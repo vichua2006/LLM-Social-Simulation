@@ -154,42 +154,150 @@ def query_judge(action,individual,system):
     # This function creates a task for the GPT model to determine the result of an action
     # taken by an individual in the system. The task includes the rules for judging the action
     # and how to format the result.
-  system_message="You are a neutral judge observing a world simulation in which people fight for their own interests. You should judge everything as objectively as possible."
-  task=task = f'''
-Your task is to determine the result of the action from an individual, person {individual.attributes["name"]}, which is {action},
-and then format the changed parameters into a tuple in python.
+  def query_judge(action,individual,system):
+    # This function creates a task for the GPT model to determine the result of an action
+    # taken by an individual in the system. The task includes the rules for judging the action
+    # and how to format the result.
+    system_message="You are a neutral judge observing a world simulation in which people fight for their own interests. You should judge everything as objectively as possible."
+    task=f'''Your task is to determine the result of the action from an individual, person {individual.attributes["name"]}, which is {action}.'''
+    q= [f'''{task}
+    If the action is the response to a confrontation, for example, someone else initiated to fight with person {individual}, and the receiver choose to fight back,
+    then you compare the strength of the two individuals using this dict {({x.attributes["name"]: x.attributes['strength'] for x in system.individuals})},
+    and determines who wins. If you do have to determine who wins, you should respond with the result as a string.
 
-If the action is something that requires a response from another person, namely, communicate (make offer, negotiate, announce, exchange information), fight, and rob,
-then you should format the first item in the tuple as another tuple B, the first item of which is a third tuple C, ({individual.attributes["name"]}, THE NAME OF THE RECEIVER OF THE ACTION), the second item of B is {action}. Without the receiver addressing the action, this will not be resolved. For example, if person one initiate a fight with person 3, format it as (("person 1", "person 3"),"Person 1 fights with person 3")
+    [System Note: You MUST output in the following JSON <OutputFormat>:
+    {{
+      <OutputFormat>:{{
+        actor: <ActorId>,
+        responder:<ResponderID>
+        action: <Initial_Action>,
+        response: <Response>
+        result:<Result>
+      }}
+      ActorID:
+      {{
+        description: "The id of person who initiated the initial action",
+        value: int (only select one int number from 0 to {len(system.individuals)-1})
+      }}
+      ResponderID:
+      {{
+        description: "The id of the person on the receiving end of the initial action who then responded with another action.",
+        value: int (only select one int number from 0 to {len(system.individuals)-1})
+      }}
+      Action:
+      {{
+        description: "The action."
+        value: string (Maximum 30 words)
+      }}
+      Response:
+      {{
+        description: "The response.",
+        value: string (Maximum 30 words)
+      }}
+      Result:
+      {{
+        description: "The result that you determined based on everything you know."
+        value: string (Maximum 20 words)
+      }}
+    }}
+    example output:
+    {{
+      actor: 3,
+      responder:5
+      action: 'trade',
+      response: 'agree to trade'
+      result:'trade initiated by 3 to 5 is successful'
+    }}
+    ]'''
+    ,f'''
+    {task}
 
-If not, then the first item should be None.
+    If a pending action is resolved, for example, a fight is being responded by the receiver (so you have to determine the winner), or a conversation no longer needs any more response,
+    then you put the key of the resolved item in {system.pending_action} as a tuple in python. Sample response: (1,6)
+    If not, respond with null.'''
+    ,f'''
+    {task}
 
-However, if the action is the response to a confrontation, for example, someone else initiated to fight with person {individual}, and the receiver choose to fight back,
-then you compare the strength of the two individuals using this dict {({x.attributes["name"]: x.attributes['strength'] for x in system.individuals})},
-and determines who wins. If you do have to determine who wins, the result should be the second item of the tuple as a string.
+    Your response should be a dict with keys of the integers in the names ({[x.attributes["name"] for x in system.individuals]}) of people whose parameters changed. The values will be the name of the changed parameters and the change in value.
+    There are several ways that could happen.
+    If a person gets robbed and you determine that the robber wins the interaction, then the victim loses all food and the robber gains
+    all food, and you should put that in changed parameter. For example, person 1 originally has 3 food, but he lost the fight when person 2 tries to rob him, so he lost all 3 food. When someone wins an interaction, their social status increase by 1. If someone looses an interaction, their status decrease by 1.
 
-If not, then the second item should be None.
+    And if a person initiated an action, then the person's
+    action attribute should be decreased to 0. If a person farms, then this person gains {np.random.uniform(0.9, 1.1)} more unit of
+    food. If a person addresses another person's action, for example, by responding to being robbed, then do not change this person's action attribute. The way for you to formulate these parameter changes, is given by the sample below (only respond with the tuple and absolutely nothing else, DO NOT EXPLAIN ANYTHING. ):
+    [System Note: You MUST output in the following JSON <OutputFormat>:
+    {{
+    PersonIndex: Resource{{
+        type:<ParameterName>
+        change:<NumericalChange>
+    }}
+    ParameterName{{
+      description: a string that is used for the key of the parameter
+      value: string
+    }}
+    NumericalChange{{
+      description: the change in the parameters numerical value
+      value: float
+    }}
+    exmaple output{{
+      1:Resource{{
+        type:food
+        change:1.23
+        
+      }}
+    }}
+    }}
+    
+    ]
+    '''
 
-If a pending action is resolved, for example, a fight is being responded by the receiver (so you have to determine the winner), or a conversation no longer needs any more response,
-then you put the key of the resolved item in {system.pending_action} as an tuple for the third item of the tuple.
-If no action is resolved, then the third item should None.
 
-Then, the fourth items should be a dict with keys of the integers in the names ({[x.attributes["name"] for x in system.individuals]}) of people whose parameters changed. The keys must be int data type.
-There are several ways that could happen.
-If a person gets robbed and you determine that the robber wins the interaction, then the victim loses all food and the robber gains
-all food, and you should put that in changed parameter. For example, person 1 originally has 3 food, but he lost the fight when person 2 tries to rob him, so he lost all 3 food. When someone wins an interaction, their social status increase by 1. If someone looses an interaction, their status decrease by 1.
 
-And if a person initiated an action, then the person's
-action attribute should be decreased to 0. If a person farms, then this person gains {np.random.uniform(0.9, 1.1)} more unit of
-food. If a person addresses another person's action, for example, by responding to being robbed, then do not change this person's action attribute. The way for you to formulate these parameter changes, is given by the sample below (only respond with the tuple and absolutely nothing else, DO NOT EXPLAIN ANYTHING. ):
+    ,f'''
+    {task}
+    Determine the change in the memory of the involved people in the action, or the result you determined (when confrontation happens). Format it using a dict, the keys are the involved people using an int data type that's in their names, and the values are strings that briefly recount the events' in their perspectives.
+    [System Note: You MUST output in the following JSON <OutputFormat>:
+     {{
+      <OutputFormat>:{{
+        ID: <IndividualId>
+        memory:<NewMemory>
+        
+      }}
+      ID{{
+        description: the ID of person with changed memory
+        value: int
+      }}
+      NewMemory{{
+        description: the new memory in succinct words
+        value: string
+      }}
+      example output{{
+        ID: 5
+        memory: 'I farmed and obtained 1.02131 unit of food."
+      }}
+      ]
+    ''']
 
-{{PERSONINDEX(INT): {{PARAMETER_NAME: A VALUE THAT'S TO BE ADDED TO THE ORIGINAL VALUE, CAN BE NEGATIVE, PARAMETER_NAME: A VALUE THAT'S TO BE ADDED TO THE ORIGINAL VALUE, CAN BE NEGATIVE}}, PERSONINDEX: {{PARAMETER_NAME: A VALUE THAT'S TO BE ADDED TO THE ORIGINAL VALUE, CAN BE NEGATIVE}}}}
-
-Then, for the fifth item, change the memory of the involved people in the action, or the result you determined (when confrontation happens). Format it similarly, using a dict, the keys are the involved people using an int data type that's in their names, and the values are strings that briefly recount the events' in their perspectives.
-So overall, your response should look like this, in this exact format, with absolutely nothing else. DO NOT EXPLAIN YOUR CHOICES. ((("person 1","person 4"),"Person 1 does X to person 4"), 'DETERMINED RESULT IF ANY', 'RESOLVED PENDING_ACTION IF ANY', {{DICT FOR PEOPLE's CHANGE PARAMETER}},{{DICT FOR PEOPLE's CHANGED MEMORY}}). Do not touch any parameters that are not involved in the action.
-'''
-
-  return chat(system_message,[task])
+  response=[]
+    system.pending_action[result[0][0]] = result[0][1] if result[0] else None
+    system.history.append(result[1]) if result[1] else None
+    if result[2]:system.pending_action[result[2]]
+    for affected_person in result[3]:#{PERSON:{strength:1,...}...}
+      for attribute in result[3][affected_person]:
+        individuals[affected_person].attributes[attribute]=result[3][affected_person][attribute]
+    for affected_person in result[4]:#{PERSON:{strength:1,...}...}
+      individuals[affected_person].memory.append(result[4][affected_person])
+    for i in q:
+      for o in range(5):
+        try:
+            buffer=chat(system_message,[i])
+            print(buffer)
+            response.append(json.loads(buffer))
+            break
+        except:
+            continue
+    return response
 
 
 # Function to update the state of each individual at the end of the day
