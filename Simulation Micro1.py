@@ -29,7 +29,6 @@ class Individual:
             "land": [f'land {name}'],  # Land owned by the individual
             "food": 2,  # Initial food is 2
             "action": 1,  # Initial action point is 1
-            "status":0,  # Initial status is 0
         }
         # Initialize memory of the individual
         self.memory = ['None']*30
