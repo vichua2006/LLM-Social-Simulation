@@ -16,6 +16,7 @@ class System:
           self.ranking[i]=0
         self.relations=[x for x in individuals]
         self.time=0
+        self.is_stop=False
 
 class Individual:
     def __init__(self, id:int, name:str):

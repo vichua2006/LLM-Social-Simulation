@@ -48,13 +48,13 @@ def initialize():
       individuals.append(Individual(i,f'person {i}'))
       lands.append(f'land {i}')
     system=System(individuals,lands)
+    system.is_stop=False
     return system
   
-def simulate(individuals:List[Individual],system:System, stop_event: threading.Event):
+def simulate(individuals:List[Individual],system:System):
     while True:
       for i in individuals:
-          print("stop_Event", stop_event, stop_event.is_set())
-          if stop_event and stop_event.is_set():
+          if system.is_stop:
             print("Stop Simulation!")
             return
           index:int = individuals.index(i)
@@ -62,6 +62,9 @@ def simulate(individuals:List[Individual],system:System, stop_event: threading.E
           if i.attributes['action']>0 or get_related_pending_action(i,system):
             action:str=query_individual(i,system)
             for o in range(5):
+              if system.is_stop:
+                print("Stop Simulation!")
+                return
               try:
                 print("Action: "+action)
                 action = deserialize_first_json_object(action.lower())

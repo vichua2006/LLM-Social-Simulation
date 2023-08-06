@@ -21,24 +21,24 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
     return sg.TabGroup([person_layout], size=(200, 200))
 
 
-def start_simulate(system:System, stop_event: threading.Event):
+def start_simulate(system:System):
     for i in range(2):
-        simulate(system.individuals, system, stop_event)
+        simulate(system.individuals, system)
 def main():
-    isappStarted = False
+
     system=initialize()
     individuals = system.individuals
     person_layout = create_individual_layout(individuals)
     console_log = [[sg.Output(size=(80,30), key='-OUTPUT-')]] 
     button:List[List[button]] = [[sg.Button('Start', key= '-START-')], [sg.Button('Stop', key= '-STOP-')], [sg.Button('Clear', key= '-Clear-')], [sg.Button('Exit', key= '-Exit-')]]
     layout = [[person_layout], [console_log], button]
-
+    isappStarted = False
     window = sg.Window('LLM Social Simulation', layout)
         # Redirect stdout to the sg.Output element
     while True:             # Event Loop
         event, values = window.read()
         thread: threading.Thread
-        stop_event_flag = threading.Event()
+        stop_event_flag = [False]
         if event == sg.WIN_CLOSED:
             break
         elif event == '-Clear-':
@@ -47,12 +47,12 @@ def main():
             break
         elif event == '-START-':
             print("Start")
-            stop_event_flag.clear()
-            thread = window.start_thread(lambda: start_simulate(system, stop_event_flag), ('-THREAD-', '-THEAD ENDED-'))
+            system.is_stop=False
+            thread = window.start_thread(lambda: start_simulate(system), ('-THREAD-', '-THEAD ENDED-'))
             isappStarted = True
         elif event == '-STOP-':
-            print("Stop")
-            stop_event_flag.set()
+            system.is_stop=True
+            print("Stoped", stop_event_flag)
             isappStarted = False
             
         # Check if event is a section Collapsible
