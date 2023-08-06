@@ -72,10 +72,12 @@ def simulate(individuals:List[Individual],system:System, stop_event: threading.E
                 action:str=query_individual(i,system)
             system.history.append(f'{i.attributes["name"]}:{action["reason"]}') 
             if action["action"]==AIAction.Farm:
+                  print(f'Person {index} is farming...')
                   i.attributes['food']+=np.random.uniform(0.9, 1.1)*i.attributes["land"]/3
                   i.attributes['action']=0
                   i.memory.append(action['reason'])
             elif action["action"]==AIAction.Rob or action["action"]==AIAction.Trade:
+                  print(f'Person {index} is robing or trading...')
                   i.attributes['action']=0
                   i.memory.append(action['reason'])
             else:
