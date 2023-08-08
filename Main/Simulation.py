@@ -50,11 +50,10 @@ def initialize():
     system=System(individuals,lands)
     return system
   
-def simulate(individuals:List[Individual],system:System, stop_event: threading.Event):
+def simulate(individuals:List[Individual],system:System):
     while True:
       for i in individuals:
-          print("stop_Event", stop_event, stop_event.is_set())
-          if stop_event and stop_event.is_set():
+          if system.is_stop:
             print("Stop Simulation!")
             return
           index:int = individuals.index(i)
@@ -66,6 +65,9 @@ def simulate(individuals:List[Individual],system:System, stop_event: threading.E
               query_judge(action, i,system)
             else:
               for o in range(5):
+                if system.is_stop:
+                  print("Stop Simulation!")
+                  return
                 try:
                   print("Action: "+action)
                   action = deserialize_first_json_object(action.lower())
