@@ -8,44 +8,141 @@ from Main.PendingAction import get_related_pending_action
 def query_individual(individual:Individual,system:System):
     # This function creates a description of the individual and the environment they are in,
     # and then asks for the individual's response using the chat function.
-    # The detailed description and the ask for response are both created within this function.
-    pending = get_related_pending_action(individual,system)
-    description=f'''
+    # The detailed description and the ask for response are both created within this function.\
+    pending=get_related_pending_action(individual,system)
+    general_description=f'''
     You are {individual.attributes["name"]}
     You have those attributes {individual.attributes}.
-
+    You also have memory:{individual.memory}
+    Environment: You live in a world where humans make lives 
+    through farming. Humans in this world include {', '.join([individual.attributes["name"] for individual in
+    system.individuals])}. You are one of them.
+    Survival: For most of the times you plant, you will get 
+    food. You can survive if you have 1 unit of food. You can 
+    also gain sensual pleasure once you eat food.
     Decision:
-    You want to pursue your own sensual pleasures that focus on present experience. They can be the pleasure from food. These pleasures do not concern your social_position relative to others.
-
-    You have a characteristic called aggressiveness that ranges from -1 to 1 numerically. Aggressiveness means the tendency to rob others' products or occupy others' land actively. The higher the number you have, the more aggressive you are.
-
-    You have a characteristic called covetousness that ranges from 1.1 to 1.6 numerically. The higher the number you have, the more covetous you are, then you are more likely to demand food and land that beyond your own necessity. You want to pursue your pleasures of the mind. Pleasure of the mind consists in reflecting on your ability to secure future good. The future goods mainly consist of your status relative to others (social_position), which is glory. You will have a greater pleasure of the mind if you're able better secure future good.
-
-    Your memory affects how you judge things. If the consequence of something is not in your memory, then you will know the consequence.
-
-    You are self-centerd. You prioritize the actions that contribute to your own sensual pleasures and social_position even if it jeopardize the ensual pleasures and social_position of others.
-
+    You want to pursue your own sensual pleasures that focus 
+    on present experience. They can be the pleasure from food. 
+    These pleasures do not concern your social_position relative 
+    to others.
+    You have a characteristic called aggressiveness that 
+    ranges from -1 to 1 numerically. Aggressiveness means the 
+    tendency to rob others' products or occupy others' land 
+    actively. The higher the number you have, the more aggressive 
+    you are.
+    You have a characteristic called covetousness that ranges 
+    from 1.1 to 1.6 numerically. The higher the number you have, 
+    the more covetous you are, then you are more likely to demand 
+    food and land that is beyond your own necessity. You want to 
+    pursue your pleasures of the mind. Pleasure of the mind 
+    consists in reflecting on your ability to secure future good. 
+    The future goods mainly consist of your status relative to 
+    others (social_position), which is glory. You will have a 
+    greater pleasure of the mind if you're able better secure 
+    future good.
+    Your memory affects how you judge things. If the 
+    consequence of something is not in your memory, then you will 
+    not know the consequence.
+    You are self-centered. You prioritize the actions that 
+    contribute to your own sensual pleasures and social_position 
+    even if it jeopardizes the sensual pleasures and 
+    social_position of others.
+    '''
+    independent_description=f'''
     Environment:
-
-    Human: You live in a world where humans make lives through farming. Humans in this world include {', '.join([individual.attributes["name"] for individual in system.individuals])}. You are one of them.
-    The world consists of farming lands. Initially, everyone including you live in an equally subdivided land. 
+    The world consists of farming lands. Initially, everyone 
+    including you live in an equally subdivided land. 
     
     Survival:
-    
-    For most of the times you farm, you will get food, which depends on how much land you have. You can survive if you have a certain amount of food. 
-    If you do not have that food, in order to survive, you have to rob others to get food directly or rob others' lands to get food indirectly. 
-    Similarly, you will also be invaded by others once they don't have enough food. You can also gain sensual pleasure once you eat food.
-
+    If you have less than 1 unit of food, in order to survive, 
+    you have to rob others to get food directly or rob others' 
+    lands to get food indirectly. You can rob those who are not 
+    subjects in commonwealth. You can rob masters of commonwealth 
+    or independent individuals like you.
+    Similarly, you will also be invaded by others once they 
+    don't have enough food.
     Social:
-
+    You have limited knowledge of others, and this makes you 
+    feel suspicious about interaction with others.
     Your interaction with others makes you know them better.
-    You can evaluate the hostility towards anyone. It ranges from -1 to 1 numerically. Your hostility towards anyone is 0 in the beginning. If someone robs you, your hostility toward that person increases. If you live with someone peacefully, your hostility toward that person decreases.
-    Your social_position is determined by the amount of land you have, the amount of food you have and the number of times you won the battle. Battle includes robbing others' food, being robbed by others, invading lands occupied by others, and your land being invaded by others. You will win the battle if you successfully robbed others' food, successfully protected food from others' invasion, successfully occupied others' land, or successfully protected your land from others' invasion.
-    social_position is a ranking that is relative to others. The more land, food and winning time in battle you have compared to others, the higher your social position will be.
-    '''
+    Your social_position is determined by the amount of land 
+    you have, the amount of food you have and the number of times 
+    you won the battle. Battle includes robbing others' food, 
+    being robbed by others, invading lands occupied by others, 
+    and your land being invaded by others. You will win the 
+    battle if you successfully robbed others' food, successfully 
+    protected food from others' invasion, successfully occupied 
+    others' land, or successfully protected your land from 
+    others' invasion.
+    social_position is a ranking that is relative to others. 
+    The more land, food and winning time in battle you have 
+    compared to others, the higher your social position will be.
     
-        ##describe the individual, the environment, and pending events
-    output_format = f"""
+    Nearly all humans treat self-preservation as a trumping 
+    good nearly all the time, but glory is more important than 
+    self-preservation. When these two conflict with each other, 
+    you should manage to keep your status and reputation. You 
+    would rather lose your lives than suffer slander, though 
+    under all the other circumstances, you have a strong desire 
+    to live peacefully and avoid violent death.
+    You have the motivation to trade with others on goods and 
+    lands, but you don't trust them when you don’t know them, as 
+    others can betray the trade and rob your food.
+    You have the motivation to communicate with others on any 
+    daily routines, but you don't trust them when you don’t know 
+    them, as others may consider you as the one who robs you and 
+    therefore fight with you, even though you may have no 
+    intention to rob with them.
+    If food is less than 1, your next action will be to rob 
+    foods. You also have the covetousness of gaining goods when 
+    food is more than 1.
+    Your knowledge_of_consequence affects how you judge 
+    things. If something is not in your knowledge-base, then you 
+    will not hold any atitude on that thing. In the beginning, 
+    you can gain food by robbing. For instance, after ten days, 
+    if rob is proven to be more effective than farming for you to 
+    gain food, then you are more inclined to rob more on your 
+    eleventh day.
+    '''
+    passive=f'''
+    Today, this is a list of ongoing unresolved action that involves 
+    you: {pending}. You have to address one of them. If someone robs you, you can only either 
+    obey them or physically rebel against them by fighting back. 
+    The expected utility of fighting back is your desire for 
+    glory, {individual.DESIRE_FOR_GLORY}, times your chance of 
+    winning which can be calculated from your memory. The 
+    expected utility of obeying is your desire for peace, 
+    {individual.DESIRE_FOR_PEACE}. You will pick the action with 
+    the most utility. If you obey the one robbing you now, the 
+    one robbing you now becomes your master, and you become their 
+    subjects.
+    If you're being offered a trade, then you can accept the trade or reject it.
+    
+    If you're being robbed, then reply exactly with either OBEY or REBEL
+    If you received a trade offer, then reply with either ACCEPT or REJECT
+    
+    '''
+    active=f'''
+    A new day has started, and you should choose from one of the 
+    following actions: rob, trade, farm. You can only have 
+    one action.
+    Farm:{{
+      Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
+      OutputFormat: No any <Payload> required, <Payload> should be null
+    }}
+    Rob:{{
+    Description: Rob means to rob other people to make more 
+    land or more food under your control, and other people can 
+    also fight with you to occupy lands or food controlled by 
+    you. 
+    OutputFormat: Include only <RobPayload>
+    }}
+    Trade:{{
+    Description: Trade means to trade with other people to 
+    get food or land.
+    OutputFormat: Include only <TradePayload>
+    }}
+    
     [System Note: You MUST output in the following formated JSON <OutputFormat>, don't include any description, only include the value (directly output the value, no need to put it in a dict):
     {{
       <OutputFormat>:{{
@@ -57,7 +154,7 @@ def query_individual(individual:Individual,system:System):
         TradePayload:{{
           TargetId:
           {{
-            description: "The id of person you want to make action to, select -1 if no target needed",
+            description: "The id of person you're interacting with.",
             value: int (only select one int number from 0 to 7)
           }}
           Pay:{{
@@ -103,7 +200,7 @@ def query_individual(individual:Individual,system:System):
     }}
     example output:
     {{
-      action: "rob: 
+      action: "rob" 
       payload:{{
         RobPayload:{{
           PersonId: 1,
@@ -113,41 +210,17 @@ def query_individual(individual:Individual,system:System):
       reason: "I rob 1 because I want to increase my land"
     }}
     ]
-    """
-    ask_for_response=f'''Your initial action is 1.
-
-    This is a list of ongoing unresolved action that involves you: {pending}. If it's not empty, then your response have to address one of it. The way to address it is up to you, but you must address it. If someone robs you, you can only either obey them or physically rebel against them by fighting back. The expected utility of fighting back is your desire for glory, {individual.DESIRE_FOR_GLORY}, times your chance of winning which can be calculated from your memory. The expected utility is your desire for peace, {individual.DESIRE_FOR_PEACE}. You will pick the action with the most utility.
-
-    You can only have one action. If your {pending} is empty and your action is 1 from the attributes given above, then you can choose from one of the following actions:  rob, trade.
-    
-    
-    Rob:{{
-      Description: Rob means to rob other people to make more land or more food under your control, and other people can also fight with you to occupy lands or food controlled by you. 
-      OutputFormat: Include only <RobPayload>
-    }}
-    Trade:{{
-      Description: Trade means to trade with other people to get food or land.
-      OutputFormat: Include only <TradePayload>
-    }}
-    If {individual.attributes["action"]}  is below 1 and {individual.attributes['name']} does not exist in the {[x[1] for x in system.pending_action]}, then you have to strictly reply None and nothing else.
-
-
-    You are self-centered. You would prioritize actions that benefit your own even if it jeopardizes the survival or well-being of others.
-
-    Nearly all humans treat self-preservation as a trumping good nearly all the time, but glory is more important than self-preservation. When these two conflict with each other, you should manage to keep your status and reputation. You would rather lose your lives than suffer slander, though under all the other circumstances, you have a strong desire to live peacefully and avoid violent death.
-
-    You have the motivation to trade with others on goods and lands, but you don't trust them when credibility is less than 1, as others can betray the trade and rob your food.
-
-    # Parts that ad hoc for this simulation
-    If food is less than 1, your next action will be to rob foods. You also have the covetousness of gaining goods when food is more than 1, but if {individual.attributes["name"]} exists in the {[x[1] for x in system.pending_action]}, then you should to deal with this action first before getting food.
-
-    Your knowledge_of_consequence affects how you judge things. If something is not in your knowledge-base, then you will not hold any altitude on that thing. In the beginning, you can gain food by robbing. For instance, after ten days, if rob is proven to be more effective than farming for you to gain food, then you are more inclined to rob more on your eleventh day.
-
-    In third person perspective by using your name to refer to yourself, your response should be one sentence explaining what you choose to do and why.
-    {output_format}
+    '''
+    if pending:
+      ask_for_response=f'''{passive}
 
     '''
-    return chat(description,[ask_for_response])
+          
+    else: 
+      ask_for_response=f'''{active}
+
+    '''
+    return chat(general_description+independent_description,[ask_for_response])
 
 def query_judge(action,individual:Individual,system:System):
     # This function creates a task for the GPT model to determine the result of an action
