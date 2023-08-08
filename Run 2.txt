@@ -1,0 +1,74 @@
+Start
+stop_Event <threading.Event object at 0x0000027EFFA6CF10> False
+get_related_pending_action []
+Person 0 is responding...
+
+get_related_pending_action []
+Action: {
+  "trade": {
+    "action": "trade",
+    "payload": {
+      "TradePayload": {
+        "TargetId": 1,
+        "Pay": "land",
+        "PayAmount": 1,
+        "Gain": "food",
+        "GainAmount": 1
+      }
+    },
+    "reason": "I choose to trade with person 1 because I have extra land and I need more food for survival."
+  }
+}
+First Exception:'action', second exception:'targetid'
+Exception: 'action'
+get_related_pending_action []
+Action: {
+  "farm": {
+    "action": "farm",
+    "payload": null,
+    "reason": "I need to farm to get food and survive."
+  }
+}
+System: No pending action need to be added
+Exception: 'action'
+get_related_pending_action []
+Action: {
+  "action": "farm",
+  "payload": null,
+  "reason": "I choose to farm because it is the safest and most reliable way to get food and survive."
+}
+System: No pending action need to be added
+stop_Event <threading.Event object at 0x0000027EFFA6CF10> False
+get_related_pending_action []
+Person 1 is responding...
+
+get_related_pending_action []
+Action: {
+  "action": "farm",
+  "payload": null,
+  "reason": "I choose to farm because it is the most reliable way to gain food and ensure my survival."
+}
+System: No pending action need to be added
+stop_Event <threading.Event object at 0x0000027EFFA6CF10> False
+get_related_pending_action []
+Person 2 is responding...
+
+get_related_pending_action []
+Action: {
+  "action": "rob",
+  "payload": {
+    "RobPayload": {
+      "TargetId": 1,
+      "RobItem": "land"
+    }
+  },
+  "reason": "I choose to rob person 1 because I want to increase my land and ensure my future good by securing a higher social position."
+}
+First Exception:'targetid', second exception:string indices must be integers
+Exception: 'targetid'
+get_related_pending_action []
+Action: {
+  "farm": {
+    "action": "farm",
+    "payload": null,
+    "rea

@@ -105,8 +105,7 @@ def query_individual(individual:Individual,system:System):
     eleventh day.
     '''
     passive=f'''
-    Today, this is a list of ongoing unresolved action that involves 
-    you: {pending}. You have to address one of them. If someone robs you, you can only either 
+    Today, you have received this action from a neighbor:{pending[0]}. You have to address one of them. If someone robs you, you can only either 
     obey them or physically rebel against them by fighting back. 
     The expected utility of fighting back is your desire for 
     glory, {individual.DESIRE_FOR_GLORY}, times your chance of 
