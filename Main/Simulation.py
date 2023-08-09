@@ -92,6 +92,6 @@ def simulate(individuals:List[Individual],system:System):
       system.ranking.update({x: x.attributes["social_position"] for x in system.individuals})
       print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
       if not system.pending_action:
+        day_end(system,individuals)
         break
-      day_end(system,individuals)
 

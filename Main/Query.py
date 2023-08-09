@@ -105,7 +105,7 @@ def query_individual(individual:Individual,system:System):
     eleventh day.
     '''
     passive=f'''
-    Today, you have received this action from a neighbor:{pending[0]}. You have to address one of them. If someone robs you, you can only either 
+    Today, you have received this action from a neighbor:{pending[0] if pending else None}. You have to address one of them. If someone robs you, you can only either 
     obey them or physically rebel against them by fighting back. 
     The expected utility of fighting back is your desire for 
     glory, {individual.DESIRE_FOR_GLORY}, times your chance of 
@@ -121,14 +121,15 @@ def query_individual(individual:Individual,system:System):
     If you received a trade offer, then reply with either ACCEPT or REJECT
     
     '''
+    farm=False
     active=f'''
     A new day has started, and you should choose from one of the 
-    following actions: rob, trade, farm. You can only have 
+    following actions: rob, trade{' and farm' if farm else ''}. You can only have 
     one action.
-    Farm:{{
+    {f"""Farm:{{
       Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
       OutputFormat: No any <Payload> required, <Payload> should be null
-    }}
+    }}""" if farm else ""}
     Rob:{{
     Description: Rob means to rob other people to make more 
     land or more food under your control, and other people can 
@@ -189,7 +190,7 @@ def query_individual(individual:Individual,system:System):
       Action:
       {{
         description: "The action you want to do in this turn",
-        value: string (only select from one of the [trade, rob, farm])
+        value: string (only select from one of the [trade, rob{", farm" if farm else ''} ])
       }}
       Reason:
       {{
