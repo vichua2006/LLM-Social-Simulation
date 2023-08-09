@@ -44,6 +44,8 @@ def main():
         elif event == '-Clear-':
             window['-OUTPUT-'].update('')
         elif event == '-Exit-':
+            system.is_stop = False
+            isappStarted = False
             break
         elif event == '-START-':
             print("Start")
