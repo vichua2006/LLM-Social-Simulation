@@ -1,15 +1,15 @@
+import queue
 import numpy as np  # numpy for numerical computations
-from typing import List, Dict, Tuple       
-from Main.AIAction import AIAction, PendingAction
+from typing import List, Dict, Tuple      
+from Main.AIAction import AIActionType, AIAction
 
 class Individual:
     pass
 class System:   
     def __init__(self,individuals:List[Individual],lands):
         # Each system has a set of pending actions, history, individuals, lands, and rankings
-        self.pending_action:Dict[Tuple[int, int], PendingAction]={}#(actor,receiver):action
         self.history=[]
-        self.individuals=individuals
+        self.individuals:List[Individual] =individuals
         self.land=lands
         self.ranking={}
         for i in individuals:
@@ -34,14 +34,18 @@ class Individual:
             "action": 1  # Initial action point is 1
             ,"trust_of_others":0
         }
-        self.current_action:AIAction = AIAction.Default
+        self.pending_action:queue.Queue[AIAction] = queue.Queue() # The pending action that the individual need to deal with
+        self.current_action_type:AIActionType = AIActionType.Default
         self.robbing_stats = RobStats()
         self.obey_stats = ObeyStats()
         # Initialize memory of the individual
         self.memory = ['None']*30
         self.DESIRE_FOR_GLORY=10
         self.DESIRE_FOR_PEACE=3
-        
+
+    def get_pending_action_as_list(self):
+        return list(self.pending_action.queue)
+    
     def add_rob(self, person_id: int, win_rob: bool = False) -> None:   
         self.robbing_stats.total_rob_times += 1
 
@@ -59,21 +63,14 @@ class Individual:
         #Get the person you obey to and add yourself to the subject list
         system.individuals[person_id].obey_stats.subject.append(system.individuals.index(self)) 
     
-    def change_current_action(self, action: str)->None:
-        for a in AIAction:
-            if a == action:
-                self.current_action = a
-                return
-    def check_is_responser(self, pending_action:Dict[Tuple[int, int], PendingAction])->None:
-        for key in pending_action:
-            if key[1] == self.attributes["id"]:
-                print(f"Individual {self.attributes['name']} is responser")
-                print("pendingActionResponse:", pending_action[key])
-                if pending_action[key].type == AIAction.Trade:
-                    self.current_action = AIAction.BeTraded
-                elif pending_action[key].type == AIAction.Rob:
-                    self.current_action = AIAction.BeRobbed
-                return True
+    # Check if the individual is the responser of the action
+    def check_is_responser(self, action:AIAction)->None:
+        match action.type:
+            case AIActionType.Rob:
+                self.current_action_type = AIActionType.BeRobbed
+            case AIActionType.Trade:
+                self.current_action_type = AIActionType.BeTraded
+            
             
           
   

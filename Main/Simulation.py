@@ -4,23 +4,9 @@ from typing import List
 from Main.Individual import Individual, System
 from Main.Query import query_individual, query_judge
 from Main.StringUtils import deserialize_first_json_object
-from Main.AIAction import AIAction
-from Main.PendingAction import get_related_pending_action
-#Noted that action is all lower case
-def append_to_pending_action(id:int, action, system:System):
-    if(action["action"]=="trade"):
-      if system.pending_action is None: system.pending_action={}
-  
-      system.pending_action[(id,action["payload"]["tradepayload"]["targetid"])]=f'''Person {id} proposes to trade {action["payload"]["tradepayload"]["payamount"]} {action["payload"]["tradepayload"]["pay"]} for Person {action["payload"]["tradepayload"]["targetid"]}'s {action["payload"]["tradepayload"]["gainamount"]} {action["payload"]["tradepayload"]["gain"]}'''
-      print(f'Pending action being added:{system.pending_action}')
-    else:
-      if(action["action"]=="rob"):
-        if system.pending_action is None: system.pending_action={}
-        system.pending_action[(id,action["payload"]["robpayload"]["targetid"])]=f'{action["action"]} against {action["payload"]["robpayload"]["targetid"]} for more {action["payload"]["robpayload"]["robitem"]}'
-        print(f'Pending:{system.pending_action}')
-      else:
-        print("System: No pending action need to be added")
-        
+from Main.AIAction import AIAction, AIActionType
+from Main.PendingAction import append_to_pending_action, str_to_ai_action
+
 def change_affected_people(affected_people, system:System):
     for affected_person in affected_people:#{PERSON:{strength:1,...}...}
     #avoid if affected_person is "person 0" instead of "0"
@@ -52,17 +38,18 @@ def initialize():
   
 def simulate(individuals:List[Individual],system:System):
     while True:
-      for i in individuals:
+      for individual in individuals:
           if system.is_stop:
             print("Stop Simulation!")
             return
-          index:int = individuals.index(i)
-          pending=get_related_pending_action(i,system)
+          index:int = individuals.index(individual)
           print(f"Person {index} is responding...\n")
-          if i.attributes['action']>0 or pending:
-            action:str=query_individual(i,system)
-            if pending:
-              query_judge(action, i,system)
+          if individual.attributes['action']>0 or individual.pending_action:
+            action:str=query_individual(individual,system)
+            if not individual.pending_action.empty():
+              print(f'\n{individual.attributes["name"]} need to response pending action {individual.pending_action.queue[0]}')
+              individual.check_is_responser(individual.pending_action.queue[0])
+              query_judge(action, individual,system)
             else:
               for o in range(5):
                 if system.is_stop:
@@ -71,29 +58,32 @@ def simulate(individuals:List[Individual],system:System):
                 try:
                   print("Action: "+action)
                   action = deserialize_first_json_object(action.lower())
-                  append_to_pending_action(index, action, system)
+                  ai_action:AIAction = str_to_ai_action(action, index)
+                  individual.current_action_type = ai_action.type
+                  append_to_pending_action(ai_action, system)
                   break
                 except Exception as e:
                   try:
-                    append_to_pending_action(index, [action[x] for x in action][0], system)
+                    ai_action:AIAction = str_to_ai_action([action[x] for x in action][0], index)
+                    append_to_pending_action(ai_action, system)
                     action=list(action[x] for x in action)[0]
                     break
                   except Exception as e2:print(f"First Exception:{e}, second exception:{e2}")
-                  action:str=query_individual(i,system)
-              try:system.history.append(f'{i.attributes["name"]}:{action["reason"]}')
+                  action:str=query_individual(individual,system)
+              try:system.history.append(f'{individual.attributes["name"]}:{action["reason"]}')
               except:
-                try:system.history.append(f'{i.attributes["name"]}:{action[[x for x in action][0]]["reason"]}')
-                except:system.history.append(f'{i.attributes["name"]}:\n{action}')
-              if action["action"]==AIAction.Farm:
-                    i.attributes['food']+=np.random.uniform(0.9, 1.1)*i.attributes["land"]/3
-                    i.attributes['action']=0
-                    i.memory.append(action['reason'])
-              elif action["action"]==AIAction.Rob or action["action"]==AIAction.Trade:
-                    i.attributes['action']=0
-                    i.memory.append(action['reason'])
+                try:system.history.append(f'{individual.attributes["name"]}:{action[[x for x in action][0]]["reason"]}')
+                except:system.history.append(f'{individual.attributes["name"]}:\n{action}')
+              if action["action"]==AIActionType.Farm:
+                    individual.attributes['food']+=np.random.uniform(0.9, 1.1)*individual.attributes["land"]/3
+                    individual.attributes['action']=0
+                    individual.memory.append(action['reason'])
+              elif action["action"]==AIActionType.Rob or action["action"]==AIActionType.Trade:
+                    individual.attributes['action']=0
+                    individual.memory.append(action['reason'])
       system.ranking.update({x: x.attributes["social_position"] for x in system.individuals})
       print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
-      if not system.pending_action:
-        day_end(system,individuals)
-        break
+      #reach this mean all pending action is done
+      day_end(system,individuals)
+      break
 
