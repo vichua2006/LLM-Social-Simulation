@@ -236,7 +236,7 @@ def query_judge(action,individual:Individual,system:System):
     #1,query about result if any, 2 format, 3 para change, 4 format, 5 memory, 6 format
     q= [
     f''' {task}
-    {query[action["action"]]}''','''
+    {query[individual.current_action]}''','''
     Response:
     [System Note: You MUST output in the following JSON <OutputFormat>, no include anything else than <OutputFormat>:
     

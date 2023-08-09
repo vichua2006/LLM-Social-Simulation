@@ -11,12 +11,12 @@ def append_to_pending_action(id:int, action, system:System):
     if(action["action"]=="trade"):
       if system.pending_action is None: system.pending_action={}
   
-      system.pending_action[(id,action["payload"]["tradepayload"]["targetid"])]=f'''Person {id} proposes to trade {action["payload"]["tradepayload"]["payamount"]} {action["payload"]["tradepayload"]["pay"]} for Person {action["targetid"]}'s {action["payload"]["tradepayload"]["gainamount"]} {action["payload"]["tradepayload"]["gain"]}'''
+      system.pending_action[(id,action["payload"]["tradepayload"]["targetid"])]=f'''Person {id} proposes to trade {action["payload"]["tradepayload"]["payamount"]} {action["payload"]["tradepayload"]["pay"]} for Person {action["payload"]["tradepayload"]["targetid"]}'s {action["payload"]["tradepayload"]["gainamount"]} {action["payload"]["tradepayload"]["gain"]}'''
       print(f'Pending action being added:{system.pending_action}')
     else:
       if(action["action"]=="rob"):
         if system.pending_action is None: system.pending_action={}
-        system.pending_action[(id,action["payload"]["robpayload"]["targetid"])]=f'{action["action"]} against {action["targetid"]} for more {action["payload"]["robpayload"]["robitem"]}'
+        system.pending_action[(id,action["payload"]["robpayload"]["targetid"])]=f'{action["action"]} against {action["payload"]["robpayload"]["targetid"]} for more {action["payload"]["robpayload"]["robitem"]}'
         print(f'Pending:{system.pending_action}')
       else:
         print("System: No pending action need to be added")
@@ -76,12 +76,14 @@ def simulate(individuals:List[Individual],system:System):
                 except Exception as e:
                   try:
                     append_to_pending_action(index, [action[x] for x in action][0], system)
-                  except Exception as e2:
-                    print(f"First Exception:{e}, second exception:{e2}")
-                    
-                  print(f"Exception: {e}")
+                    action=list(action[x] for x in action)[0]
+                    break
+                  except Exception as e2:print(f"First Exception:{e}, second exception:{e2}")
                   action:str=query_individual(i,system)
-              system.history.append(f'{i.attributes["name"]}:{action["reason"]}') 
+              try:system.history.append(f'{i.attributes["name"]}:{action["reason"]}')
+              except:
+                try:system.history.append(f'{i.attributes["name"]}:{action[[x for x in action][0]]["reason"]}')
+                except:system.history.append(f'{i.attributes["name"]}:\n{action}')
               if action["action"]==AIAction.Farm:
                     i.attributes['food']+=np.random.uniform(0.9, 1.1)*i.attributes["land"]/3
                     i.attributes['action']=0
