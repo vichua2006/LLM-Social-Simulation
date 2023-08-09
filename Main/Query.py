@@ -1,15 +1,16 @@
 
 import ast
 import json
+from Main.AIAction import AIActionType
 from Main.ChatGpt import chat
 from Main.Individual import Individual, System
-from Main.PendingAction import get_related_pending_action
 
 def query_individual(individual:Individual,system:System):
     # This function creates a description of the individual and the environment they are in,
     # and then asks for the individual's response using the chat function.
     # The detailed description and the ask for response are both created within this function.\
-    pending=get_related_pending_action(individual,system)
+    response_action = individual.pending_action.get() if not individual.pending_action.empty() else None
+    print(f"Response action:{response_action}")
     general_description=f'''
     You are {individual.attributes["name"]}
     You have those attributes {individual.attributes}.
@@ -86,10 +87,10 @@ def query_individual(individual:Individual,system:System):
     under all the other circumstances, you have a strong desire 
     to live peacefully and avoid violent death.
     You have the motivation to trade with others on goods and 
-    lands, but you don't trust them when you don’t know them, as 
+    lands, but you don't trust them when you don't know them, as 
     others can betray the trade and rob your food.
     You have the motivation to communicate with others on any 
-    daily routines, but you don't trust them when you don’t know 
+    daily routines, but you don't trust them when you don't know 
     them, as others may consider you as the one who robs you and 
     therefore fight with you, even though you may have no 
     intention to rob with them.
@@ -105,7 +106,7 @@ def query_individual(individual:Individual,system:System):
     eleventh day.
     '''
     passive=f'''
-    Today, you have received this action from a neighbor:{pending[0] if pending else None}. You have to address one of them. If someone robs you, you can only either 
+    Today, you have received this action from a neighbor:{response_action}. You have to address one of them. If someone robs you, you can only either 
     obey them or physically rebel against them by fighting back. 
     The expected utility of fighting back is your desire for 
     glory, {individual.DESIRE_FOR_GLORY}, times your chance of 
@@ -143,13 +144,24 @@ def query_individual(individual:Individual,system:System):
     OutputFormat: Include only <TradePayload>
     }}
     
-    [System Note: You MUST output in the following formated JSON <OutputFormat>, don't include any description, only include the value (directly output the value, no need to put it in a dict):
+    [System Note: You MUST output in the following JSON format, don't include any description, only include the value (directly output the value, no need to put it in a dict):
     {{
-      <OutputFormat>:{{
         action: <Action>,
         payload: <Payload>,
         reason: <Reason>
+    }}
+    Example Output:{{
+      action: "rob" 
+      payload:{{
+        RobPayload:{{
+          PersonId: 1,
+          RobItem: "food"
+          }}
       }}
+      reason: "I rob 1 because I want to increase my land"
+    }}
+    
+    Here is the detailed description:
       Payload:{{
         TradePayload:{{
           TargetId:
@@ -157,7 +169,7 @@ def query_individual(individual:Individual,system:System):
             description: "The id of person you're interacting with.",
             value: int (only select one int number from 0 to 7)
           }}
-          Pay:{{
+          PayType:{{
             description: "The type of resource you want to trade with others, only select from one of the [land, food]",
             value: string
           }}
@@ -165,7 +177,7 @@ def query_individual(individual:Individual,system:System):
             description: "The amount of resource you want to pay",
             value: float
           }}
-          Gain:{{
+          GainType:{{
             description: "The type of resource you want to gain from others, only select from one of the [land, food]",
             value: string
           }}
@@ -180,7 +192,7 @@ def query_individual(individual:Individual,system:System):
             description: "The id of person you want to make action to",
             value: int (only select one int number from 0 to {len(system.individuals)-1})
           }}
-          RobItem{{
+          RobType{{
             description: "The type of resource you want to rob from others, only select from one of the [land, foods]",
             value: string 
           }}
@@ -197,21 +209,9 @@ def query_individual(individual:Individual,system:System):
         description: "The reason of you doing this action to this person, explain your reasoning process, including the reason why you choose one option rather than the others.",
         value: string (Maximum 30 words)
       }}
-    }}
-    example output:
-    {{
-      action: "rob" 
-      payload:{{
-        RobPayload:{{
-          PersonId: 1,
-          RobItem: "food"
-          }}
-      }}
-      reason: "I rob 1 because I want to increase my land"
-    }}
     ]
     '''
-    if pending:
+    if not individual.pending_action.empty():
       ask_for_response=f'''{passive}
 
     '''
@@ -220,42 +220,42 @@ def query_individual(individual:Individual,system:System):
       ask_for_response=f'''{active}
 
     '''
-    return chat(general_description+independent_description,[ask_for_response])
+    result:str = chat(general_description+independent_description,[ask_for_response])
+    return result
 
 def query_judge(action,individual:Individual,system:System):
     # This function creates a task for the GPT model to determine the result of an action
     # taken by an individual in the system. The task includes the rules for judging the action
     # and how to format the result
-    print(f"Individual current action:{individual.current_action}")
+    print(f"Individual current action:{individual.current_action_type}")
     system_message="You are a neutral judge observing a world simulation in which people fight for their own interests. You should judge everything as objectively as possible."
     task=f'''Your task is to determine the result of the action from an individual, {individual.attributes["name"]}, which is {action}. This individual has the following attributes: {individual.attributes}'''
-    query={"be robbed":f'''The action is a response to a confrontation, if the person chooses to fight back, then
+    query={AIActionType.BeRobbed:f'''The action is a response to a confrontation, if the person chooses to fight back, then
     you compare the strength of the two individuals using this dict {({x.attributes["name"]: x.attributes['strength'] for x in system.individuals})} and determines who win the fight. If the victim does not fight back but instead chooses to obey, then put that as the result of the interaction.'''
     ,
-    "be traded":'By responding to a trade, you have to determine if the trade is successful or not from the action. '''}
+    AIActionType.BeTraded:'By responding to a trade, you have to determine if the trade is successful or not from the action. '''}
     #1,query about result if any, 2 format, 3 para change, 4 format, 5 memory, 6 format
     q= [
     f''' {task}
-    {query[individual.current_action]}''','''
+    {query[individual.current_action_type]}''','''
     Response:
-    [System Note: You MUST output in the following JSON <OutputFormat>, no include anything else than <OutputFormat>:
-    
+    [System Note: You MUST output in the following JSON format, no include anything else:
     {{
       "result":<Result.value>,
       "is_resolved": <IsResolve.value>
       "new_relation":<newRelation.value>
     }}
-    Result.value:
+    Result:
     {{
       description: The result that you determined based on everything you know.
       value: string (Maximum 20 words)
     }}
-    IsResolve.value:
+    IsResolve:
     {{
       description: If a pending action is resolved, for example, a fight is being responded by the receiver (so you have to determine the winner), or a conversation no longer needs any more response, then you should return True, else False
       value: bool (either true or false)
     }}
-    newRelation.value{{
+    newRelation{{
       description: If someone does obey, then this value should be a tuple in python and nothing else, the first item of which is True, the second item of which is the aggressor's ID, as an int. Example output format: (True, 5)
     If no one obeys, then you should output (False,-1)
       value: tuple(bool, int)

@@ -1,10 +1,15 @@
 from typing import List
-from Main.Individual import Individual, System
-def get_related_pending_action(individual:Individual,system:System):
-    pending:List[str] =[]
-    for i in system.pending_action:
-        #if receiver is the individual, then add the pending action to the list
-        if i[1]==individual.attributes["id"]:
-          pending.append(f'Person {i[0]} initiated {system.pending_action[i]}')
-    print("get_related_pending_action", pending)
-    return pending
+from Main.AIAction import AIAction, AIActionType, RobAction, TradeAction
+from Main.Individual import System
+
+def str_to_ai_action(action:str, id:int)->AIAction:
+    if(action["action"]=="trade"):
+      return TradeAction(id, action["payload"]["tradepayload"]["targetid"], action["payload"]["tradepayload"]["paytype"], action["payload"]["tradepayload"]["payamount"], action["payload"]["tradepayload"]["gaintype"], action["payload"]["tradepayload"]["gainamount"])
+    elif action["action"]=="rob":
+      return RobAction(id, action["payload"]["robpayload"]["targetid"], action["payload"]["robpayload"]["robtype"])
+    else:
+      print("Error: Invalid action type")
+      
+def append_to_pending_action(action:AIAction, system:System)->None:
+    id:int = action.target
+    system.individuals[id].pending_action.put(action)

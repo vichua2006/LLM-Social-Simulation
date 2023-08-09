@@ -3,6 +3,7 @@ import PySimpleGUI as sg
 from typing import List, Tuple
 from Main.Individual import Individual, System
 from Main.Simulation import initialize, simulate
+import time
 
 def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
     person_layout = []
@@ -15,10 +16,11 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
                    [sg.Text('SocialPosition:'), sg.Input(person.attributes["social_position"], key=f'-SOCIALPOSITION{i}-')],
                    [sg.Text('Food:'), sg.Input(person.attributes["food"], key=f'-FOOD{i}-')],
                    [sg.Text('Land:'), sg.Input(person.attributes["land"], key=f'-LAND{i}-')],
-                   
+                   [sg.Text('CurrentActionType:'), sg.Input(person.current_action_type, key=f'-CURRENTACTIONTYPE{i}-')],
+                   [sg.Listbox(values=person.get_pending_action_as_list(), size=(100, 200),  horizontal_scroll= True, key=f'-PENDINGACTION{i}-')]
                    ]
-        person_layout.append(sg.Tab(f'Person {i+1}', section, key=section_key))
-    return sg.TabGroup([person_layout], size=(200, 200))
+        person_layout.append(sg.Tab(f'Person {i}', section, key=section_key))
+    return sg.TabGroup([person_layout], size=(200, 300))
 
 
 def start_simulate(system:System):
@@ -34,11 +36,10 @@ def main():
     layout = [[person_layout], [console_log], button]
     isappStarted = False
     window = sg.Window('LLM Social Simulation', layout)
+    thread: threading.Thread
         # Redirect stdout to the sg.Output element
     while True:             # Event Loop
-        event, values = window.read()
-        thread: threading.Thread
-        stop_event_flag = [False]
+        event, values = window.read(timeout=100) #update every 100ms
         if event == sg.WIN_CLOSED:
             break
         elif event == '-Clear-':
@@ -50,18 +51,28 @@ def main():
         elif event == '-START-':
             print("Start")
             system.is_stop=False
+            if(isappStarted):
+                continue
             thread = window.start_thread(lambda: start_simulate(system), ('-THREAD-', '-THEAD ENDED-'))
             isappStarted = True
         elif event == '-STOP-':
             system.is_stop=True
-            print("Stoped", stop_event_flag)
+            print("Stop")
             isappStarted = False
+        
+        #update 
+        for i, person in enumerate(individuals):
+            window[f'-AGGRESSIVENESS{i}-'].update(person.attributes["aggressiveness"])
+            window[f'-COVETOUSNESS{i}-'].update(person.attributes["covetousness"])
+            window[f'-INTELLIGENCE{i}-'].update(person.attributes["intelligence"])
+            window[f'-STRENGTH{i}-'].update(person.attributes["strength"])
+            window[f'-SOCIALPOSITION{i}-'].update(person.attributes["social_position"])
+            window[f'-FOOD{i}-'].update(person.attributes["food"])
+            window[f'-LAND{i}-'].update(person.attributes["land"])
+            window[f'-CURRENTACTIONTYPE{i}-'].update(person.current_action_type)
+            window[f'-PENDINGACTION{i}-'].update(person.get_pending_action_as_list())
+       
             
-        # Check if event is a section Collapsible
-        if '-COLLASPSIBLE-' in event:
-            section_key = event.split('-COLLASPSIBLE-')[0]
-            window[section_key].update(visible=not window[section_key].visible)
-            window[section_key+'-COLLASPSIBLE-'].update(window[section_key].metadata[0] if window[section_key].visible else window[section_key].metadata[1])
 
     window.close()
 

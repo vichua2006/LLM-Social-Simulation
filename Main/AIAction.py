@@ -13,7 +13,7 @@ class StringEnumMeta(EnumMeta):
         return super().__call__(value, *args, **kwargs)
     
 # Define the string enum using the custom metaclass
-class AIAction(str, Enum, metaclass=StringEnumMeta):
+class AIActionType(str, Enum, metaclass=StringEnumMeta):
     Default = "None"
     Farm = "farm"
     Rob = "rob"
@@ -21,22 +21,29 @@ class AIAction(str, Enum, metaclass=StringEnumMeta):
     BeRobbed = "be robbed"
     BeTraded = "be traded"
 
-#class Item(str, Enum, metaclass=StringEnumMeta):
+#class Type(str, Enum, metaclass=StringEnumMeta):
  #   Land = "land"
   #  Food = "food"
    # Glory = "glory"
-class PendingAction:
-    def __init__(self, type:AIAction) -> None:
-        self.type:AIAction = type
-class RobAction(PendingAction):
-    def __init__(self, robItem:str) -> None:
-        super().__init__(AIAction.Rob)
-        self.robItem:str= robItem
-        
-class TradeAction(PendingAction):
-    def __init__(self, payItem:str, payAmount:float, gainItem:str, gainAmount:float) -> None:
-        super().__init__(AIAction.Trade)
-        self.payItem: str = payItem
+class AIAction:
+    def __init__(self, type:AIActionType, owner:int, target:int) -> None:
+        self.type:AIActionType = type
+        self.owner:int = owner
+        self.target:int = target
+    def __str__(self) -> str:
+        return f"{self.type}, owner: {self.owner}, target: {self.target}"
+class RobAction(AIAction):
+    def __init__(self, owner:int, target:int, robType:str) -> None:
+        super().__init__(AIActionType.Rob, owner, target)
+        self.robType:str= robType
+    def __str__(self) -> str:
+        return f"{self.type}, owner: {self.owner}, target: {self.target}, robType: {self.robType}"
+class TradeAction(AIAction):
+    def __init__(self, owner:int, target:int, payType:str, payAmount:float, gainType:str, gainAmount:float) -> None:
+        super().__init__(AIActionType.Trade, owner, target)
+        self.payType: str = payType
         self.payAmount: float = payAmount
-        self.gainItem: str = gainItem
+        self.gainType: str = gainType
         self.gainAmount: float = gainAmount
+    def __str__(self) -> str:
+        return f"{self.type}, owner: {self.owner}, target: {self.target}, payType: {self.payType}, payAmount: {self.payAmount}, gainType: {self.gainType}, gainAmount: {self.gainAmount}" 
