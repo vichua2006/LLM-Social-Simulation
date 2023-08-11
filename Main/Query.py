@@ -5,11 +5,10 @@ from Main.AIAction import AIActionType
 from Main.ChatGpt import chat
 from Main.Individual import Individual, System
 
-def query_individual(individual:Individual,system:System):
+def query_individual(individual:Individual,system:System,response_action):
     # This function creates a description of the individual and the environment they are in,
     # and then asks for the individual's response using the chat function.
     # The detailed description and the ask for response are both created within this function.\
-    response_action = individual.pending_action.get() if not individual.pending_action.empty() else None
     print(f"Response action:{response_action}")
     general_description=f'''
     You are {individual.attributes["name"]}
@@ -211,15 +210,18 @@ def query_individual(individual:Individual,system:System):
       }}
     ]
     '''
-    if not individual.pending_action.empty():
+    if response_action:
       ask_for_response=f'''{passive}
 
     '''
+      print('PASSIVE STATE')
           
     else: 
       ask_for_response=f'''{active}
 
     '''
+      print("ACTIVE STATE")
+    
     result:str = chat(general_description+independent_description,[ask_for_response])
     return result
 

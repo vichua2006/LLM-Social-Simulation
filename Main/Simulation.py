@@ -44,12 +44,14 @@ def simulate(individuals:List[Individual],system:System):
             return
           index:int = individuals.index(individual)
           print(f"Person {index} is responding...\n")
-          if individual.attributes['action']>0 or individual.pending_action:
-            action:str=query_individual(individual,system)
-            if not individual.pending_action.empty():
-              print(f'\n{individual.attributes["name"]} need to response pending action {individual.pending_action.queue[0]}')
-              individual.check_is_responser(individual.pending_action.queue[0])
-              query_judge(action, individual,system)
+          passive=not individual.pending_action.empty()
+          if individual.attributes['action']>0 or passive:
+            response_action = individual.pending_action.get() if not individual.pending_action.empty() else None
+            action:str=query_individual(individual,system,response_action)
+            if passive:
+                  print(f'{individual.attributes["name"]} chooses to {action}')
+                  individual.check_is_responser(response_action)
+                  query_judge(f'In response to {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}',individual,system)
             else:
               for o in range(5):
                 if system.is_stop:
@@ -69,21 +71,26 @@ def simulate(individuals:List[Individual],system:System):
                     action=list(action[x] for x in action)[0]
                     break
                   except Exception as e2:print(f"First Exception:{e}, second exception:{e2}")
-                  action:str=query_individual(individual,system)
+                  action:str=query_individual(individual,system,response_action)
               try:system.history.append(f'{individual.attributes["name"]}:{action["reason"]}')
               except:
                 try:system.history.append(f'{individual.attributes["name"]}:{action[[x for x in action][0]]["reason"]}')
                 except:system.history.append(f'{individual.attributes["name"]}:\n{action}')
-              if action["action"]==AIActionType.Farm:
+              if action["action"]=="farm":
+                    print("Farming identified.")
                     individual.attributes['food']+=np.random.uniform(0.9, 1.1)*individual.attributes["land"]/3
                     individual.attributes['action']=0
                     individual.memory.append(action['reason'])
-              elif action["action"]==AIActionType.Rob or action["action"]==AIActionType.Trade:
+              else:
                     individual.attributes['action']=0
                     individual.memory.append(action['reason'])
       system.ranking.update({x: x.attributes["social_position"] for x in system.individuals})
       print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
       #reach this mean all pending action is done
-      day_end(system,individuals)
-      break
+      pending=[i.pending_action for i in system.individuals]
+      if not pending:
+        day_end(system,individuals)
+        break
+      else:
+            print(f'Systme still has the following pending actions:{pending}, so will go into another round.')
 
