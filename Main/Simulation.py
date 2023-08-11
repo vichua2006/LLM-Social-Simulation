@@ -87,10 +87,12 @@ def simulate(individuals:List[Individual],system:System):
       system.ranking.update({x: x.attributes["social_position"] for x in system.individuals})
       print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
       #reach this mean all pending action is done
-      pending=[i.pending_action for i in system.individuals]
+      pending=False
+      for i in individuals:
+            pending=pending or not i.pending_action.empty()
       if not pending:
         day_end(system,individuals)
         break
       else:
-            print(f'Systme still has the following pending actions:{pending}, so will go into another round.')
+            print(f'Systme still pending actions, so will go into another round.')
 

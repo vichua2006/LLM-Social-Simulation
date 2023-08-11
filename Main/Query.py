@@ -153,11 +153,11 @@ def query_individual(individual:Individual,system:System,response_action):
       action: "rob" 
       payload:{{
         RobPayload:{{
-          PersonId: 1,
+          PersonId: X,
           RobItem: "food"
           }}
       }}
-      reason: "I rob 1 because I want to increase my land"
+      reason: "I rob person X because I want to increase my land"
     }}
     
     Here is the detailed description:
