@@ -9,18 +9,24 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
     person_layout = []
     for i, person in enumerate(individual):
         section_key = f'-SECTION{i}-'
-        section = [[sg.Text('Aggressiveness:'), sg.Input(person.attributes["aggressiveness"], key=f'-AGGRESSIVENESS{i}-')],
-                   [sg.Text('Covetousness:'), sg.Input(person.attributes["covetousness"], key=f'-COVETOUSNESS{i}-')],
-                   [sg.Text('Intelligence:'), sg.Input(person.attributes["intelligence"], key=f'-INTELLIGENCE{i}-')],
-                   [sg.Text('Strength:'), sg.Input(person.attributes["strength"], key=f'-STRENGTH{i}-')],
-                   [sg.Text('SocialPosition:'), sg.Input(person.attributes["social_position"], key=f'-SOCIALPOSITION{i}-')],
-                   [sg.Text('Food:'), sg.Input(person.attributes["food"], key=f'-FOOD{i}-')],
-                   [sg.Text('Land:'), sg.Input(person.attributes["land"], key=f'-LAND{i}-')],
-                   [sg.Text('CurrentActionType:'), sg.Input(person.current_action_type, key=f'-CURRENTACTIONTYPE{i}-')],
-                   [sg.Listbox(values=person.get_pending_action_as_list(), size=(100, 200),  horizontal_scroll= True, key=f'-PENDINGACTION{i}-')]
+        pending_action_layout = [[sg.Text("PendingAction:")], [sg.Listbox(values=person.get_pending_action_as_list(), size=(300, 150),  horizontal_scroll= True, key=f'-PENDINGACTION{i}-')]]
+        obey_subject_layout = [[sg.Text("ObeySubject:")], [sg.Listbox(values = person.obey_stats.subject, size=(300, 100),  horizontal_scroll= True, key=f'-OBEYSUBJECT{i}-')]]
+        left_section = [[sg.Text('Aggressiveness:'), sg.Input(person.attributes["aggressiveness"], size = (15, None), key=f'-AGGRESSIVENESS{i}-')],
+                   [sg.Text('Covetousness:'), sg.Input(person.attributes["covetousness"], size = (15, None), key=f'-COVETOUSNESS{i}-')],
+                   [sg.Text('Intelligence:'), sg.Input(person.attributes["intelligence"], size = (15, None), key=f'-INTELLIGENCE{i}-')],
+                   [sg.Text('Strength:'), sg.Input(person.attributes["strength"], size = (15, None), key=f'-STRENGTH{i}-')],
+                   [sg.Text('SocialPosition:'), sg.Input(person.attributes["social_position"], size = (10, None), key=f'-SOCIALPOSITION{i}-')],
+                   [sg.Text('Food:'), sg.Input(person.attributes["food"], size = (10, None), key=f'-FOOD{i}-')],
+                   [sg.Text('Land:'), sg.Input(person.attributes["land"], size = (10, None), key=f'-LAND{i}-')],
+                   [sg.Text('CurrentActionType:'), sg.Input(person.current_action_type, size = (10, None), key=f'-CURRENTACTIONTYPE{i}-')],
+                   [sg.Text('ObeyTo:'), sg.Input(person.obey_stats.obey_personId, size = (10, None), key=f'-OBEYPERSONID{i}-')],
                    ]
+        right_section = [[sg.Column(pending_action_layout, size=(300, 150))],
+                        [sg.Column(obey_subject_layout, size = (300, 100))]
+                        ]
+        section = [[sg.Column(left_section), sg.Column(right_section)]]
         person_layout.append(sg.Tab(f'Person {i}', section, key=section_key))
-    return sg.TabGroup([person_layout], size=(200, 300))
+    return sg.TabGroup([person_layout])
 
 
 def start_simulate(system:System):
@@ -71,7 +77,9 @@ def main():
             window[f'-LAND{i}-'].update(person.attributes["land"])
             window[f'-CURRENTACTIONTYPE{i}-'].update(person.current_action_type)
             window[f'-PENDINGACTION{i}-'].update(person.get_pending_action_as_list())
-       
+            window[f'-OBEYPERSONID{i}-'].update(person.obey_stats.obey_personId)
+            window[f'-OBEYSUBJECT{i}-'].update(person.obey_stats.subject)
+        window.refresh()
             
 
     window.close()
