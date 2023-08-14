@@ -1,8 +1,10 @@
+import sys
 import threading
 import PySimpleGUI as sg
 from typing import List, Tuple
 from Main.Individual import Individual, System
 from Main.Simulation import initialize, simulate
+from datetime import datetime
 import time
 
 def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
@@ -38,7 +40,7 @@ def main():
     individuals = system.individuals
     person_layout = create_individual_layout(individuals)
     console_log = [[sg.Output(size=(80,30), key='-OUTPUT-')]] 
-    button:List[List[button]] = [[sg.Button('Start', key= '-START-')], [sg.Button('Stop', key= '-STOP-')], [sg.Button('Clear', key= '-Clear-')], [sg.Button('Exit', key= '-Exit-')]]
+    button:List[List[button]] = [[sg.Button('Start', key= '-START-')], [sg.Button('Stop', key= '-STOP-')], [sg.Button('Clear', key= '-Clear-')], [sg.Button('Exit', key= '-Exit-')], [sg.Button('Export', key= '-Export-')]]
     layout = [[person_layout], [console_log], button]
     isappStarted = False
     window = sg.Window('LLM Social Simulation', layout)
@@ -65,6 +67,14 @@ def main():
             system.is_stop=True
             print("Stop")
             isappStarted = False
+        elif event == '-Export-':
+            current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+            folderPath = "Log"
+            filename = f"{folderPath}/{current_time}.txt"
+            with open(filename, 'w') as f:
+                f.write(window['-OUTPUT-'].get())
+            print(f"Log successfully export to {filename}")
+           
         
         #update 
         for i, person in enumerate(individuals):
