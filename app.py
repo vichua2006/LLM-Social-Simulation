@@ -2,11 +2,12 @@ import sys
 import threading
 import PySimpleGUI as sg
 from typing import List, Tuple
+from GUI.CustomConsoleLog import CustomConsoleLog
 from Main.Individual import Individual, System
 from Main.Simulation import initialize, simulate
 from datetime import datetime
 import time
-
+    
 def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
     person_layout = []
     for i, person in enumerate(individual):
@@ -35,16 +36,21 @@ def start_simulate(system:System):
     for i in range(2):
         simulate(system.individuals, system)
 def main():
-
     system=initialize()
     individuals = system.individuals
-    person_layout = create_individual_layout(individuals)
-    console_log = [[sg.Output(size=(80,30), key='-OUTPUT-')]] 
-    button:List[List[button]] = [[sg.Button('Start', key= '-START-')], [sg.Button('Stop', key= '-STOP-')], [sg.Button('Clear', key= '-Clear-')], [sg.Button('Exit', key= '-Exit-')], [sg.Button('Export', key= '-Export-')]]
-    layout = [[person_layout], [console_log], button]
-    isappStarted = False
+    
+    person_layout = [[create_individual_layout(individuals)]]
+    special_log_layout = [[sg.Output(size=(80,15), key='-SPECIAL OUTPUT-')]]
+    layout_left = person_layout + special_log_layout
+    console_log_layout = [[sg.Output(size=(80,30), key='-OUTPUT-')]]
+    button_layout = [[sg.Button('Start', key= '-START-'), sg.Button('Stop', key= '-STOP-'), sg.Button('Clear', key= '-Clear-'), sg.Button('Exit', key= '-Exit-') ,sg.Button('Export', key= '-Export-')]]
+    layout_right = console_log_layout+ button_layout
+    #column layout of person_layout and console_log_layout
+    layout = [[sg.Column(layout_left), sg.Column(layout_right)]]
     window = sg.Window('LLM Social Simulation', layout)
     thread: threading.Thread
+    system.set_console_log(CustomConsoleLog(window, '-SPECIAL OUTPUT-'))
+    isappStarted = False
         # Redirect stdout to the sg.Output element
     while True:             # Event Loop
         event, values = window.read(timeout=100) #update every 100ms

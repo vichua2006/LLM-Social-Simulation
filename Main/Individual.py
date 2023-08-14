@@ -1,6 +1,7 @@
 import queue
 import numpy as np  # numpy for numerical computations
-from typing import List, Dict, Tuple      
+from typing import List, Dict, Tuple
+from GUI.CustomConsoleLog import CustomConsoleLog      
 from Main.AIAction import AIActionType, AIAction
 
 class Individual:
@@ -17,7 +18,9 @@ class System:
         self.relations=[x for x in individuals]
         self.time=0
         self.is_stop=False
-
+        
+    def set_console_log(self, console_log:CustomConsoleLog):
+        self.console_log = console_log
 class Individual:
     def __init__(self, id:int, name:str):
         # Define the characteristics of the individual

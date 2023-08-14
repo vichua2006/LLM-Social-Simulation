@@ -1,6 +1,6 @@
 import threading
-import numpy as np
 from typing import List
+from Main.Calculation import increase_food
 from Main.Individual import Individual, System
 from Main.Query import query_individual, query_judge
 from Main.StringUtils import deserialize_first_json_object
@@ -76,14 +76,21 @@ def simulate(individuals:List[Individual],system:System):
               except:
                 try:system.history.append(f'{individual.attributes["name"]}:{action[[x for x in action][0]]["reason"]}')
                 except:system.history.append(f'{individual.attributes["name"]}:\n{action}')
-              if action["action"]=="farm":
-                    print("Farming identified.")
-                    individual.attributes['food']+=np.random.uniform(0.9, 1.1)*individual.attributes["land"]/3
-                    individual.attributes['action']=0
-                    individual.memory.append(action['reason'])
-              else:
-                    individual.attributes['action']=0
-                    individual.memory.append(action['reason'])
+                
+              match individual.current_action_type:
+                case AIActionType.Farm:
+                  system.console_log.append(f"{index}:🌾")
+                  increase_food(individual)
+                case AIActionType.Trade:
+                  system.console_log.append(f"{index}:🤝")
+                case AIActionType.Rob:
+                  system.console_log.append(f"{index}:🗡️")
+                case AIActionType.BeRobbed:
+                  system.console_log.append(f"{index}:🛡️")
+                case _ :
+                  system.console_log.append(f"{index}:🤷 ActionType Error")
+              individual.attributes['action']-=1
+              individual.memory.append(action['reason'])
       system.ranking.update({x: x.attributes["social_position"] for x in system.individuals})
       print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
       #reach this mean all pending action is done
