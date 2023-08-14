@@ -65,6 +65,9 @@ class Individual:
         self.obey_stats.obey_personId = person_id
         #Get the person you obey to and add yourself to the subject list
         system.individuals[person_id].obey_stats.subject.append(system.individuals.index(self)) 
+        #iterate all subject of yours and transfer its obeyperson to the person you obey to
+        for subject in self.obey_stats.subject:
+            system.individuals[subject].obey_stats.obey_personId = person_id
     
     # Check if the individual is the responser of the action
     def check_is_responser(self, action:AIAction)->None:

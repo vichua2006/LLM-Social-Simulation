@@ -58,7 +58,6 @@ def simulate(individuals:List[Individual],system:System):
                   print("Stop Simulation!")
                   return
                 try:
-                  print("Action: "+action)
                   action = deserialize_first_json_object(action.lower())
                   ai_action:AIAction = str_to_ai_action(action, index)
                   individual.current_action_type = ai_action.type
@@ -88,7 +87,7 @@ def simulate(individuals:List[Individual],system:System):
                 case AIActionType.BeRobbed:
                   system.console_log.append(f"{index}:🛡️")
                 case _ :
-                  system.console_log.append(f"{index}:🤷 ActionType Error")
+                  system.console_log.append(f"{index}:Error")
               individual.attributes['action']-=1
               individual.memory.append(action['reason'])
       system.ranking.update({x: x.attributes["social_position"] for x in system.individuals})
