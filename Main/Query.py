@@ -9,7 +9,7 @@ def query_individual(individual:Individual,system:System,response_action):
     # This function creates a description of the individual and the environment they are in,
     # and then asks for the individual's response using the chat function.
     # The detailed description and the ask for response are both created within this function.\
-    print(f"Response action:{response_action}")
+    print(f"Responding to:{response_action}")
     general_description=f'''
     You are {individual.attributes["name"]}
     You have those attributes {individual.attributes}.
@@ -104,22 +104,25 @@ def query_individual(individual:Individual,system:System,response_action):
     gain food, then you are more inclined to rob more on your 
     eleventh day.
     '''
-    passive=f'''
-    Today, you have received this action from a neighbor:{response_action}. You have to address one of them. If someone robs you, you can only either 
+    passive_trade=f'''
+    Today, you noticed that {response_action}.
+    You can accept the trade or reject it. You decision is only a result of your psychological axioms.
+    Reply with either ACCEPT or REJECT
+    
+    '''
+    passive_rob=f'''
+    Today, you noticed that {response_action}. You can only either 
     obey them or physically rebel against them by fighting back. 
     The expected utility of fighting back is your desire for 
     glory, {individual.DESIRE_FOR_GLORY}, times your chance of 
-    winning which can be calculated from your memory. The 
+    winning which can be calculated from your memory. If you've never lost to this person before, then you wouldn't want to obey. The 
     expected utility of obeying is your desire for peace, 
-    {individual.DESIRE_FOR_PEACE}. You will pick the action with 
+    {individual.DESIRE_FOR_PEACE}. So only when you've lost many times to this person by rebelling would the utility of rebel be low enough so that it's no longer the correct option. You will pick the action with 
     the most utility. If you obey the one robbing you now, the 
     one robbing you now becomes your master, and you become their 
     subjects.
-    If you're being offered a trade, then you can accept the trade or reject it.
     
-    If you're being robbed, then reply exactly with either OBEY or REBEL
-    If you received a trade offer, then reply with either ACCEPT or REJECT
-    
+    Reply exactly with either OBEY or REBEL
     '''
     farm=False
     active=f'''
@@ -211,15 +214,19 @@ def query_individual(individual:Individual,system:System,response_action):
     ]
     '''
     if response_action:
-      ask_for_response=f'''{passive}
+      if individual.current_action_type=='be traded':
+            
+        ask_for_response=passive_trade
+      else:
+        ask_for_response=passive_rob
 
-    '''
+    
       print('PASSIVE STATE')
           
     else: 
-      ask_for_response=f'''{active}
+      ask_for_response=active
 
-    '''
+    
       print("ACTIVE STATE")
     
     result:str = chat(general_description+independent_description,[ask_for_response])
@@ -232,8 +239,7 @@ def query_judge(action,individual:Individual,system:System):
     print(f"Individual current action:{individual.current_action_type}")
     system_message="You are a neutral judge observing a world simulation in which people fight for their own interests. You should judge everything as objectively as possible."
     task=f'''Your task is to determine the result of the action from an individual, {individual.attributes["name"]}, which is {action}. This individual has the following attributes: {individual.attributes}'''
-    query={AIActionType.BeRobbed:f'''The action is a response to a confrontation, if the person chooses to fight back, then
-    you compare the strength of the two individuals using this dict {({x.attributes["name"]: x.attributes['strength'] for x in system.individuals})} and determines who win the fight. If the victim does not fight back but instead chooses to obey, then put that as the result of the interaction.'''
+    query={AIActionType.BeRobbed:f'''The action is a response to a confrontation, if the person chooses to fight back, then system will compare the strength of the two individuals to determine who win the fight. If the victim does not fight back but instead chooses to obey, then put that as the result of the interaction.'''
     ,
     AIActionType.BeTraded:'By responding to a trade, you have to determine if the trade is successful or not from the action. '''}
     #1,query about result if any, 2 format, 3 para change, 4 format, 5 memory, 6 format

@@ -62,6 +62,7 @@ def simulate(individuals:List[Individual],system:System):
                   ai_action:AIAction = str_to_ai_action(action, index)
                   individual.current_action_type = ai_action.type
                   append_to_pending_action(ai_action, system)
+                  print(action)
                   break
                 except Exception as e:
                   try:
