@@ -43,16 +43,17 @@ def simulate(individuals:List[Individual],system:System):
             print("Stop Simulation!")
             return
           index:int = individuals.index(individual)
-          print(f"Person {index} is responding...\n")
           passive=not individual.pending_action.empty()
           if individual.attributes['action']>0 or passive:
+            print(f"Person {index} is responding...\n")
             response_action = individual.pending_action.get() if not individual.pending_action.empty() else None
             action:str=query_individual(individual,system,response_action)
+            print(action)
             if passive:
                   print(f'{individual.attributes["name"]} chooses to {action}')
                   individual.check_is_responser(response_action)
                   query_judge(f'In response to {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}',individual,system)
-            else:
+            elif not passive:
               for o in range(5):
                 if system.is_stop:
                   print("Stop Simulation!")
@@ -62,7 +63,7 @@ def simulate(individuals:List[Individual],system:System):
                   ai_action:AIAction = str_to_ai_action(action, index)
                   individual.current_action_type = ai_action.type
                   append_to_pending_action(ai_action, system)
-                  print(action)
+                  
                   break
                 except Exception as e:
                   try:
@@ -70,8 +71,11 @@ def simulate(individuals:List[Individual],system:System):
                     append_to_pending_action(ai_action, system)
                     action=list(action[x] for x in action)[0]
                     break
-                  except Exception as e2:print(f"First Exception:{e}, second exception:{e2}")
-                  action:str=query_individual(individual,system,response_action)
+                  except Exception as e2:
+                    print(f"First Exception:{e}, second exception:{e2}")
+                    action:str=query_individual(individual,system,response_action)
+                    continue
+                  
               try:system.history.append(f'{individual.attributes["name"]}:{action["reason"]}')
               except:
                 try:system.history.append(f'{individual.attributes["name"]}:{action[[x for x in action][0]]["reason"]}')
