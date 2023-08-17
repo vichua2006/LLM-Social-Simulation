@@ -48,13 +48,14 @@ def simulate(individuals:List[Individual],system:System):
             print(f"Person {index} is responding...\n")
             response_action = individual.pending_action.get() if not individual.pending_action.empty() else None
             action:str=query_individual(individual,system,response_action)
-            print(action)
             if passive:
+                  print(action)
                   print(f'{individual.attributes["name"]} chooses to {action}')
                   individual.check_is_responser(response_action)
                   query_judge(f'In response to {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}',individual,system)
             elif not passive:
               for o in range(5):
+                print(action)
                 if system.is_stop:
                   print("Stop Simulation!")
                   return

@@ -21,6 +21,7 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
                    [sg.Text('SocialPosition:'), sg.Input(person.attributes["social_position"], size = (10, None), key=f'-SOCIALPOSITION{i}-')],
                    [sg.Text('Food:'), sg.Input(person.attributes["food"], size = (10, None), key=f'-FOOD{i}-')],
                    [sg.Text('Land:'), sg.Input(person.attributes["land"], size = (10, None), key=f'-LAND{i}-')],
+                   [sg.Text('Action:'), sg.Input(person.attributes["action"], size = (10, None), key=f'-Action{i}-')],
                    [sg.Text('CurrentActionType:'), sg.Input(person.current_action_type, size = (10, None), key=f'-CURRENTACTIONTYPE{i}-')],
                    [sg.Text('ObeyTo:'), sg.Input(person.obey_stats.obey_personId, size = (10, None), key=f'-OBEYPERSONID{i}-')],
                    ]
@@ -34,7 +35,7 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
 
 def start_simulate(system:System):
     for i in range(10):
-        print(f"DAY {i+1} HAS STARTED.")
+        print(f"DAY {system.time+1} HAS STARTED.")
         simulate(system.individuals, system)
 def main():
     system=initialize()
@@ -92,10 +93,12 @@ def main():
             window[f'-SOCIALPOSITION{i}-'].update(person.attributes["social_position"])
             window[f'-FOOD{i}-'].update(person.attributes["food"])
             window[f'-LAND{i}-'].update(person.attributes["land"])
+            window[f'-Action{i}-'].update(person.attributes['action'])
             window[f'-CURRENTACTIONTYPE{i}-'].update(person.current_action_type)
             window[f'-PENDINGACTION{i}-'].update(person.get_pending_action_as_list())
             window[f'-OBEYPERSONID{i}-'].update(person.obey_stats.obey_personId)
             window[f'-OBEYSUBJECT{i}-'].update(person.obey_stats.subject)
+            
         window.refresh()
             
 
