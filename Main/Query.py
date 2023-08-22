@@ -10,6 +10,8 @@ def query_individual(individual:Individual,system:System,response_action):
     # and then asks for the individual's response using the chat function.
     # The detailed description and the ask for response are both created within this function.\
     print(f"Responding to:{response_action}")
+    obedience=f'You have obeyed to this person: Person {individual.obey_stats.obey_personId}. You have to always obey his actions, and you cannot initiate any action against him.'
+    master=f'These people have obeyed to your invasion: {[f"Person"+str(i) for i in individual.obey_stats.subject]}. You can trade or rob them knowning that they will only accept.'
     general_description=f'''
     You are {individual.attributes["name"]}
     You have those attributes {individual.attributes}.
@@ -103,6 +105,9 @@ def query_individual(individual:Individual,system:System,response_action):
     if rob is proven to be more effective than farming for you to 
     gain food, then you are more inclined to rob more on your 
     eleventh day.
+    
+    {obedience if individual.obey_stats.obey_personId!=-1 else ''}
+    {master if individual.obey_stats.subject else ''}
     '''
     passive_trade=f'''
     Today, you noticed that {response_action}.
@@ -125,6 +130,7 @@ def query_individual(individual:Individual,system:System,response_action):
     Reply exactly with either OBEY or REBEL
     '''
     farm=False
+    
     active=f'''
     A new day has started, and you should choose from one of the 
     following actions: rob, trade{' and farm' if farm else ''}. You can only have 

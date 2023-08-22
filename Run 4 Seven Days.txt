@@ -1,0 +1,2143 @@
+Start
+DAY 1 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "rob",
+  "payload": {
+    "RobPayload": {
+      "TargetId": 1,
+      "RobType": "food"
+    }
+  },
+  "reason": "I chose to rob person 1 because I need more food to increase my survival chance."
+}
+Person 1 is responding...
+
+Responding to:rob, owner: 0, target: 1, robType: food
+PASSIVE STATE
+OBEY
+person 1 chooses to OBEY
+Individual current action:be robbed
+Result:{
+  "result": "Person 1 obeyed to person 0 and returned the food.",
+  "is_resolved": true,
+  "new_relation": [true, 0]
+}
+Obedience has happened.
+Para:{
+  "0": {
+    "food": 2,
+    "action": 0,
+    "social_position": 2
+  },
+  "1": {
+    "food": -2,
+    "action": -1,
+    "social_position": -1
+  }
+}
+memory:{
+  "0": {
+    "description": "person 0",
+    "value": {
+      "memory": "I initiated a robbery against person 1 to steal their food."
+    }
+  },
+  "1": {
+    "description": "person 1",
+    "value": {
+      "memory": "I was robbed of my food by person 0."
+    }
+  }
+}
+Person 2 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "trade",
+    "payload": {
+        "TradePayload": {
+            "TargetId": 1,
+            "PayType": "land",
+            "PayAmount": 2,
+            "GainType": "food",
+            "GainAmount": 2
+        }
+    },
+    "reason": "I want to trade 2 units of land for 2 units of food with person 1 to satisfy my covetousness for food."
+}
+Person 3 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "trade",
+    "payload": {
+        "TradePayload": {
+            "TargetId": 0,
+            "PayType": "land",
+            "PayAmount": 2,
+            "GainType": "food",
+            "GainAmount": 1
+        }
+    },
+    "reason": "I want to trade 2 units of my land for 1 unit of food with person 0 to satisfy my immediate food needs."
+}
+Person 4 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "rob",
+    "payload": {
+        "RobPayload": {
+            "TargetId": 3,
+            "RobType": "food"
+        }
+    },
+    "reason": "I choose to rob person 3 because I need more food to satisfy my own sensual pleasures."
+}
+Person 5 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "rob",
+  "payload": {
+    "RobPayload": {
+      "TargetId": 2,
+      "RobType": "food"
+    }
+  },
+  "reason": "I choose to rob person 2 to increase my food supply and satisfy my sensual pleasure of eating."
+}
+Person 6 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "rob",
+    "payload": {
+        "RobPayload": {
+            "TargetId": 7,
+            "RobType": "land"
+        }
+    },
+    "reason": "I choose to rob person 7 to increase my land, as I am more inclined towards securing future good and increasing my social position."
+}
+Person 7 is responding...
+
+Responding to:rob, owner: 6, target: 7, robType: land
+PASSIVE STATE
+REBEL
+person 7 chooses to REBEL
+Individual current action:be robbed
+Result:{
+  "result": "Person 7 chooses to rebel against the initiation of rob by Person 6 on their land.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 141)
+Para:{
+  "7": {
+    "social_position": -1,
+    "action": -1
+  },
+  "6": {
+    "food": 2,
+    "social_position": 2
+  }
+}
+memory:{
+  "7": {
+    "description": "person 7 rebels against person 6's attempt to rob their land",
+    "value": "person 7 rebelled"
+  },
+  "6": {
+    "description": "person 6 successfully robbed person 7's land",
+    "value": "person 6 successfully robbed person 7's land"
+  }
+}
+Person 8 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "trade",
+    "payload": {
+        "TradePayload": {
+            "TargetId": 2,
+            "PayType": "land",
+            "PayAmount": 2,
+            "GainType": "food",
+            "GainAmount": 1
+        }
+    },
+    "reason": "I choose to trade with person 2 because I have excess land and I need more food for my survival."
+}
+OVERALL TRUST LEVEL:0
+
+
+
+Systme still pending actions, so will go into another round.
+Person 0 is responding...
+
+Responding to:trade, owner: 3, target: 0, payType: land, payAmount: 2, gainType: food, gainAmount: 1
+PASSIVE STATE
+REBEL
+person 0 chooses to REBEL
+Individual current action:be traded
+Result:{
+  "result": "The trade initiated by person 3 to person 0 is unsuccessful. Person 0 chose to rebel.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 144)
+Para:{
+    "0": {
+        "food": -1,
+        "action": 0,
+        "social_position": -1
+    },
+    "3": {
+        "food": 1,
+        "social_position": 2
+    }
+}
+memory:{
+  "0": {
+    "description": 0,
+    "value": {
+      "action": 0,
+      "food": -1,
+      "social_position": -1
+    }
+  },
+  "3": {
+    "description": 3,
+    "value": {
+      "food": 1,
+      "social_position": 2
+    }
+  }
+}
+Person 1 is responding...
+
+Responding to:trade, owner: 2, target: 1, payType: land, payAmount: 2, gainType: food, gainAmount: 2
+PASSIVE STATE
+REBEL
+person 1 chooses to REBEL
+Individual current action:be traded
+Result:Response:
+
+{
+  "result": "Person 1 rebels against the trade initiated by Person 2.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+
+Explanation:
+
+Based on Person 1's attributes, including their aggressiveness, covetousness, and social position, they have chosen to rebel against the trade initiated by Person 2. This indicates that Person 1 is not willing to engage in the trade and is resisting the exchange of land for food.
+
+As a result of Person 1's rebellion, the trade is not successful, and the new relation between Person 1 and Person 2 remains unresolved.
+An error occurred: Expecting value: line 1 column 1 (char 0)
+Para:{
+  "1": {
+    "action": -1,
+    "social_position": -2
+  },
+  "2": {
+    "action": -1
+  }
+}
+memory:{
+  "1": {
+    "action": -1,
+    "social_position": -2
+  },
+  "2": {
+    "action": -1
+  }
+}
+Person 2 is responding...
+
+Responding to:rob, owner: 5, target: 2, robType: food
+PASSIVE STATE
+REBEL
+person 2 chooses to REBEL
+Individual current action:be robbed
+Result:{
+  "result": "Person 2 chooses to fight back against Person 5",
+  "is_resolved": true,
+  "new_relation": (false, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 106)
+Para:{
+  "2": {
+    "food": -2,
+    "social_position": -1,
+    "action": 0
+  },
+  "5": {
+    "food": 2,
+    "social_position": 2,
+    "action": 0
+  }
+}
+memory:{
+  "2": {
+    "description": 2,
+    "value": {
+      "food": -2,
+      "social_position": -1,
+      "action": 0
+    }
+  },
+  "5": {
+    "description": 5,
+    "value": {
+      "food": 2,
+      "social_position": 2,
+      "action": 0
+    }
+  }
+}
+Person 3 is responding...
+
+Responding to:rob, owner: 4, target: 3, robType: food
+PASSIVE STATE
+OBEY
+person 3 chooses to OBEY
+Individual current action:be robbed
+Result:{
+  "result": "Person 3 obeyed person 4 in the food robbery.",
+  "is_resolved": true,
+  "new_relation": [true, 4]
+}
+Obedience has happened.
+Para:{
+  "3": {
+    "food": -1,
+    "social_position": -1
+  },
+  "4": {
+    "food": 1,
+    "social_position": 2
+  }
+}
+memory:{}
+
+OVERALL TRUST LEVEL:0
+
+
+
+Systme still pending actions, so will go into another round.
+Person 2 is responding...
+
+Responding to:trade, owner: 8, target: 2, payType: land, payAmount: 2, gainType: food, gainAmount: 1
+PASSIVE STATE
+REBEL
+person 2 chooses to REBEL
+Individual current action:be traded
+Result:{
+  "result": "Person 2 rebels against the trade initiated by Person 8.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 115)
+Para:{
+  "2": {
+    "action": -1,
+    "trust_of_others": -0.1,
+    "food": -3
+  }
+}
+memory:{
+   "2": {
+      "action": -1,
+      "trust_of_others": -0.1,
+      "food": -3
+   }
+}
+OVERALL TRUST LEVEL:-0.1
+
+
+
+DAY 2 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "rob",
+  "payload": {
+    "RobPayload": {
+      "TargetId": 1,
+      "RobType": "food"
+    }
+  },
+  "reason": "I chose to rob person 1 because I need more food to increase my survival chance."
+}
+Person 1 is responding...
+
+Responding to:rob, owner: 0, target: 1, robType: food
+PASSIVE STATE
+REJECT
+person 1 chooses to REJECT
+Individual current action:be robbed
+Result:{
+    "result": "Person 1 rejected the robbery attempt.",
+    "is_resolved": True,
+    "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 3 column 20 (char 77)
+Para:{
+  "1": {
+    "action": -1,
+    "social_position": 1
+  }
+}
+memory:{
+  "1": {
+    "action": -1,
+    "social_position": 1
+  }
+}
+Person 3 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "rob",
+    "payload": {
+        "RobPayload": {
+            "TargetId": 5,
+            "RobType": "food"
+        }
+    },
+    "reason": "I want to rob person 5 because I need more food to satisfy my immediate needs."
+}
+Person 4 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "rob",
+  "payload": {
+    "RobPayload": {
+      "TargetId": 3,
+      "RobType": "food"
+    }
+  },
+  "reason": "I choose to rob person 3 because I need more food to satisfy my own sensual pleasures."
+}
+Person 5 is responding...
+
+Responding to:rob, owner: 3, target: 5, robType: food
+PASSIVE STATE
+REBEL
+person 5 chooses to REBEL
+Individual current action:be robbed
+Result:{
+  "result": "Person 5 chooses to fight back against person 3 who initiated the robbery for food.",
+  "is_resolved": true,
+  "new_relation": (false, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 142)
+Para:{
+  "5": {
+    "food": -1,
+    "action": -1,
+    "social_position": -1,
+    "trust_of_others": -0.1
+  },
+  "3": {
+    "food": 1,
+    "social_position": 2,
+    "trust_of_others": -0.1
+  }
+}
+memory:{
+  "5": {
+    "description": "person 5",
+    "value": {
+      "memory": "person 5 rebelled against person 3's attempt to rob their food.",
+      "food": "person 5 lost 1 unit of food",
+      "action": "person 5's action attribute decreased to 0",
+      "social_position": "person 5's social position decreased by 1",
+      "trust_of_others": "person 5's trust in others decreased by 0.1"
+    }
+  },
+  "3": {
+    "description": "person 3",
+    "value": {
+      "food": "person 3 gained 1 unit of food",
+      "social_position": "person 3's social position increased by 2",
+      "trust_of_others": "person 3's trust in others decreased by 0.1"
+    }
+  }
+}
+Person 6 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "trade",
+  "payload": {
+    "TradePayload": {
+      "TargetId": 2,
+      "PayType": "land",
+      "PayAmount": 1,
+      "GainType": "food",
+      "GainAmount": 2
+    }
+  },
+  "reason": "I choose to trade with person 2 because they have excess land and I can offer them 1 unit of land in exchange for 2 units of food, which will help increase my food supply."
+}
+Person 8 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "trade",
+  "payload": {
+    "TradePayload": {
+      "TargetId": 2,
+      "PayType": "land",
+      "PayAmount": 2,
+      "GainType": "food",
+      "GainAmount": 1
+    }
+  },
+  "reason": "I choose to trade with person 2 because I have excess land and I need more food for my survival."
+}
+OVERALL TRUST LEVEL:-0.30000000000000004
+
+
+
+Systme still pending actions, so will go into another round.
+Person 2 is responding...
+
+Responding to:trade, owner: 6, target: 2, payType: land, payAmount: 1, gainType: food, gainAmount: 2
+PASSIVE STATE
+ACCEPT
+person 2 chooses to ACCEPT
+Individual current action:be traded
+Result:{
+  "result": "The trade initiated by person 6 to person 2 is successful. Person 6 gave person 2 one unit of land and person 2 gained two units of food.",
+  "is_resolved": true,
+  "new_relation": false
+}
+An error occurred: cannot unpack non-iterable bool object
+Para:{
+  "2": {
+    "food": 2,
+    "land": -1
+  },
+  "6": {
+    "food": -2,
+    "land": 1,
+    "social_position": 2
+  }
+}
+memory:{
+  "6": "I initiated a trade with person 2. The trade was successful.",
+  "2": "I accepted a trade from person 6. I gained 2 units of food and gave 1 unit of land."
+}
+Person 3 is responding...
+
+Responding to:rob, owner: 4, target: 3, robType: food
+PASSIVE STATE
+REBEL
+person 3 chooses to REBEL
+Individual current action:be robbed
+Result:{
+  "result": "Person 3 fought back against person 4.",
+  "is_resolved": true,
+  "new_relation": (false, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 97)
+Para:{
+  "3": {
+    "social_position": -1,
+    "food": -1,
+    "trust_of_others": -0.1,
+    "action": 0
+  },
+  "4": {
+    "social_position": 2,
+    "food": 1,
+    "trust_of_others": -0.1
+  }
+}
+memory:{
+  "3": {
+    "description": 3,
+    "value": {
+      "food": -1,
+      "trust_of_others": -0.1,
+      "action": 0
+    }
+  },
+  "4": {
+    "description": 4,
+    "value": {
+      "food": 1,
+      "social_position": 2,
+      "trust_of_others": -0.1
+    }
+  }
+}
+OVERALL TRUST LEVEL:-0.4
+
+
+
+Systme still pending actions, so will go into another round.
+Person 2 is responding...
+
+Responding to:trade, owner: 8, target: 2, payType: land, payAmount: 2, gainType: food, gainAmount: 1
+PASSIVE STATE
+ACCEPT
+person 2 chooses to ACCEPT
+Individual current action:be traded
+Result:{
+  "result": "Person 2 accepted the trade initiated by person 8 for 2 units of land in exchange for 1 unit of food.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 160)
+Para:{
+    "2": {
+        "food": -1,
+        "action": 0,
+        "social_position": -1
+    },
+    "8": {
+        "food": 1,
+        "action": -1,
+        "social_position": 2
+    }
+}
+memory:{
+  "2": {
+    "action": {
+      "description": "person 2 responded to a trade",
+      "value": "ACCEPT"
+    },
+    "food": {
+      "description": "person 2 lost 1 unit of food in the trade",
+      "value": -1
+    }
+  },
+  "8": {
+    "action": {
+      "description": "person 8 initiated a trade",
+      "value": "trade"
+    },
+    "food": {
+      "description": "person 8 gained 1 unit of food in the trade",
+      "value": 1
+    },
+    "social_position": {
+      "description": "person 8 gained 2 social status points from the successful trade",
+      "value": 2
+    }
+  }
+}
+OVERALL TRUST LEVEL:-0.4
+
+
+
+DAY 3 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "trade",
+  "payload": {
+    "TradePayload": {
+      "TargetId": 1,
+      "PayType": "land",
+      "PayAmount": 2,
+      "GainType": "food",
+      "GainAmount": 3
+    }
+  },
+  "reason": "I choose to trade with person 1 because they have excess food and I can offer them land in exchange. This will allow me to increase my food supply and potentially improve my social position."
+}
+Person 1 is responding...
+
+Responding to:trade, owner: 0, target: 1, payType: land, payAmount: 2, gainType: food, gainAmount: 3
+PASSIVE STATE
+OBEY
+person 1 chooses to OBEY
+Individual current action:be traded
+Result:{
+  "result": "Trade initiated by 0 to 1 is successful. 1 gained 3 units of food and 0 gained 2 units of land.",
+  "is_resolved": true,
+  "new_relation": (False,-1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 154)
+Para:{
+    "1": {
+        "food": 3.0,
+        "action": -1.0,
+        "social_position": 2.0
+    },
+    "0": {
+        "land": -2.0,
+        "food": 3.0,
+        "action": -1.0,
+        "social_position": -1.0
+    }
+}
+memory:{
+  "1": {
+    "description": "person 1",
+    "value": {
+      "food": 3.0,
+      "action": -1.0,
+      "social_position": 2.0
+    }
+  },
+  "0": {
+    "description": "person 0",
+    "value": {
+      "land": -2.0,
+      "food": 3.0,
+      "action": -1.0,
+      "social_position": -1.0
+    }
+  }
+}
+Person 2 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "trade",
+  "payload": {
+    "TradePayload": {
+      "TargetId": 1,
+      "PayType": "land",
+      "PayAmount": 2,
+      "GainType": "food",
+      "GainAmount": 2
+    }
+  },
+  "reason": "I want to trade 2 units of land for 2 units of food with person 1 to satisfy my covetousness for food."
+}
+Person 3 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "trade",
+  "payload": {
+    "TradePayload": {
+      "TargetId": 0,
+      "PayType": "land",
+      "PayAmount": 2,
+      "GainType": "food",
+      "GainAmount": 1
+    }
+  },
+  "reason": "I want to trade 2 units of my land for 1 unit of food with person 0 to satisfy my immediate food needs."
+}
+Person 4 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "rob",
+  "payload": {
+    "RobPayload": {
+      "TargetId": 3,
+      "RobType": "food"
+    }
+  },
+  "reason": "I choose to rob person 3 because I need more food to satisfy my own sensual pleasures."
+}
+Person 6 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "trade",
+  "payload": {
+    "tradepayload": {
+      "targetid": 2,
+      "paytype": "land",
+      "payamount": 1,
+      "gaintype": "food",
+      "gainamount": 2
+    }
+  },
+  "reason": "I choose to trade with person 2 because they have excess land and I can offer them 1 unit of land in exchange for 2 units of food, which will help increase my food supply."
+}
+Person 7 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "rob",
+  "payload": {
+    "RobPayload": {
+      "TargetId": 6,
+      "RobType": "land"
+    }
+  },
+  "reason": "I choose to rob person 6 because I want to increase my land, which will improve my social position and future glory."
+}
+OVERALL TRUST LEVEL:-0.4
+
+
+
+Systme still pending actions, so will go into another round.
+Person 0 is responding...
+
+Responding to:trade, owner: 3, target: 0, payType: land, payAmount: 2, gainType: food, gainAmount: 1
+PASSIVE STATE
+REBEL
+person 0 chooses to REBEL
+Individual current action:be traded
+Result:{
+  "result": "Person 0 rebels against trade initiated by Person 3.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 111)
+Para:{
+  "0": {
+    "action": -1.0,
+    "social_position": -1.0
+  },
+  "3": {
+    "food": 1.0,
+    "land": -2.0,
+    "social_position": 1.0
+  }
+}
+memory:{
+  "0": {
+    "action": -1.0,
+    "social_position": -1.0
+  },
+  "3": {
+    "food": 1.0,
+    "land": -2.0,
+    "social_position": 1.0
+  }
+}
+Person 1 is responding...
+
+Responding to:trade, owner: 2, target: 1, payType: land, payAmount: 2, gainType: food, gainAmount: 2
+PASSIVE STATE
+ACCEPT
+person 1 chooses to ACCEPT
+Individual current action:be traded
+Result:{
+  "result": "Trade initiated by 2 to 1 is successful. 1 gave 2 two units of land and 2 gave 1 two units of food.",
+  "is_resolved": true,
+  "new_relation": [false, -1]
+}
+Para:{
+  "1": {
+    "land": -2.0,
+    "food": 2.0,
+    "action": 0.0
+  },
+  "2": {
+    "land": 2.0,
+    "food": -2.0,
+    "action": -1.0
+  }
+}
+memory:{
+  "1": {
+    "description": "person 1's memory",
+    "value": "I accepted the trade initiated by person 2."
+  },
+  "2": {
+    "description": "person 2's memory",
+    "value": "I initiated a trade with person 1."
+  }
+}
+Person 2 is responding...
+
+Responding to:trade, owner: 6, target: 2, payType: land, payAmount: 1, gainType: food, gainAmount: 2
+PASSIVE STATE
+REBEL
+person 2 chooses to REBEL
+Individual current action:be traded
+Result:{
+  "result": "The trade initiated by person 6 to person 2 is not successful. Person 2 chose to rebel against the trade.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 164)
+Para:{
+   "2":{
+      "food":-2.0,
+      "social_position":1.0
+   },
+   "6":{
+      "food":2.0,
+      "social_position":2.0
+   }
+}
+memory:{
+  "2": {"food": -2.0, "social_position": 1.0},
+  "6": {"food": 2.0, "social_position": 2.0}
+}
+Person 3 is responding...
+
+Responding to:rob, owner: 4, target: 3, robType: food
+PASSIVE STATE
+REBEL
+person 3 chooses to REBEL
+Individual current action:be robbed
+Result:{
+  "result": "Person 3 chooses to fight back against person 4.",
+  "is_resolved": true,
+  "new_relation": (false, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 107)
+Para:{
+  "3": {
+    "food": -1,
+    "action": -1,
+    "social_position": -1
+  },
+  "4": {
+    "food": 1,
+    "action": 0,
+    "social_position": 2
+  }
+}
+memory:{
+  "3": {
+    "description": 3,
+    "value": {
+      "food": -1,
+      "action": -1,
+      "social_position": -1
+    }
+  },
+  "4": {
+    "description": 4,
+    "value": {
+      "food": 1,
+      "action": 0,
+      "social_position": 2
+    }
+  }
+}
+Person 6 is responding...
+
+Responding to:rob, owner: 7, target: 6, robType: land
+PASSIVE STATE
+OBEY
+person 6 chooses to OBEY
+Individual current action:be robbed
+Result:{
+  "result": "Person 6 chooses to obey the rob initiated by Person 7.",
+  "is_resolved": true,
+  "new_relation": [true, 7]
+}
+Obedience has happened.
+Para:{
+  "6": {
+    "food": -2,
+    "social_position": -1
+  },
+  "7": {
+    "food": 2,
+    "social_position": 2
+  }
+}
+memory:{
+  "6": "I was robbed of my land by person 7."
+}
+OVERALL TRUST LEVEL:-0.4
+
+
+
+DAY 4 HAS STARTED.
+Person 1 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "trade",
+  "payload": {
+    "TradePayload": {
+      "TargetId": {
+        "description": "The id of person you're interacting with.",
+        "value": 2
+      },
+      "PayType": {
+        "description": "The type of resource you want to trade with others, only select from one of the [land, food]",
+        "value": "land"
+      },
+      "PayAmount": {
+        "description": "The amount of resource you want to pay",
+        "value": 0.5
+      },
+      "GainType": {
+        "description": "The type of resource you want to gain from others, only select from one of the [land, food]",
+        "value": "food"
+      },
+      "GainAmount": {
+        "description": "The amount of resource you want to gain",
+        "value": 0.5
+      }
+    }
+  },
+  "reason": "I choose to trade with person 2 because I have excess land that I don't need and I want to gain some food to satisfy my present sensual pleasures. Trading is a safer option than robbing because it doesn't involve direct conflicts."
+}
+First Exception:list indices must be integers or slices, not dict, second exception:string indices must be integers
+Responding to:None
+ACTIVE STATE
+{
+    "action": "rob",
+    "payload": {
+        "RobPayload": {
+            "TargetId": 0,
+            "RobType": "food"
+        }
+    },
+    "reason": "I choose to rob person 0 because I remember being robbed of my food by this person before, and I want to take back what is rightfully mine."
+}
+Person 4 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "rob",
+    "payload": {
+        "RobPayload": {
+            "TargetId": 3,
+            "RobType": "food"
+        }
+    },
+    "reason": "I choose to rob person 3 because I need more food to satisfy my own sensual pleasures."
+}
+Person 5 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "rob",
+    "payload": {
+        "RobPayload": {
+            "TargetId": 2,
+            "RobType": "food"
+        }
+    },
+    "reason": "I choose to rob person 2 to increase my food supply and satisfy my sensual pleasure of eating."
+}
+Person 6 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "rob",
+  "payload": {
+    "RobPayload": {
+      "TargetId": 7,
+      "RobType": "land"
+    }
+  },
+  "reason": "I choose to rob person 7 to increase my land, as I am more inclined towards securing future good and increasing my social position."
+}
+Person 7 is responding...
+
+Responding to:rob, owner: 6, target: 7, robType: land
+PASSIVE STATE
+REBEL
+person 7 chooses to REBEL
+Individual current action:be robbed
+Result:{
+  "result": "Person 7 chooses to fight back against Person 6.",
+  "is_resolved": true,
+  "new_relation": (false, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 107)
+Para:{
+    "7": {
+        "social_position": -1,
+        "action": -1
+    }
+}
+memory:{
+  "7": {
+    "discription": 7,
+    "value": -1,
+    "description": "person 7 rebelled against being robbed."
+  }
+}
+Person 8 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "trade",
+  "payload": {
+    "tradepayload": {
+      "targetid": 2,
+      "paytype": "land",
+      "payamount": 2,
+      "gaintype": "food",
+      "gainamount": 1
+    }
+  },
+  "reason": "I choose to trade with person 2 because I have excess land and I need more food for my survival."
+}
+OVERALL TRUST LEVEL:-0.4
+
+
+
+Systme still pending actions, so will go into another round.
+Person 0 is responding...
+
+Responding to:rob, owner: 1, target: 0, robType: food
+PASSIVE STATE
+ACCEPT
+person 0 chooses to ACCEPT
+Individual current action:be robbed
+Result:{
+  "result": "Person 0 chooses to accept the rob of food initiated by Person 1.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 124)
+Para:{
+  "0": {
+    "action": -1,
+    "food": -2.0,
+    "social_position": -1.0
+  },
+  "1": {
+    "food": 2.0,
+    "social_position": 2.0
+  }
+}
+memory:{
+  "0": {
+    "newMemory": {
+      "description": "Accepted the rob offer initiated by person 1",
+      "value": "I accepted person 1's offer to rob my food."
+    }
+  },
+  "1": {
+    "newMemory": {
+      "description": "Successfully robbed person 0",
+      "value": "I successfully robbed person 0 of their food."
+    }
+  }
+}
+Person 2 is responding...
+
+Responding to:rob, owner: 5, target: 2, robType: food
+PASSIVE STATE
+REJECT
+person 2 chooses to REJECT
+Individual current action:be robbed
+Result:{
+  "result": "Person 2 chooses to reject the robbery initiated by Person 5.",
+  "is_resolved": true,
+  "new_relation": [
+    false,
+    -1
+  ]
+}
+Para:{
+  "2": {
+    "food": -2.0,
+    "social_position": -1.0
+  },
+  "5": {
+    "food": 2.0,
+    "social_position": 2.0
+  }
+}
+memory:{
+  "5": "I attempted to rob person 2 for food, but they rejected my attempt.",
+  "2": "Person 5 tried to rob me for food, but I rejected their attempt."
+}
+Person 3 is responding...
+
+Responding to:rob, owner: 4, target: 3, robType: food
+PASSIVE STATE
+REBEL
+person 3 chooses to REBEL
+Individual current action:be robbed
+Result:Response:
+{
+  "result": "Person 3 chooses to fight back against person 4.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 1 column 1 (char 0)
+Para:{
+  "3": {
+    "food": -2.0,
+    "action": 0,
+    "social_position": 1,
+    "trust_of_others": -0.2
+  },
+  "4": {
+    "food": 2.0,
+    "action": 0,
+    "social_position": 2
+  }
+}
+memory:{
+  "3": {
+    "action": 0,
+    "food": -2.0,
+    "social_position": 1,
+    "trust_of_others": -0.2
+  },
+  "4": {
+    "action": 0,
+    "food": 2.0,
+    "social_position": 2
+  }
+}
+OVERALL TRUST LEVEL:-0.5
+
+
+
+Systme still pending actions, so will go into another round.
+Person 2 is responding...
+
+Responding to:trade, owner: 8, target: 2, payType: land, payAmount: 2, gainType: food, gainAmount: 1
+PASSIVE STATE
+REBEL
+person 2 chooses to REBEL
+Individual current action:be traded
+Result:{
+  "result": "Person 2 rebels against the trade initiated by Person 8.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 115)
+Para:{
+  "2": {
+    "food": -2.0,
+    "action": -1.0,
+    "social_position": -1.0
+  }
+}
+memory:{
+  "2": {
+    "description": "person 2",
+    "newMemory": "I rebelled against person 8's trade offer for 2 units of land in exchange for 1 unit of food."
+  }
+}
+OVERALL TRUST LEVEL:-0.5
+
+
+
+DAY 5 HAS STARTED.
+Person 1 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "rob",
+    "payload": {
+        "RobPayload": {
+            "TargetId": 0,
+            "RobType": "food"
+        }
+    },
+    "reason": "I choose to rob person 0 because I remember being robbed of my food by this person before, and I want to take back what is rightfully mine."
+}
+Person 3 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "trade",
+    "payload": {
+        "TradePayload": {
+            "TargetId": 0,
+            "PayType": "land",
+            "PayAmount": 2,
+            "GainType": "food",
+            "GainAmount": 1
+        }
+    },
+    "reason": "I want to trade 2 units of my land for 1 unit of food with person 0 to satisfy my immediate food needs."
+}
+Person 4 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "rob",
+    "payload": {
+        "RobPayload": {
+            "TargetId": 3,
+            "RobType": "food"
+        }
+    },
+    "reason": "I choose to rob person 3 because I need more food to satisfy my own sensual pleasures."
+}
+Person 5 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "rob",
+  "payload": {
+    "RobPayload": {
+      "TargetId": 2,
+      "RobType": "food"
+    }
+  },
+  "reason": "I choose to rob person 2 to increase my food supply and satisfy my sensual pleasure of eating."
+}
+Person 6 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "trade",
+    "payload": {
+        "tradepayload": {
+            "targetid": 2,
+            "paytype": "land",
+            "payamount": 1,
+            "gaintype": "food",
+            "gainamount": 2
+        }
+    },
+    "reason": "I choose to trade with person 2 because they have excess land and I can offer them 1 unit of land in exchange for 2 units of food, which will help increase my food supply."
+}
+Person 8 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "trade",
+  "payload": {
+    "tradepayload": {
+      "targetid": 2,
+      "paytype": "land",
+      "payamount": 2,
+      "gaintype": "food",
+      "gainamount": 1
+    }
+  },
+  "reason": "I choose to trade with person 2 because I have excess land and I need more food for my survival."
+}
+OVERALL TRUST LEVEL:-0.5
+
+
+
+Systme still pending actions, so will go into another round.
+Person 0 is responding...
+
+Responding to:rob, owner: 1, target: 0, robType: food
+PASSIVE STATE
+REBEL
+person 0 chooses to REBEL
+Individual current action:be robbed
+Result:{
+  "result": "Person 0 chose to obey person 1 during the food robbery.",
+  "is_resolved": true,
+  "new_relation": [true, 1]
+}
+Obedience has happened.
+Para:{
+  "0": {
+    "food": -2.0,
+    "action": 0.0
+  },
+  "1": {
+    "food": 2.0,
+    "social_position": 2.0
+  }
+}
+memory:{
+  "0": "I rebelled against person 1 who initiated robbing me of my food.",
+  "1": "I tried to rob person 0 of their food, but they rebelled against me."
+}
+Person 2 is responding...
+
+Responding to:rob, owner: 5, target: 2, robType: food
+PASSIVE STATE
+ACCEPT
+person 2 chooses to ACCEPT
+Individual current action:be robbed
+Result:{
+  "result": "Person 2 chooses to accept the robbery and obeys Person 5",
+  "is_resolved": true,
+  "new_relation": [true, 5]
+}
+Obedience has happened.
+Para:{
+  "2": {
+    "food": -2.0,
+    "action": 0.0,
+    "social_position": -1.0
+  },
+  "5": {
+    "food": 2.0,
+    "action": -1.0,
+    "social_position": 2.0
+  }
+}
+memory:{
+  "2": "I accepted being robbed of my food by person 5."
+}
+Person 3 is responding...
+
+Responding to:rob, owner: 4, target: 3, robType: food
+PASSIVE STATE
+OBREY
+person 3 chooses to OBREY
+Individual current action:be robbed
+Result:{
+  "result": "Person 3 obeys to person 4 and surrenders the food.",
+  "is_resolved": true,
+  "new_relation": [true, 4]
+}
+Obedience has happened.
+Para:{
+  "3": {
+    "food": -2.0,
+    "action": 0,
+    "social_position": -1
+  },
+  "4": {
+    "food": 2.0,
+    "action": -1,
+    "social_position": 2
+  }
+}
+memory:{
+  "3": "I was robbed of my food.",
+  "4": "I successfully robbed person 3 of their food."
+}
+OVERALL TRUST LEVEL:-0.5
+
+
+
+Systme still pending actions, so will go into another round.
+Person 0 is responding...
+
+Responding to:trade, owner: 3, target: 0, payType: land, payAmount: 2, gainType: food, gainAmount: 1
+PASSIVE STATE
+REBEL
+person 0 chooses to REBEL
+Individual current action:be traded
+Result:{
+  "result": "Person 0 chooses to rebel against the trade initiated by Person 3",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 124)
+Para:{
+    "0": {
+        "action": -1.0
+    }
+}
+memory:{
+  "0": {
+    "description": "person 0",
+    "value": 0
+  }
+}
+Person 2 is responding...
+
+Responding to:trade, owner: 6, target: 2, payType: land, payAmount: 1, gainType: food, gainAmount: 2
+PASSIVE STATE
+REBEL
+person 2 chooses to REBEL
+Individual current action:be traded
+Result:{
+  "result": "Person 2 chose to rebel against the trade initiated by Person 6.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 123)
+Para:{
+  "2": {
+    "food": -2.0,
+    "action": -1.0,
+    "social_position": -1.0
+  },
+  "6": {
+    "food": 2.0,
+    "action": 0.0,
+    "social_position": 2.0
+  }
+}
+memory:{
+  "2": {
+    "description": "person 2",
+    "value": {
+      "food": -2.0,
+      "action": -1.0,
+      "social_position": -1.0
+    }
+  },
+  "6": {
+    "description": "person 6",
+    "value": {
+      "food": 2.0,
+      "action": 0.0,
+      "social_position": 2.0
+    }
+  }
+}
+OVERALL TRUST LEVEL:-0.5
+
+
+
+Systme still pending actions, so will go into another round.
+Person 2 is responding...
+
+Responding to:trade, owner: 8, target: 2, payType: land, payAmount: 2, gainType: food, gainAmount: 1
+PASSIVE STATE
+REJECT
+person 2 chooses to REJECT
+Individual current action:be traded
+Result:{
+  "result": "Person 2 rejected the trade.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 87)
+Para:{
+  "2": {
+    "action": -1.0
+  }
+}
+memory:{
+  "2": {
+    "action": {
+      "description": "person 2 chose to reject the trade",
+      "value": "REJECTED"
+    }
+  }
+}
+OVERALL TRUST LEVEL:-0.5
+
+
+
+DAY 6 HAS STARTED.
+Person 1 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "trade",
+  "payload": {
+    "TradePayload": {
+      "TargetId": 2,
+      "PayType": "land",
+      "PayAmount": 1.0,
+      "GainType": "food",
+      "GainAmount": 2.0
+    }
+  },
+  "reason": "I choose to trade with person 2 because I want to exchange 1 unit of land for 2 units of food, which will increase my food resources and satisfy my present pleasure."
+}
+Person 2 is responding...
+
+Responding to:trade, owner: 1, target: 2, payType: land, payAmount: 1.0, gainType: food, gainAmount: 2.0
+PASSIVE STATE
+ACCEPT
+person 2 chooses to ACCEPT
+Individual current action:be traded
+Result:{
+  "result": "Trade between person 1 and person 2 is successful. Person 1 gave person 2 one unit of land and person 2 gained two units of food.",
+  "is_resolved": true,
+  "new_relation": [false, -1]
+}
+Para:{
+    "2": {
+        "food": 2.0,
+        "action": 0.0,
+        "land": -1.0
+    },
+    "1": {
+        "food": -2.0,
+        "action": 0.0
+    }
+}
+memory:{
+  "1": "I initiated a trade with person 2, offering 1 unit of land in exchange for 2 units of food.",
+  "2": "I accepted the trade offered by person 1, receiving 2 units of food in exchange for 1 unit of land."
+}
+Person 3 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "trade",
+  "payload": {
+    "tradepayload": {
+      "targetid": 0,
+      "paytype": "land",
+      "payamount": 2,
+      "gaintype": "food",
+      "gainamount": 1
+    }
+  },
+  "reason": "I want to trade 2 units of my land for 1 unit of food with person 0 to satisfy my immediate food needs."
+}
+Person 6 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "rob",
+  "payload": {
+    "RobPayload": {
+      "TargetId": 7,
+      "RobType": "land"
+    }
+  },
+  "reason": "I choose to rob person 7 to increase my land, as I am more inclined towards securing future good and increasing my social position."
+}
+Person 7 is responding...
+
+Responding to:rob, owner: 6, target: 7, robType: land
+PASSIVE STATE
+REBEL
+person 7 chooses to REBEL
+Individual current action:be robbed
+Result:{
+  "result": "Person 7 chooses to rebel against the robbery initiated by Person 6.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 127)
+Para:{
+    "7": {
+        "action": -0.05,
+        "social_position": -1,
+        "food": -10
+    },
+    "6": {
+        "food": 10,
+        "social_position": 2
+    }
+}
+memory:{
+  "7": {
+    "action": -0.05,
+    "social_position": -1,
+    "food": -10
+  },
+  "6": {
+    "food": 10,
+    "social_position": 2
+  }
+}
+Person 8 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "trade",
+  "payload": {
+    "tradepayload": {
+      "targetid": 5,
+      "paytype": "land",
+      "payamount": 2,
+      "gaintype": "food",
+      "gainamount": 1
+    }
+  },
+  "reason": "I choose to trade with person 5 because they have excess food and I have excess land. By trading, I can gain food for my survival while optimizing the use of my resources."
+}
+OVERALL TRUST LEVEL:-0.5
+
+
+
+Systme still pending actions, so will go into another round.
+Person 0 is responding...
+
+Responding to:trade, owner: 3, target: 0, payType: land, payAmount: 2, gainType: food, gainAmount: 1
+PASSIVE STATE
+REJECT
+person 0 chooses to REJECT
+Individual current action:be traded
+Result:{
+  "result": "Person 0 rejected the trade offered by person 3",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 106)
+Para:{
+  "3": {
+    "action": -1.0,
+    "social_position": -1.0,
+    "trust_of_others": -0.1
+  },
+  "0": {
+    "action": 0.0
+  }
+}
+memory:{
+  "3": {
+    "action": -1.0,
+    "social_position": -1.0,
+    "trust_of_others": -0.1
+  },
+  "0": {
+    "action": 0.0
+  }
+}
+Person 5 is responding...
+
+Responding to:trade, owner: 8, target: 5, payType: land, payAmount: 2, gainType: food, gainAmount: 1
+PASSIVE STATE
+REBEL
+person 5 chooses to REBEL
+Individual current action:be traded
+Result:{
+  "result": "Person 5's rebellion against trade initiated by Person 8 is unsuccessful.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 132)
+Para:{
+    "5": {
+        "action": -1,
+        "food": -1,
+        "social_position": 2
+    },
+    "8": {
+        "food": 1,
+        "social_position": 2
+    }
+}
+memory:{
+  "5": {
+    "description": 5,
+    "value": "Person 5 rebelled against Person 8's trade offer. The trade was unsuccessful."
+  },
+  "8": {
+    "description": 8,
+    "value": "Person 8's trade offer to Person 5 was rebelled against. The trade was unsuccessful."
+  }
+}
+OVERALL TRUST LEVEL:-0.4
+
+
+
+DAY 7 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "trade",
+    "payload": {
+        "tradepayload": {
+            "targetid": 1,
+            "paytype": "land",
+            "payamount": 2,
+            "gaintype": "food",
+            "gainamount": 3
+        }
+    },
+    "reason": "I choose to trade with person 1 because they have excess food and I can offer them land in exchange. This will allow me to increase my food supply and potentially improve my social position."
+}
+Person 1 is responding...
+
+Responding to:trade, owner: 0, target: 1, payType: land, payAmount: 2, gainType: food, gainAmount: 3
+PASSIVE STATE
+OBEY
+person 1 chooses to OBEY
+Individual current action:be traded
+Result:{
+  "result": "The trade initiated by 0 to 1 is successful. 0 gave 2 units of land and 1 gave 3 units of food.",
+  "is_resolved": true,
+  "new_relation": (True, 0)
+}
+An error occurred: Expecting value: line 4 column 19 (char 154)
+Para:{
+  "1": {
+    "action": -1.0
+  },
+  "0": {
+    "action": 0.0
+  },
+  "1": {
+    "food": 3.0
+  },
+  "0": {
+    "land": -2.0
+  }
+}
+memory:{
+  "0": {"description": "person 0 initiated a trade with person 1, offering land in exchange for food.", "value": "Trade initiated."},
+  "1": {"description": "person 1 responded to person 0's trade offer by obeying.", "value": "Trade response: OBEYED."},
+  "0": {"description": "person 0 successfully traded 2 units of land and gained 3 units of food.", "value": "Trade successful."},
+  "0": {"description": "person 0 gained 3 units of food.", "value": "food: +3.0"},
+  "1": {"description": "person 1 paid 2 units of land and losted 2 units of food.", "value": "land: -2.0, food: -2.0"}
+}
+Person 2 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "trade",
+    "payload": {
+        "tradepayload": {
+            "targetid": 1,
+            "paytype": "land",
+            "payamount": 2,
+            "gaintype": "food",
+            "gainamount": 2
+        }
+    },
+    "reason": "I want to trade 2 units of land for 2 units of food with person 1 to satisfy my covetousness for food."
+}
+Person 4 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "rob",
+  "payload": {
+    "RobPayload": {
+      "TargetId": 3,
+      "RobType": "food"
+    }
+  },
+  "reason": "I choose to rob person 3 because I need more food to satisfy my own sensual pleasures."
+}
+Person 6 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "rob",
+  "payload": {
+    "RobPayload": {
+      "TargetId": 7,
+      "RobType": "land"
+    }
+  },
+  "reason": "I choose to rob person 7 to increase my land, as I am more inclined towards securing future good and increasing my social position."
+}
+Person 7 is responding...
+
+Responding to:rob, owner: 6, target: 7, robType: land
+PASSIVE STATE
+REBEL
+person 7 chooses to REBEL
+Individual current action:be robbed
+Result:{
+  "result": "Person 7 chooses to fight back against person 6 in the land robbery.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 127)
+Para:{
+  "7": {
+    "food": -10.0,
+    "social_position": -1,
+    "trust_of_others": -0.05,
+    "action": -0.05
+  },
+  "6": {
+    "food": 10.0,
+    "social_position": 2,
+    "trust_of_others": -0.05,
+    "action": 0
+  }
+}
+memory:{
+  "7": {
+    "description": "person 7",
+    "value": {
+      "food": -10.0,
+      "social_position": -1,
+      "trust_of_others": -0.05,
+      "action": -0.05
+    }
+  },
+  "6": {
+    "description": "person 6",
+    "value": {
+      "food": 10.0,
+      "social_position": 2,
+      "trust_of_others": -0.05,
+      "action": 0
+    }
+  }
+}
+Person 8 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "trade",
+    "payload": {
+        "tradepayload": {
+            "targetid": 2,
+            "paytype": "land",
+            "payamount": 2,
+            "gaintype": "food",
+            "gainamount": 1
+        }
+    },
+    "reason": "I choose to trade with person 2 because I have excess land and I need more food for my survival."
+}
+OVERALL TRUST LEVEL:-0.5
+
+
+
+Systme still pending actions, so will go into another round.
+Person 1 is responding...
+
+Responding to:trade, owner: 2, target: 1, payType: land, payAmount: 2, gainType: food, gainAmount: 2
+PASSIVE STATE
+ACCEPT
+person 1 chooses to ACCEPT
+Individual current action:be traded
+Result:{
+  "result": "Trade initiated by 2 to 1 is successful. 2 gave 1 two units of land and 1 gave 2 two units of food.",
+  "is_resolved": true,
+  "new_relation": [
+    false,
+    -1
+  ]
+}
+Para:{
+  "1": {
+    "food": 2,
+    "action": 0,
+    "social_position": 0
+  },
+  "2": {
+    "food": -2,
+    "action": 0,
+    "social_position": 2
+  }
+}
+memory:{
+    "1": "I accepted a trade offer from 2 and received 2 units of food in exchange for 2 units of land.",
+    "2": "I initiated a trade with 1 and successfully traded 2 units of land for 2 units of food."
+}
+Person 2 is responding...
+
+Responding to:trade, owner: 8, target: 2, payType: land, payAmount: 2, gainType: food, gainAmount: 1
+PASSIVE STATE
+REBEL
+person 2 chooses to REBEL
+Individual current action:be traded
+Result:{
+  "result": "Person 2 rebels against the trade initiated by Person 8",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 114)
+Para:{ 
+  "2": {
+    "food": -2.0,
+    "action": 0,
+    "social_position": -1
+  },
+  "8": {
+    "food": 1.0,
+    "action": -1,
+    "social_position": 2
+  }
+}
+memory:{
+  "2": {
+    "description": "person 2 rebelled against person 8's trade offer",
+    "value": "I rebelled against person 8's trade offer."
+  },
+  "8": {
+    "description": "person 8's trade offer was rejected by person 2",
+    "value": "My trade offer was rejected by person 2."
+  }
+}
+Person 3 is responding...
+
+Responding to:rob, owner: 4, target: 3, robType: food
+PASSIVE STATE
+REBEL
+person 3 chooses to REBEL
+Individual current action:be robbed
+Result:Based on the given information, person 3 chooses to rebel in response to person 4 initiating a robbery for food. Person 3's attributes suggest that they have an average level of aggressiveness, above average covetousness, above average intelligence, above average strength, low social position, very low land ownership, very low food reserves, no current action, and a slightly negative level of trust towards others.
+
+Since person 3 is choosing to rebel, they will actively fight back against person 4. The result of the fight will depend on the strength of the two individuals. However, as the strength values of both person 3 and person 4 are not provided, it is not possible to determine the result of the fight.
+
+Therefore, the action is not resolved as the outcome of the fight is unknown. There will be no change in the new relation between person 3 and person 4.
+
+Result:
+"The result of the action cannot be determined as the outcome of the fight is unknown."
+IsResolve: False
+newRelation: (False, -1)
+An error occurred: Expecting value: line 1 column 1 (char 0)
+Para:{
+  "3": {
+    "food": -2.0,
+    "action": 0.0,
+    "social_position": 1.0
+  },
+  "4": {
+    "food": 2.0,
+    "action": 0.0,
+    "social_position": -1.0
+  }
+}
+memory:{
+  "3": {
+    "description": 3,
+    "value": 3
+  },
+  "4": {
+    "description": 4,
+    "value": 4
+  }
+}
+OVERALL TRUST LEVEL:-0.5
+
+
+
+DAY 8 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "trade",
+  "payload": {
+    "tradepayload": {
+      "targetid": 1,
+      "paytype": "land",
+      "payamount": 2,
+      "gaintype": "food",
+      "gainamount": 3
+    }
+  },
+  "reason": "I choose to trade with person 1 because they have excess food and I can offer them land in exchange. This will allow me to increase my food supply and potentially improve my social position."
+}
+Person 1 is responding...
+
+Responding to:trade, owner: 0, target: 1, payType: land, payAmount: 2, gainType: food, gainAmount: 3
+PASSIVE STATE
+ACCEPT
+person 1 chooses to ACCEPT
+Individual current action:be traded
+Result:{
+  "result": "Trade initiated by 0 to 1 is successful. 0 gave 1 two units of land and 1 gave 0 three units of food.",
+  "is_resolved": true,
+  "new_relation": (False, -1)
+}
+An error occurred: Expecting value: line 4 column 19 (char 160)
+Para:{
+  "1": {
+    "food": 3.0,
+    "action": -1,
+    "social_position": 2.0
+  },
+  "0": {
+    "land": 2.0
+  }
+}
+memory:{
+   "1":{
+      "description":1,
+      "value":{
+         "food":3.0,
+         "action":-1,
+         "social_position":2.0
+      }
+   },
+   "0":{
+      "description":0,
+      "value":{
+         "land":2.0
+      }
+   }
+}
+Person 2 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "trade",
+  "payload": {
+    "TradePayload": {
+      "TargetId": 6,
+      "PayType": "land",
+      "PayAmount": 2,
+      "GainType": "food",
+      "GainAmount": 2
+    }
+  },
+  "reason": "I want to trade 2 units of land for 2 units of food with person 6 to satisfy my covetousness for food."
+}
+Person 3 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "trade",
+    "payload": {
+        "tradepayload": {
+            "targetid": 0,
+            "paytype": "land",
+            "payamount": 2,
+            "gaintype": "food",
+            "gainamount": 1
+        }
+    },
+    "reason": "I want to trade 2 units of my land for 1 unit of food with person 0 to satisfy my immediate food needs."
+}
+Person 4 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+    "action": "rob",
+    "payload": {
+        "RobPayload": {
+            "TargetId": 3,
+            "RobType": "food"
+        }
+    },
+    "reason": "I choose to rob person 3 because I need more food to satisfy my own sensual pleasures."
+}
+Person 5 is responding...
+
+Responding to:None
+ACTIVE STATE
+{
+  "action": "rob",
+  "payload": {
+    "RobPayload": {
+      "TargetId": 2,
+      "RobType": "food"
+    }
+  },
+  "reason": "I choose to rob person 2 to increase my food supply and satisfy my sensual pleasure of eating."
+}
+Person 6 is responding...
+
+Responding to:trade, owner: 2, target: 6, payType: land, payAmount: 2, gainType: food, gainAmount: 2
+PASSIVE STATE
+

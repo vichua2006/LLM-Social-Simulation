@@ -62,12 +62,20 @@ class Individual:
         if win_rob:
             self.robbing_stats.win_rob_times[person_id] + 1
     def obey(self, person_id: int, system:System) -> None:
+        if self.obey_stats.obey_personId!=-1:
+            system.individuals[self.obey_stats.obey_personId].obey_stats.subject.remove(self.attributes['id'])
+        master_is_slave=system.individuals[person_id].obey_stats.subject
+        while master_is_slave!=-1:
+            person_id=master_is_slave
         self.obey_stats.obey_personId = person_id
         #Get the person you obey to and add yourself to the subject list
         system.individuals[person_id].obey_stats.subject.append(system.individuals.index(self)) 
         #iterate all subject of yours and transfer its obeyperson to the person you obey to
         for subject in self.obey_stats.subject:
             system.individuals[subject].obey_stats.obey_personId = person_id
+            system.individuals[person_id].obey_stats.subject.append(subject)
+        self.obey_stats.subject=[]
+        
     
     # Check if the individual is the responser of the action
     def check_is_responser(self, action:AIAction)->None:

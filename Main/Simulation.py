@@ -24,7 +24,7 @@ def day_end(system,individuals:List[Individual]):
         # Limit the memory to the last 30 events
         forget = len(individual.memory) - 40
         individual.memory = individual.memory[forget:]
-        system.time+=1
+    system.time+=1
 def initialize():
     # Initialize individuals and environment
     individuals=[]
@@ -95,7 +95,7 @@ def simulate(individuals:List[Individual],system:System):
                 case _ :
                   system.console_log.append(f"{index}:Error")
               individual.attributes['action']-=1
-              individual.memory.append(action['reason'])
+              individual.memory.append(action)
       system.ranking.update({x: x.attributes["social_position"] for x in system.individuals})
       print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
       #reach this mean all pending action is done
@@ -103,8 +103,7 @@ def simulate(individuals:List[Individual],system:System):
       for i in individuals:
             pending=pending or not i.pending_action.empty()
       if not pending:
-        day_end(system,individuals)
         break
       else:
             print(f'Systme still pending actions, so will go into another round.')
-
+    day_end(system,individuals)
