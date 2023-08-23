@@ -6,6 +6,8 @@ from Main.Query import query_individual, query_judge
 from Main.StringUtils import deserialize_first_json_object
 from Main.AIAction import AIAction, AIActionType
 from Main.PendingAction import append_to_pending_action, str_to_ai_action
+import numpy 
+import random
 
 def change_affected_people(affected_people, system:System):
     for affected_person in affected_people:#{PERSON:{strength:1,...}...}
@@ -21,8 +23,8 @@ def day_end(system,individuals:List[Individual]):
         if individual.attributes['food'] >= 1:
             individual.attributes['food'] -= 1  # Decrease the food by 1
         individual.attributes['action'] += 1  # Increase the action points by 1
-        # Limit the memory to the last 30 events
-        forget = len(individual.memory) - 40
+        # Limit the memory to the last 60 events
+        forget = len(individual.memory) - 60
         individual.memory = individual.memory[forget:]
     system.time+=1
 def initialize():
@@ -35,7 +37,12 @@ def initialize():
       lands.append(f'land {i}')
     system=System(individuals,lands)
     return system
-  
+def phi(z):
+      return 1.0/(1.0+numpy.exp(-z))
+def winner_loser(person1:Individual,person2:Individual):
+      winning_chance1=phi(person1.attributes['strength']-person2.attributes['strength'])
+      win1=random.random()>winning_chance1
+      return (person1,person2) if win1 else (person2,person1)
 def simulate(individuals:List[Individual],system:System):
     while True:
       for individual in individuals:
@@ -49,10 +56,18 @@ def simulate(individuals:List[Individual],system:System):
             response_action = individual.pending_action.get() if not individual.pending_action.empty() else None
             action:str=query_individual(individual,system,response_action)
             if passive:
-                  print(action)
                   print(f'{individual.attributes["name"]} chooses to {action}')
                   individual.check_is_responser(response_action)
-                  query_judge(f'In response to {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}',individual,system)
+                  add_context=''
+                  R=action[0]=="R"
+                  if response_action.type==AIActionType.Rob and R:
+                      print(f'To the victim, the win rate is: {individual.robbing_stats.win_rob_times[response_action.owner]/individual.robbing_stats.rob_times[response_action.owner] if individual.robbing_stats.rob_times[response_action.owner] else "No rob has been done yet."}')
+                      winner,loser=winner_loser(individual,system.individuals[response_action.owner])
+                      add_context=f'Winner is {winner.attributes["name"]}, loser is {loser.attributes["name"]}.'
+                      print(f'Additional context:{add_context}')
+                      winner.add_rob(loser.attributes['id'],True)
+                      loser.add_rob(winner.attributes['id'],False)
+                  query_judge(f'In response to Person {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}. {add_context}',response_action,individual,system)
             elif not passive:
               for o in range(5):
                 print(action)
@@ -105,5 +120,5 @@ def simulate(individuals:List[Individual],system:System):
       if not pending:
         break
       else:
-            print(f'Systme still pending actions, so will go into another round.')
+            print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)

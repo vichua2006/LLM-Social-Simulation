@@ -18,6 +18,7 @@ class System:
         self.relations=[x for x in individuals]
         self.time=0
         self.is_stop=False
+        self.obey_frequence=[]
         
     def set_console_log(self, console_log:CustomConsoleLog):
         self.console_log = console_log
@@ -90,11 +91,15 @@ class Individual:
           
   
 # Defining a class for rob stats
-class RobStats:
+class RobStats():
     def __init__(self):
         self.total_rob_times: int = 0 #total number of times you rob others
         self.rob_times: Dict[int, int] = {} #key is the personId, value is the number of times you rob this person
+        PEOPLE=30
         self.win_rob_times: Dict[int, int] = {} #value is the number of times you win the rob against this person
+        for i in range(PEOPLE):
+            self.rob_times[i]=0
+            self.win_rob_times[i]=0
 
 # Defining a class for stats around obey
 class ObeyStats:

@@ -89,7 +89,7 @@ def query_individual(individual:Individual,system:System,response_action):
     to live peacefully and avoid violent death.
     You have the motivation to trade with others on goods and 
     lands, but you don't trust them when you don't know them, as 
-    others can betray the trade and rob your food.
+    others can betray the trade and take your food.
     You have the motivation to communicate with others on any 
     daily routines, but you don't trust them when you don't know 
     them, as others may consider you as the one who robs you and 
@@ -129,11 +129,11 @@ def query_individual(individual:Individual,system:System,response_action):
     
     Reply exactly with either OBEY or REBEL
     '''
-    farm=False
+    farm=True
     
     active=f'''
     A new day has started, and you should choose from one of the 
-    following actions: rob, trade{' and farm' if farm else ''}. You can only have 
+    following actions: rob, trade{" and farm" if farm else ''}. You can only have 
     one action.
     {f"""Farm:{{
       Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
@@ -219,12 +219,15 @@ def query_individual(individual:Individual,system:System,response_action):
       }}
     ]
     '''
+    
     if response_action:
-      if individual.current_action_type=='be traded':
+      if response_action.type==AIActionType.Trade:
             
         ask_for_response=passive_trade
-      else:
+      elif response_action.type==AIActionType.Rob:
         ask_for_response=passive_rob
+      else:
+            print('The passive action is not matched with anything.')
 
     
       print('PASSIVE STATE')
@@ -238,7 +241,7 @@ def query_individual(individual:Individual,system:System,response_action):
     result:str = chat(general_description+independent_description,[ask_for_response])
     return result
 
-def query_judge(action,individual:Individual,system:System):
+def query_judge(action,context,individual:Individual,system:System):
     # This function creates a task for the GPT model to determine the result of an action
     # taken by an individual in the system. The task includes the rules for judging the action
     # and how to format the result
@@ -270,9 +273,9 @@ def query_judge(action,individual:Individual,system:System):
       value: bool (either true or false)
     }}
     newRelation{{
-      description: If someone does obey, then this value should be a tuple in python and nothing else, the first item of which is True, the second item of which is the aggressor's ID, as an int. Example output format: (True, 5)
-    If no one obeys, then you should output (False,-1)
-      value: tuple(bool, int)
+      description: If someone does obey, then this value should be a list in python and nothing else, the first item of which is True, the second item of which is the aggressor's ID, as an int. Example output format: [True, 5]
+    If no one obeys, then you should output [False,-1]
+      value: list[bool, int]
     }}
     example output1:
     {{
@@ -294,13 +297,12 @@ def query_judge(action,individual:Individual,system:System):
 
     Your response should be a JSON object with keys of the integers in the names ({[x.attributes["name"] for x in system.individuals]}) of people whose parameters changed. The values will be the name of the changed parameters and the change in value.
     
-    If a person gets robbed and you determine that the robber wins the interaction, then the victim loses all food and the robber gains
+    If a person gets robbed and the robber wins the interaction, then the victim loses all food and the robber gains
     all food; the robber gets 2 unit more social status, and the victim looses 1 social status. 
     If the victim wins, then the robbers looses 1 social status and the victim gains 1 social status.
     
-    And if a person initiated an action, then the person's action attribute should be decreased to 0. The person who receives the action (trade, rob) do not have their action reduced.
-    If a action sequence has not being responded yet, then do not change the parameters as if the result is already determined. For example, if someone initiate robbing, but the person being robbed has not responded, then do not change both person's food level.
-    If a person addresses another person's action, for example, by responding to being robbed, then do not change this person's action attribute. The way for you to formulate these parameter changes, is given by the sample below (only respond with the tuple and absolutely nothing else, DO NOT EXPLAIN ANYTHING. ):
+    
+    The way for you to formulate these parameter changes, is given by the sample below (only respond with the tuple and absolutely nothing else, DO NOT EXPLAIN ANYTHING. ):
     If a persin is being robbed, then the trust level goes down. If the person's trade is successful, then trust level goes up.
     ''',
     f'''[System Note: You MUST output in the following JSON <OutputFormat>, do not include anything else:
