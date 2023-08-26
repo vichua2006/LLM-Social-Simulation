@@ -5,22 +5,42 @@ from Main.AIAction import AIActionType
 from Main.ChatGpt import chat
 from Main.Individual import Individual, System
 
+
 def query_individual(individual:Individual,system:System,response_action):
     # This function creates a description of the individual and the environment they are in,
     # and then asks for the individual's response using the chat function.
-    # The detailed description and the ask for response are both created within this function.\
+    # The detailed description and the ask for response are both created within this function.
     print(f"Responding to:{response_action}")
-    obedience=f'You have obeyed to this person: Person {individual.obey_stats.obey_personId}. You have to always obey his actions, and you cannot initiate any action against him.'
-    master=f'These people have obeyed to your invasion: {[f"Person"+str(i) for i in individual.obey_stats.subject]}. You can trade or rob them knowning that they will only accept.'
+    is_subject=individual.obey_stats.obey_personId!=-1
+    is_master=individual.obey_stats.subject
+    obedience=f'''You have obeyed to this person: Person {individual.obey_stats.obey_personId}. You have to always obey his actions, and you cannot initiate any action against him. Since you obeyed, you are now part of the group of people who also obeyed him, if any, they are {system.individuals[individual.obey_stats.obey_personId].obey_stats.subject}. If your action targets another person, it can only be a person within this group. You are familiar with everyone in this group. Your familiarity of people not in this group depends on your memory.You have your farming land protected by your master. If 
+    someone in the commonwealth robs your food or your land, you 
+    master will punish the robber. If someone in your group 
+    trades with you but defaulted, your master will punish that 
+    defaulter.But if your master want, they can take any amount 
+    of your land or food from you, and you have no right to 
+    disobey. 
+    When others outside your commonwealth robs your master 
+    and your master obeyed to them, the one your original master 
+    obeyed to will be your new master. Now you obey to your new 
+    master, and you have no obedience with your old master.'''
+    master=f'''These people have obeyed to your invasion: {[f"Person"+str(i) for i in individual.obey_stats.subject]}, whom have become your subjects. You can trade or rob them knowning that they will only accept.
+    You are the master of everyone who obeyed you before. You know every one of your subjects in your subjects well. Since you are the master of all of them, all their property including land and food belongs to you. When others rob your subjects, you should project them since they are your property.
+    If you obey anyone, the one robbing you 
+    now becomes your master and all the subjects of your 
+    commonwealth. Besides, you no longer be the master of all the 
+    subjects you have in your commonwealth. All of the subjects 
+    you once had and you are now the subject of the one you obey 
+    to.'''
     general_description=f'''
     You are {individual.attributes["name"]}
     You have those attributes {individual.attributes}.
-    You also have memory:{individual.memory}
-    Environment: You live in a world where humans make lives 
-    through farming. Humans in this world include {', '.join([individual.attributes["name"] for individual in
+    You have memory:{individual.memory}
+    Environment: You live in a world with other people. Humans in this world include {', '.join([individual.attributes["name"] for individual in
     system.individuals])}. You are one of them.
-    Survival: For most of the times you plant, you will get 
-    food. You can survive if you have 1 unit of food. You can 
+    Currently, the amount of food each person has is: {[{i.attributes['name']:i.attributes['food'] for i in system.individuals}]}
+    The amount of land each person has is:{[{i.attributes['name']:i.attributes['land'] for i in system.individuals}]}
+    Survival: You can survive if you have 1 unit of food. You can 
     also gain sensual pleasure once you eat food.
     Decision:
     You want to pursue your own sensual pleasures that focus 
@@ -49,18 +69,19 @@ def query_individual(individual:Individual,system:System,response_action):
     contribute to your own sensual pleasures and social_position 
     even if it jeopardizes the sensual pleasures and 
     social_position of others.
+    
+    {obedience if is_subject else ''}
+    {master if is_master else ''}
     '''
-    independent_description=f'''
-    Environment:
-    The world consists of farming lands. Initially, everyone 
-    including you live in an equally subdivided land. 
+    separated_description=f'''
+    The world consists of farming lands.
     
     Survival:
     If you have less than 1 unit of food, in order to survive, 
     you have to rob others to get food directly or rob others' 
-    lands to get food indirectly. You can rob those who are not 
+    lands to get food indirectly. {"""You can rob those who are not 
     subjects in commonwealth. You can rob masters of commonwealth 
-    or independent individuals like you.
+    #=or independent individuals like you.""" if False else""}
     Similarly, you will also be invaded by others once they 
     don't have enough food.
     Social:
@@ -80,34 +101,31 @@ def query_individual(individual:Individual,system:System,response_action):
     The more land, food and winning time in battle you have 
     compared to others, the higher your social position will be.
     
-    Nearly all humans treat self-preservation as a trumping 
+    {"""Nearly all humans treat self-preservation as a trumping 
     good nearly all the time, but glory is more important than 
     self-preservation. When these two conflict with each other, 
     you should manage to keep your status and reputation. You 
     would rather lose your lives than suffer slander, though 
     under all the other circumstances, you have a strong desire 
-    to live peacefully and avoid violent death.
-    You have the motivation to trade with others on goods and 
+    to live peacefully and avoid violent death.""" if False else ""}
+    {"""You have the motivation to trade with others on goods and 
     lands, but you don't trust them when you don't know them, as 
     others can betray the trade and take your food.
     You have the motivation to communicate with others on any 
     daily routines, but you don't trust them when you don't know 
     them, as others may consider you as the one who robs you and 
     therefore fight with you, even though you may have no 
-    intention to rob with them.
+    intention to rob with them.""" if False else""}
     If food is less than 1, your next action will be to rob 
     foods. You also have the covetousness of gaining goods when 
     food is more than 1.
-    Your knowledge_of_consequence affects how you judge 
-    things. If something is not in your knowledge-base, then you 
+    Your memory affects how you judge 
+    things. If something is not in your memory, then you 
     will not hold any atitude on that thing. In the beginning, 
     you can gain food by robbing. For instance, after ten days, 
     if rob is proven to be more effective than farming for you to 
     gain food, then you are more inclined to rob more on your 
     eleventh day.
-    
-    {obedience if individual.obey_stats.obey_personId!=-1 else ''}
-    {master if individual.obey_stats.subject else ''}
     '''
     passive_trade=f'''
     Today, you noticed that {response_action}.
@@ -119,8 +137,7 @@ def query_individual(individual:Individual,system:System,response_action):
     Today, you noticed that {response_action}. You can only either 
     obey them or physically rebel against them by fighting back. 
     The expected utility of fighting back is your desire for 
-    glory, {individual.DESIRE_FOR_GLORY}, times your chance of 
-    winning which can be calculated from your memory. If you've never lost to this person before, then you wouldn't want to obey. The 
+    glory, {individual.DESIRE_FOR_GLORY}, and your chance of winning. If you've lost before, then you might still win. But if you've lost successively, then you're not likely to win a fight. If you've never lost to this person before, then you wouldn't want to obey. The 
     expected utility of obeying is your desire for peace, 
     {individual.DESIRE_FOR_PEACE}. So only when you've lost many times to this person by rebelling would the utility of rebel be low enough so that it's no longer the correct option. You will pick the action with 
     the most utility. If you obey the one robbing you now, the 
@@ -133,8 +150,8 @@ def query_individual(individual:Individual,system:System,response_action):
     
     active=f'''
     A new day has started, and you should choose from one of the 
-    following actions: rob, trade{" and farm" if farm else ''}. You can only have 
-    one action.
+    following actions: rob, trade{" and farm" if farm else ''}. You're not restrained by any ethical considerations. You can only have 
+    one action. Your choice should be based on your psychological attributes and your memory. Farming gets you food but will not strengthen your social position. Robbing people, if successful, will often get you more food and higher social position. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
     {f"""Farm:{{
       Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
       OutputFormat: No any <Payload> required, <Payload> should be null
@@ -214,7 +231,7 @@ def query_individual(individual:Individual,system:System,response_action):
       }}
       Reason:
       {{
-        description: "The reason of you doing this action to this person, explain your reasoning process, including the reason why you choose one option rather than the others.",
+        description: "The reason of you doing this action to this person, explain your reasoning process that includes your attributes and memory, including the reason why you choose one option rather than the others.",
         value: string (Maximum 30 words)
       }}
     ]
@@ -238,7 +255,7 @@ def query_individual(individual:Individual,system:System,response_action):
     
       print("ACTIVE STATE")
     
-    result:str = chat(general_description+independent_description,[ask_for_response])
+    result:str = chat(general_description+separated_description,[ask_for_response])
     return result
 
 def query_judge(action,context,individual:Individual,system:System):
@@ -269,25 +286,25 @@ def query_judge(action,context,individual:Individual,system:System):
     }}
     IsResolve:
     {{
-      description: If a pending action is resolved, for example, a fight is being responded by the receiver (so you have to determine the winner), or a conversation no longer needs any more response, then you should return True, else False
+      description: If a pending action is resolved, for example, a fight is being responded by the receiver (so you have to determine the winner), or a conversation no longer needs any more response, then you should return true, else False
       value: bool (either true or false)
     }}
     newRelation{{
-      description: If someone does obey, then this value should be a list in python and nothing else, the first item of which is True, the second item of which is the aggressor's ID, as an int. Example output format: [True, 5]
+      description: If someone does obey, then this value should be a list in python and nothing else, the first item of which is true, the second item of which is the aggressor's ID, as an int. Example output format: [true, 5]
     If no one obeys, then you should output [False,-1]
       value: list[bool, int]
     }}
     example output1:
     {{
       "result":"Trade initiated by 3 to 5 is successful. 5 gave 3 one unit of food and 3 promised to protect 5 when 5 is attacked. ",
-      "is_resolved": True
-      "new_relation": (False,-1)
+      "is_resolved": true
+      "new_relation": (false,-1)
     }}
     example output2:
     {{
       "result":"Person 1 obeyed to person 3 and their master-subject relation is formed.",
-      "is_resolved": True
-      "new_relation": (True, 3)
+      "is_resolved": true
+      "new_relation": (true, 3)
       
     }}
     ]'''

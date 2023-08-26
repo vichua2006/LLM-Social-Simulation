@@ -77,21 +77,26 @@ def simulate(individuals:List[Individual],system:System):
                 try:
                   action = deserialize_first_json_object(action.lower())
                   ai_action:AIAction = str_to_ai_action(action, index)
-                  individual.current_action_type = ai_action.type
-                  append_to_pending_action(ai_action, system)
-                  
                   break
                 except Exception as e:
                   try:
                     ai_action:AIAction = str_to_ai_action([action[x] for x in action][0], index)
-                    append_to_pending_action(ai_action, system)
                     action=list(action[x] for x in action)[0]
                     break
                   except Exception as e2:
                     print(f"First Exception:{e}, second exception:{e2}")
                     action:str=query_individual(individual,system,response_action)
                     continue
-                  
+              individual.current_action_type = ai_action.type
+              if ai_action.type==AIActionType.Farm:
+                    land=individual.attributes['land']
+                    individual.attributes['food']+=land*random.random()*0.3 if land>1 else 1
+                    print("Farm is successful.")
+              elif ai_action.type==AIActionType.Rob or ai_action.type==AIActionType.Trade:
+                    append_to_pending_action(ai_action, system)
+                    print("Result yet to be seen.")
+              else:
+                    print(f'Problem, the type of the action is:{ai_action.type}')
               try:system.history.append(f'{individual.attributes["name"]}:{action["reason"]}')
               except:
                 try:system.history.append(f'{individual.attributes["name"]}:{action[[x for x in action][0]]["reason"]}')

@@ -7,8 +7,9 @@ def str_to_ai_action(action:str, id:int)->AIAction:
       return TradeAction(id, action["payload"]["tradepayload"]["targetid"], action["payload"]["tradepayload"]["paytype"], action["payload"]["tradepayload"]["payamount"], action["payload"]["tradepayload"]["gaintype"], action["payload"]["tradepayload"]["gainamount"])
     elif action["action"]=="rob":
       return RobAction(id, action["payload"]["robpayload"]["targetid"], action["payload"]["robpayload"]["robtype"])
-    else:
-      print("Error: Invalid action type")
+    elif action["action"]=='farm':
+          return AIAction(AIActionType.Farm,id,None)
+    else:print("Error: Invalid action type")
       
 def append_to_pending_action(action:AIAction, system:System)->None:
     id:int = action.target
