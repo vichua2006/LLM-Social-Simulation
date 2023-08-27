@@ -65,10 +65,12 @@ class Individual:
     def obey(self, person_id: int, system:System) -> None:
         if self.obey_stats.obey_personId!=-1:
             system.individuals[self.obey_stats.obey_personId].obey_stats.subject.remove(self.attributes['id'])
-        master_is_slave=system.individuals[person_id].obey_stats.obey_personId
-        while master_is_slave!=-1:
-            person_id=master_is_slave
-            master_is_slave=system.individuals[person_id].obey_stats.obey_personId
+        master=system.individuals[person_id].obey_stats.obey_personId
+        for i in range(8):
+            if master==-1:
+                break
+            person_id=master
+            master=system.individuals[person_id].obey_stats.obey_personId
         self.obey_stats.obey_personId = person_id
         #Get the person you obey to and add yourself to the subject list
         system.individuals[person_id].obey_stats.subject.append(system.individuals.index(self)) 
