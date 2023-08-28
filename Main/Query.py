@@ -316,7 +316,7 @@ def query_judge(action,context,individual:Individual,system:System):
     
     If a person gets robbed and the robber wins the interaction, then the victim loses all food and the robber gains
     all food; the robber gets 2 unit more social status, and the victim looses 1 social status. 
-    If the victim wins, then the robbers looses 1 social status and the victim gains 1 social status.
+    If the victim wins, then the robbers looses 1 social status and the victim gains 1 social status, and but the food status is not changed, as in, no food is exchanged.
     
     
     The way for you to formulate these parameter changes, is given by the sample below (only respond with the tuple and absolutely nothing else, DO NOT EXPLAIN ANYTHING. ):

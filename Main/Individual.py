@@ -65,20 +65,23 @@ class Individual:
     def obey(self, person_id: int, system:System) -> None:
         if self.obey_stats.obey_personId!=-1:
             system.individuals[self.obey_stats.obey_personId].obey_stats.subject.remove(self.attributes['id'])
+        if person_id==self.attributes['id']:
+            print("LOGICAL ERROR:CANNOT OBEY TO SELF")
+            return
         master=system.individuals[person_id].obey_stats.obey_personId
-        for i in range(8):
-            if master==-1:
-                break
+        while master!=-1:
             person_id=master
             master=system.individuals[person_id].obey_stats.obey_personId
         self.obey_stats.obey_personId = person_id
         #Get the person you obey to and add yourself to the subject list
         system.individuals[person_id].obey_stats.subject.append(system.individuals.index(self)) 
         #iterate all subject of yours and transfer its obeyperson to the person you obey to
-        for subject in self.obey_stats.subject:
+        subjects=[x for x in self.obey_stats.subject]
+        for subject in subjects:
             system.individuals[subject].obey_stats.obey_personId = person_id
             system.individuals[person_id].obey_stats.subject.append(subject)
         self.obey_stats.subject=[]
+        
         
     
     # Check if the individual is the responser of the action
