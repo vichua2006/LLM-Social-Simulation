@@ -45,7 +45,7 @@ def main():
     special_log_layout = [[sg.Output(size=(80,15), key='-SPECIAL OUTPUT-')]]
     layout_left = person_layout + special_log_layout
     console_log_layout = [[sg.Output(size=(80,30), key='-OUTPUT-')]]
-    button_layout = [[sg.Button('Start', key= '-START-'), sg.Button('Stop', key= '-STOP-'), sg.Button('Clear', key= '-Clear-'), sg.Button('Exit', key= '-Exit-') ,sg.Button('Export', key= '-Export-')]]
+    button_layout = [[sg.Button('Start', key= '-START-'), sg.Button('Stop', key= '-STOP-'), sg.Button('Clear', key= '-Clear-'), sg.Button('Exit', key= '-Exit-') ,sg.Button('Export', key= '-Export-'), sg.Button('Save', key= '-Save-') ,sg.Button('Load', key= '-Load-')]]
     layout_right = console_log_layout+ button_layout
     #column layout of person_layout and console_log_layout
     layout = [[sg.Column(layout_left), sg.Column(layout_right)]]
@@ -82,7 +82,11 @@ def main():
             with open(filename, 'w') as f:
                 f.write(window['-OUTPUT-'].get())
             print(f"Log successfully export to {filename}")
-           
+        elif event == '-Save-':
+            filepath = sg.popup_get_file('Save File', save_as=True, no_window=True, file_types=(("Text Files", "*.txt"),))
+            if filepath:
+                print(f"Log successfully saved to {filepath}")
+            
         
         #update 
         for i, person in enumerate(individuals):
@@ -97,7 +101,7 @@ def main():
             window[f'-Action{i}-'].update(person.attributes['action'])
             window[f'-CURRENTACTIONTYPE{i}-'].update(person.current_action_type)
             window[f'-OBEYPERSONID{i}-'].update(person.obey_stats.obey_personId)
-            
+            window[f'-SPECIAL OUTPUT-'].update(system.console_log.content)
             # Update Listbox, Remain the listbox scroll position
             for key in [f'-PENDINGACTION{i}-', f'-OBEYSUBJECT{i}-']:
                 # Access the tkinter Listbox widget

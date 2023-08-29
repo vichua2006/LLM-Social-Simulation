@@ -63,11 +63,14 @@ class Individual:
         if win_rob:
             self.robbing_stats.win_rob_times[person_id] + 1
     def obey(self, person_id: int, system:System) -> None:
+        #if already obey to anyone, directly return
         if self.obey_stats.obey_personId!=-1:
-            system.individuals[self.obey_stats.obey_personId].obey_stats.subject.remove(self.attributes['id'])
+            print("LOGICAL ERROR:ALREADY OBEY TO SOMEONE")
+            return
         if person_id==self.attributes['id']:
             print("LOGICAL ERROR:CANNOT OBEY TO SELF")
             return
+        #obey to the obyer's obeyer if applicable
         master=system.individuals[person_id].obey_stats.obey_personId
         while master!=-1:
             person_id=master
