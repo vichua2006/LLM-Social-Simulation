@@ -56,7 +56,7 @@ def main():
     layout = [[sg.Column(layout_left), sg.Column(layout_right)]]
     window = sg.Window('LLM Social Simulation', layout)
     #redirect stdout to the sg.Output element
-    sys.stdout = ConsoleLog(window, '-OUTPUT-')
+    sys.stdout = ConsoleLog(window, '-OUTPUT-', '-OUTPUT THREAD-')
     
     thread: threading.Thread
     system.set_console_log(CustomConsoleLog(window, '-SPECIAL OUTPUT-'))
@@ -66,8 +66,8 @@ def main():
         event, values = window.read(timeout=100) #update every 100ms
         if event == sg.WIN_CLOSED:
             break
-        elif event == '-OUTPUT-':
-            window['-OUTPUT-'].update(values['-OUTPUT-'], append = True)
+        elif event == '-OUTPUT THREAD-':
+            window['-OUTPUT-'].update(values['-OUTPUT THREAD-'], append = True)
         elif event == '-Clear-':
             window['-OUTPUT-'].update('')
         elif event == '-Exit-':
@@ -101,6 +101,10 @@ def main():
                 print(f"Log successfully saved to {filepath}")
             
         elif event == '-Load-':
+            system.is_stop=True
+            print("Stop")
+            isappStarted = False
+            
             filepath = sg.popup_get_file('Load File', save_as=False, no_window=True, file_types=(("Simulation Save", "*.txt"),))
             if filepath:
                 system, console_log = load(filepath)
