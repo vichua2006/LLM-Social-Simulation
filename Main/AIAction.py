@@ -20,7 +20,14 @@ class AIActionType(str, Enum, metaclass=StringEnumMeta):
     Trade = "trade"
     BeRobbed = "be robbed"
     BeTraded = "be traded"
-
+    
+    #for jsonpickle serialization
+    def __getstate__(self):
+        return self.value
+    
+    def __setstate__(self, state):
+        self._value_ = state
+        
 #class Type(str, Enum, metaclass=StringEnumMeta):
  #   Land = "land"
   #  Food = "food"
