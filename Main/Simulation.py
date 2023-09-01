@@ -1,7 +1,8 @@
 import threading
 from typing import List
 from Main.Calculation import increase_food
-from Main.Individual import Individual, System
+from Main.Individual import Individual
+from Main.System import System
 from Main.Query import query_individual, query_judge
 from Main.StringUtils import deserialize_first_json_object
 from Main.AIAction import AIAction, AIActionType

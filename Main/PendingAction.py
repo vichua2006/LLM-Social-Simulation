@@ -1,6 +1,6 @@
 from typing import List
 from Main.AIAction import AIAction, AIActionType, RobAction, TradeAction
-from Main.Individual import System
+from Main.System import System
 
 def str_to_ai_action(action:str, id:int)->AIAction:
     if(action["action"]=="trade"):

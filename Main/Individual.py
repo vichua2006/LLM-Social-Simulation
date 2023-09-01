@@ -1,27 +1,8 @@
 import queue
 import numpy as np  # numpy for numerical computations
 from typing import List, Dict, Tuple
-from GUI.CustomConsoleLog import CustomConsoleLog      
 from Main.AIAction import AIActionType, AIAction
-
-class Individual:
-    pass
-class System:   
-    def __init__(self,individuals:List[Individual],lands):
-        # Each system has a set of pending actions, history, individuals, lands, and rankings
-        self.history=[]
-        self.individuals:List[Individual] =individuals
-        self.land=lands
-        self.ranking={}
-        for i in individuals:
-          self.ranking[i]=0
-        self.relations=[x for x in individuals]
-        self.time=0
-        self.is_stop=False
-        self.obey_frequence=[]
-        
-    def set_console_log(self, console_log:CustomConsoleLog):
-        self.console_log = console_log
+from Main.System import System
 class Individual:
     def __init__(self, id:int, name:str):
         # Define the characteristics of the individual
@@ -94,8 +75,8 @@ class Individual:
                 self.current_action_type = AIActionType.BeRobbed
             case AIActionType.Trade:
                 self.current_action_type = AIActionType.BeTraded
-            
-            
+    
+    
           
   
 # Defining a class for rob stats
@@ -108,9 +89,32 @@ class RobStats():
         for i in range(PEOPLE):
             self.rob_times[i]=0
             self.win_rob_times[i]=0
+    #JSON serialization
+    def __json_encode__(self):
+        return self.__dict__
 
+    #JSON deserialization
+    @classmethod
+    def __json_decode__(cls, dct):
+        obj = cls()
+        obj.__dict__.update(dct)
+        return obj
+
+    
 # Defining a class for stats around obey
 class ObeyStats:
     def __init__(self) -> None:
         self.obey_personId: int = -1 #the personId you are obey to, -1 means no one is obeyed
         self.subject: List[int] = [] #the personId who obey you
+    def to_dict(self) -> Dict:
+        return {
+            'obey_personId': self.obey_personId,
+            'subject': self.subject
+        }
+
+    @classmethod
+    def from_dict(cls, data: Dict):
+        obj = cls()
+        obj.obey_personId = data['obey_personId']
+        obj.subject = data['subject']
+        return obj
