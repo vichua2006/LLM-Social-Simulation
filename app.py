@@ -1,12 +1,15 @@
-import sys
+import io
 import threading
 import PySimpleGUI as sg
 from typing import List, Tuple
 from GUI.CustomConsoleLog import CustomConsoleLog
+from GUI.ConsoleLog import ConsoleLog
 from Main.Individual import Individual, System
 from Main.Simulation import initialize, simulate
 from datetime import datetime
-import time
+import sys
+
+
     
 def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
     person_layout = []
@@ -42,14 +45,17 @@ def main():
     individuals = system.individuals
     
     person_layout = [[create_individual_layout(individuals)]]
-    special_log_layout = [[sg.Output(size=(80,15), key='-SPECIAL OUTPUT-')]]
+    special_log_layout = [[sg.Multiline(size=(80,15), key='-SPECIAL OUTPUT-', autoscroll=False)]]
     layout_left = person_layout + special_log_layout
-    console_log_layout = [[sg.Output(size=(80,30), key='-OUTPUT-')]]
+    console_log_layout = [[sg.Multiline(size=(80,30), key='-OUTPUT-', autoscroll=False)]]
     button_layout = [[sg.Button('Start', key= '-START-'), sg.Button('Stop', key= '-STOP-'), sg.Button('Clear', key= '-Clear-'), sg.Button('Exit', key= '-Exit-') ,sg.Button('Export', key= '-Export-'), sg.Button('Save', key= '-Save-') ,sg.Button('Load', key= '-Load-')]]
     layout_right = console_log_layout+ button_layout
     #column layout of person_layout and console_log_layout
     layout = [[sg.Column(layout_left), sg.Column(layout_right)]]
     window = sg.Window('LLM Social Simulation', layout)
+    #redirect stdout to the sg.Output element
+    sys.stdout = ConsoleLog(window, '-OUTPUT-')
+    
     thread: threading.Thread
     system.set_console_log(CustomConsoleLog(window, '-SPECIAL OUTPUT-'))
     isappStarted = False
@@ -58,6 +64,8 @@ def main():
         event, values = window.read(timeout=100) #update every 100ms
         if event == sg.WIN_CLOSED:
             break
+        elif event == '-OUTPUT-':
+            window['-OUTPUT-'].update(values['-OUTPUT-'], append = True)
         elif event == '-Clear-':
             window['-OUTPUT-'].update('')
         elif event == '-Exit-':
@@ -69,7 +77,7 @@ def main():
             system.is_stop=False
             if(isappStarted):
                 continue
-            thread = window.start_thread(lambda: start_simulate(system), ('-THREAD-', '-THEAD ENDED-'))
+            thread = window.start_thread(lambda: start_simulate(system), ('-MAIN THREAD-', '-MAIN THREAD ENDED-'))
             isappStarted = True
         elif event == '-STOP-':
             system.is_stop=True
@@ -89,6 +97,9 @@ def main():
             
         
         #update 
+        #update console log
+        window[f'-OUTPUT-'].update()
+        
         for i, person in enumerate(individuals):
             #Update person attributes
             window[f'-AGGRESSIVENESS{i}-'].update(person.attributes["aggressiveness"])
@@ -102,6 +113,7 @@ def main():
             window[f'-CURRENTACTIONTYPE{i}-'].update(person.current_action_type)
             window[f'-OBEYPERSONID{i}-'].update(person.obey_stats.obey_personId)
             window[f'-SPECIAL OUTPUT-'].update(system.console_log.content)
+
             # Update Listbox, Remain the listbox scroll position
             for key in [f'-PENDINGACTION{i}-', f'-OBEYSUBJECT{i}-']:
                 # Access the tkinter Listbox widget

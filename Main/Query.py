@@ -399,6 +399,7 @@ def query_judge(action,context,individual:Individual,system:System):
           obey,master=result["new_relation"]
           if obey:
                 print('Obedience has happened.')
+                system.console_log.append(f"{individual.attributes['id']}: Obey {master.attributes['id']}")
                 individual.obey(int(master),system)
           progress[0]=True
         except Exception as e:
