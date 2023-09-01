@@ -1,3 +1,4 @@
+from typing import Tuple
 import json
 import queue
 from Main.Individual import Individual
@@ -18,16 +19,22 @@ class QueueHandler(jsonpickle.handlers.BaseHandler):
 # Register the custom handler for queue.Queue
 jsonpickle.handlers.register(queue.Queue, QueueHandler)
 
-# Serialize System object to JSON
-def save_system(system: System, filename: str):
+# Serialize System object and console log to JSON
+def save(system: System, console_log: str, filename: str):
     serialized_system = jsonpickle.encode(system)
+    save_dict = {
+        "system": serialized_system,
+        "console_log": console_log
+    }
     with open(filename, 'w') as f:
-        f.write(serialized_system)
+        json.dump(save_dict, f)
 
-# Deserialize System object from JSON
-def load_system(filename: str) -> System:
+# Deserialize System object and console log from JSON
+def load(filename: str) -> Tuple[System, str]:
     with open(filename, 'r') as f:
-        loaded_serialized_system = f.read()
-    loaded_system = jsonpickle.decode(loaded_serialized_system)
-    return loaded_system
+        load_dict = json.load(f)
+    
+    loaded_system = jsonpickle.decode(load_dict["system"])
+    loaded_console_log = load_dict["console_log"]
+    return loaded_system, loaded_console_log
 

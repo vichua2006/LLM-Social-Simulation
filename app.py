@@ -5,7 +5,7 @@ from typing import List, Tuple
 from GUI.CustomConsoleLog import CustomConsoleLog
 from GUI.ConsoleLog import ConsoleLog
 from Main.Individual import Individual
-from Main.SaveLoad import load_system, save_system
+from Main.SaveLoad import load, save
 from Main.System import System
 from Main.Simulation import initialize, simulate
 from datetime import datetime
@@ -95,16 +95,18 @@ def main():
         elif event == '-Save-':
             filepath = sg.popup_get_file('Save File', save_as=True, no_window=True, file_types=(("Simulation Save", "*.txt"),))
             if filepath:
-                save_system(system, filepath)
+                console_log = window['-OUTPUT-'].get()
+                save(system, console_log, filepath)
+                # Save the console log
                 print(f"Log successfully saved to {filepath}")
             
         elif event == '-Load-':
             filepath = sg.popup_get_file('Load File', save_as=False, no_window=True, file_types=(("Simulation Save", "*.txt"),))
             if filepath:
-                system = load_system(filepath)
+                system, console_log = load(filepath)
                 individuals = system.individuals
-                window['-OUTPUT-'].update('')
-                print(f"{filepath} successfully load")
+                window['-OUTPUT-'].update(console_log)
+                print(f"{filepath} successfully loaded")
             
         #update 
         #update console log
