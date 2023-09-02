@@ -17,8 +17,9 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
     person_layout = []
     for i, person in enumerate(individual):
         section_key = f'-SECTION{i}-'
-        pending_action_layout = [[sg.Text("PendingAction:")], [sg.Listbox(values=person.get_pending_action_as_list(), size=(30, 7),  horizontal_scroll= True, key=f'-PENDINGACTION{i}-')]]
+        pending_action_layout = [[sg.Text("PendingAction:")], [sg.Listbox(values=person.get_pending_action_as_list(), size=(30, 5),  horizontal_scroll= True, key=f'-PENDINGACTION{i}-')]]
         obey_subject_layout = [[sg.Text("ObeySubject:")], [sg.Listbox(values = person.obey_stats.subject, size=(30, 5),  horizontal_scroll= True, key=f'-OBEYSUBJECT{i}-')]]
+        memory_layout = [[sg.Text("Memory:")], [sg.Listbox(values = person.memory, size=(30, 5),  horizontal_scroll= True, key=f'-MEMORY{i}-')]]
         left_section = [[sg.Text('Aggressiveness:'), sg.Input(person.attributes["aggressiveness"], size = (15, None), key=f'-AGGRESSIVENESS{i}-')],
                    [sg.Text('Covetousness:'), sg.Input(person.attributes["covetousness"], size = (15, None), key=f'-COVETOUSNESS{i}-')],
                    [sg.Text('Intelligence:'), sg.Input(person.attributes["intelligence"], size = (15, None), key=f'-INTELLIGENCE{i}-')],
@@ -31,7 +32,8 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
                    [sg.Text('ObeyTo:'), sg.Input(person.obey_stats.obey_personId, size = (10, None), key=f'-OBEYPERSONID{i}-')],
                    ]
         right_section = [[sg.Column(pending_action_layout)],
-                        [sg.Column(obey_subject_layout)]
+                        [sg.Column(obey_subject_layout)],
+                        [sg.Column(memory_layout)]
                         ]
         section = [[sg.Column(left_section), sg.Column(right_section)]]
         person_layout.append(sg.Tab(f'Person {i}', section, key=section_key))
@@ -48,7 +50,7 @@ def main():
     individuals = system.individuals
     
     person_layout = [[create_individual_layout(individuals)]]
-    special_log_layout = [[sg.Multiline(size=(80,15), key='-SPECIAL OUTPUT-', autoscroll=False)]]
+    special_log_layout = [[sg.Multiline(size=(80,10), key='-SPECIAL OUTPUT-', autoscroll=False)]]
     layout_left = person_layout + special_log_layout
     console_log_layout = [[sg.Multiline(size=(80,30), key='-OUTPUT-', autoscroll=False)]]
     button_layout = [[sg.Button('Start', key= '-START-'), sg.Button('Stop', key= '-STOP-'), sg.Button('Clear', key= '-Clear-'), sg.Button('Exit', key= '-Exit-') ,sg.Button('Export', key= '-Export-'), sg.Button('Save', key= '-Save-') ,sg.Button('Load', key= '-Load-'), sg.Button('DEBUG', key= '-DEBUG-')]]
@@ -137,17 +139,20 @@ def main():
             window[f'-SPECIAL OUTPUT-'].update(system.console_log.content)
 
             # Update Listbox, Remain the listbox scroll position
-            for key in [f'-PENDINGACTION{i}-', f'-OBEYSUBJECT{i}-']:
+            for key in [f'-PENDINGACTION{i}-', f'-OBEYSUBJECT{i}-', f'-MEMORY{i}-']:
                 # Access the tkinter Listbox widget
                 lb_widget = window[key].Widget
 
                 # Get current scroll position
                 scroll_position = lb_widget.yview()
-
-                if key == f'-PENDINGACTION{i}-':
-                    new_values = person.get_pending_action_as_list()
-                else: # key == f'-OBEYSUBJECT{i}-':
-                    new_values = person.obey_stats.subject
+                match key:
+                    case _ if (_ := f'-PENDINGACTION{i}-') == key:
+                        new_values = person.get_pending_action_as_list()
+                    case _ if (_ := f'-OBEYSUBJECT{i}-') == key:
+                        new_values = person.obey_stats.subject
+                    case _ if (_ := f'-MEMORY{i}-') == key:
+                        new_values = person.memory
+                
                 
                 window[key].update(new_values)
             
