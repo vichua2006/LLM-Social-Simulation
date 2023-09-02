@@ -135,9 +135,9 @@ def query_individual(individual:Individual,system:System,response_action):
     '''
     passive_rob=f'''
     Today, you noticed that {response_action}. You can only either 
-    obey them or physically rebel against them by fighting back. 
+    obey them or physically rebel against them by fighting back.
     The expected utility of fighting back is your desire for 
-    glory, {individual.DESIRE_FOR_GLORY}, and your chance of winning. If you've lost before, then you might still win. But if you've lost successively, then you're not likely to win a fight. If you've never lost to this person before, then you wouldn't want to obey. The 
+    glory, {individual.DESIRE_FOR_GLORY}, and your chance of winning. Even if someone is stronger than you, you still have a chance to win. But if you've lost successively, then you're not likely to win a fight. If you've never lost to this person before, then you wouldn't want to obey. The 
     expected utility of obeying is your desire for peace, 
     {individual.DESIRE_FOR_PEACE}. So only when you've lost many times to this person by rebelling would the utility of rebel be low enough so that it's no longer the correct option. You will pick the action with 
     the most utility. If you obey the one robbing you now, the 
@@ -387,6 +387,7 @@ def query_judge(action,context,individual:Individual,system:System):
     progress=[False,False,False]#to keep track of which query is complete
     error_correction=8
     assistence=[None]*6
+    print(type(individual))
     for i in range(error_correction):
       assistence[0]=q[0]
       if not progress[0] and query:
@@ -397,9 +398,10 @@ def query_judge(action,context,individual:Individual,system:System):
           assistence[1]=str(result["result"])
           system.history.append(result["result"]) if result["is_resolved"] else None
           obey,master=result["new_relation"]
+          
           if obey:
                 print('Obedience has happened.')
-                system.console_log.append(f"{individual.attributes['id']}: Obey {master.attributes['id']}")
+                system.console_log.append(f"{individual.attributes['id']}: Obey {master}")
                 individual.obey(int(master),system)
           progress[0]=True
         except Exception as e:
