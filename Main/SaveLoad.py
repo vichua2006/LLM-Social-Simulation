@@ -1,23 +1,9 @@
 from typing import Tuple
 import json
-import queue
 from Main.Individual import Individual
 from Main.System import System
 import jsonpickle
 import jsonpickle.handlers
-
-class QueueHandler(jsonpickle.handlers.BaseHandler):
-    def flatten(self, obj, data):
-        data['items'] = list(obj.queue)
-        return data
-
-    def restore(self, obj):
-        q = queue.Queue()
-        for item in obj['items']:
-            q.put(item)
-        return q
-# Register the custom handler for queue.Queue
-jsonpickle.handlers.register(queue.Queue, QueueHandler)
 
 # Serialize System object and console log to JSON
 def save(system: System, console_log: str, filename: str):

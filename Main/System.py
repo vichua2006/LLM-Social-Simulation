@@ -12,7 +12,7 @@ class System:
         self.ranking={}
         for i in individuals:
           self.ranking[i]=0
-        self.relations=[x for x in individuals]
+        #self.relations=[x for x in individuals]
         self.time=0
         self.is_stop=False
         self.obey_frequence=[]

@@ -20,13 +20,6 @@ class AIActionType(str, Enum, metaclass=StringEnumMeta):
     Trade = "trade"
     BeRobbed = "be robbed"
     BeTraded = "be traded"
-    
-    #for jsonpickle serialization
-    def __getstate__(self):
-        return self.value
-    
-    def __setstate__(self, state):
-        self._value_ = state
         
 #class Type(str, Enum, metaclass=StringEnumMeta):
  #   Land = "land"
@@ -39,12 +32,15 @@ class AIAction:
         self.target:int = target
     def __str__(self) -> str:
         return f"{self.type}, owner: {self.owner}, target: {self.target}"
+    
 class RobAction(AIAction):
     def __init__(self, owner:int, target:int, robType:str) -> None:
         super().__init__(AIActionType.Rob, owner, target)
         self.robType:str= robType
     def __str__(self) -> str:
         return f"{self.type}, owner: {self.owner}, target: {self.target}, robType: {self.robType}"
+
+        
 class TradeAction(AIAction):
     def __init__(self, owner:int, target:int, payType:str, payAmount:float, gainType:str, gainAmount:float) -> None:
         super().__init__(AIActionType.Trade, owner, target)
@@ -54,3 +50,4 @@ class TradeAction(AIAction):
         self.gainAmount: float = gainAmount
     def __str__(self) -> str:
         return f"{self.type}, owner: {self.owner}, target: {self.target}, payType: {self.payType}, payAmount: {self.payAmount}, gainType: {self.gainType}, gainAmount: {self.gainAmount}" 
+    

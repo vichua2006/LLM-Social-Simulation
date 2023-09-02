@@ -1,8 +1,16 @@
-import queue
 import numpy as np  # numpy for numerical computations
 from typing import List, Dict, Tuple
-from Main.AIAction import AIActionType, AIAction
+from Main.AIAction import AIActionType, AIAction, RobAction
+import queue
 from Main.System import System
+
+class SeralizeQueue(queue.Queue):
+    def __getstate__(self):
+        return list(self.queue)
+    def __setstate__(self, state):
+        self.__init__()
+        self.queue = state
+        
 class Individual:
     def __init__(self, id:int, name:str):
         # Define the characteristics of the individual
@@ -19,7 +27,7 @@ class Individual:
             "action": 1  # Initial action point is 1
             ,"trust_of_others":0
         }
-        self.pending_action:queue.Queue[AIAction] = queue.Queue() # The pending action that the individual need to deal with
+        self.pending_action:SeralizeQueue[AIAction] = SeralizeQueue() # The pending action that the individual need to deal with
         self.current_action_type:AIActionType = AIActionType.Default
         self.robbing_stats = RobStats()
         self.obey_stats = ObeyStats()

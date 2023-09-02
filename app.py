@@ -1,7 +1,7 @@
-import io
 import threading
 import PySimpleGUI as sg
 from typing import List, Tuple
+import jsonpickle
 from GUI.CustomConsoleLog import CustomConsoleLog
 from GUI.ConsoleLog import ConsoleLog
 from Main.Individual import Individual
@@ -43,6 +43,7 @@ def start_simulate(system:System):
         print(f"DAY {system.time+1} HAS STARTED.")
         simulate(system.individuals, system)
 def main():
+    
     system=initialize()
     individuals = system.individuals
     
@@ -50,7 +51,7 @@ def main():
     special_log_layout = [[sg.Multiline(size=(80,15), key='-SPECIAL OUTPUT-', autoscroll=False)]]
     layout_left = person_layout + special_log_layout
     console_log_layout = [[sg.Multiline(size=(80,30), key='-OUTPUT-', autoscroll=False)]]
-    button_layout = [[sg.Button('Start', key= '-START-'), sg.Button('Stop', key= '-STOP-'), sg.Button('Clear', key= '-Clear-'), sg.Button('Exit', key= '-Exit-') ,sg.Button('Export', key= '-Export-'), sg.Button('Save', key= '-Save-') ,sg.Button('Load', key= '-Load-')]]
+    button_layout = [[sg.Button('Start', key= '-START-'), sg.Button('Stop', key= '-STOP-'), sg.Button('Clear', key= '-Clear-'), sg.Button('Exit', key= '-Exit-') ,sg.Button('Export', key= '-Export-'), sg.Button('Save', key= '-Save-') ,sg.Button('Load', key= '-Load-'), sg.Button('DEBUG', key= '-DEBUG-')]]
     layout_right = console_log_layout+ button_layout
     #column layout of person_layout and console_log_layout
     layout = [[sg.Column(layout_left), sg.Column(layout_right)]]
@@ -111,7 +112,12 @@ def main():
                 individuals = system.individuals
                 window['-OUTPUT-'].update(console_log)
                 print(f"{filepath} successfully loaded")
-            
+        elif event == '-DEBUG-':
+            print("DEBUG")
+
+        
+        
+        
         #update 
         #update console log
         window[f'-OUTPUT-'].update()
