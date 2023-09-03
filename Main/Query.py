@@ -286,12 +286,12 @@ def query_judge(action,context,individual:Individual,system:System):
     }}
     IsResolve:
     {{
-      description: If a pending action is resolved, for example, a fight is being responded by the receiver (so you have to determine the winner), or a conversation no longer needs any more response, then you should return true, else False
+      description: If a pending action is resolved, for example, a fight is being responded by the receiver (so you have to determine the winner), or a conversation no longer needs any more response, then you should return true, else false
       value: bool (either true or false)
     }}
     newRelation{{
       description: If someone does obey, then this value should be a list in python and nothing else, the first item of which is true, the second item of which is the aggressor's ID, as an int. Example output format: [true, 5]
-    If no one obeys, then you should output [False,-1]
+    If no one obeys, then you should output [false,-1]
       value: list[bool, int]
     }}
     example output1:

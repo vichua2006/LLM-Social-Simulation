@@ -32,7 +32,7 @@ def initialize():
     # Initialize individuals and environment
     individuals=[]
     lands=[]
-    POPULATION=5
+    POPULATION=9
     for i in range(POPULATION):
       individuals.append(Individual(i,f'person {i}'))
       lands.append(f'land {i}')
