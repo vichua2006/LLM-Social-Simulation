@@ -20,7 +20,7 @@ class AIActionType(str, Enum, metaclass=StringEnumMeta):
     Trade = "trade"
     BeRobbed = "be robbed"
     BeTraded = "be traded"
-        
+    
 #class Type(str, Enum, metaclass=StringEnumMeta):
  #   Land = "land"
   #  Food = "food"

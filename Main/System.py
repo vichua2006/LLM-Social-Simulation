@@ -20,3 +20,7 @@ class System:
     def set_console_log(self, console_log:CustomConsoleLog):
         self.console_log = console_log
 
+    def __getstate__(self):
+        return self.__dict__
+    def __setstate__(self, state):
+        self.__dict__.update(state)

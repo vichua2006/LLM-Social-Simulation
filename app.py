@@ -20,6 +20,7 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
         pending_action_layout = [[sg.Text("PendingAction:")], [sg.Listbox(values=person.get_pending_action_as_list(), size=(30, 5),  horizontal_scroll= True, key=f'-PENDINGACTION{i}-')]]
         obey_subject_layout = [[sg.Text("ObeySubject:")], [sg.Listbox(values = person.obey_stats.subject, size=(30, 5),  horizontal_scroll= True, key=f'-OBEYSUBJECT{i}-')]]
         memory_layout = [[sg.Text("Memory:")], [sg.Listbox(values = person.memory, size=(30, 5),  horizontal_scroll= True, key=f'-MEMORY{i}-')]]
+        rob_stat_layout = [[sg.Text("RobTimes:")], [sg.Listbox(values = person.robbing_stats.rob_times, size=(30, 5),  horizontal_scroll= True, key=f'-ROBTIMES{i}-')]]
         left_section = [[sg.Text('Aggressiveness:'), sg.Input(person.attributes["aggressiveness"], size = (15, None), key=f'-AGGRESSIVENESS{i}-')],
                    [sg.Text('Covetousness:'), sg.Input(person.attributes["covetousness"], size = (15, None), key=f'-COVETOUSNESS{i}-')],
                    [sg.Text('Intelligence:'), sg.Input(person.attributes["intelligence"], size = (15, None), key=f'-INTELLIGENCE{i}-')],
@@ -30,6 +31,7 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
                    [sg.Text('Action:'), sg.Input(person.attributes["action"], size = (10, None), key=f'-Action{i}-')],
                    [sg.Text('CurrentActionType:'), sg.Input(person.current_action_type, size = (10, None), key=f'-CURRENTACTIONTYPE{i}-')],
                    [sg.Text('ObeyTo:'), sg.Input(person.obey_stats.obey_personId, size = (10, None), key=f'-OBEYPERSONID{i}-')],
+                   [sg.Text('TotalRobTimes:'), sg.Input(person.robbing_stats.total_rob_times, size = (10, None), key=f'-TOTALROBTIMES{i}-')],
                    ]
         right_section = [[sg.Column(pending_action_layout)],
                         [sg.Column(obey_subject_layout)],

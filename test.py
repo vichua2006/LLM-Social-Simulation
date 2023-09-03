@@ -1,29 +1,30 @@
-import PySimpleGUI as sg
-import time
+import jsonpickle
 
-# Sample initial data for the list box
-data = ['Item 1', 'Item 2', 'Item 3']
+class B:
+    def __init__(self, value):
+        self.value = value
+    
+    def __getstate__(self):
+        print("B's getstate invoked")
+        return self.__dict__
+    
+    def __setstate__(self, state):
+        print("B's setstate invoked")
+        self.__dict__.update(state)
 
-layout = [
-    [sg.Listbox(values=data, size=(20, 4), key='-LISTBOX-')],
-    [sg.Button('Start Updating'), sg.Button('Stop Updating'), sg.Button('Exit')]
-]
+class A:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = B(y)
 
-window = sg.Window('Update Listbox Each Frame', layout)
 
-updating = False
-counter = 0
+# Create an instance of A
+a = A(10, 20)
 
-while True:
-    event, values = window.read(timeout=100)  # timeout in milliseconds
+# Encode
+encoded_a = jsonpickle.encode(a)
+print("Encoded A:", encoded_a)
 
-    if event == sg.WINDOW_CLOSED or event == 'Exit':
-        break
-    elif event == 'Start Updating':
-        updating = True
-    elif event == 'Stop Updating':
-        updating = False
-
-    print("a")
-
-window.close()
+# Decode
+decoded_a = jsonpickle.decode(encoded_a)
+print("Decoded A:", decoded_a)

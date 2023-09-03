@@ -1,13 +1,13 @@
+import jsonpickle
 import threading
 from typing import List
-from Main.Calculation import increase_food
+from Main.Calculation import increase_food, winner_loser
 from Main.Individual import Individual
 from Main.System import System
 from Main.Query import query_individual, query_judge
 from Main.StringUtils import deserialize_first_json_object
 from Main.AIAction import AIAction, AIActionType
 from Main.PendingAction import append_to_pending_action, str_to_ai_action
-import numpy 
 import random
 
 def change_affected_people(affected_people, system:System):
@@ -38,12 +38,7 @@ def initialize():
       lands.append(f'land {i}')
     system=System(individuals,lands)
     return system
-def phi(z):
-      return 1.0/(1.0+numpy.exp(-z))
-def winner_loser(person1:Individual,person2:Individual):
-      winning_chance1=phi(person1.attributes['strength']-person2.attributes['strength'])
-      win1=random.random()>winning_chance1
-      return (person1,person2) if win1 else (person2,person1)
+
 def simulate(individuals:List[Individual],system:System):
     while True:
       for individual in individuals:
@@ -54,7 +49,7 @@ def simulate(individuals:List[Individual],system:System):
           passive=not individual.pending_action.empty()
           if individual.attributes['action']>0 or passive:
             print(f"Person {index} is responding...\n")
-            response_action = individual.pending_action.get() if not individual.pending_action.empty() else None
+            response_action: AIAction = individual.pending_action.get() if not individual.pending_action.empty() else None
             action:str=query_individual(individual,system,response_action)
             if passive:
                   print(f'{individual.attributes["name"]} chooses to {action}')
@@ -62,7 +57,7 @@ def simulate(individuals:List[Individual],system:System):
                   add_context=''
                   R=action[0]=="R"
                   if response_action.type==AIActionType.Rob and R:
-                      print(f'To the victim, the win rate is: {individual.robbing_stats.win_rob_times[response_action.owner]/individual.robbing_stats.rob_times[response_action.owner] if individual.robbing_stats.rob_times[response_action.owner] else "No rob has been done yet."}')
+                      print(f'To the victim, the win rate is: {individual.get_win_rate(response_action.owner) if individual.robbing_stats.rob_times[response_action.owner] else "No rob has been done yet."}')
                       winner,loser=winner_loser(individual,system.individuals[response_action.owner])
                       add_context=f'Winner is {winner.attributes["name"]}, loser is {loser.attributes["name"]}.'
                       print(f'Additional context:{add_context}')

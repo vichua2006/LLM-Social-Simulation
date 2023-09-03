@@ -20,7 +20,7 @@ def load(filename: str) -> Tuple[System, str]:
     with open(filename, 'r') as f:
         load_dict = json.load(f)
     
-    loaded_system = jsonpickle.decode(load_dict["system"])
-    loaded_console_log = load_dict["console_log"]
+    loaded_system:System = jsonpickle.decode(load_dict["system"])
+    loaded_console_log:str = load_dict["console_log"]
     return loaded_system, loaded_console_log
 

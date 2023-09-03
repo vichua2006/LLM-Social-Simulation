@@ -1,15 +1,20 @@
+from __future__ import annotations # Allow self-reference in type annotations
 import numpy as np  # numpy for numerical computations
-from typing import List, Dict, Tuple
+from typing import Any, List, Dict, Tuple
 from Main.AIAction import AIActionType, AIAction, RobAction
 import queue
 from Main.System import System
 
+
 class SeralizeQueue(queue.Queue):
     def __getstate__(self):
         return list(self.queue)
-    def __setstate__(self, state):
+    
+    def __setstate__(self, state:List[AIAction]):
         self.__init__()
-        self.queue = state
+        #List to queue
+        for action in state:
+            self.put(action)
         
 class Individual:
     def __init__(self, id:int, name:str):
@@ -84,8 +89,13 @@ class Individual:
             case AIActionType.Trade:
                 self.current_action_type = AIActionType.BeTraded
     
+    def get_win_rate(self, target:Individual):
+        return self.robbing_stats.win_rob_times[target]/self.robbing_stats.rob_times[target]
     
-          
+    def __getstate__(self):
+        return self.__dict__
+    def __setstate__(self, state):
+        self.__dict__.update(state)
   
 # Defining a class for rob stats
 class RobStats():
@@ -97,32 +107,24 @@ class RobStats():
         for i in range(PEOPLE):
             self.rob_times[i]=0
             self.win_rob_times[i]=0
-    #JSON serialization
-    def __json_encode__(self):
+    def get_rob_times_list(self):
+        return [f"{key}:{value}" for key, value in self.rob_times.items()]
+    
+    def __getstate__(self):
         return self.__dict__
-
-    #JSON deserialization
-    @classmethod
-    def __json_decode__(cls, dct):
-        obj = cls()
-        obj.__dict__.update(dct)
-        return obj
-
+    #JsonPickle will transfer the Dict[int, int] to Dict[str, int], so we need to transfer it back
+    def __setstate__(self, state):
+        self.__init__()
+        #if get the value, then get, else use the default value
+        self.total_rob_times=state.get("total_rob_times", self.total_rob_times)
+        self.rob_times=state.get("rob_times", self.rob_times)
+        self.win_rob_times=state.get("win_rob_times", self.win_rob_times)        
+        #str to int
+        self.rob_times={int(key):value for key, value in self.rob_times.items()}
+        self.win_rob_times={int(key):value for key, value in self.win_rob_times.items()}
     
 # Defining a class for stats around obey
 class ObeyStats:
     def __init__(self) -> None:
         self.obey_personId: int = -1 #the personId you are obey to, -1 means no one is obeyed
         self.subject: List[int] = [] #the personId who obey you
-    def to_dict(self) -> Dict:
-        return {
-            'obey_personId': self.obey_personId,
-            'subject': self.subject
-        }
-
-    @classmethod
-    def from_dict(cls, data: Dict):
-        obj = cls()
-        obj.obey_personId = data['obey_personId']
-        obj.subject = data['subject']
-        return obj

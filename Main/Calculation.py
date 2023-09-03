@@ -14,3 +14,10 @@ def increase_food(individual:Individual):
 #returns true if individual's strength > enemy's
 def compare_strength(individual:Individual, enemy:Individual):
     return individual.attributes["strength"] > enemy.attributes["strength"]
+
+def phi(z):
+      return 1.0/(1.0+np.exp(-z))
+def winner_loser(person1:Individual,person2:Individual):
+      winning_chance1=phi(person1.attributes['strength']-person2.attributes['strength'])
+      win1=random.random()>winning_chance1
+      return (person1,person2) if win1 else (person2,person1)
