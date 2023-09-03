@@ -267,7 +267,7 @@ def query_judge(action,context,individual:Individual,system:System):
     task=f'''Your task is to determine the result of the action from an individual, {individual.attributes["name"]}, which is {action}. This individual has the following attributes: {individual.attributes}'''
     query={AIActionType.BeRobbed:f'''The action is a response to a confrontation, if the person chooses to fight back, then system will compare the strength of the two individuals to determine who win the fight. If the victim does not fight back but instead chooses to obey, then put that as the result of the interaction.'''
     ,
-    AIActionType.BeTraded:'By responding to a trade, you have to determine if the trade is successful or not from the action. '''}
+    AIActionType.BeTraded:'By responding to a trade, you have to determine if the trade is successful or not from the action. Food can be negative, but land cannot go below one. If a trade will result in land being less than one, then do not allow the trade to go through by responding with 0 for each parameter change which will be explained later.'''}
     #1,query about result if any, 2 format, 3 para change, 4 format, 5 memory, 6 format
     q= [
     f''' {task}
@@ -387,7 +387,6 @@ def query_judge(action,context,individual:Individual,system:System):
     progress=[False,False,False]#to keep track of which query is complete
     error_correction=8
     assistence=[None]*6
-    print(type(individual))
     for i in range(error_correction):
       assistence[0]=q[0]
       if not progress[0] and query:
