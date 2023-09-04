@@ -32,7 +32,7 @@ def initialize():
     # Initialize individuals and environment
     individuals=[]
     lands=[]
-    POPULATION=9
+    POPULATION=5
     for i in range(POPULATION):
       individuals.append(Individual(i,f'person {i}'))
       lands.append(f'land {i}')
@@ -86,7 +86,9 @@ def simulate(individuals:List[Individual],system:System):
               individual.current_action_type = ai_action.type
               if ai_action.type==AIActionType.Farm:
                     land=individual.attributes['land']
-                    individual.attributes['food']+=land*random.random()*0.3 if land>1 else 1
+                    gain=land*random.random()*0.3 if land>1 else 1
+                    individual.attributes['food']+=gain
+                    individual.memory.append('On day {system.time}. I farmed and gained {gain} units of food.')
                     print("Farm is successful.")
               elif ai_action.type==AIActionType.Rob or ai_action.type==AIActionType.Trade:
                     append_to_pending_action(ai_action, system)
@@ -111,7 +113,7 @@ def simulate(individuals:List[Individual],system:System):
                 case _ :
                   system.console_log.append(f"{index}:Error")
               individual.attributes['action']-=1
-              individual.memory.append(action)
+              
       system.ranking.update({x: x.attributes["social_position"] for x in system.individuals})
       print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
       #reach this mean all pending action is done
