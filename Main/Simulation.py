@@ -4,7 +4,7 @@ from typing import List
 from Main.Calculation import increase_food, winner_loser
 from Main.Individual import Individual
 from Main.System import System
-from Main.Query import query_individual, query_judge
+from Main.Query import query_individual
 from Main.StringUtils import deserialize_first_json_object
 from Main.AIAction import AIAction, AIActionType
 from Main.PendingAction import append_to_pending_action, str_to_ai_action
@@ -64,6 +64,8 @@ def simulate(individuals:List[Individual],system:System):
                         print(f'Additional context:{add_context}')
                         winner.add_rob(loser.attributes['id'],True)
                         loser.add_rob(winner.attributes['id'],False)
+                        print(f'Total rob times of the winner: {winner.robbing_stats.total_rob_times}')
+                        print("Rob times are being added.")
                         if winner.attributes['id']==individual.attributes['id']:
                               individual.attributes['social_position']+=1
                               loser.attributes['social_position']+=-1
@@ -91,6 +93,7 @@ def simulate(individuals:List[Individual],system:System):
                               winner.memory.append(f"Day {system.time}. I tried to rob {individual.attributes['name']}, who rebelled against me but I won. {victor_memory}. I gained 2 units of social status.")
                       elif not R:
                             master=system.individuals[response_action.owner]
+                            master.add_rob(individual.attributes['id'],True)
                             system.console_log.append(f"{individual.attributes['id']}: Obey {response_action.owner}")
                             individual.obey(response_action.owner,system)
                             master.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
