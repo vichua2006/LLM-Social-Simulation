@@ -32,6 +32,7 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
                    [sg.Text('CurrentActionType:'), sg.Input(person.current_action_type, size = (10, None), key=f'-CURRENTACTIONTYPE{i}-')],
                    [sg.Text('ObeyTo:'), sg.Input(person.obey_stats.obey_personId, size = (10, None), key=f'-OBEYPERSONID{i}-')],
                    [sg.Text('TotalRobTimes:'), sg.Input(person.robbing_stats.total_rob_times, size = (10, None), key=f'-TOTALROBTIMES{i}-')],
+                   [sg.Text("RobTimes:"), sg.Listbox(values = person.robbing_stats.get_rob_times_list(), size=(30, 5),  horizontal_scroll= True, key=f'-ROBTIMESLIST{i}-')]
                    ]
         right_section = [[sg.Column(pending_action_layout)],
                         [sg.Column(obey_subject_layout)],
