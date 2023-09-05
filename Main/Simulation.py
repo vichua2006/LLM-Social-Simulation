@@ -56,14 +56,65 @@ def simulate(individuals:List[Individual],system:System):
                   individual.check_is_responser(response_action)
                   add_context=''
                   R=action[0]=="R"
-                  if response_action.type==AIActionType.Rob and R:
-                      print(f'To the victim, the win rate is: {individual.get_win_rate(response_action.owner) if individual.robbing_stats.rob_times[response_action.owner] else "No rob has been done yet."}')
-                      winner,loser=winner_loser(individual,system.individuals[response_action.owner])
-                      add_context=f'Winner is {winner.attributes["name"]}, loser is {loser.attributes["name"]}.'
-                      print(f'Additional context:{add_context}')
-                      winner.add_rob(loser.attributes['id'],True)
-                      loser.add_rob(winner.attributes['id'],False)
-                  query_judge(f'In response to Person {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}. {add_context}',response_action,individual,system)
+                  if response_action.type==AIActionType.Rob:
+                      if R:
+                        print(f'To the victim, the win rate is: {individual.get_win_rate(response_action.owner) if individual.robbing_stats.rob_times[response_action.owner] else "No rob has been done yet."}')
+                        winner,loser=winner_loser(individual,system.individuals[response_action.owner])
+                        add_context=f'Winner is {winner.attributes["name"]}, loser is {loser.attributes["name"]}.'
+                        print(f'Additional context:{add_context}')
+                        winner.add_rob(loser.attributes['id'],True)
+                        loser.add_rob(winner.attributes['id'],False)
+                        if winner.attributes['id']==individual.attributes['id']:
+                              individual.attributes['social_position']+=1
+                              loser.attributes['social_position']+=-1
+                              individual.memory.append(f"Day {system.time}. {loser.attributes['name']} tried to rob me, but I rebelled and won. I protected my own land and food and my social position elevated 1 unit.")
+                              loser.memory.append(f"Day {system.time}. I tried to rob {individual.attributes['name']}, who rebelled against me and I lost. I did not gain anything and my social position dropped 1 unit.")
+                        else:
+                              lost_food=individual.attributes['food']
+                              if response_action.robType=='food':
+                                    individual.attributes['food']-=lost_food
+                                    loser.attributes['food']+=lost_food
+                                    victim_memory=f"I got robbed {lost_food} units of food."
+                                    victor_memory=f"I robbed and gained {lost_food} units of food."
+                              elif response_action.robType=="land":
+                                    if individual.attributes['land']>1:
+                                          individual.attributes['land']-=1
+                                          winner.attributes['land']+=1
+                                          victim_memory=f"I got robbed of 1 land."
+                                          victor_memory=f"I robbed and gained 1 land."
+                                    else:
+                                          victim_memory="I have no land to loose."
+                                          victor_memory="I robbed but he had no land to loose."
+                              individual.attributes['social_position']-=1
+                              winner.attributes['social_position']+=2
+                              individual.memory.append(f"Day {system.time}. {loser.attributes['name']} tried to rob me, I rebelled but lost. {victim_memory}. I lost 1 unit of social status.")
+                              winner.memory.append(f"Day {system.time}. I tried to rob {individual.attributes['name']}, who rebelled against me but I won. {victor_memory}. I gained 2 units of social status.")
+                      elif not R:
+                            master=system.individuals[response_action.owner]
+                            system.console_log.append(f"{individual.attributes['id']}: Obey {response_action.owner}")
+                            individual.obey(response_action.owner,system)
+                            master.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
+                            individual.memory.append(f"I obeyed to {master.attributes['name']} and now I have to listen to all his commands and can never betray him.")
+                  elif response_action.type==AIActionType.Trade:
+                        
+                        if R:
+                              individual.memory.append(f'I rejected the trade offer by {response_action.owner} which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}.')
+                              system.individuals[response_action.owner].memory.append(f"I initiated a trade to {individual.attributes['name']}, which is to exchange {response_action.payAmount} units of my {response_action.payType} for {response_action.gainAmount} units of his {response_action.gainType}, but he rejected it so I gained nothing and exhausted my action opportunity of today.")
+                        elif not R:
+                              
+                              valid=True #ADD conditionals here to invalidate unrealisitic trade offers
+                              if valid:
+                                individual.memory.append(f'{response_action.owner} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. I accepted the trade and it has been executed.')
+                                system.individuals[response_action.owner].memory.append(f"I initiated a trade to {individual.attributes['name']}, which is to exchange {response_action.payAmount} units of my {response_action.payType} for {response_action.gainAmount} units of his {response_action.gainType}. He accepted the trade and the trade has been executed.")
+                                individual.attributes[response_action.gainType]-=response_action.gainAmount
+                                individual.attributes[response_action.payType]+=response_action.payAmount
+                                system.individuals[response_action.owner].attributes[response_action.gainType]+=response_action.gainAmount
+                                system.individuals[response_action.owner].attributes[response_action.payType]-=response_action.payAmount
+                              else:
+                                    #invalidate the trade here and append relevant memory
+                                    pass
+                                  
+                  #query_judge(f'In response to Person {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}. {add_context}',response_action,individual,system)
             elif not passive:
               for o in range(5):
                 print(action)
@@ -125,3 +176,5 @@ def simulate(individuals:List[Individual],system:System):
       else:
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
+
+# %%
