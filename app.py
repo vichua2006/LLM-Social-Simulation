@@ -4,7 +4,9 @@ from typing import List, Tuple
 import jsonpickle
 from GUI.CustomConsoleLog import CustomConsoleLog
 from GUI.ConsoleLog import ConsoleLog
+
 from Main.Individual import Individual
+
 from Main.SaveLoad import load, save
 from Main.System import System
 from Main.Simulation import initialize, simulate

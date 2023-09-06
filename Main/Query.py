@@ -147,6 +147,13 @@ def query_individual(individual:Individual,system:System,response_action):
     
     Reply exactly with either OBEY or REBEL
     '''
+    passive_rob_fromMaster = f'''
+    Today, you noticed that {response_action}. You can only 
+    obey them because there are your master.
+    
+    Reply exactly with OBEY
+    '''
+    
     farm=True
     
     active=f'''
@@ -243,7 +250,11 @@ def query_individual(individual:Individual,system:System,response_action):
             
         ask_for_response=passive_trade
       elif response_action.type==AIActionType.Rob:
-        ask_for_response=passive_rob
+        if individual.obey_stats.obey_personId != response_action.ownerid:
+          ask_for_response=passive_rob
+        else:
+          ask_for_response=passive_rob_fromMaster
+          print("success rob from Master")
       else:
             print('The passive action is not matched with anything.')
 
