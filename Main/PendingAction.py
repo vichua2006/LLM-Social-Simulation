@@ -12,5 +12,5 @@ def str_to_ai_action(action:str, id:int)->AIAction:
     else:print("Error: Invalid action type")
       
 def append_to_pending_action(action:AIAction, system:System)->None:
-    id:int = action.target
+    id:int = action.targetid
     system.individuals[id].pending_action.put(action)
