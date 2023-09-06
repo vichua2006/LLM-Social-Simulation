@@ -75,7 +75,7 @@ def simulate(individuals:List[Individual],system:System):
                               lost_food=individual.attributes['food']
                               if response_action.robType=='food':
                                     individual.attributes['food']-=lost_food
-                                    winner.attributes['food']+=lost_food
+                                    loser.attributes['food']+=lost_food
                                     victim_memory=f"I got robbed {lost_food} units of food."
                                     victor_memory=f"I robbed and gained {lost_food} units of food."
                               elif response_action.robType=="land":
