@@ -11,16 +11,21 @@ from Main.Simulation import initialize, simulate
 from datetime import datetime
 import sys
 
+SYMBOL_UP =    '▲'
+SYMBOL_DOWN =  '▼'
 
+
+def collapse(layout, key):
+    return sg.pin(sg.Column(layout, key=key))
     
 def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
     person_layout = []
     for i, person in enumerate(individual):
         section_key = f'-SECTION{i}-'
-        pending_action_layout = [[sg.Text("PendingAction:")], [sg.Listbox(values=person.get_pending_action_as_list(), size=(30, 5),  horizontal_scroll= True, key=f'-PENDINGACTION{i}-')]]
-        obey_subject_layout = [[sg.Text("ObeySubject:")], [sg.Listbox(values = person.obey_stats.subject, size=(30, 5),  horizontal_scroll= True, key=f'-OBEYSUBJECT{i}-')]]
-        memory_layout = [[sg.Text("Memory:")], [sg.Listbox(values = person.memory, size=(30, 5),  horizontal_scroll= True, key=f'-MEMORY{i}-')]]
-        rob_stat_layout = [[sg.Text("RobTimes:")], [sg.Listbox(values = person.robbing_stats.rob_times, size=(30, 5),  horizontal_scroll= True, key=f'-ROBTIMES{i}-')]]
+        pending_action_layout = [[sg.Listbox(values=person.get_pending_action_as_list(), size=(30, 5),  horizontal_scroll= True, key=f'-PENDINGACTION{i}-')]]
+        obey_subject_layout = [[sg.Listbox(values = person.obey_stats.subject, size=(30, 5),  horizontal_scroll= True, key=f'-OBEYSUBJECT{i}-')]]
+        memory_layout = [[sg.Listbox(values = person.memory, size=(30, 5),  horizontal_scroll= True, key=f'-MEMORY{i}-')]]
+        rob_stat_layout = [[sg.Listbox(values = person.robbing_stats.get_rob_times_list(), size=(30, 5),  horizontal_scroll= True, key=f'-ROBTIMESLIST{i}-')]]
         left_section = [[sg.Text('Aggressiveness:'), sg.Input(person.attributes["aggressiveness"], size = (15, None), key=f'-AGGRESSIVENESS{i}-')],
                    [sg.Text('Covetousness:'), sg.Input(person.attributes["covetousness"], size = (15, None), key=f'-COVETOUSNESS{i}-')],
                    [sg.Text('Intelligence:'), sg.Input(person.attributes["intelligence"], size = (15, None), key=f'-INTELLIGENCE{i}-')],
@@ -32,13 +37,23 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
                    [sg.Text('CurrentActionType:'), sg.Input(person.current_action_type, size = (10, None), key=f'-CURRENTACTIONTYPE{i}-')],
                    [sg.Text('ObeyTo:'), sg.Input(person.obey_stats.obey_personId, size = (10, None), key=f'-OBEYPERSONID{i}-')],
                    [sg.Text('TotalRobTimes:'), sg.Input(person.robbing_stats.total_rob_times, size = (10, None), key=f'-TOTALROBTIMES{i}-')],
-                   [sg.Text("RobTimes:"), sg.Listbox(values = person.robbing_stats.get_rob_times_list(), size=(30, 5),  horizontal_scroll= True, key=f'-ROBTIMESLIST{i}-')]
                    ]
-        right_section = [[sg.Column(pending_action_layout)],
-                        [sg.Column(obey_subject_layout)],
-                        [sg.Column(memory_layout)]
-                        ]
-        section = [[sg.Column(left_section), sg.Column(right_section)]]
+        right_section = [[sg.T(SYMBOL_DOWN, enable_events=True, k='-OPEN PENDINGACTION-', text_color='white'), sg.T('Pending Action', enable_events=True, text_color='white', k='-OPEN PENDINGACTION-TEXT')],
+                         [collapse(pending_action_layout, '-PENDINGACTION-')],
+                         [sg.T(SYMBOL_DOWN, enable_events=True, k='-OPEN OBEYSUBJECT-', text_color='white'), sg.T('Obey Subject', enable_events=True, text_color='white', k='-OPEN OBEYSUBJECT-TEXT')],
+                         [collapse(obey_subject_layout, '-OBEYSUBJECT-')],
+                         [sg.T(SYMBOL_DOWN, enable_events=True, k='-OPEN MEMORY-', text_color='white'), sg.T('Memory', enable_events=True, text_color='white', k='-OPEN MEMORY-TEXT')],
+                         [collapse(memory_layout, '-MEMORY-')],
+                         ]
+        new_left_section = [[sg.T(SYMBOL_DOWN, enable_events=True, k='-OPEN LEFTSEC-', text_color='white'), sg.T('Attibute', enable_events=True, text_color='white', k='-OPEN LEFTSEC-TEXT')],
+                            [collapse(left_section, '-LEFTSEC-')],
+                            [sg.T(SYMBOL_DOWN, enable_events=True, k='-OPEN ROBTXT-', text_color='white'), sg.T('RobTimes', enable_events=True, text_color='white', k='-OPEN ROBTXT-TEXT')],
+                            [collapse(rob_stat_layout, '-ROBTXT-')]
+                            ]
+
+        left = sg.Column(new_left_section, size=(None, None))
+        print(left.Size)
+        section = [[left, sg.Column(right_section)]]
         person_layout.append(sg.Tab(f'Person {i}', section, key=section_key))
     return sg.TabGroup([person_layout])
 
@@ -67,6 +82,7 @@ def main():
     thread: threading.Thread
     system.set_console_log(CustomConsoleLog(window, '-SPECIAL OUTPUT-'))
     isappStarted = False
+    opened = [True for i in range(10)]
         # Redirect stdout to the sg.Output element
     while True:             # Event Loop
         event, values = window.read(timeout=100) #update every 100ms
@@ -105,7 +121,33 @@ def main():
                 save(system, console_log, filepath)
                 # Save the console log
                 print(f"Log successfully saved to {filepath}")
-            
+        if event.startswith('-OPEN LEFTSEC-'):
+            opened[0] = not opened[0]
+            window['-OPEN LEFTSEC-'].update(SYMBOL_DOWN if opened[0] else SYMBOL_UP)
+            window['-LEFTSEC-'].update(visible=opened[0])
+            # if(not opened1):
+            #     window['-LEFTSEC-'].Widget
+        if event.startswith('-OPEN RIGHTSEC-'):
+            opened[1] = not opened[1]
+            window['-OPEN RIGHTSEC-'].update(SYMBOL_DOWN if opened[1] else SYMBOL_UP)
+            window['-RIGHTSEC-'].update(visible=opened[1])
+        if event.startswith('-OPEN ROBTXT-'):
+            opened[2] = not opened[2]
+            window['-OPEN ROBTXT-'].update(SYMBOL_DOWN if opened[2] else SYMBOL_UP)
+            window['-ROBTXT-'].update(visible=opened[2])
+        if event.startswith('-OPEN PENDINGACTION-'):
+            opened[3] = not opened[3]
+            window['-OPEN PENDINGACTION-'].update(SYMBOL_DOWN if opened[3] else SYMBOL_UP)
+            window['-PENDINGACTION-'].update(visible=opened[3])
+        if event.startswith('-OPEN OBEYSUBJECT-'):
+            opened[4] = not opened[4]
+            window['-OPEN OBEYSUBJECT-'].update(SYMBOL_DOWN if opened[4] else SYMBOL_UP)
+            window['-OBEYSUBJECT-'].update(visible=opened[4])
+        if event.startswith('-OPEN MEMORY-'):
+            opened[5] = not opened[5]
+            window['-OPEN MEMORY-'].update(SYMBOL_DOWN if opened[5] else SYMBOL_UP)
+            window['-MEMORY-'].update(visible=opened[5])
+        
         elif event == '-Load-':
             system.is_stop=True
             print("Stop")
