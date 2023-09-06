@@ -140,6 +140,7 @@ def main():
             window[f'-CURRENTACTIONTYPE{i}-'].update(person.current_action_type)
             window[f'-OBEYPERSONID{i}-'].update(person.obey_stats.obey_personId)
             window[f'-SPECIAL OUTPUT-'].update(system.console_log.content)
+            window[f'-ROBTIMESLIST{i}-'].update(person.robbing_stats.get_rob_times_list())
 
             # Update Listbox, Remain the listbox scroll position
             for key in [f'-PENDINGACTION{i}-', f'-OBEYSUBJECT{i}-', f'-MEMORY{i}-']:
