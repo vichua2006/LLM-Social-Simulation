@@ -69,6 +69,7 @@ def start_simulate(system:System):
         simulate(system.individuals, system)
 def main():
     
+    
     system=initialize()
     individuals = system.individuals
     
@@ -166,6 +167,7 @@ def main():
                 print(f"{filepath} successfully loaded")
         elif event == '-DEBUG-':
             print("DEBUG")
+            print("A")
 
         
         
