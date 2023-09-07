@@ -78,8 +78,6 @@ class Individual:
             system.individuals[subject].obey_stats.obey_personId = person_id
             system.individuals[person_id].obey_stats.subject.append(subject)
         self.obey_stats.subject=[]
-        
-        
     
     # Check if the individual is the responser of the action
     def check_is_responser(self, action:AIAction)->None:

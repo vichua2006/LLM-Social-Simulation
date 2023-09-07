@@ -28,17 +28,17 @@ class AIActionType(str, Enum, metaclass=StringEnumMeta):
 class AIAction:
     def __init__(self, type:AIActionType, owner:int, target:int) -> None:
         self.type:AIActionType = type
-        self.owner:int = owner
-        self.target:int = target
+        self.ownerid:int = owner
+        self.targetid:int = target
     def __str__(self) -> str:
-        return f"{self.type}, owner: {self.owner}, target: {self.target}"
+        return f"{self.type}, owner: {self.ownerid}, target: {self.targetid}"
     
 class RobAction(AIAction):
     def __init__(self, owner:int, target:int, robType:str) -> None:
         super().__init__(AIActionType.Rob, owner, target)
         self.robType:str= robType
     def __str__(self) -> str:
-        return f"{self.type}, owner: {self.owner}, target: {self.target}, robType: {self.robType}"
+        return f"{self.type}, owner: {self.ownerid}, target: {self.targetid}, robType: {self.robType}"
 
         
 class TradeAction(AIAction):
@@ -49,5 +49,5 @@ class TradeAction(AIAction):
         self.gainType: str = gainType
         self.gainAmount: float = gainAmount
     def __str__(self) -> str:
-        return f"{self.type}, owner: {self.owner}, target: {self.target}, payType: {self.payType}, payAmount: {self.payAmount}, gainType: {self.gainType}, gainAmount: {self.gainAmount}" 
+        return f"{self.type}, owner: {self.ownerid}, target: {self.targetid}, payType: {self.payType}, payAmount: {self.payAmount}, gainType: {self.gainType}, gainAmount: {self.gainAmount}" 
     
