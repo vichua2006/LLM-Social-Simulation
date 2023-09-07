@@ -39,6 +39,7 @@ def initialize():
     for i in random_numbers:
       individuals.append(Individual(i,f'person {i}'))
       lands.append(f'land {i}')
+    individuals.sort(key=lambda x: x.attributes['id'])
     #default
     #for i in range(POPULATION):
       #individuals.append(Individual(i,f'person {i}'))

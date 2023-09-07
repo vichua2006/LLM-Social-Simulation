@@ -29,9 +29,10 @@ def share_rob_gain(master: Individual, robAmount: float, robType: str) -> None:
         master.attributes[robType]+=robAmount
         return
     #divide the rob amount to each subject
-    for subject in master.obey_stats.subject:
+    for subjectid in master.obey_stats.subject:
+        subject = master.system.individuals[subjectid]
         subject.attributes[robType]+=robAmount/len(master.obey_stats.subject)
-        subject.memory.append(f"Day {master.system.time}. I got {robAmount/len(master.obey_stats.subject)} units of {robType} from {master.attributes['name']}.")
+        subjectid.memory.append(f"Day {master.system.time}. I got {robAmount/len(master.obey_stats.subject)} units of {robType} from {master.attributes['name']}.")
     #include the master
     master.attributes[robType]+=robAmount/len(master.obey_stats.subject)
     master.memory.append(f"Day {master.system.time}. I gave {robAmount} units of {robType} to my subjects.")
