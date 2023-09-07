@@ -61,12 +61,18 @@ def simulate(individuals:List[Individual],system:System):
                         owner:Individual=system.individuals[response_action.ownerid]
                         rob(individual, owner, system, response_action.robType)
                       elif not R:
-                            master=system.individuals[response_action.ownerid]
-                            master.add_rob(individual.attributes['id'],True)
-                            system.console_log.append(f"{individual.attributes['id']}: Obey {response_action.ownerid}")
-                            individual.obey(response_action.ownerid,system)
-                            master.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
-                            individual.memory.append(f"I obeyed to {master.attributes['name']} and now I have to listen to all his commands and can never betray him.")
+                            if system.individuals[response_action.ownerid].attributes["id"] !=  individual.obey_stats.obey_personId:
+                              master=system.individuals[response_action.ownerid]
+                              master.add_rob(individual.attributes['id'],True)
+                              system.console_log.append(f"{individual.attributes['id']}: Obey {response_action.ownerid}")
+                              individual.obey(response_action.ownerid,system)
+                              master.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
+                              individual.memory.append(f"I obeyed to {master.attributes['name']} and now I have to listen to all his commands and can never betray him.")
+                            else:
+                              master=system.individuals[response_action.ownerid]
+                              master.add_rob(individual.attributes['id'],True)
+                              system.console_log.append(f"{individual.attributes['id']}: Accept robbery from {response_action.ownerid}")
+                              print("success accepting robbery from master")
                   elif response_action.type==AIActionType.Trade:
                         
                         if R:
