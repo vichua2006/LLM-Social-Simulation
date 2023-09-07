@@ -33,9 +33,16 @@ def initialize():
     individuals=[]
     lands=[]
     POPULATION=5
-    for i in range(POPULATION):
+    POPULATIONLIST=[x for x in range(POPULATION)]
+    #random id
+    random_numbers = random.sample(POPULATIONLIST, POPULATION)
+    for i in random_numbers:
       individuals.append(Individual(i,f'person {i}'))
       lands.append(f'land {i}')
+    #default
+    #for i in range(POPULATION):
+      #individuals.append(Individual(i,f'person {i}'))
+      #lands.append(f'land {i}')
     system=System(individuals,lands)
     return system
 
