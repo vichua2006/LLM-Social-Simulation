@@ -4,9 +4,7 @@ from typing import List, Tuple
 import jsonpickle
 from GUI.CustomConsoleLog import CustomConsoleLog
 from GUI.ConsoleLog import ConsoleLog
-
 from Main.Individual import Individual
-
 from Main.SaveLoad import load, save
 from Main.System import System
 from Main.Simulation import initialize, simulate
@@ -29,17 +27,18 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
         memory_layout = [[sg.Listbox(values = person.memory, size=(30, 5),  horizontal_scroll= True, key=f'-MEMORY{i}-')]]
         rob_stat_layout = [[sg.Listbox(values = person.robbing_stats.get_rob_times_list(), size=(30, 5),  horizontal_scroll= True, key=f'-ROBTIMESLIST{i}-')]]
         left_section = [[sg.Text('Aggressiveness:'), sg.Input(person.attributes["aggressiveness"], size = (15, None), key=f'-AGGRESSIVENESS{i}-')],
-                   [sg.Text('Covetousness:'), sg.Input(person.attributes["covetousness"], size = (15, None), key=f'-COVETOUSNESS{i}-')],
-                   [sg.Text('Intelligence:'), sg.Input(person.attributes["intelligence"], size = (15, None), key=f'-INTELLIGENCE{i}-')],
-                   [sg.Text('Strength:'), sg.Input(person.attributes["strength"], size = (15, None), key=f'-STRENGTH{i}-')],
-                   [sg.Text('SocialPosition:'), sg.Input(person.attributes["social_position"], size = (10, None), key=f'-SOCIALPOSITION{i}-')],
-                   [sg.Text('Food:'), sg.Input(person.attributes["food"], size = (10, None), key=f'-FOOD{i}-')],
-                   [sg.Text('Land:'), sg.Input(person.attributes["land"], size = (10, None), key=f'-LAND{i}-')],
-                   [sg.Text('Action:'), sg.Input(person.attributes["action"], size = (10, None), key=f'-Action{i}-')],
-                   [sg.Text('CurrentActionType:'), sg.Input(person.current_action_type, size = (10, None), key=f'-CURRENTACTIONTYPE{i}-')],
-                   [sg.Text('ObeyTo:'), sg.Input(person.obey_stats.obey_personId, size = (10, None), key=f'-OBEYPERSONID{i}-')],
-                   [sg.Text('TotalRobTimes:'), sg.Input(person.robbing_stats.total_rob_times, size = (10, None), key=f'-TOTALROBTIMES{i}-')],
-                   ]
+                        [sg.Text('Covetousness:'), sg.Input(person.attributes["covetousness"], size = (15, None), key=f'-COVETOUSNESS{i}-')],
+                        [sg.Text('Intelligence:'), sg.Input(person.attributes["intelligence"], size = (15, None), key=f'-INTELLIGENCE{i}-')],
+                        [sg.Text('Strength:'), sg.Input(person.attributes["strength"], size = (15, None), key=f'-STRENGTH{i}-')],
+                        [sg.Text('SocialPosition:'), sg.Input(person.attributes["social_position"], size = (10, None), key=f'-SOCIALPOSITION{i}-')],
+                        [sg.Text('Food:'), sg.Input(person.attributes["food"], size = (10, None), key=f'-FOOD{i}-')],
+                        [sg.Text('Land:'), sg.Input(person.attributes["land"], size = (10, None), key=f'-LAND{i}-')],
+                        [sg.Text('Action:'), sg.Input(person.attributes["action"], size = (10, None), key=f'-Action{i}-')],
+                        [sg.Text('CurrentActionType:'), sg.Input(person.current_action_type, size = (10, None), key=f'-CURRENTACTIONTYPE{i}-')],
+                        [sg.Text('ObeyTo:'), sg.Input(person.obey_stats.obey_personId, size = (10, None), key=f'-OBEYPERSONID{i}-')],
+                        [sg.Text('TotalRobTimes:'), sg.Input(person.robbing_stats.total_rob_times, size = (10, None), key=f'-TOTALROBTIMES{i}-')],
+                        [sg.Text('WinRobTimes:'), sg.Input(person.robbing_stats.win_rob_times, size = (10, None), key=f'-WINROBTIMES{i}-')],
+                        ]
         right_section = [[sg.T(SYMBOL_DOWN, enable_events=True, k='-OPEN PENDINGACTION-', text_color='white'), sg.T('Pending Action', enable_events=True, text_color='white', k='-OPEN PENDINGACTION-TEXT')],
                          [collapse(pending_action_layout, '-PENDINGACTION-')],
                          [sg.T(SYMBOL_DOWN, enable_events=True, k='-OPEN OBEYSUBJECT-', text_color='white'), sg.T('Obey Subject', enable_events=True, text_color='white', k='-OPEN OBEYSUBJECT-TEXT')],
@@ -185,9 +184,9 @@ def main():
             window[f'-OBEYPERSONID{i}-'].update(person.obey_stats.obey_personId)
             window[f'-SPECIAL OUTPUT-'].update(system.console_log.content)
             window[f'-ROBTIMESLIST{i}-'].update(person.robbing_stats.get_rob_times_list())
-
+            window[f'-WINROBTIMES{i}-'].update(person.robbing_stats.win_rob_times)
             # Update Listbox, Remain the listbox scroll position
-            for key in [f'-PENDINGACTION{i}-', f'-OBEYSUBJECT{i}-', f'-MEMORY{i}-']:
+            for key in [f'-PENDINGACTION{i}-', f'-OBEYSUBJECT{i}-', f'-MEMORY{i}-', f'-ROBTIMESLIST{i}-']:
                 # Access the tkinter Listbox widget
                 lb_widget = window[key].Widget
 
@@ -200,6 +199,8 @@ def main():
                         new_values = person.obey_stats.subject
                     case _ if (_ := f'-MEMORY{i}-') == key:
                         new_values = person.memory
+                    case _ if (_ := f'-ROBTIMESLIST{i}-') == key:
+                        new_values = person.robbing_stats.get_rob_times_list()
                 
                 
                 window[key].update(new_values)
