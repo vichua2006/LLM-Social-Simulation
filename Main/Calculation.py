@@ -23,14 +23,14 @@ def winner_loser(person1:Individual,person2:Individual):
       win1=random.random()>winning_chance1
       return (person1,person2) if win1 else (person2,person1)
   
-def share_rob_gain(master: Individual, robAmount: float, robType: str) -> None:
+def share_rob_gain(master: Individual, robAmount: float, robType: str, system:System) -> None:
     if master.obey_stats.subject is None or not master.obey_stats.subject:
         print("SHARE_ROB_FOOD: no subject, directly get the rob amount.")
         master.attributes[robType]+=robAmount
         return
     #divide the rob amount to each subject
     for subjectid in master.obey_stats.subject:
-        subject = master.system.individuals[subjectid]
+        subject = system.individuals[subjectid]
         subject.attributes[robType]+=robAmount/len(master.obey_stats.subject)
         subjectid.memory.append(f"Day {master.system.time}. I got {robAmount/len(master.obey_stats.subject)} units of {robType} from {master.attributes['name']}.")
     #include the master
@@ -55,17 +55,18 @@ def rob(target: Individual, rob_person:Individual, system: System, robType: str)
             target.memory.append(f"Day {system.time}. {rob_person.attributes['name']} tried to rob me, but I rebelled and won. I protected my own land and food and my social position elevated 1 unit.")
             rob_person.memory.append(f"Day {system.time}. I tried to rob {rob_person.attributes['name']}, who rebelled against me and I lost. I did not gain anything and my social position dropped 1 unit.")
     else:
+            victim_memory = ""
             #Rob Person Successfully Rob Target
             lost_food:float=target.attributes['food']
             if robType=='food':
                 target.attributes['food']-=lost_food
-                share_rob_gain(rob_person,lost_food,robType)
+                share_rob_gain(rob_person,lost_food,robType, system)
                 victim_memory=f"I got robbed {lost_food} units of food."
                 victor_memory=f"I robbed and gained {lost_food} units of food."
             elif robType=="land":
                 if target.attributes['land']>1:
                         target.attributes['land']-=1
-                        share_rob_gain(rob_person,lost_food,robType)
+                        share_rob_gain(rob_person,lost_food,robType, system)
                         victim_memory=f"I got robbed of 1 land."
                         victor_memory=f"I robbed and gained 1 land."
                 else:
