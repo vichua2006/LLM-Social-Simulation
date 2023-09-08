@@ -8,10 +8,7 @@ from Main.Query import query_individual
 from Main.StringUtils import deserialize_first_json_object
 from Main.AIAction import AIAction, AIActionType
 from Main.PendingAction import append_to_pending_action, str_to_ai_action
-from Main.SaveLoad import save_logframes, init_save
-
 import random
-
 
 def change_affected_people(affected_people, system:System):
     for affected_person in affected_people:#{PERSON:{strength:1,...}...}
@@ -31,8 +28,6 @@ def day_end(system,individuals:List[Individual]):
         forget = len(individual.memory) - 60
         individual.memory = individual.memory[forget:]
     system.time+=1
-    save_logframes(system)
-  
 def initialize():
     # Initialize individuals and environment
     individuals=[]
@@ -50,7 +45,6 @@ def initialize():
       individuals.append(Individual(i,f'person {i}'))
       lands.append(f'land {i}')
     system=System(individuals,lands)
-    init_save(system)
     return system
 
 def simulate(individuals:List[Individual],system:System):
