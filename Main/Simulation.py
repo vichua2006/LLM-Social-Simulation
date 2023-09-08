@@ -117,6 +117,7 @@ def simulate(individuals:List[Individual],system:System):
                                   
                   #query_judge(f'In response to Person {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}. {add_context}',response_action,individual,system)
             elif not passive:
+              ai_action:AIAction = None
               for o in range(5):
                 print(action)
                 if system.is_stop:
@@ -124,11 +125,11 @@ def simulate(individuals:List[Individual],system:System):
                   return
                 try:
                   action = deserialize_first_json_object(action.lower())
-                  ai_action:AIAction = str_to_ai_action(action, index)
+                  ai_action = str_to_ai_action(action, index)
                   break
                 except Exception as e:
                   try:
-                    ai_action:AIAction = str_to_ai_action([action[x] for x in action][0], index)
+                    ai_action = str_to_ai_action([action[x] for x in action][0], index)
                     action=list(action[x] for x in action)[0]
                     break
                   except Exception as e2:
