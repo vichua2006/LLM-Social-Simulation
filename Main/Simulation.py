@@ -1,7 +1,7 @@
 import jsonpickle
 import threading
 from typing import List
-from Main.Calculation import increase_food, rob, winner_loser
+from Main.Calculation import increase_food, punishment, rob, winner_loser
 from Main.Individual import Individual
 from Main.System import System
 from Main.Query import query_individual
@@ -67,23 +67,23 @@ def simulate(individuals:List[Individual],system:System):
                   owner:Individual=system.individuals[response_action.ownerid]
                   if response_action.type==AIActionType.Rob:
                       #if subject rob subject, this rob will be prohibited and the master will punish the subject and share the gain with all other subjects
-                      
+                      if owner.obey_stats.obey_personId==individual.obey_stats.obey_personId and owner.obey_stats.obey_personId != -1:
+                          print("DETECT: subject rob subject, pushiment will be given.")
+                          punishment(owner, system)
 
-                    
-                      if R:
+                      elif R:
                         rob(individual, owner, system, response_action.robType)
                       elif not R:
                             #if master rob subject, subject will accept instead of obey, where obey only refer to the first obey that happen between two individuals without subject-master relationship
-                            if system.individuals[response_action.ownerid].attributes["id"] !=  individual.obey_stats.obey_personId:
-                              master=system.individuals[response_action.ownerid]
-                              master.add_rob(individual.attributes['id'],True)
+                            if owner.attributes["id"] !=  individual.obey_stats.obey_personId:
+                              owner.add_rob(individual.attributes['id'],True)
                               system.console_log.append(f"{individual.attributes['id']}: Obey {response_action.ownerid}")
                               individual.obey(response_action.ownerid,system)
-                              master.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
-                              individual.memory.append(f"I obeyed to {master.attributes['name']} and now I have to listen to all his commands and can never betray him.")
+                              owner.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
+                              individual.memory.append(f"I obeyed to {owner.attributes['name']} and now I have to listen to all his commands and can never betray him.")
                             else:
-                              master=system.individuals[response_action.ownerid]
-                              master.add_rob(individual.attributes['id'],True)
+                              owner =system.individuals[response_action.ownerid]
+                              owner.add_rob(individual.attributes['id'],True)
                               system.console_log.append(f"{individual.attributes['id']}: Accept robbery from {response_action.ownerid}")
                               print("success accepting robbery from master")
                   elif response_action.type==AIActionType.Trade:
@@ -91,9 +91,8 @@ def simulate(individuals:List[Individual],system:System):
                         individual.memory.append(f"Day {system.time}.{response_action.ownerid} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ")
                         if R:
                               individual.memory.append(f'I rejected the trade offer by {response_action.ownerid}.')
-                              system.individuals[response_action.ownerid].memory.append(f"But he rejected it so I gained nothing and exhausted my action opportunity of today.")
+                              owner.memory.append(f"But he rejected it so I gained nothing and exhausted my action opportunity of today.")
                         elif not R:
-                              owner=system.individuals[response_action.ownerid]
                               gainT=response_action.gainType
                               gainA=response_action.gainAmount
                               payA=response_action.payAmount
