@@ -286,7 +286,7 @@ def query_individual(individual:Individual,system:System,response_action):
     
       print("ACTIVE STATE")
     
-    result:str = chat(general_description+separated_description,[ask_for_response])
+    result:str = chat(general_description+separated_description,[ask_for_response],top_prob=individual.INTELLIGENCE)
     return result
 
 """def query_judge(action,context,individual:Individual,system:System):

@@ -24,7 +24,7 @@ class Individual:
             "name": name,  # The name of the individual
             "aggressiveness": np.random.uniform(-1, 1),  # Randomly assigned aggressiveness level
             "covetousness": np.random.uniform(0.9, 1.6),  # Randomly assigned covetousness level
-            "intelligence": np.random.uniform(0.6, 0.95),  # Randomly assigned intelligence level
+            
             "strength": np.random.uniform(0.5, 0.9),  # Randomly assigned strength level
             "social_position": 0,  # Initial social position is 0
             "land": 10,  # Land owned by the individual
@@ -32,6 +32,7 @@ class Individual:
             "action": 1  # Initial action point is 1
             ,"trust_of_others":0
         }
+        self.INTELLIGENCE=np.random.beta(40,40)
         self.pending_action:SeralizeQueue[AIAction] = SeralizeQueue() # The pending action that the individual need to deal with
         self.current_action_type:AIActionType = AIActionType.Default
         self.robbing_stats = RobStats()
