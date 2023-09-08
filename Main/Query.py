@@ -245,6 +245,21 @@ def query_individual(individual:Individual,system:System,response_action):
     ]
     '''
     
+    additional_active_to_master = f''' Additionally, you can not choose to rob or trade with Person {individual.obey_stats.obey_personId} since they are your master.
+    '''
+    
+    def subject_information(individual:Individual):
+      result = ""
+      for i in range(len(individual.obey_stats.subject)):
+        result = result + str(individual.obey_stats.subject[i]) + ", "
+      
+      result  = result[0:len(result) - 2]
+      return result
+    
+    additional_active_to_subject = f''' Additionally, you may not trade with Person {subject_information(individual)}. Instead, if you ever wants their land or food, you can directly rob them as they will only obey.
+    '''
+    
+    
     if response_action:
       if response_action.type==AIActionType.Trade:
             
@@ -263,11 +278,15 @@ def query_individual(individual:Individual,system:System,response_action):
           
     else: 
       ask_for_response=active
+      if individual.obey_stats.obey_personId != -1:
+        ask_for_response = ask_for_response + additional_active_to_master
+      if len(individual.obey_stats.subject) != 0:
+        ask_for_response  = ask_for_response + additional_active_to_subject
 
     
       print("ACTIVE STATE")
     
-    result:str = chat(general_description+separated_description,[ask_for_response])
+    result:str = chat(general_description+separated_description,[ask_for_response],top_prob=individual.INTELLIGENCE)
     return result
 
 """def query_judge(action,context,individual:Individual,system:System):

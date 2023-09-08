@@ -6,5 +6,5 @@ class CustomConsoleLog:
         self.content = ''
     def append(self, message):
         # Retrieve the current content
-        self.content += message
+        self.content += message+" "
     #all update should be done in main thread to avoid conflict

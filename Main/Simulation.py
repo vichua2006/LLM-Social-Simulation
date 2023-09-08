@@ -1,14 +1,13 @@
 import jsonpickle
 import threading
 from typing import List
-from Main.Calculation import increase_food, rob, winner_loser
+from Main.Calculation import increase_food, punishment, rob, winner_loser
 from Main.Individual import Individual
 from Main.System import System
 from Main.Query import query_individual
 from Main.StringUtils import deserialize_first_json_object
 from Main.AIAction import AIAction, AIActionType
 from Main.PendingAction import append_to_pending_action, str_to_ai_action
-from Main.SaveLoad import init_save, save_logframes
 import random
 
 def change_affected_people(affected_people, system:System):
@@ -34,19 +33,18 @@ def initialize():
     individuals=[]
     lands=[]
     POPULATION=5
-    POPULATIONLIST=[x for x in range(POPULATION)]
+    #POPULATIONLIST=[x for x in range(POPULATION)]
     #random id
-    random_numbers = random.sample(POPULATIONLIST, POPULATION)
-    for i in random_numbers:
-      individuals.append(Individual(i,f'person {i}'))
-      lands.append(f'land {i}')
-    individuals.sort(key=lambda x: x.attributes['id'])
-    #default
-    #for i in range(POPULATION):
+    #random_numbers = random.sample(POPULATIONLIST, POPULATION)
+    #for i in random_numbers:
       #individuals.append(Individual(i,f'person {i}'))
       #lands.append(f'land {i}')
+    #individuals.sort(key=lambda x: x.attributes['id'])
+    #default
+    for i in range(POPULATION):
+      individuals.append(Individual(i,f'person {i}'))
+      lands.append(f'land {i}')
     system=System(individuals,lands)
-    init_save(system)
     return system
 
 def simulate(individuals:List[Individual],system:System):
@@ -61,26 +59,34 @@ def simulate(individuals:List[Individual],system:System):
             print(f"Person {index} is responding...\n")
             response_action: AIAction = individual.pending_action.get() if not individual.pending_action.empty() else None
             action:str=query_individual(individual,system,response_action)
+            
+            
+            
             if passive:
                   print(f'{individual.attributes["name"]} chooses to {action}')
                   individual.check_is_responser(response_action)
                   add_context=''
                   R=action[0]=="R"
+                  owner:Individual=system.individuals[response_action.ownerid]
                   if response_action.type==AIActionType.Rob:
-                      if R:
-                        owner:Individual=system.individuals[response_action.ownerid]
+                      #if subject rob subject, this rob will be prohibited and the master will punish the subject and share the gain with all other subjects
+                      if owner.obey_stats.obey_personId==individual.obey_stats.obey_personId and owner.obey_stats.obey_personId != -1:
+                          print("DETECT: subject rob subject, pushiment will be given.")
+                          punishment(owner, system)
+
+                      elif R:
                         rob(individual, owner, system, response_action.robType)
                       elif not R:
-                            if system.individuals[response_action.ownerid].attributes["id"] !=  individual.obey_stats.obey_personId:
-                              master=system.individuals[response_action.ownerid]
-                              master.add_rob(individual.attributes['id'],True)
+                            #if master rob subject, subject will accept instead of obey, where obey only refer to the first obey that happen between two individuals without subject-master relationship
+                            if owner.attributes["id"] !=  individual.obey_stats.obey_personId:
+                              owner.add_rob(individual.attributes['id'],True)
                               system.console_log.append(f"{individual.attributes['id']}: Obey {response_action.ownerid}")
                               individual.obey(response_action.ownerid,system)
-                              master.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
-                              individual.memory.append(f"I obeyed to {master.attributes['name']} and now I have to listen to all his commands and can never betray him.")
+                              owner.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
+                              individual.memory.append(f"I obeyed to {owner.attributes['name']} and now I have to listen to all his commands and can never betray him.")
                             else:
-                              master=system.individuals[response_action.ownerid]
-                              master.add_rob(individual.attributes['id'],True)
+                              owner =system.individuals[response_action.ownerid]
+                              owner.add_rob(individual.attributes['id'],True)
                               system.console_log.append(f"{individual.attributes['id']}: Accept robbery from {response_action.ownerid}")
                               print("success accepting robbery from master")
                   elif response_action.type==AIActionType.Trade:
@@ -88,9 +94,8 @@ def simulate(individuals:List[Individual],system:System):
                         individual.memory.append(f"Day {system.time}.{response_action.ownerid} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ")
                         if R:
                               individual.memory.append(f'I rejected the trade offer by {response_action.ownerid}.')
-                              system.individuals[response_action.ownerid].memory.append(f"But he rejected it so I gained nothing and exhausted my action opportunity of today.")
+                              owner.memory.append(f"But he rejected it so I gained nothing and exhausted my action opportunity of today.")
                         elif not R:
-                              owner=system.individuals[response_action.ownerid]
                               gainT=response_action.gainType
                               gainA=response_action.gainAmount
                               payA=response_action.payAmount
@@ -115,11 +120,30 @@ def simulate(individuals:List[Individual],system:System):
                                   
                   #query_judge(f'In response to Person {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}. {add_context}',response_action,individual,system)
             elif not passive:
+              ai_action:AIAction = None
               for o in range(5):
                 print(action)
                 if system.is_stop:
                   print("Stop Simulation!")
                   return
+                
+                try:
+                  action = deserialize_first_json_object(action.lower())
+                  ai_action = str_to_ai_action(action, index)
+                  break
+                except Exception as e:
+                  try:
+                    ai_action = str_to_ai_action([action[x] for x in action][0], index)
+                    action=list(action[x] for x in action)[0]
+                    break
+                  except Exception as e2:
+                    print(f"First Exception:{e}, second exception:{e2}")
+                    action:str=query_individual(individual,system,response_action)
+                    continue
+                
+              #Prevent subject to trade with master
+              while ai_action.type == AIActionType.Trade and individual.obey_stats.obey_personId == ai_action.targetid:
+                action:str=query_individual(individual,system,response_action)
                 try:
                   action = deserialize_first_json_object(action.lower())
                   ai_action:AIAction = str_to_ai_action(action, index)
@@ -133,6 +157,48 @@ def simulate(individuals:List[Individual],system:System):
                     print(f"First Exception:{e}, second exception:{e2}")
                     action:str=query_individual(individual,system,response_action)
                     continue
+              
+              #Prevent subject to rob master
+              while ai_action.type == AIActionType.Rob and individual.obey_stats.obey_personId == ai_action.targetid:
+                action:str=query_individual(individual,system,response_action)
+                try:
+                  action = deserialize_first_json_object(action.lower())
+                  ai_action:AIAction = str_to_ai_action(action, index)
+                  break
+                except Exception as e:
+                  try:
+                    ai_action:AIAction = str_to_ai_action([action[x] for x in action][0], index)
+                    action=list(action[x] for x in action)[0]
+                    break
+                  except Exception as e2:
+                    print(f"First Exception:{e}, second exception:{e2}")
+                    action:str=query_individual(individual,system,response_action)
+                    continue
+              
+              #Prevent master to trade with subjects
+              is_subject = "False"
+              for id in individual.obey_stats.subject:
+                if id == ai_action.targetid:
+                  is_subject = "True"
+              
+              while ai_action.type == AIActionType.Trade and is_subject == "True":
+                action:str=query_individual(individual,system,response_action)
+                try:
+                  action = deserialize_first_json_object(action.lower())
+                  ai_action:AIAction = str_to_ai_action(action, index)
+                  break
+                except Exception as e:
+                  try:
+                    ai_action:AIAction = str_to_ai_action([action[x] for x in action][0], index)
+                    action=list(action[x] for x in action)[0]
+                    break
+                  except Exception as e2:
+                    print(f"First Exception:{e}, second exception:{e2}")
+                    action:str=query_individual(individual,system,response_action)
+                    continue
+              
+                  
+              
               individual.current_action_type = ai_action.type
               if ai_action.type==AIActionType.Farm:
                     land=individual.attributes['land']
@@ -175,6 +241,5 @@ def simulate(individuals:List[Individual],system:System):
       else:
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
-    save_logframes(system)
 
 # %%
