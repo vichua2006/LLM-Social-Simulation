@@ -17,7 +17,7 @@ def save(system: System, console_log: str, filename: str):
     with open(filename, 'w') as f:
         json.dump(save_dict, f)
      
-file_name='Log/'+datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")+'Experimentlog.csv'
+file_name='Log/'+datetime.datetime.now().strftime("%B %d, %I %M%p , %Y")+'Experimentlog.csv'
 def init_save(system: System):
     save_dict_day = []
     for person in system.individuals:
