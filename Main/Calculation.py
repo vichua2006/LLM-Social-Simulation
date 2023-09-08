@@ -48,7 +48,7 @@ def rob(target: Individual, rob_person:Individual, system: System, robType: str)
     winner.add_rob(loser.attributes['id'],True)
     loser.add_rob(winner.attributes['id'],False)
     print(f'Total rob times of the winner: {winner.robbing_stats.total_rob_times}')
-    print("Rob times are being added.")
+    
     if winner==target:
             target.attributes['social_position']+=1
             rob_person.attributes['social_position']+=-1
