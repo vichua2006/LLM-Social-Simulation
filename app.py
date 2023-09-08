@@ -4,7 +4,9 @@ from typing import List, Tuple
 import jsonpickle
 from GUI.CustomConsoleLog import CustomConsoleLog
 from GUI.ConsoleLog import ConsoleLog
+from Main.AIAction import RobAction
 from Main.Individual import Individual
+from Main.PendingAction import append_to_pending_action
 from Main.SaveLoad import load, save
 from Main.System import System
 from Main.Simulation import initialize, simulate
@@ -21,6 +23,7 @@ def collapse(layout, key):
 def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
     person_layout = []
     for i, person in enumerate(individual):
+        id = person.attributes["id"]
         section_key = f'-SECTION{i}-'
         pending_action_layout = [[sg.Listbox(values=person.get_pending_action_as_list(), size=(30, 5),  horizontal_scroll= True, key=f'-PENDINGACTION{i}-')]]
         obey_subject_layout = [[sg.Listbox(values = person.obey_stats.subject, size=(30, 5),  horizontal_scroll= True, key=f'-OBEYSUBJECT{i}-')]]
@@ -55,7 +58,7 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
         left = sg.Column(new_left_section, size=(None, None))
         print(left.Size)
         section = [[left, sg.Column(right_section)]]
-        person_layout.append(sg.Tab(f'Person {i}', section, key=section_key))
+        person_layout.append(sg.Tab(f'Person {id}', section, key=section_key))
     return sg.TabGroup([person_layout])
 
 
@@ -64,6 +67,7 @@ def start_simulate(system:System):
         print(f"DAY {system.time+1} HAS STARTED.")
         simulate(system.individuals, system)
 def main():
+    
     
     system=initialize()
     individuals = system.individuals
@@ -162,6 +166,7 @@ def main():
                 print(f"{filepath} successfully loaded")
         elif event == '-DEBUG-':
             print("DEBUG")
+            print("A")
 
         
         
