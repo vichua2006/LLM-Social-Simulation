@@ -19,30 +19,28 @@ def save(system: System, console_log: str, filename: str):
      
 file_name='Log/'+datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")+'Experimentlog.csv'
 def init_save(system: System):
-    save_dict = ''
+    save_dict_day = []
     for person in system.individuals:
-        current_dict = ''
         for key, item in person.__dict__.items():
-            current_dict += '"'+ str(key)+str(person.attributes["id"])+'",'
-        save_dict += current_dict
+            save_dict_day.append(key)
     with open(file_name, 'a', newline='') as f:
         csv_writer = csv.writer(f)
-        csv_writer.writerow(save_dict)
+        csv_writer.writerow(save_dict_day)
 
+#TODO: these things...
 def save_logframes(system: System):
     serialized_system = jsonpickle.encode(system)
     if len(system.individuals)==0:
         return ''
     
-    save_dict = ''
+    save_dict_day = []
     for person in system.individuals:
-        current_dict = ''
         for key, item in person.__dict__.items():
-            current_dict += '"'+ str(item)+'",'
-        save_dict += current_dict
+            save_dict_day.append(item)
+
     with open(file_name, 'a', newline='') as f:
         csv_writer = csv.writer(f)
-        csv_writer.writerow(save_dict)
+        csv_writer.writerow(save_dict_day)
 
 # Deserialize System object and console log from JSON
 def load(filename: str) -> Tuple[System, str]:
