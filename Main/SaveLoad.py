@@ -4,8 +4,6 @@ from Main.Individual import Individual
 from Main.System import System
 import jsonpickle
 import jsonpickle.handlers
-import datetime
-import csv
 
 # Serialize System object and console log to JSON
 def save(system: System, console_log: str, filename: str):
