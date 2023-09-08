@@ -2,6 +2,7 @@ from typing import Tuple
 import json
 from Main.Individual import Individual, SeralizeQueue
 from Main.System import System
+from GUI.CustomConsoleLog import CustomConsoleLog
 
 import jsonpickle
 import jsonpickle.handlers
@@ -51,24 +52,25 @@ def init_save(system: System):
     # json_iteratable = json.loads(serialized_system)
     save_dict_day = []
     
-    return
     
     # TODO: most current 
-    # def custom_dict_repr_key(obj, key=''):
-    #     if isinstance(obj, (int, float, str, bytes, bool, type(None))):
-    #         if not isinstance(obj, (type(None))):
-    #             save_dict_day.append(key)
-    #     elif isinstance(obj, (list, tuple)):
-    #         save_dict_day.append(key)
-    #     elif isinstance(obj, SeralizeQueue):
-    #         return None
-    #     elif isinstance(obj, dict):
-    #         for k, v in obj.items():
-    #             custom_dict_repr_key(v, k)
-    #     else:
-    #         variables = vars(obj)
-    #         for k, v in variables.items():
-    #             custom_dict_repr_key(v, k)
+    def custom_dict_repr_key(obj, key=''):
+        if isinstance(obj, (int, float, str, bytes, bool, type(None))):
+            if not isinstance(obj, (type(None))):
+                save_dict_day.append(key)
+        elif isinstance(obj, (list, tuple)):
+            save_dict_day.append(key)
+        elif isinstance(obj, SeralizeQueue):
+            return None
+        elif isinstance(obj, CustomConsoleLog):
+            return None
+        elif isinstance(obj, dict):
+            for k, v in obj.items():
+                custom_dict_repr_key(v, k)
+        else:
+            variables = vars(obj)
+            for k, v in variables.items():
+                custom_dict_repr_key(v, k)
     
     
     # for person in system.individuals:
@@ -82,11 +84,11 @@ def init_save(system: System):
     #     json_file = json.dump(serialized_system, temp)
     # with open(temp_json_file_name, 'r+') as temp:
     
-    # item_lists= flatten_json_key(json_iteratable)
-    # custom_dict_repr_key(system, 'system')
-    # with open(file_name, 'a', newline='') as f:
-    #     csv_writer = csv.writer(f)
-    #     csv_writer.writerow(save_dict_day)
+    item_lists= flatten_json_key(json_iteratable)
+    custom_dict_repr_key(system, 'system')
+    with open(file_name, 'a', newline='') as f:
+        csv_writer = csv.writer(f)
+        csv_writer.writerow(save_dict_day)
 
 def save_logframes(system: System):
     # serialized_system = jsonpickle.encode(system)
@@ -96,39 +98,37 @@ def save_logframes(system: System):
     #     return ''
     
     save_dict_day = []
-    return
     # save_dict_day.append()
     
     # DOTO: most current
     # # for person in system.individuals:
     # #     for key, item in person.__dict__.items():
     # #         save_dict_day.append(item)
-    # def custom_dict_repr_val(obj, key=''):
-    #     if isinstance(obj, (int, float, str, bytes, bool, type(None))):
-    #         if not isinstance(obj, (type(None))):
-    #             save_dict_day.append(obj)
-    #     elif isinstance(obj, (list, tuple)):
-    #         save_dict_day.append(obj)
-    #     elif isinstance(obj, SeralizeQueue):
-    #         return None
-    #         # return [custom_dict_repr(e) for e in obj.queue]
-    #     elif isinstance(obj, dict):
-    #         for k, v in obj.items():
-    #             custom_dict_repr_val(v, k)
-    #     else:
-    #         try:
-    #             variables = vars(obj)
-    #             for k, v in variables.items():
-    #                 custom_dict_repr_val(v, k)
-    #         except:
-    #             print(type(obj))
-    
+    def custom_dict_repr_val(obj, key=''):
+        if isinstance(obj, (int, float, str, bytes, bool, type(None))):
+            if not isinstance(obj, (type(None))):
+                save_dict_day.append(obj)
+        elif isinstance(obj, (list, tuple)):
+            save_dict_day.append(obj)
+        elif isinstance(obj, SeralizeQueue):
+            return None
+        elif isinstance(obj, CustomConsoleLog):
+            return None
+            # return [custom_dict_repr(e) for e in obj.queue]
+        elif isinstance(obj, dict):
+            for k, v in obj.items():
+                custom_dict_repr_val(v, k)
+        else:
+            variables = vars(obj)
+            for k, v in variables.items():
+                custom_dict_repr_val(v, k)
 
-    # custom_dict_repr_val(system, 'system')
 
-    # with open(file_name, 'a', newline='') as f:
-    #     csv_writer = csv.writer(f)
-    #     csv_writer.writerow(save_dict_day)
+    custom_dict_repr_val(system, 'system')
+
+    with open(file_name, 'a', newline='') as f:
+        csv_writer = csv.writer(f)
+        csv_writer.writerow(save_dict_day)
 
 # def init_save(system: System):
 #     save_dict_day = []
