@@ -84,7 +84,8 @@ def init_save(system: System):
     #     json_file = json.dump(serialized_system, temp)
     # with open(temp_json_file_name, 'r+') as temp:
     
-    item_lists= flatten_json_key(json_iteratable)
+    # item_lists= flatten_json_key(json_iteratable)
+    
     custom_dict_repr_key(system, 'system')
     with open(file_name, 'a', newline='') as f:
         csv_writer = csv.writer(f)

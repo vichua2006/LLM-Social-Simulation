@@ -8,6 +8,7 @@ from Main.Query import query_individual
 from Main.StringUtils import deserialize_first_json_object
 from Main.AIAction import AIAction, AIActionType
 from Main.PendingAction import append_to_pending_action, str_to_ai_action
+from Main.SaveLoad import init_save, save_logframes
 import random
 
 def change_affected_people(affected_people, system:System):
@@ -45,6 +46,7 @@ def initialize():
       individuals.append(Individual(i,f'person {i}'))
       lands.append(f'land {i}')
     system=System(individuals,lands)
+    init_save(system)
     return system
 
 def simulate(individuals:List[Individual],system:System):
@@ -241,5 +243,6 @@ def simulate(individuals:List[Individual],system:System):
       else:
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
+    save_logframes(system)
 
 # %%
