@@ -8,6 +8,7 @@ from Main.Query import query_individual
 from Main.StringUtils import deserialize_first_json_object
 from Main.AIAction import AIAction, AIActionType
 from Main.PendingAction import append_to_pending_action, str_to_ai_action
+from Main.SaveLoad import init_save, save_logframes
 import random
 
 def change_affected_people(affected_people, system:System):
@@ -33,18 +34,19 @@ def initialize():
     individuals=[]
     lands=[]
     POPULATION=5
-    #POPULATIONLIST=[x for x in range(POPULATION)]
+    POPULATIONLIST=[x for x in range(POPULATION)]
     #random id
-    #random_numbers = random.sample(POPULATIONLIST, POPULATION)
-    #for i in random_numbers:
-      #individuals.append(Individual(i,f'person {i}'))
-      #lands.append(f'land {i}')
-    #individuals.sort(key=lambda x: x.attributes['id'])
-    #default
-    for i in range(POPULATION):
+    random_numbers = random.sample(POPULATIONLIST, POPULATION)
+    for i in random_numbers:
       individuals.append(Individual(i,f'person {i}'))
       lands.append(f'land {i}')
+    individuals.sort(key=lambda x: x.attributes['id'])
+    #default
+    #for i in range(POPULATION):
+      #individuals.append(Individual(i,f'person {i}'))
+      #lands.append(f'land {i}')
     system=System(individuals,lands)
+    init_save(system)
     return system
 
 def simulate(individuals:List[Individual],system:System):
@@ -64,9 +66,9 @@ def simulate(individuals:List[Individual],system:System):
                   individual.check_is_responser(response_action)
                   add_context=''
                   R=action[0]=="R"
-                  owner:Individual=system.individuals[response_action.ownerid]
                   if response_action.type==AIActionType.Rob:
                       if R:
+                        owner:Individual=system.individuals[response_action.ownerid]
                         rob(individual, owner, system, response_action.robType)
                       elif not R:
                             if system.individuals[response_action.ownerid].attributes["id"] !=  individual.obey_stats.obey_personId:
@@ -173,5 +175,6 @@ def simulate(individuals:List[Individual],system:System):
       else:
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
+    save_logframes(system)
 
 # %%
