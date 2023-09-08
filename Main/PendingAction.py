@@ -1,6 +1,7 @@
 from typing import List
 from Main.AIAction import AIAction, AIActionType, RobAction, TradeAction
 from Main.System import System
+from Main.Individual import Individual
 
 def str_to_ai_action(action:str, id:int)->AIAction:
     if(action["action"]=="trade"):
@@ -13,4 +14,5 @@ def str_to_ai_action(action:str, id:int)->AIAction:
       
 def append_to_pending_action(action:AIAction, system:System)->None:
     id:int = action.targetid
-    system.individuals[id].pending_action.put(action)
+    person:Individual = system.individuals[id]
+    person.pending_action.put(action)
