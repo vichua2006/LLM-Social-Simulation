@@ -64,9 +64,9 @@ def simulate(individuals:List[Individual],system:System):
                   individual.check_is_responser(response_action)
                   add_context=''
                   R=action[0]=="R"
+                  owner:Individual=system.individuals[response_action.ownerid]
                   if response_action.type==AIActionType.Rob:
                       if R:
-                        owner:Individual=system.individuals[response_action.ownerid]
                         rob(individual, owner, system, response_action.robType)
                       elif not R:
                             if system.individuals[response_action.ownerid].attributes["id"] !=  individual.obey_stats.obey_personId:
