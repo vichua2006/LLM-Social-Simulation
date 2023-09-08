@@ -12,7 +12,7 @@ os.environ["OPENAI"] = charles_key
 openai.api_key = os.environ["OPENAI"]
 # Function to interact with the GPT-3 model and get response
 
-def chat(system, user_assistant):
+def chat(system, user_assistant,top_prob):
     # Format the conversation
     system_msg = [{"role": "system", "content": system}]
     user_assistant_msgs = [
@@ -24,7 +24,7 @@ def chat(system, user_assistant):
     msgs = system_msg + user_assistant_msgs
     try:
       # Interact with the GPT-3 model
-      response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=msgs)
+      response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=msgs,top_p=top_prob)
       # Check the status of the response
       status_code = response["choices"][0]["finish_reason"]
       assert status_code == "stop", f"The status code was {status_code}."

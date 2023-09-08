@@ -59,6 +59,9 @@ def simulate(individuals:List[Individual],system:System):
             print(f"Person {index} is responding...\n")
             response_action: AIAction = individual.pending_action.get() if not individual.pending_action.empty() else None
             action:str=query_individual(individual,system,response_action)
+            
+            
+            
             if passive:
                   print(f'{individual.attributes["name"]} chooses to {action}')
                   individual.check_is_responser(response_action)
@@ -123,6 +126,7 @@ def simulate(individuals:List[Individual],system:System):
                 if system.is_stop:
                   print("Stop Simulation!")
                   return
+                
                 try:
                   action = deserialize_first_json_object(action.lower())
                   ai_action = str_to_ai_action(action, index)
@@ -136,6 +140,65 @@ def simulate(individuals:List[Individual],system:System):
                     print(f"First Exception:{e}, second exception:{e2}")
                     action:str=query_individual(individual,system,response_action)
                     continue
+                
+              #Prevent subject to trade with master
+              while ai_action.type == AIActionType.Trade and individual.obey_stats.obey_personId == ai_action.targetid:
+                action:str=query_individual(individual,system,response_action)
+                try:
+                  action = deserialize_first_json_object(action.lower())
+                  ai_action:AIAction = str_to_ai_action(action, index)
+                  break
+                except Exception as e:
+                  try:
+                    ai_action:AIAction = str_to_ai_action([action[x] for x in action][0], index)
+                    action=list(action[x] for x in action)[0]
+                    break
+                  except Exception as e2:
+                    print(f"First Exception:{e}, second exception:{e2}")
+                    action:str=query_individual(individual,system,response_action)
+                    continue
+              
+              #Prevent subject to rob master
+              while ai_action.type == AIActionType.Rob and individual.obey_stats.obey_personId == ai_action.targetid:
+                action:str=query_individual(individual,system,response_action)
+                try:
+                  action = deserialize_first_json_object(action.lower())
+                  ai_action:AIAction = str_to_ai_action(action, index)
+                  break
+                except Exception as e:
+                  try:
+                    ai_action:AIAction = str_to_ai_action([action[x] for x in action][0], index)
+                    action=list(action[x] for x in action)[0]
+                    break
+                  except Exception as e2:
+                    print(f"First Exception:{e}, second exception:{e2}")
+                    action:str=query_individual(individual,system,response_action)
+                    continue
+              
+              #Prevent master to trade with subjects
+              is_subject = "False"
+              for id in individual.obey_stats.subject:
+                if id == ai_action.targetid:
+                  is_subject = "True"
+              
+              while ai_action.type == AIActionType.Trade and is_subject == "True":
+                action:str=query_individual(individual,system,response_action)
+                try:
+                  action = deserialize_first_json_object(action.lower())
+                  ai_action:AIAction = str_to_ai_action(action, index)
+                  break
+                except Exception as e:
+                  try:
+                    ai_action:AIAction = str_to_ai_action([action[x] for x in action][0], index)
+                    action=list(action[x] for x in action)[0]
+                    break
+                  except Exception as e2:
+                    print(f"First Exception:{e}, second exception:{e2}")
+                    action:str=query_individual(individual,system,response_action)
+                    continue
+              
+                  
+              
               individual.current_action_type = ai_action.type
               if ai_action.type==AIActionType.Farm:
                     land=individual.attributes['land']
