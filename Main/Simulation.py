@@ -64,13 +64,13 @@ def simulate(individuals:List[Individual],system:System):
                   individual.check_is_responser(response_action)
                   add_context=''
                   R=action[0]=="R"
+                  owner:Individual=system.individuals[response_action.ownerid]
                   if response_action.type==AIActionType.Rob:
                       #if subject rob subject, this rob will be prohibited and the master will punish the subject and share the gain with all other subjects
                       
 
                     
                       if R:
-                        owner:Individual=system.individuals[response_action.ownerid]
                         rob(individual, owner, system, response_action.robType)
                       elif not R:
                             #if master rob subject, subject will accept instead of obey, where obey only refer to the first obey that happen between two individuals without subject-master relationship
