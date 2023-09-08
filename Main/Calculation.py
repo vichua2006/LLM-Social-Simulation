@@ -76,3 +76,27 @@ def rob(target: Individual, rob_person:Individual, system: System, robType: str)
             rob_person.attributes['social_position']+=2
             target.memory.append(f"Day {system.time}. {rob_person.attributes['name']} tried to rob me, I rebelled but lost. {victim_memory}. I lost 1 unit of social status.")
             rob_person.memory.append(f"Day {system.time}. I tried to rob {target.attributes['name']}, who rebelled against me but I won. {victor_memory}. I gained 2 units of social status.")
+    return
+
+#master punish subject, get his food and land and share it to other subjects except the subject being punished
+def punishment(subject:Individual, system:System) -> None:
+    if subject.obey_stats.obey_personId==-1:
+        print("PUNISHMENTERROR: no master, this should not happen.")
+        return
+    print(f"PUNISHMENT: {subject.attributes['name']} is punished by {system.individuals[subject.obey_stats.obey_personId].attributes['name']}, all other subjects will share the food and land of {subject.attributes['name']}.")
+    subject.memory.append(f"I was punished by {system.individuals[subject.obey_stats.obey_personId].attributes['name']} because I, as a subject, rob other subject.")
+    master.memory.append(f"I punished {subject.attributes['name']} because he, as a subject, rob other subject.")
+    master = system.individuals[subject.obey_stats.obey_personId]
+    #master punish subject, 50% food and 50% land
+    food_amount = 0.5 * subject.attributes['food']
+    land_amount = 0.5 * subject.attributes['land']
+    subject.attributes['food'] -= food_amount
+    subject.attributes['land'] -= land_amount
+    #share the food and land to other subjects
+    for subjectid in master.obey_stats.subject:
+        if subjectid!=subject.attributes['id']:
+            subject.memory.append(f"I got food and land because {subject.attributes['name']} was punished by {master.attributes['name']}, since he robbed other subject.")
+            subject = master.system.individuals[subjectid]
+            subject.attributes['food'] += food_amount/(len(master.obey_stats.subject)-1)
+            subject.attributes['land'] += land_amount/(len(master.obey_stats.subject)-1)
+    return
