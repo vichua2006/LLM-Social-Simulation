@@ -86,7 +86,11 @@ def query_individual(individual:Individual,system:System,response_action):
     don't have enough food.
     Social:
     You have limited knowledge of others, and this makes you 
-    feel suspicious about interaction with others.
+    feel suspicious about interaction with others. 
+    For example, when you are trading with others,
+    you don't know if they will violate the trade or not,
+    which means that person took away your food or land without giving you their food or land as what they claimed,
+    your master will punish that violater.
     Your interaction with others makes you know them better.
     Your social_position is determined by the amount of land 
     you have, the amount of food you have and the number of times 
