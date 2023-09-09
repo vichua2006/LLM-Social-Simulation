@@ -32,7 +32,7 @@ class Individual:
             "action": 1  # Initial action point is 1
             ,"trust_of_others":0
         }
-        self.INTELLIGENCE=np.random.beta(40,20)
+        self.INTELLIGENCE=1 #np.random.beta(40,20)
         self.pending_action:SeralizeQueue[AIAction] = SeralizeQueue() # The pending action that the individual need to deal with
         self.current_action_type:AIActionType = AIActionType.Default
         self.robbing_stats = RobStats()
