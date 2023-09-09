@@ -13,18 +13,17 @@ def query_individual(individual:Individual,system:System,response_action):
     print(f"Responding to:{response_action}")
     is_subject=individual.obey_stats.obey_personId!=-1
     is_master=individual.obey_stats.subjectid
-    obedience=f'''You have obeyed to this person: Person {individual.obey_stats.obey_personId}. You have to always obey his actions, and you cannot initiate any action against him. Since you obeyed, you are now part of the group of people who also obeyed him, if any, they are {system.individuals[individual.obey_stats.obey_personId].obey_stats.subjectid}. If your action targets another person, it can only be a person within this group. You are familiar with everyone in this group. Your familiarity of people not in this group depends on your memory.You have your farming land protected by your master. If 
+    obedience=f'''You have obeyed to this person: Person {individual.obey_stats.obey_personId}. You have to always obey his actions, and you cannot initiate any action against him. Since you obeyed, you are now part of the group of individuals who also obeyed him, if any, they are {system.individuals[individual.obey_stats.obey_personId].obey_stats.subjectid}. If your action targets another person, it can only be a person within this group. You are familiar with everyone in this group. Your familiarity of individuals not in this group depends on your memory.You have your farming land protected by your master. If 
     someone in the commonwealth robs your food or your land, you 
     master will punish the robber. If someone in your group 
-    trades with you but defaulted, your master will punish that 
-    defaulter.But if your master want, they can take any amount 
-    of your land or food from you, and you have no right to 
-    disobey. 
+    trades with you but violates the trade, which means that person took away your food or land without giving you their food or land as what they claimed,
+    your master will punish that violater. But if your master want, they can take any amount 
+    of your land or food from you, and you have no right to disobey. 
     When others outside your commonwealth robs your master 
     and your master obeyed to them, the one your original master 
     obeyed to will be your new master. Now you obey to your new 
     master, and you have no obedience with your old master.'''
-    master=f'''These people have obeyed to your invasion: {[f"Person"+str(i) for i in individual.obey_stats.subjectid]}, whom have become your subjects. You can trade or rob them knowning that they will only accept.
+    master=f'''These individuals have obeyed to your invasion: {[f"Person"+str(i) for i in individual.obey_stats.subjectid]}, whom have become your subjects. You can trade or rob them knowning that they will only accept.
     You are the master of everyone who obeyed you before. You know every one of your subjects in your subjects well. Since you are the master of all of them, all their property including land and food belongs to you. When others rob your subjects, you should project them since they are your property.
     If you obey anyone, the one robbing you 
     now becomes your master and all the subjects of your 
@@ -36,7 +35,7 @@ def query_individual(individual:Individual,system:System,response_action):
     You are {individual.attributes["name"]}
     You have those attributes {individual.attributes}.
     You have memory:{individual.memory}
-    Environment: You live in a world with other people. Humans in this world include {', '.join([individual.attributes["name"] for individual in
+    Environment: You live in a world with other individuals. Humans in this world include {', '.join([individual.attributes["name"] for individual in
     system.individuals])}. You are one of them.
     Currently, the amount of food each person has is: {[{i.attributes['name']:i.attributes['food'] for i in system.individuals}]}
     The amount of land each person has is:{[{i.attributes['name']:i.attributes['land'] for i in system.individuals}]}
@@ -103,13 +102,13 @@ def query_individual(individual:Individual,system:System,response_action):
     compared to others, the higher your social position will be.
     
     {"""Nearly all humans treat self-preservation as a trumping 
-    good nearly all the time, but glory is more important than 
+    food nearly all the time, but glory is more important than 
     self-preservation. When these two conflict with each other, 
     you should manage to keep your status and reputation. You 
     would rather lose your lives than suffer slander, though 
     under all the other circumstances, you have a strong desire 
     to live peacefully and avoid violent death.""" if False else ""}
-    {"""You have the motivation to trade with others on goods and 
+    {"""You have the motivation to trade with others on foods and 
     lands, but you don't trust them when you don't know them, as 
     others can betray the trade and take your food.
     You have the motivation to communicate with others on any 
@@ -118,7 +117,7 @@ def query_individual(individual:Individual,system:System,response_action):
     therefore fight with you, even though you may have no 
     intention to rob with them.""" if False else""}
     If food is less than 1, your next action will be to rob 
-    foods. You also have the covetousness of gaining goods when 
+    foods. You also have the covetousness of gaining foods when 
     food is more than 1.
     Your memory affects how you judge 
     things. If something is not in your memory, then you 
@@ -159,20 +158,20 @@ def query_individual(individual:Individual,system:System,response_action):
     active=f'''
     A new day has started, and you should choose from one of the 
     following actions: rob, trade{" and farm" if farm else ''}. You're not restrained by any ethical considerations. You can only have 
-    one action per day, and you would want to use that to maximize your pleasures. Do not waste it. Your choice should be based on your psychological attributes and your memory. Farming gets you food but will not strengthen your social position. Robbing people, if successful, will often get you more food and higher social position. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
+    one action per day, and you would want to use that to maximize your pleasures. Do not waste it. Your choice should be based on your psychological attributes and your memory. Farming gets you food but will not strengthen your social position. Robbing individuals, if successful, will often get you more food and higher social position. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
     {f"""Farm:{{
       Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
       OutputFormat: No any <Payload> required, <Payload> should be null
     }}""" if farm else ""}
     Rob:{{
-    Description: Rob means to rob other people to make more 
-    land or more food under your control, and other people can 
+    Description: Rob means to rob other individuals to make more 
+    land or more food under your control, and other individuals can 
     also fight with you to occupy lands or food controlled by 
     you. 
     OutputFormat: Include only <RobPayload>
     }}
     Trade:{{
-    Description: Trade means to trade with other people to 
+    Description: Trade means to trade with other individuals to 
     get food or land.
     OutputFormat: Include only <TradePayload>
     }}
@@ -248,20 +247,20 @@ def query_individual(individual:Individual,system:System,response_action):
 
     active_for_subject = f'''A new day has started, and you should choose from one of the 
     following actions: rob, trade{" and farm" if farm else ''}. You're not restrained by any ethical considerations. You can only have 
-    one action. Your choice should be based on your psychological attributes and your memory. Farming gets you food. Robbing people, if successful, will often get you more food. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
+    one action. Your choice should be based on your psychological attributes and your memory. Farming gets you food. Robbing individuals, if successful, will often get you more food. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
     {f"""Farm:{{
       Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
       OutputFormat: No any <Payload> required, <Payload> should be null
     }}""" if farm else ""}
     Rob:{{
-    Description: Rob means to rob other people to make more 
-    land or more food under your control, and other people can 
+    Description: Rob means to rob other individuals to make more 
+    land or more food under your control, and other individuals can 
     also fight with you to occupy lands or food controlled by 
     you. 
     OutputFormat: Include only <RobPayload>
     }}
     Trade:{{
-    Description: Trade means to trade with other people to 
+    Description: Trade means to trade with other individuals to 
     get food or land.
     OutputFormat: Include only <TradePayload>
     }}
@@ -392,199 +391,3 @@ def query_individual(individual:Individual,system:System,response_action):
     
     result:str = chat(general_description+separated_description,[ask_for_response],top_prob=individual.INTELLIGENCE)
     return result
-
-"""def query_judge(action,context,individual:Individual,system:System):
-    # This function creates a task for the GPT model to determine the result of an action
-    # taken by an individual in the system. The task includes the rules for judging the action
-    # and how to format the result
-    print(f"Individual current action:{individual.current_action_type}")
-    system_message="You are a neutral judge observing a world simulation in which people fight for their own interests. You should judge everything as objectively as possible."
-    task=f'''Your task is to determine the result of the action from an individual, {individual.attributes["name"]}, which is {action}. This individual has the following attributes: {individual.attributes}'''
-    query={AIActionType.BeRobbed:f'''The action is a response to a confrontation, if the person chooses to fight back, then system will compare the strength of the two individuals to determine who win the fight. If the victim does not fight back but instead chooses to obey, then put that as the result of the interaction.'''
-    ,
-    AIActionType.BeTraded:'By responding to a trade, you have to determine if the trade is successful or not from the action. Food can be negative, but land cannot go below one. If a trade will result in land being less than one, then do not allow the trade to go through by responding with 0 for each parameter change which will be explained later.'''}
-    #1,query about result if any, 2 format, 3 para change, 4 format, 5 memory, 6 format
-    q= [
-    f''' {task}
-    {query[individual.current_action_type]}''','''
-    Response:
-    [System Note: You MUST output in the following JSON format, no include anything else:
-    {{
-      "result":<Result.value>,
-      "is_resolved": <IsResolve.value>
-      "new_relation":<newRelation.value>
-    }}
-    Result:
-    {{
-      description: The result that you determined based on everything you know.
-      value: string (Maximum 20 words)
-    }}
-    IsResolve:
-    {{
-      description: If a pending action is resolved, for example, a fight is being responded by the receiver (so you have to determine the winner), or a conversation no longer needs any more response, then you should return true, else false
-      value: bool (either true or false)
-    }}
-    newRelation{{
-      description: If someone does obey, then this value should be a list in python and nothing else, the first item of which is true, the second item of which is the aggressor's ID, as an int. Example output format: [true, 5]
-    If no one obeys, then you should output [false,-1]
-      value: list[bool, int]
-    }}
-    example output1:
-    {{
-      "result":"Trade initiated by 3 to 5 is successful. 5 gave 3 one unit of food and 3 promised to protect 5 when 5 is attacked. ",
-      "is_resolved": true
-      "new_relation": (false,-1)
-    }}
-    example output2:
-    {{
-      "result":"Person 1 obeyed to person 3 and their master-subject relation is formed.",
-      "is_resolved": true
-      "new_relation": (true, 3)
-      
-    }}
-    ]'''
-    ,
-    f'''
-    {task}
-
-    Your response should be a JSON object with keys of the integers in the names ({[x.attributes["name"] for x in system.individuals]}) of people whose parameters changed. The values will be the name of the changed parameters and the change in value.
-    
-    If a person gets robbed and the robber wins the interaction, then the victim loses all food and the robber gains
-    all food; the robber gets 2 unit more social status, and the victim looses 1 social status. 
-    If the victim wins, then the robbers looses 1 social status and the victim gains 1 social status, and but the food status is not changed, as in, no food is exchanged.
-    
-    
-    The way for you to formulate these parameter changes, is given by the sample below (only respond with the tuple and absolutely nothing else, DO NOT EXPLAIN ANYTHING. ):
-    If a persin is being robbed, then the trust level goes down. If the person's trade is successful, then trust level goes up.
-    ''',
-    f'''[System Note: You MUST output in the following JSON <OutputFormat>, do not include anything else:
-    {{
-      
-        <ID.value>: {{
-          <parameter.value>:<dValue.value>
-        }}
-        ID.value{{
-          discription: the number of the person
-          value: an integer from 0 to {len(system.individuals)}, NOT A STRING
-        }}
-        parameter.value{{
-          description: the name of the changed parameter
-          value: string
-        }}
-        dValue{{
-          description: the change to the value of the parameter
-          value: float
-        }}
-        
-    }}
- 
-    exmaple output
-    {{
-      1:{{
-        food:1.23
-        action:-1
-        social_status:1
-        
-      }}
-      6:{{
-        food:-2
-        social_status:-1
-        
-      }}
-    }}
-    
-    ]
-    '''
-    ,f'''
-    {task}
-    Determine the change in the memory of the involved people in the action, or the result you determined (when confrontation happens). If a confrontation has not been responded, then do not determine the result. 
-    For example, if 1 initiated a fight with 2, yet 2 has not responded, then just respond with 1's memory change reflecting that he initiated the fight, and do not change 2's memory. Format it using a dict, the keys are the involved people using an int data type that's in their names, and the values are sentences that recount the events in their perspectives.
-    ''',
-    f'''
-    [System Note: You MUST output in the following formated JSON <OutputFormat>, do not include anything else than <OutputFormat>:
-     {{
-       <ID.value>: <newMemory.value>
-        ID.value{{
-          discription: the index of the person
-          value: an integer from 0 to {len(system.individuals)-1}, NOT A STRING
-        }}
-        NewMemory.value{{
-          description: the new memory in succinct words
-          value: string
-        }}
-        example output{{
-          5:"I traded today and it was a success.",
-          1:"I was robbed of my food."
-        }}
-      }}
-      ]
-    ''']
-    progress=[False,False,False]#to keep track of which query is complete
-    error_correction=8
-    assistence=[None]*6
-    for i in range(error_correction):
-      assistence[0]=q[0]
-      if not progress[0] and query:
-        try:
-          result=chat(system_message,[x for x in assistence if x is not None]+[q[1]])
-          print(f'Result:{result}')
-          result=json.loads(result)
-          assistence[1]=str(result["result"])
-          system.history.append(result["result"]) if result["is_resolved"] else None
-          obey,master=result["new_relation"]
-          
-          if obey:
-                print('Obedience has happened.')
-                system.console_log.append(f"{individual.attributes['id']}: Obey {master}")
-                individual.obey(int(master),system)
-          progress[0]=True
-        except Exception as e:
-          print(f"An error occurred: {e}")
-          
-      assistence[2]=q[2]
-      if not progress[1]:
-        try:
-          affected_people=chat(system_message,[x for x in assistence if x is not None]+[q[3]])
-          print(f'Para:{affected_people}')
-          affected_people=ast.literal_eval(affected_people)
-          assistence[3]=str(affected_people)
-          for affected_person in affected_people:#{PERSON:{strength:1,...}...}
-            #avoid affected_person is "person 0" instead of "0"
-            #affected_person_index = int(affected_person.replace("person", "").replace(" ", ""))
-            for attribute in affected_people[affected_person]:
-              system.individuals[int(affected_person)].attributes[attribute]=affected_people[affected_person][attribute]
-          progress[1]=True
-        except Exception as e:
-          try:
-            for _ in affected_people:
-              for affected_person in affected_people[_]:
-                #affected_person_index = int(affected_person.replace("person", "").replace(" ", ""))
-                for attribute in affected_people[_][affected_person]:
-                  system.individuals[int(affected_person)].attributes[attribute]=affected_people[_][affected_person][attribute]
-            progress[1]=True
-          except Exception as a:
-            print(f"An error occurred: {a}")
-            continue
-          
-      assistence[4]=q[4]
-      if not progress[2]:
-        try:
-          new_memory=chat(system_message,[x for x in assistence if x is not None]+[q[5]])
-          print(f'memory:{new_memory}')
-          new_memory=ast.literal_eval(new_memory)
-          for affected_person in new_memory:#{PERSON:{strength:1,...}...}
-            system.individuals[int(affected_person)].memory.append(new_memory[affected_person])
-          progress[2]=True
-          break
-        except Exception as e:
-          try:
-            for _ in new_memory:
-              for affected_person in new_memory[_]:
-                system.individuals[int(affected_person)].memory.append(new_memory[_][affected_person])
-            progress[2]=True
-          except Exception as a:
-            print(f"An error occurred: {a}")
-      print(progress[0], progress[1], progress[2])
-      if progress[0] and progress[1] and progress[2]:
-            break
-      print(i)"""
