@@ -97,6 +97,8 @@ def rob(target: Individual, rob_person:Individual, system: System, robType: str)
             rob_person.attributes['social_position']+=2
             target.memory.append(f"Day {system.time}. {rob_person.attributes['name']} tried to rob me, I rebelled but lost. {victim_memory}. I lost 1 unit of social status.")
             rob_person.memory.append(f"Day {system.time}. I tried to rob {target.attributes['name']}, who rebelled against me but I won. {victor_memory}. I gained 2 units of social status.")
+
+    print("Robbing process finished")
     return
 
 #master punish subject, get his food and land and share it to other subjects except the subject being punished
