@@ -32,7 +32,7 @@ def share_rob_gain(master: Individual, robAmount: float, robType: str, system:Sy
     for subjectid in master.obey_stats.subjectid:
         subject = system.individuals[subjectid]
         subject.attributes[robType]+=robAmount/len(master.obey_stats.subjectid)
-        subject.memory.append(f"Day {master.system.time}. I got {robAmount/len(master.obey_stats.subjectid)} units of {robType} from {master.attributes['name']}.")
+        subject.memory.append(f"Day {system.time}. I got {robAmount/len(master.obey_stats.subjectid)} units of {robType} from {master.attributes['name']}.")
     #include the master
     master.attributes[robType]+=robAmount/len(master.obey_stats.subjectid)
     master.memory.append(f"Day {master.system.time}. I gave {robAmount} units of {robType} to my subjects.")
@@ -101,7 +101,7 @@ def punishment(subject:Individual, system:System) -> None:
     for subjectid in master.obey_stats.subjectid:
         if subjectid!=subject.attributes['id']:
             subject.memory.append(f"I got food and land because {subject.attributes['name']} was punished by {master.attributes['name']}, since he robbed other subject.")
-            subject = master.system.individuals[subjectid]
+            subject = system.individuals[subjectid]
             subject.attributes['food'] += food_amount/(len(master.obey_stats.subjectid)-1)
             subject.attributes['land'] += land_amount/(len(master.obey_stats.subjectid)-1)
     return

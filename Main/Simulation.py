@@ -43,7 +43,7 @@ class analysis:
     if all(self.obey_):
       with open(file_name, 'a', newline='') as f:
         csv_writer = csv.writer(f)
-        csv_writer.writerow(["Common Wealth achived on day {self.day_}"])
+        csv_writer.writerow(["Common Wealth achived on day "+ str(self.day_)])
       self.rob_=0
       self.farm_=0
       self.trade_=0
@@ -52,7 +52,7 @@ class analysis:
       
     
     log = [self.rob_, self.rob_/total, self.trade_, self.trade_/total,
-           self.farm_, self.farm_/total, self.obey_, self.obey_amount/self.person_]
+           self.farm_, self.farm_/total, self.obey_amount, self.obey_amount/self.person_]
     with open(file_name, 'a', newline='') as f:
       csv_writer = csv.writer(f)
       csv_writer.writerow(log)
