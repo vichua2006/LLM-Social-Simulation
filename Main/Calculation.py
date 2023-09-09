@@ -40,6 +40,11 @@ def share_rob_gain(master: Individual, robAmount: float, robType: str, system:Sy
     return
     
 def rob(target: Individual, rob_person:Individual, system: System, robType: str)->None:
+    #cannot rob self
+    if target.attributes['id']==rob_person.attributes['id']:
+        print("ROBERROR: cannot rob self.")
+        return
+    
     rob_perosn_id:int=rob_person.attributes['id']
     print(f'To the victim, the win rate is: {target.get_win_rate(rob_perosn_id) if target.robbing_stats.rob_times[rob_perosn_id] else "No rob has been done yet."}')
     winner,loser=winner_loser(target, rob_person,)
@@ -53,7 +58,7 @@ def rob(target: Individual, rob_person:Individual, system: System, robType: str)
             target.attributes['social_position']+=1
             rob_person.attributes['social_position']+=-1
             target.memory.append(f"Day {system.time}. {rob_person.attributes['name']} tried to rob me, but I rebelled and won. I protected my own land and food and my social position elevated 1 unit.")
-            rob_person.memory.append(f"Day {system.time}. I tried to rob {rob_person.attributes['name']}, who rebelled against me and I lost. I did not gain anything and my social position dropped 1 unit.")
+            rob_person.memory.append(f"Day {system.time}. I tried to rob {target.attributes['name']}, who rebelled against me and I lost. I did not gain anything and my social position dropped 1 unit.")
     else:
             victim_memory = ""
             #Rob Person Successfully Rob Target
@@ -84,9 +89,9 @@ def punishment(subject:Individual, system:System) -> None:
         print("PUNISHMENTERROR: no master, this should not happen.")
         return
     print(f"PUNISHMENT: {subject.attributes['name']} is punished by {system.individuals[subject.obey_stats.obey_personId].attributes['name']}, all other subjects will share the food and land of {subject.attributes['name']}.")
+    master = system.individuals[subject.obey_stats.obey_personId]
     subject.memory.append(f"I was punished by {system.individuals[subject.obey_stats.obey_personId].attributes['name']} because I, as a subject, rob other subject.")
     master.memory.append(f"I punished {subject.attributes['name']} because he, as a subject, rob other subject.")
-    master = system.individuals[subject.obey_stats.obey_personId]
     #master punish subject, 50% food and 50% land
     food_amount = 0.5 * subject.attributes['food']
     land_amount = 0.5 * subject.attributes['land']
