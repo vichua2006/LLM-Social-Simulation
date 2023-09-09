@@ -32,13 +32,29 @@ def share_rob_gain(master: Individual, robAmount: float, robType: str, system:Sy
     for subjectid in master.obey_stats.subjectid:
         subject = system.individuals[subjectid]
         subject.attributes[robType]+=robAmount/len(master.obey_stats.subjectid)
-        subject.memory.append(f"Day {master.system.time}. I got {robAmount/len(master.obey_stats.subjectid)} units of {robType} from {master.attributes['name']}.")
+        subject.memory.append(f"Day {system.time}. I got {robAmount/len(master.obey_stats.subjectid)} units of {robType} from {master.attributes['name']}.")
     #include the master
     master.attributes[robType]+=robAmount/len(master.obey_stats.subjectid)
-    master.memory.append(f"Day {master.system.time}. I gave {robAmount} units of {robType} to my subjects.")
+    master.memory.append(f"Day {system.time}. I gave {robAmount} units of {robType} to my subjects.")
     print(f"SHARE_ROB_FOOD: {master.attributes['name']} shared {robAmount} units of {robType} to {len(master.obey_stats.subjectid)} subjects.")
     return
-    
+
+def share_rob_lost(master:Individual, robAmount:float, robType:str, system:System) -> None:
+    if master.obey_stats.subjectid is None or not master.obey_stats.subjectid:
+        print("SHARE_LOST_FOOD: no subject, directly lost the rob amount.")
+        master.attributes[robType]= master.attributes[robType] - robAmount
+        return
+    #divide the rob amount to each subject
+    for subjectid in master.obey_stats.subjectid:
+        subject = system.individuals[subjectid]
+        subject.attributes[robType]= subject.attributes[robType] - robAmount/len(master.obey_stats.subjectid)
+        subject.memory.append(f"Day {master.system.time}. I lost {robAmount/len(master.obey_stats.subjectid)} units of {robType} to {master.attributes['name']}.")
+    #include the master
+    master.attributes[robType] = master.attributes[robType] - robAmount/len(master.obey_stats.subjectid)
+    master.memory.append(f"Day {master.system.time}. I get {robAmount} units of {robType} from my subjects.")
+    print(f"SHARE_LOST_FOOD: {master.attributes['name']} got {robAmount} units of {robType} from {len(master.obey_stats.subjectid)} subjects.")
+    return
+
 def rob(target: Individual, rob_person:Individual, system: System, robType: str)->None:
     #cannot rob self
     if target.attributes['id']==rob_person.attributes['id']:
@@ -64,14 +80,14 @@ def rob(target: Individual, rob_person:Individual, system: System, robType: str)
             #Rob Person Successfully Rob Target
             lost_food:float=target.attributes['food']
             if robType=='food':
-                target.attributes['food']-=lost_food
+                share_rob_lost(target,lost_food, robType, system)
                 share_rob_gain(rob_person,lost_food,robType, system)
                 victim_memory=f"I got robbed {lost_food} units of food."
                 victor_memory=f"I robbed and gained {lost_food} units of food."
             elif robType=="land":
                 if target.attributes['land']>1:
-                        target.attributes['land']-=1
-                        share_rob_gain(rob_person,lost_food,robType, system)
+                        share_rob_lost(target,1,robType, system)
+                        share_rob_gain(rob_person,1,robType, system)
                         victim_memory=f"I got robbed of 1 land."
                         victor_memory=f"I robbed and gained 1 land."
                 else:
@@ -101,7 +117,7 @@ def punishment(subject:Individual, system:System) -> None:
     for subjectid in master.obey_stats.subjectid:
         if subjectid!=subject.attributes['id']:
             subject.memory.append(f"I got food and land because {subject.attributes['name']} was punished by {master.attributes['name']}, since he robbed other subject.")
-            subject = master.system.individuals[subjectid]
+            subject = system.individuals[subjectid]
             subject.attributes['food'] += food_amount/(len(master.obey_stats.subjectid)-1)
             subject.attributes['land'] += land_amount/(len(master.obey_stats.subjectid)-1)
     return

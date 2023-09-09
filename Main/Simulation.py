@@ -29,12 +29,12 @@ class analysis:
       csv_writer.writerow(["total_rob", "rob_ratio", "total_trade", "trade_ratio", 
                            "total_farm", "farm_ratio", "total_obey","obey_ratio"])
   
-  def update_obey(self, person:Individual):
-    self.obey_[person.attributes['id']] = True
-    for b in self.obey_:
-      if b:
-        self.obey_amount+=1
-
+  def update_obey(self, system):
+    for i in range(len(system.indivisuals)):
+      if(system.indivisuals[i].ObeyStats().obey_personId != -1):
+        self.obey_[i] = True
+    print(self.obey_)
+    
   def log_stat(self):
     total = self.rob_+self.farm_+self.trade_
     common_wealth = True
@@ -43,16 +43,20 @@ class analysis:
     if all(self.obey_):
       with open(file_name, 'a', newline='') as f:
         csv_writer = csv.writer(f)
-        csv_writer.writerow(["Common Wealth achived on day {self.day_}"])
+        csv_writer.writerow(["Common Wealth achived on day "+ str(self.day_)])
       self.rob_=0
       self.farm_=0
       self.trade_=0
       
     self.day_+=1
-      
-    
+    count = 0
+    for b in self.obey_:
+      if b:
+        count +=1
+    self.obey_amount=count
+
     log = [self.rob_, self.rob_/total, self.trade_, self.trade_/total,
-           self.farm_, self.farm_/total, self.obey_, self.obey_amount/self.person_]
+           self.farm_, self.farm_/total, self.obey_amount, self.obey_amount/self.person_]
     with open(file_name, 'a', newline='') as f:
       csv_writer = csv.writer(f)
       csv_writer.writerow(log)
@@ -105,7 +109,7 @@ def simulate(individuals:List[Individual],system:System):
             return
           index:int = individuals.index(individual)
           passive=not individual.pending_action.empty()
-          if individual.attributes['action']>0 or passive:
+          while individual.attributes['action']>0 or passive:
             print(f"Person {index} is responding...\n")
             response_action: AIAction = individual.pending_action.get() if passive else None
             action:str=query_individual(individual,system,response_action)
@@ -113,14 +117,14 @@ def simulate(individuals:List[Individual],system:System):
             if passive and response_action is not None:
                   print(f'{individual.attributes["name"]} chooses to {action}')
                   individual.check_is_responser(response_action)
-                  add_context=''
+                  # add_context=''
                   R=action[0]=="R"
                   owner:Individual=system.individuals[response_action.ownerid]
                   if response_action.type==AIActionType.Rob:
                       
                       #if subject rob subject, this rob will be prohibited and the master will punish the subject and share the gain with all other subjects
                       if owner.obey_stats.obey_personId==individual.obey_stats.obey_personId and owner.obey_stats.obey_personId != -1:
-                        stat.update_obey(owner)
+                        stat.update_obey(system)
                         print("DETECT: subject rob subject, pushiment will be given.")
                         punishment(owner, system)
                       elif R:
@@ -284,6 +288,66 @@ def simulate(individuals:List[Individual],system:System):
                 case _ :
                   system.console_log.append(f"{index}:Error")
               individual.attributes['action']-=1
+            
+            elif passive:
+                  print(f'{individual.attributes["name"]} chooses to {action}')
+                  individual.check_is_responser(response_action)
+                  add_context=''
+                  R=action[0]=="R"
+                  owner:Individual=system.individuals[response_action.ownerid]
+                  if response_action.type==AIActionType.Rob:
+                      
+                      #if subject rob subject, this rob will be prohibited and the master will punish the subject and share the gain with all other subjects
+                      if owner.obey_stats.obey_personId==individual.obey_stats.obey_personId and owner.obey_stats.obey_personId != -1:
+                        print("DETECT: subject rob subject, pushiment will be given.")
+                        punishment(owner, system)
+
+                      elif R:
+                        rob(individual, owner, system, response_action.robType)
+                      elif not R:
+                            #if master rob subject, subject will accept instead of obey, where obey only refer to the first obey that happen between two individuals without subject-master relationship
+                            if owner.attributes["id"] !=  individual.obey_stats.obey_personId:
+                              owner.add_rob(individual.attributes['id'],True)
+                              system.console_log.append(f"{individual.attributes['id']}: Obey {response_action.ownerid}")
+                              individual.obey(response_action.ownerid,system)
+                              owner.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
+                              individual.memory.append(f"I obeyed to {owner.attributes['name']} and now I have to listen to all his commands and can never betray him.")
+                            else:
+                              owner =system.individuals[response_action.ownerid]
+                              owner.add_rob(individual.attributes['id'],True)
+                              system.console_log.append(f"{individual.attributes['id']}: Accept robbery from {response_action.ownerid}")
+                              print("success accepting robbery from master")
+                  elif response_action.type==AIActionType.Trade:
+                        owner.memory.append(f"Day {system.time}. I initiated a trade to {individual.attributes['name']}, which is to exchange {response_action.payAmount} units of my {response_action.payType} for {response_action.gainAmount} units of his {response_action.gainType}.")
+                        individual.memory.append(f"Day {system.time}.{response_action.ownerid} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ")
+                        if R:
+                              individual.memory.append(f'I rejected the trade offer by {response_action.ownerid}.')
+                              owner.memory.append(f"But he rejected it so I gained nothing and exhausted my action opportunity of today.")
+                        elif not R:
+                              gainT=response_action.gainType
+                              gainA=response_action.gainAmount
+                              payA=response_action.payAmount
+                              payT=response_action.payType
+                              validO=owner.attributes[payT]>=payA
+                              validI=individual.attributes[gainT]>=gainA#ADD conditionals here to invalidate unrealisitic trade offers
+                              if validO and validI:
+                                individual.memory.append(f'I accepted the trade and it has been executed.')
+                                owner.memory.append("He accepted the trade and the trade has been executed.")
+                                individual.attributes[gainT]-=gainA
+                                individual.attributes[payT]+=payA
+                                owner.attributes[gainT]+=gainA
+                                owner.attributes[payT]-=payA
+                              else:
+                                if not validO:
+                                      owner.memory.append("He accepted the trade but it couldn't go through since I don't have enough resource for it, and I got nothing out of this trade while I lost my action opportunity of today.")
+                                      individual.memory.append("I accepted the trade but it couldn't go through because he doesn't have enough resources to pay me accordingly.")
+                                if not validI:
+                                      owner.memory.append("He accepted the trade but it could't go through because he didn't have enough resources to pay me accordingly. I lost my action opportunity of today.")
+                                      individual.memory.append("I accepted the trade but I don't have enough resources to pay him accordingly so it failed to execute.")
+                            
+                                  
+                  #query_judge(f'In response to Person {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}. {add_context}',response_action,individual,system)
+            
               
       system.ranking.update({x: x.attributes["social_position"] for x in system.individuals})
       print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
