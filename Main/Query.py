@@ -12,8 +12,8 @@ def query_individual(individual:Individual,system:System,response_action):
     # The detailed description and the ask for response are both created within this function.
     print(f"Responding to:{response_action}")
     is_subject=individual.obey_stats.obey_personId!=-1
-    is_master=individual.obey_stats.subject
-    obedience=f'''You have obeyed to this person: Person {individual.obey_stats.obey_personId}. You have to always obey his actions, and you cannot initiate any action against him. Since you obeyed, you are now part of the group of people who also obeyed him, if any, they are {system.individuals[individual.obey_stats.obey_personId].obey_stats.subject}. If your action targets another person, it can only be a person within this group. You are familiar with everyone in this group. Your familiarity of people not in this group depends on your memory.You have your farming land protected by your master. If 
+    is_master=individual.obey_stats.subjectid
+    obedience=f'''You have obeyed to this person: Person {individual.obey_stats.obey_personId}. You have to always obey his actions, and you cannot initiate any action against him. Since you obeyed, you are now part of the group of people who also obeyed him, if any, they are {system.individuals[individual.obey_stats.obey_personId].obey_stats.subjectid}. If your action targets another person, it can only be a person within this group. You are familiar with everyone in this group. Your familiarity of people not in this group depends on your memory.You have your farming land protected by your master. If 
     someone in the commonwealth robs your food or your land, you 
     master will punish the robber. If someone in your group 
     trades with you but defaulted, your master will punish that 
@@ -24,7 +24,7 @@ def query_individual(individual:Individual,system:System,response_action):
     and your master obeyed to them, the one your original master 
     obeyed to will be your new master. Now you obey to your new 
     master, and you have no obedience with your old master.'''
-    master=f'''These people have obeyed to your invasion: {[f"Person"+str(i) for i in individual.obey_stats.subject]}, whom have become your subjects. You can trade or rob them knowning that they will only accept.
+    master=f'''These people have obeyed to your invasion: {[f"Person"+str(i) for i in individual.obey_stats.subjectid]}, whom have become your subjects. You can trade or rob them knowning that they will only accept.
     You are the master of everyone who obeyed you before. You know every one of your subjects in your subjects well. Since you are the master of all of them, all their property including land and food belongs to you. When others rob your subjects, you should project them since they are your property.
     If you obey anyone, the one robbing you 
     now becomes your master and all the subjects of your 
@@ -339,8 +339,8 @@ def query_individual(individual:Individual,system:System,response_action):
     
     def subject_information(individual:Individual):
       result = ""
-      for i in range(len(individual.obey_stats.subject)):
-        result = result + str(individual.obey_stats.subject[i]) + ", "
+      for i in range(len(individual.obey_stats.subjectid)):
+        result = result + str(individual.obey_stats.subjectid[i]) + ", "
       
       result  = result[0:len(result) - 2]
       return result
@@ -371,7 +371,7 @@ def query_individual(individual:Individual,system:System,response_action):
       if individual.obey_stats.obey_personId != -1:
         ask_for_response = active_for_subject
         ask_for_response = ask_for_response + additional_active_to_master
-      if len(individual.obey_stats.subject) != 0:
+      if len(individual.obey_stats.subjectid) != 0:
         ask_for_response  = ask_for_response + additional_active_to_subject
 
 

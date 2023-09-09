@@ -32,7 +32,9 @@ class Individual:
             "action": 1  # Initial action point is 1
             ,"trust_of_others":0
         }
-        self.INTELLIGENCE= 1
+
+
+        self.INTELLIGENCE=1 #np.random.beta(40,20)
         self.pending_action:SeralizeQueue[AIAction] = SeralizeQueue() # The pending action that the individual need to deal with
         self.current_action_type:AIActionType = AIActionType.Default
         self.robbing_stats = RobStats()
@@ -72,13 +74,13 @@ class Individual:
             master=system.individuals[person_id].obey_stats.obey_personId
         self.obey_stats.obey_personId = person_id
         #Get the person you obey to and add yourself to the subject list
-        system.individuals[person_id].obey_stats.subject.append(system.individuals.index(self)) 
+        system.individuals[person_id].obey_stats.subjectid.append(system.individuals.index(self)) 
         #iterate all subject of yours and transfer its obeyperson to the person you obey to
-        subjects=[x for x in self.obey_stats.subject]
+        subjects=[x for x in self.obey_stats.subjectid]
         for subject in subjects:
             system.individuals[subject].obey_stats.obey_personId = person_id
-            system.individuals[person_id].obey_stats.subject.append(subject)
-        self.obey_stats.subject=[]
+            system.individuals[person_id].obey_stats.subjectid.append(subject)
+        self.obey_stats.subjectid=[]
         
     
     # Check if the individual is the responser of the action
@@ -127,4 +129,4 @@ class RobStats():
 class ObeyStats:
     def __init__(self) -> None:
         self.obey_personId: int = -1 #the personId you are obey to, -1 means no one is obeyed
-        self.subject: List[int] = [] #the personId who obey you
+        self.subjectid: List[int] = [] #the personId who obey you

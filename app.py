@@ -28,7 +28,7 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
         id = person.attributes["id"]
         section_key = f'-SECTION{i}-'
         pending_action_layout = [[sg.Listbox(values=person.get_pending_action_as_list(), size=(30, 5),  horizontal_scroll= True, key=f'-PENDINGACTION{i}-')]]
-        obey_subject_layout = [[sg.Listbox(values = person.obey_stats.subject, size=(30, 5),  horizontal_scroll= True, key=f'-OBEYSUBJECT{i}-')]]
+        obey_subject_layout = [[sg.Listbox(values = person.obey_stats.subjectid, size=(30, 5),  horizontal_scroll= True, key=f'-OBEYSUBJECT{i}-')]]
         memory_layout = [[sg.Listbox(values = person.memory, size=(30, 5),  horizontal_scroll= True, key=f'-MEMORY{i}-')]]
         rob_stat_layout = [[sg.Listbox(values = person.robbing_stats.get_rob_times_list(), size=(30, 5),  horizontal_scroll= True, key=f'-ROBTIMESLIST{i}-')]]
         left_section = [[sg.Text('Aggressiveness:'), sg.Input(person.attributes["aggressiveness"], size = (15, None), key=f'-AGGRESSIVENESS{i}-')],
@@ -196,7 +196,7 @@ def main():
                     case _ if (_ := f'-PENDINGACTION{i}-') == key:
                         new_values = person.get_pending_action_as_list()
                     case _ if (_ := f'-OBEYSUBJECT{i}-') == key:
-                        new_values = person.obey_stats.subject
+                        new_values = person.obey_stats.subjectid
                     case _ if (_ := f'-MEMORY{i}-') == key:
                         new_values = person.memory
                 
