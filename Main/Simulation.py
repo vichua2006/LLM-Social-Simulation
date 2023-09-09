@@ -29,12 +29,12 @@ class analysis:
       csv_writer.writerow(["total_rob", "rob_ratio", "total_trade", "trade_ratio", 
                            "total_farm", "farm_ratio", "total_obey","obey_ratio"])
   
-  def update_obey(self, person:Individual):
-    self.obey_[person.attributes['id']] = True
-    for b in self.obey_:
-      if b:
-        self.obey_amount+=1
-
+  def update_obey(self, system):
+    for i in range(len(system.indivisuals)):
+      if(system.indivisuals[i].ObeyStats().obey_personId != -1):
+        self.obey_[i] = True
+    print(self.obey_)
+    
   def log_stat(self):
     total = self.rob_+self.farm_+self.trade_
     common_wealth = True
@@ -49,8 +49,12 @@ class analysis:
       self.trade_=0
       
     self.day_+=1
-      
-    
+    count = 0
+    for b in self.obey_:
+      if b:
+        count +=1
+    self.obey_amount=count
+
     log = [self.rob_, self.rob_/total, self.trade_, self.trade_/total,
            self.farm_, self.farm_/total, self.obey_amount, self.obey_amount/self.person_]
     with open(file_name, 'a', newline='') as f:
@@ -113,14 +117,14 @@ def simulate(individuals:List[Individual],system:System):
             if passive and response_action is not None:
                   print(f'{individual.attributes["name"]} chooses to {action}')
                   individual.check_is_responser(response_action)
-                  add_context=''
+                  # add_context=''
                   R=action[0]=="R"
                   owner:Individual=system.individuals[response_action.ownerid]
                   if response_action.type==AIActionType.Rob:
                       
                       #if subject rob subject, this rob will be prohibited and the master will punish the subject and share the gain with all other subjects
                       if owner.obey_stats.obey_personId==individual.obey_stats.obey_personId and owner.obey_stats.obey_personId != -1:
-                        stat.update_obey(owner)
+                        stat.update_obey(system)
                         print("DETECT: subject rob subject, pushiment will be given.")
                         punishment(owner, system)
                       elif R:

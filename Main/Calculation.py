@@ -35,7 +35,7 @@ def share_rob_gain(master: Individual, robAmount: float, robType: str, system:Sy
         subject.memory.append(f"Day {system.time}. I got {robAmount/len(master.obey_stats.subjectid)} units of {robType} from {master.attributes['name']}.")
     #include the master
     master.attributes[robType]+=robAmount/len(master.obey_stats.subjectid)
-    master.memory.append(f"Day {master.system.time}. I gave {robAmount} units of {robType} to my subjects.")
+    master.memory.append(f"Day {system.time}. I gave {robAmount} units of {robType} to my subjects.")
     print(f"SHARE_ROB_FOOD: {master.attributes['name']} shared {robAmount} units of {robType} to {len(master.obey_stats.subjectid)} subjects.")
     return
     
