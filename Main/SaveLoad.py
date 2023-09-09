@@ -86,7 +86,7 @@ def init_save(system: System):
     
     # item_lists= flatten_json_key(json_iteratable)
     
-    custom_dict_repr_key(system, 'system')
+    # custom_dict_repr_key(system, 'system')
     with open(file_name, 'a', newline='') as f:
         csv_writer = csv.writer(f)
         csv_writer.writerow(save_dict_day)
