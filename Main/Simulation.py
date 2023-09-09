@@ -20,6 +20,10 @@ class analysis:
     self.farm_=0
     self.trade_=0
     self.obay_=0
+    with open(file_name, 'a', newline='') as f:
+      csv_writer = csv.writer(f)
+      csv_writer.writerow(["total_rob", "rob_ratio", "total_trade", "trade_ratio", 
+                           "total_farm", "farm_ratio", "total_obay","obay_ratio"])
   
   def log_stat(self):
     total = self.rob_+self.farm_+self.trade_+self.obay_
