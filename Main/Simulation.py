@@ -92,8 +92,8 @@ def simulate(individuals:List[Individual],system:System):
                       
                       #if subject rob subject, this rob will be prohibited and the master will punish the subject and share the gain with all other subjects
                       if owner.obey_stats.obey_personId==individual.obey_stats.obey_personId and owner.obey_stats.obey_personId != -1:
-                          print("DETECT: subject rob subject, pushiment will be given.")
-                          punishment(owner, system)
+                        print("DETECT: subject rob subject, pushiment will be given.")
+                        punishment(owner, system)
 
                       elif R:
                         rob(individual, owner, system, response_action.robType)
