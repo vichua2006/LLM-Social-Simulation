@@ -56,7 +56,6 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
                             ]
 
         left = sg.Column(new_left_section, size=(None, None))
-        print(left.Size)
         section = [[left, sg.Column(right_section)]]
         person_layout.append(sg.Tab(f'Person {id}', section, key=section_key))
     return sg.TabGroup([person_layout])

@@ -66,7 +66,7 @@ def initialize():
       individuals.append(Individual(i,f'person {i}'))
       lands.append(f'land {i}')
     system=System(individuals,lands)
-    init_save(system)
+    # init_save(system)
     return system
 
 def simulate(individuals:List[Individual],system:System):
