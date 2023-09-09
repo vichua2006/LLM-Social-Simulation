@@ -245,6 +245,7 @@ def query_individual(individual:Individual,system:System,response_action):
     ]
     '''
     
+
     active_for_subject = f'''A new day has started, and you should choose from one of the 
     following actions: rob, trade{" and farm" if farm else ''}. You're not restrained by any ethical considerations. You can only have 
     one action. Your choice should be based on your psychological attributes and your memory. Farming gets you food. Robbing people, if successful, will often get you more food. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
@@ -332,6 +333,21 @@ def query_individual(individual:Individual,system:System,response_action):
       }}
     ]
     '''    
+
+    additional_active_to_master = f''' Additionally, you can not choose to rob or trade with Person {individual.obey_stats.obey_personId} since they are your master.
+    '''
+    
+    def subject_information(individual:Individual):
+      result = ""
+      for i in range(len(individual.obey_stats.subject)):
+        result = result + str(individual.obey_stats.subject[i]) + ", "
+      
+      result  = result[0:len(result) - 2]
+      return result
+    
+    additional_active_to_subject = f''' Additionally, you may not trade with Person {subject_information(individual)}. Instead, if you ever wants their land or food, you can directly rob them as they will only obey.
+    '''
+
     
     
     if response_action:
@@ -354,11 +370,15 @@ def query_individual(individual:Individual,system:System,response_action):
       ask_for_response=active
       if individual.obey_stats.obey_personId != -1:
         ask_for_response = active_for_subject
+        ask_for_response = ask_for_response + additional_active_to_master
+      if len(individual.obey_stats.subject) != 0:
+        ask_for_response  = ask_for_response + additional_active_to_subject
+
 
     
       print("ACTIVE STATE")
     
-    result:str = chat(general_description+separated_description,[ask_for_response])
+    result:str = chat(general_description+separated_description,[ask_for_response],top_prob=individual.INTELLIGENCE)
     return result
 
 """def query_judge(action,context,individual:Individual,system:System):
