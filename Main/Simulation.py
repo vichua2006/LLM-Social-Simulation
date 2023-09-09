@@ -13,27 +13,51 @@ import random
 import datetime
 import csv
 
+pupulation=5
 file_name='Log/'+datetime.datetime.now().strftime("%B %d, %I %M%p , %Y")+'Experimentlog.csv'
 class analysis:
-  def __init__(self) -> None:
+  def __init__(self, population:int) -> None:
+    self.day_=1
     self.rob_=0
     self.farm_=0
     self.trade_=0
-    self.obay_=0
+    self.obey_amount = 0
+    self.obey_=[False] * population
+    self.person_=population
     with open(file_name, 'a', newline='') as f:
       csv_writer = csv.writer(f)
       csv_writer.writerow(["total_rob", "rob_ratio", "total_trade", "trade_ratio", 
-                           "total_farm", "farm_ratio", "total_obay","obay_ratio"])
+                           "total_farm", "farm_ratio", "total_obey","obey_ratio"])
   
+  def update_obey(self, person:Individual):
+    self.obey_[person.attributes['id']] = True
+    for b in self.obey_:
+      if b:
+        self.obey_amount+=1
+
   def log_stat(self):
-    total = self.rob_+self.farm_+self.trade_+self.obay_
+    total = self.rob_+self.farm_+self.trade_
+    common_wealth = True
+    print(self.obey_)
+    
+    if all(self.obey_):
+      with open(file_name, 'a', newline='') as f:
+        csv_writer = csv.writer(f)
+        csv_writer.writerow(["Common Wealth achived on day {self.day_}"])
+      self.rob_=0
+      self.farm_=0
+      self.trade_=0
+      
+    self.day_+=1
+      
+    
     log = [self.rob_, self.rob_/total, self.trade_, self.trade_/total,
-           self.farm_, self.farm_/total, self.obay_, self.obay_/total]
+           self.farm_, self.farm_/total, self.obey_, self.obey_amount/self.person_]
     with open(file_name, 'a', newline='') as f:
       csv_writer = csv.writer(f)
       csv_writer.writerow(log)
 
-stat = analysis()
+stat = analysis(pupulation)
 
 def change_affected_people(affected_people, system:System):
     for affected_person in affected_people:#{PERSON:{strength:1,...}...}
@@ -57,7 +81,7 @@ def initialize():
     # Initialize individuals and environment
     individuals=[]
     lands=[]
-    POPULATION=5
+    POPULATION=pupulation
     #POPULATIONLIST=[x for x in range(POPULATION)]
     #random id
     #random_numbers = random.sample(POPULATIONLIST, POPULATION)
@@ -96,6 +120,7 @@ def simulate(individuals:List[Individual],system:System):
                       
                       #if subject rob subject, this rob will be prohibited and the master will punish the subject and share the gain with all other subjects
                       if owner.obey_stats.obey_personId==individual.obey_stats.obey_personId and owner.obey_stats.obey_personId != -1:
+                          stat.update_obey(owner)
                           print("DETECT: subject rob subject, pushiment will be given.")
                           punishment(owner, system)
 
