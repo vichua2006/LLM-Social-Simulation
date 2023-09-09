@@ -110,6 +110,7 @@ def simulate(individuals:List[Individual],system:System):
           index:int = individuals.index(individual)
           passive=not individual.pending_action.empty()
           while individual.attributes['action']>0 or passive:
+            passive=not individual.pending_action.empty()
             print(f"Person {index} is responding...\n")
             response_action: AIAction = individual.pending_action.get() if passive else None
             action:str=query_individual(individual,system,response_action)
@@ -289,65 +290,7 @@ def simulate(individuals:List[Individual],system:System):
                   system.console_log.append(f"{index}:Error")
               individual.attributes['action']-=1
             
-            elif passive:
-                  print(f'{individual.attributes["name"]} chooses to {action}')
-                  individual.check_is_responser(response_action)
-                  add_context=''
-                  R=action[0]=="R"
-                  owner:Individual=system.individuals[response_action.ownerid]
-                  if response_action.type==AIActionType.Rob:
-                      
-                      #if subject rob subject, this rob will be prohibited and the master will punish the subject and share the gain with all other subjects
-                      if owner.obey_stats.obey_personId==individual.obey_stats.obey_personId and owner.obey_stats.obey_personId != -1:
-                        print("DETECT: subject rob subject, pushiment will be given.")
-                        punishment(owner, system)
-
-                      elif R:
-                        rob(individual, owner, system, response_action.robType)
-                      elif not R:
-                            #if master rob subject, subject will accept instead of obey, where obey only refer to the first obey that happen between two individuals without subject-master relationship
-                            if owner.attributes["id"] !=  individual.obey_stats.obey_personId:
-                              owner.add_rob(individual.attributes['id'],True)
-                              system.console_log.append(f"{individual.attributes['id']}: Obey {response_action.ownerid}")
-                              individual.obey(response_action.ownerid,system)
-                              owner.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
-                              individual.memory.append(f"I obeyed to {owner.attributes['name']} and now I have to listen to all his commands and can never betray him.")
-                            else:
-                              owner =system.individuals[response_action.ownerid]
-                              owner.add_rob(individual.attributes['id'],True)
-                              system.console_log.append(f"{individual.attributes['id']}: Accept robbery from {response_action.ownerid}")
-                              print("success accepting robbery from master")
-                  elif response_action.type==AIActionType.Trade:
-                        owner.memory.append(f"Day {system.time}. I initiated a trade to {individual.attributes['name']}, which is to exchange {response_action.payAmount} units of my {response_action.payType} for {response_action.gainAmount} units of his {response_action.gainType}.")
-                        individual.memory.append(f"Day {system.time}.{response_action.ownerid} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ")
-                        if R:
-                              individual.memory.append(f'I rejected the trade offer by {response_action.ownerid}.')
-                              owner.memory.append(f"But he rejected it so I gained nothing and exhausted my action opportunity of today.")
-                        elif not R:
-                              gainT=response_action.gainType
-                              gainA=response_action.gainAmount
-                              payA=response_action.payAmount
-                              payT=response_action.payType
-                              validO=owner.attributes[payT]>=payA
-                              validI=individual.attributes[gainT]>=gainA#ADD conditionals here to invalidate unrealisitic trade offers
-                              if validO and validI:
-                                individual.memory.append(f'I accepted the trade and it has been executed.')
-                                owner.memory.append("He accepted the trade and the trade has been executed.")
-                                individual.attributes[gainT]-=gainA
-                                individual.attributes[payT]+=payA
-                                owner.attributes[gainT]+=gainA
-                                owner.attributes[payT]-=payA
-                              else:
-                                if not validO:
-                                      owner.memory.append("He accepted the trade but it couldn't go through since I don't have enough resource for it, and I got nothing out of this trade while I lost my action opportunity of today.")
-                                      individual.memory.append("I accepted the trade but it couldn't go through because he doesn't have enough resources to pay me accordingly.")
-                                if not validI:
-                                      owner.memory.append("He accepted the trade but it could't go through because he didn't have enough resources to pay me accordingly. I lost my action opportunity of today.")
-                                      individual.memory.append("I accepted the trade but I don't have enough resources to pay him accordingly so it failed to execute.")
-                            
-                                  
-                  #query_judge(f'In response to Person {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}. {add_context}',response_action,individual,system)
-            
+                     
               
       system.ranking.update({x: x.attributes["social_position"] for x in system.individuals})
       print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
