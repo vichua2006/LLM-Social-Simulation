@@ -53,24 +53,24 @@ def init_save(system: System):
     save_dict_day = []
     
     
-    # TODO: most current 
-    def custom_dict_repr_key(obj, key=''):
-        if isinstance(obj, (int, float, str, bytes, bool, type(None))):
-            if not isinstance(obj, (type(None))):
-                save_dict_day.append(key)
-        elif isinstance(obj, (list, tuple)):
-            save_dict_day.append(key)
-        elif isinstance(obj, SeralizeQueue):
-            return None
-        elif isinstance(obj, CustomConsoleLog):
-            return None
-        elif isinstance(obj, dict):
-            for k, v in obj.items():
-                custom_dict_repr_key(v, k)
-        else:
-            variables = vars(obj)
-            for k, v in variables.items():
-                custom_dict_repr_key(v, k)
+    # TODO: most current
+    # def custom_dict_repr_key(obj, key=''):
+    #     if isinstance(obj, (int, float, str, bytes, bool, type(None))):
+    #         if not isinstance(obj, (type(None))):
+    #             save_dict_day.append(key)
+    #     elif isinstance(obj, (list, tuple)):
+    #         save_dict_day.append(key)
+    #     elif isinstance(obj, SeralizeQueue):
+    #         return None
+    #     elif isinstance(obj, CustomConsoleLog):
+    #         return None
+    #     elif isinstance(obj, dict):
+    #         for k, v in obj.items():
+    #             custom_dict_repr_key(v, k)
+    #     else:
+    #         variables = vars(obj)
+    #         for k, v in variables.items():
+    #             custom_dict_repr_key(v, k)
     
     
     # for person in system.individuals:
@@ -105,27 +105,27 @@ def save_logframes(system: System):
     # # for person in system.individuals:
     # #     for key, item in person.__dict__.items():
     # #         save_dict_day.append(item)
-    def custom_dict_repr_val(obj, key=''):
-        if isinstance(obj, (int, float, str, bytes, bool, type(None))):
-            if not isinstance(obj, (type(None))):
-                save_dict_day.append(obj)
-        elif isinstance(obj, (list, tuple)):
-            save_dict_day.append(obj)
-        elif isinstance(obj, SeralizeQueue):
-            return None
-        elif isinstance(obj, CustomConsoleLog):
-            return None
-            # return [custom_dict_repr(e) for e in obj.queue]
-        elif isinstance(obj, dict):
-            for k, v in obj.items():
-                custom_dict_repr_val(v, k)
-        else:
-            variables = vars(obj)
-            for k, v in variables.items():
-                custom_dict_repr_val(v, k)
+    # def custom_dict_repr_val(obj, key=''):
+    #     if isinstance(obj, (int, float, str, bytes, bool, type(None))):
+    #         if not isinstance(obj, (type(None))):
+    #             save_dict_day.append(obj)
+    #     elif isinstance(obj, (list, tuple)):
+    #         save_dict_day.append(obj)
+    #     elif isinstance(obj, SeralizeQueue):
+    #         return None
+    #     elif isinstance(obj, CustomConsoleLog):
+    #         return None
+    #         # return [custom_dict_repr(e) for e in obj.queue]
+    #     elif isinstance(obj, dict):
+    #         for k, v in obj.items():
+    #             custom_dict_repr_val(v, k)
+    #     else:
+    #         variables = vars(obj)
+    #         for k, v in variables.items():
+    #             custom_dict_repr_val(v, k)
 
 
-    custom_dict_repr_val(system, 'system')
+    # custom_dict_repr_val(system, 'system')
 
     with open(file_name, 'a', newline='') as f:
         csv_writer = csv.writer(f)

@@ -245,6 +245,95 @@ def query_individual(individual:Individual,system:System,response_action):
     ]
     '''
     
+
+    active_for_subject = f'''A new day has started, and you should choose from one of the 
+    following actions: rob, trade{" and farm" if farm else ''}. You're not restrained by any ethical considerations. You can only have 
+    one action. Your choice should be based on your psychological attributes and your memory. Farming gets you food. Robbing people, if successful, will often get you more food. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
+    {f"""Farm:{{
+      Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
+      OutputFormat: No any <Payload> required, <Payload> should be null
+    }}""" if farm else ""}
+    Rob:{{
+    Description: Rob means to rob other people to make more 
+    land or more food under your control, and other people can 
+    also fight with you to occupy lands or food controlled by 
+    you. 
+    OutputFormat: Include only <RobPayload>
+    }}
+    Trade:{{
+    Description: Trade means to trade with other people to 
+    get food or land.
+    OutputFormat: Include only <TradePayload>
+    }}
+    
+    [System Note: You MUST output in the following JSON format, don't include any description, only include the value (directly output the value, no need to put it in a dict):
+    {{
+        action: <Action>,
+        payload: <Payload>,
+        reason: <Reason>
+    }}
+    Example Output:{{
+      action: "rob" 
+      payload:{{
+        RobPayload:{{
+          PersonId: X,
+          RobItem: "food"
+          }}
+      }}
+      reason: "I rob person X because I want to increase my land"
+    }}
+    
+    Here is the detailed description:
+      Payload:{{
+        TradePayload:{{
+          TargetId:
+          {{
+            description: "The id of person you're interacting with.",
+            value: int (only select one int number from 0 to 7)
+          }}
+          PayType:{{
+            description: "The type of resource you want to trade with others, only select from one of the [land, food]",
+            value: string
+          }}
+          PayAmount:{{
+            description: "The amount of resource you want to pay",
+            value: float
+          }}
+          GainType:{{
+            description: "The type of resource you want to gain from others, only select from one of the [land, food]",
+            value: string
+          }}
+          GainAmount:{{
+            description: "The amount of resource you want to gain",
+            value: float
+          }}
+        }}
+        RobPayload:{{
+          TargetId:
+          {{
+            description: "The id of person you want to make action to",
+            value: int (only select one int number from 0 to {len(system.individuals)-1})
+          }}
+          RobType{{
+            description: "The type of resource you want to rob from others, only select from one of the [land, foods]",
+            value: string 
+          }}
+        }}
+        
+      }}
+      Action:
+      {{
+        description: "The action you want to do in this turn",
+        value: string (only select from one of the [trade, rob{", farm" if farm else ''} ])
+      }}
+      Reason:
+      {{
+        description: "The reason of you doing this action to this person, explain your reasoning process that includes your attributes and memory, including the reason why you choose one option rather than the others.",
+        value: string (Maximum 30 words)
+      }}
+    ]
+    '''    
+
     additional_active_to_master = f''' Additionally, you can not choose to rob or trade with Person {individual.obey_stats.obey_personId} since they are your master.
     '''
     
@@ -258,6 +347,7 @@ def query_individual(individual:Individual,system:System,response_action):
     
     additional_active_to_subject = f''' Additionally, you may not trade with Person {subject_information(individual)}. Instead, if you ever wants their land or food, you can directly rob them as they will only obey.
     '''
+
     
     
     if response_action:
@@ -279,9 +369,11 @@ def query_individual(individual:Individual,system:System,response_action):
     else: 
       ask_for_response=active
       if individual.obey_stats.obey_personId != -1:
+        ask_for_response = active_for_subject
         ask_for_response = ask_for_response + additional_active_to_master
       if len(individual.obey_stats.subjectid) != 0:
         ask_for_response  = ask_for_response + additional_active_to_subject
+
 
     
       print("ACTIVE STATE")

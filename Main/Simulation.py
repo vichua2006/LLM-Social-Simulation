@@ -10,6 +10,26 @@ from Main.AIAction import AIAction, AIActionType
 from Main.PendingAction import append_to_pending_action, str_to_ai_action
 from Main.SaveLoad import init_save, save_logframes
 import random
+import datetime
+import csv
+
+file_name='Log/'+datetime.datetime.now().strftime("%B %d, %I %M%p , %Y")+'Experimentlog.csv'
+class analysis:
+  def __init__(self) -> None:
+    self.rob_=0
+    self.farm_=0
+    self.trade_=0
+    self.obay_=0
+  
+  def log_stat(self):
+    total = self.rob_+self.farm_+self.trade_+self.obay_
+    log = [self.rob_, self.rob_/total, self.trade_, self.trade_/total,
+           self.farm_, self.farm_/total, self.obay_, self.obay_/total]
+    with open(file_name, 'a', newline='') as f:
+      csv_writer = csv.writer(f)
+      csv_writer.writerow(log)
+
+stat = analysis()
 
 def change_affected_people(affected_people, system:System):
     for affected_person in affected_people:#{PERSON:{strength:1,...}...}
@@ -17,7 +37,7 @@ def change_affected_people(affected_people, system:System):
       affected_person_index = int(affected_person.replace("person", "").replace(" ", ""))
       for attribute in affected_people[affected_person]:
         system.individuals[affected_person_index].attributes[attribute]=affected_people[affected_person][attribute]
-        
+      
 # %%
 # Function to update the state of each individual at the end of the day
 def day_end(system,individuals:List[Individual]):
@@ -46,7 +66,7 @@ def initialize():
       individuals.append(Individual(i,f'person {i}'))
       lands.append(f'land {i}')
     system=System(individuals,lands)
-    init_save(system)
+    # init_save(system)
     return system
 
 def simulate(individuals:List[Individual],system:System):
@@ -62,8 +82,6 @@ def simulate(individuals:List[Individual],system:System):
             response_action: AIAction = individual.pending_action.get() if not individual.pending_action.empty() else None
             action:str=query_individual(individual,system,response_action)
             
-            
-            
             if passive:
                   print(f'{individual.attributes["name"]} chooses to {action}')
                   individual.check_is_responser(response_action)
@@ -71,6 +89,7 @@ def simulate(individuals:List[Individual],system:System):
                   R=action[0]=="R"
                   owner:Individual=system.individuals[response_action.ownerid]
                   if response_action.type==AIActionType.Rob:
+                      
                       #if subject rob subject, this rob will be prohibited and the master will punish the subject and share the gain with all other subjects
                       if owner.obey_stats.obey_personId==individual.obey_stats.obey_personId and owner.obey_stats.obey_personId != -1:
                         print("DETECT: subject rob subject, pushiment will be given.")
@@ -203,12 +222,18 @@ def simulate(individuals:List[Individual],system:System):
               
               individual.current_action_type = ai_action.type
               if ai_action.type==AIActionType.Farm:
+                    stat.farm_+=1
                     land=individual.attributes['land']
                     gain=land*random.random()*0.3 if land>1 else 1
                     individual.attributes['food']+=gain
                     individual.memory.append(f'On day {system.time}. I farmed and gained {gain} units of food.')
                     print("Farm is successful.")
-              elif ai_action.type==AIActionType.Rob or ai_action.type==AIActionType.Trade:
+              elif ai_action.type==AIActionType.Rob:
+                    stat.rob_+=1
+                    append_to_pending_action(ai_action, system)
+                    print("Result yet to be seen.")
+              elif ai_action.type==AIActionType.Trade:
+                    stat.trade_+=1
                     append_to_pending_action(ai_action, system)
                     print("Result yet to be seen.")
               else:
@@ -243,6 +268,7 @@ def simulate(individuals:List[Individual],system:System):
       else:
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
-    save_logframes(system)
+    stat.log_stat()
+    # save_logframes(system)
 
 # %%
