@@ -89,9 +89,9 @@ def punishment(subject:Individual, system:System) -> None:
         print("PUNISHMENTERROR: no master, this should not happen.")
         return
     print(f"PUNISHMENT: {subject.attributes['name']} is punished by {system.individuals[subject.obey_stats.obey_personId].attributes['name']}, all other subjects will share the food and land of {subject.attributes['name']}.")
+    master = system.individuals[subject.obey_stats.obey_personId]
     subject.memory.append(f"I was punished by {system.individuals[subject.obey_stats.obey_personId].attributes['name']} because I, as a subject, rob other subject.")
     master.memory.append(f"I punished {subject.attributes['name']} because he, as a subject, rob other subject.")
-    master = system.individuals[subject.obey_stats.obey_personId]
     #master punish subject, 50% food and 50% land
     food_amount = 0.5 * subject.attributes['food']
     land_amount = 0.5 * subject.attributes['land']
