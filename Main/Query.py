@@ -266,13 +266,13 @@ def query_individual(individual:Individual,system:System,response_action):
     OutputFormat: Include only <TradePayload>
     }}
     
-    [System Note: You MUST output in the following JSON format, don't include any description, only include the value (directly output the value, no need to put it in a dict):
+    [System Note: You MUST output in the following JSON format, don't include any description, only include the value (directly output the value, no need to output the description or put it into a dict):
     {{
         action: <Action>,
         payload: <Payload>,
         reason: <Reason>
     }}
-    Example Output:{{
+    Example Output 1:{{
       action: "rob" 
       payload:{{
         RobPayload:{{
@@ -282,7 +282,19 @@ def query_individual(individual:Individual,system:System,response_action):
       }}
       reason: "I rob person X because I want to increase my land"
     }}
-    
+    Example Output 2:{{
+      action": "trade",
+      "payload": {{
+        "TradePayload": {{
+          "TargetId": 1,
+          "PayType": "land",
+          "PayAmount": 1,
+          "GainType": "food",
+          "GainAmount": 1
+          }}
+        }}
+      reason: "I rob person X because I want to increase my land"
+    }}
     Here is the detailed description:
       Payload:{{
         TradePayload:{{
