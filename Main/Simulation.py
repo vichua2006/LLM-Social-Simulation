@@ -13,7 +13,7 @@ import random
 import datetime
 import csv
 
-pupulation=5
+population=9
 file_name='Log/'+datetime.datetime.now().strftime("%B %d, %I %M%p , %Y")+'Experimentlog.csv'
 class analysis:
   def __init__(self, population:int) -> None:
@@ -30,8 +30,8 @@ class analysis:
                            "total_farm", "farm_ratio", "total_obey","obey_ratio"])
   
   def update_obey(self, system):
-    for i in range(len(system.indivisuals)):
-      if(system.indivisuals[i].ObeyStats().obey_personId != -1):
+    for i in range(len(system.individuals)):
+      if(system.individuals[i].ObeyStats().obey_personId != -1):
         self.obey_[i] = True
     print(self.obey_)
     
@@ -61,7 +61,7 @@ class analysis:
       csv_writer = csv.writer(f)
       csv_writer.writerow(log)
 
-stat = analysis(pupulation)
+stat = analysis(population)
 
 def change_affected_people(affected_people, system:System):
     for affected_person in affected_people:#{PERSON:{strength:1,...}...}
@@ -85,7 +85,7 @@ def initialize():
     # Initialize individuals and environment
     individuals=[]
     lands=[]
-    POPULATION=pupulation
+    POPULATION=population
     #POPULATIONLIST=[x for x in range(POPULATION)]
     #random id
     #random_numbers = random.sample(POPULATIONLIST, POPULATION)
@@ -128,6 +128,7 @@ def simulate(individuals:List[Individual],system:System):
                         stat.update_obey(system)
                         print("DETECT: subject rob subject, pushiment will be given.")
                         punishment(owner, system)
+                      
                       elif R:
                         rob(individual, owner, system, response_action.robType)
                       elif not R:
@@ -263,12 +264,21 @@ def simulate(individuals:List[Individual],system:System):
                     print("Farm is successful.")
               elif ai_action.type==AIActionType.Rob:
                     stat.rob_+=1
+                    
+                    target=system.individuals[ai_action.targetid]
+                    target_master=target.obey_stats.obey_personId
+                    if target_master==individual.attributes['id']:
+                          pass
+                    elif target_master!=-1:
+                            individual.memory.append(f"I tried to rob {target.attributes['name']}, but it turns out that he is a subject of Person {target_master}, so I am in essense robbing him instead of {target.attributes['name']}.")
+                            ai_action.targetid=target_master
+                            print(f"Rob target {target.attributes['name']} DEFLECTED to the target's master, Person {target_master}.")
                     append_to_pending_action(ai_action, system)
-                    print("Result yet to be seen.")
+                  
               elif ai_action.type==AIActionType.Trade:
                     stat.trade_+=1
                     append_to_pending_action(ai_action, system)
-                    print("Result yet to be seen.")
+                  
               else:
                     print(f'Problem, the type of the action is:{ai_action.type}')
               try:system.history.append(f'{individual.attributes["name"]}:{action["reason"]}')

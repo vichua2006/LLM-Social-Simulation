@@ -48,10 +48,10 @@ def share_rob_lost(master:Individual, robAmount:float, robType:str, system:Syste
     for subjectid in master.obey_stats.subjectid:
         subject = system.individuals[subjectid]
         subject.attributes[robType]= subject.attributes[robType] - robAmount/len(master.obey_stats.subjectid)
-        subject.memory.append(f"Day {master.system.time}. I lost {robAmount/len(master.obey_stats.subjectid)} units of {robType} to {master.attributes['name']}.")
+        subject.memory.append(f"Day {system.time}. I lost {robAmount/len(master.obey_stats.subjectid)} units of {robType} to {master.attributes['name']}.")
     #include the master
     master.attributes[robType] = master.attributes[robType] - robAmount/len(master.obey_stats.subjectid)
-    master.memory.append(f"Day {master.system.time}. I get {robAmount} units of {robType} from my subjects.")
+    master.memory.append(f"Day {system.time}. I get {robAmount} units of {robType} from my subjects.")
     print(f"SHARE_LOST_FOOD: {master.attributes['name']} got {robAmount} units of {robType} from {len(master.obey_stats.subjectid)} subjects.")
     return
 
@@ -93,6 +93,8 @@ def rob(target: Individual, rob_person:Individual, system: System, robType: str)
                 else:
                         victim_memory="I have no land to loose."
                         victor_memory="I robbed but he had no land to loose."
+            else:
+                print(f'Error: rob type does not match anyting. Rob type: {robType}')
             target.attributes['social_position']-=1
             rob_person.attributes['social_position']+=2
             target.memory.append(f"Day {system.time}. {rob_person.attributes['name']} tried to rob me, I rebelled but lost. {victim_memory}. I lost 1 unit of social status.")
