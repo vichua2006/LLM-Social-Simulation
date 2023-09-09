@@ -24,19 +24,19 @@ def winner_loser(person1:Individual,person2:Individual):
       return (person1,person2) if win1 else (person2,person1)
   
 def share_rob_gain(master: Individual, robAmount: float, robType: str, system:System) -> None:
-    if master.obey_stats.subject is None or not master.obey_stats.subject:
+    if master.obey_stats.subjectid is None or not master.obey_stats.subjectid:
         print("SHARE_ROB_FOOD: no subject, directly get the rob amount.")
         master.attributes[robType]+=robAmount
         return
     #divide the rob amount to each subject
-    for subjectid in master.obey_stats.subject:
+    for subjectid in master.obey_stats.subjectid:
         subject = system.individuals[subjectid]
-        subject.attributes[robType]+=robAmount/len(master.obey_stats.subject)
-        subjectid.memory.append(f"Day {master.system.time}. I got {robAmount/len(master.obey_stats.subject)} units of {robType} from {master.attributes['name']}.")
+        subject.attributes[robType]+=robAmount/len(master.obey_stats.subjectid)
+        subject.memory.append(f"Day {master.system.time}. I got {robAmount/len(master.obey_stats.subjectid)} units of {robType} from {master.attributes['name']}.")
     #include the master
-    master.attributes[robType]+=robAmount/len(master.obey_stats.subject)
+    master.attributes[robType]+=robAmount/len(master.obey_stats.subjectid)
     master.memory.append(f"Day {master.system.time}. I gave {robAmount} units of {robType} to my subjects.")
-    print(f"SHARE_ROB_FOOD: {master.attributes['name']} shared {robAmount} units of {robType} to {len(master.obey_stats.subject)} subjects.")
+    print(f"SHARE_ROB_FOOD: {master.attributes['name']} shared {robAmount} units of {robType} to {len(master.obey_stats.subjectid)} subjects.")
     return
     
 def rob(target: Individual, rob_person:Individual, system: System, robType: str)->None:
@@ -98,10 +98,10 @@ def punishment(subject:Individual, system:System) -> None:
     subject.attributes['food'] -= food_amount
     subject.attributes['land'] -= land_amount
     #share the food and land to other subjects
-    for subjectid in master.obey_stats.subject:
+    for subjectid in master.obey_stats.subjectid:
         if subjectid!=subject.attributes['id']:
             subject.memory.append(f"I got food and land because {subject.attributes['name']} was punished by {master.attributes['name']}, since he robbed other subject.")
             subject = master.system.individuals[subjectid]
-            subject.attributes['food'] += food_amount/(len(master.obey_stats.subject)-1)
-            subject.attributes['land'] += land_amount/(len(master.obey_stats.subject)-1)
+            subject.attributes['food'] += food_amount/(len(master.obey_stats.subjectid)-1)
+            subject.attributes['land'] += land_amount/(len(master.obey_stats.subjectid)-1)
     return

@@ -227,7 +227,7 @@ def simulate(individuals:List[Individual],system:System):
               
               #Prevent master to trade with subjects
               is_subject = "False"
-              for id in individual.obey_stats.subject:
+              for id in individual.obey_stats.subjectid:
                 if id == ai_action.targetid:
                   is_subject = "True"
               
