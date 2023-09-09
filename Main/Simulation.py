@@ -107,10 +107,10 @@ def simulate(individuals:List[Individual],system:System):
           passive=not individual.pending_action.empty()
           if individual.attributes['action']>0 or passive:
             print(f"Person {index} is responding...\n")
-            response_action: AIAction = individual.pending_action.get() if not individual.pending_action.empty() else None
+            response_action: AIAction = individual.pending_action.get() if passive else None
             action:str=query_individual(individual,system,response_action)
             
-            if passive:
+            if passive and response_action is not None:
                   print(f'{individual.attributes["name"]} chooses to {action}')
                   individual.check_is_responser(response_action)
                   add_context=''
@@ -123,7 +123,6 @@ def simulate(individuals:List[Individual],system:System):
                         stat.update_obey(owner)
                         print("DETECT: subject rob subject, pushiment will be given.")
                         punishment(owner, system)
-
                       elif R:
                         rob(individual, owner, system, response_action.robType)
                       elif not R:
