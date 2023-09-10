@@ -65,7 +65,7 @@ class analysis:
     self.day_+=1
     log = []
     for i in range(population):
-      log =  log + [self.rob_[i], self.rob_accepted[i], self.trade_[i], self.trade_accepted[i],
+      log =  log + [self.rob_[i], self.rob_accept[i], self.trade_[i], self.trade_accept[i],
             self.obey_[i], self.farm_[i]]
     with open(file_name, 'a', newline='') as f:
       csv_writer = csv.writer(f)
