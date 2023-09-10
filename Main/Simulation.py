@@ -28,7 +28,7 @@ class analysis:
     head = []
     for i in range(population):
       head = head + [f"rob_count_{i}", f"rob_rebelled_{i}", f"trade_count_{i}",
-                    f"trade_accepted_{i}", f"obey_to_{i}", f"farm_count_{i}"]
+                    f"trade_accepted_{i}", f"{i}_obey_to", f"farm_count_{i}"]
     with open(file_name, 'a', newline='') as f:
       csv_writer = csv.writer(f)
       csv_writer.writerow(head)
