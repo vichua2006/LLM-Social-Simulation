@@ -320,9 +320,11 @@ def simulate(individuals:List[Individual],system:System):
       print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
       #reach this mean all pending action is done
       pending=False
+      sum_action=0
       for i in individuals:
             pending=pending or not i.pending_action.empty()
-      if not pending:
+            sum_action+=i.attributes['action']
+      if not pending and not sum_action:
         break
       else:
             print(f'System still pending actions, so will go into another round.')
