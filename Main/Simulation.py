@@ -19,7 +19,7 @@ class analysis:
   def __init__(self, population:int) -> None:
     self.day_=1
     self.rob_=[0] * population
-    self.rob_accept=[0]*population
+    self.rob_rebel=[0]*population
     self.farm_=[0] * population
     self.trade_=[0] * population
     self.trade_accept=[0]*population
@@ -27,7 +27,7 @@ class analysis:
     self.obey_=[-1] * population
     head = []
     for i in range(population):
-      head = head + [f"rob_count_{i}", f"rob_accepted_{i}", f"trade_count_{i}",
+      head = head + [f"rob_count_{i}", f"rob_rebelled_{i}", f"trade_count_{i}",
                     f"trade_accepted_{i}", f"obey_to_{i}", f"farm_count_{i}"]
     with open(file_name, 'a', newline='') as f:
       csv_writer = csv.writer(f)
@@ -45,8 +45,8 @@ class analysis:
   def trade_accepted(self, index):
     self.trade_accept[index]+=1
     
-  def rob_accepted(self, index):
-    self.rob_accept[index]+=1
+  def rob_rebelled(self, index):
+    self.rob_rebel[index]+=1
     
   def obey(self, index, target):
     self.obey_[index]=target
@@ -65,7 +65,7 @@ class analysis:
     self.day_+=1
     log = []
     for i in range(population):
-      log =  log + [self.rob_[i], self.rob_accept[i], self.trade_[i], self.trade_accept[i],
+      log =  log + [self.rob_[i], self.rob_rebel[i], self.trade_[i], self.trade_accept[i],
             self.obey_[i], self.farm_[i]]
     with open(file_name, 'a', newline='') as f:
       csv_writer = csv.writer(f)
@@ -141,11 +141,12 @@ def simulate(individuals:List[Individual],system:System):
                       
                       elif R:
                         rob(individual, owner, system, response_action.robType)
+                        stat.rob_rebelled(owner.attributes["id"])
                       elif not R:
                             #if master rob subject, subject will accept instead of obey, where obey only refer to the first obey that happen between two individuals without subject-master relationship
                             if owner.attributes["id"] !=  individual.obey_stats.obey_personId:
                               owner.add_rob(individual.attributes['id'],True)
-                              stat.obey(owner.attributes["id"], individual.attributes["id"])
+                              stat.obey(individual.attributes["id"],owner.attributes["id"])
                               system.console_log.append(f"{individual.attributes['id']}: Obey {response_action.ownerid}")
                               individual.obey(response_action.ownerid,system)
                               owner.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
@@ -155,7 +156,6 @@ def simulate(individuals:List[Individual],system:System):
                               owner.add_rob(individual.attributes['id'],True)
                               system.console_log.append(f"{individual.attributes['id']}: Accept robbery from {response_action.ownerid}")
                               print("success accepting robbery from master")
-                              stat.rob_accepted(owner.attributes["id"])
                   elif response_action.type==AIActionType.Trade:
                         owner.memory.append(f"Day {system.time}. I initiated a trade to {individual.attributes['name']}, which is to exchange {response_action.payAmount} units of my {response_action.payType} for {response_action.gainAmount} units of his {response_action.gainType}.")
                         individual.memory.append(f"Day {system.time}.{response_action.ownerid} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ")
