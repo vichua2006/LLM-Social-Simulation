@@ -2,10 +2,11 @@ import pandas as pd
 import csv
 file_name=input()
 data=[]
+#The 3 parameters below should be changed based on the experiment and excel format.
 TOTAL_DAYS=50
 POPULATION=9
+start_index=1 #The index at which actual data starts.
 sheet=pd.read_csv(file_name)
-start_index=1
 for i in range(0,54,6):
     
     rob_count=sheet.columns[i]

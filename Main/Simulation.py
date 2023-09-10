@@ -331,5 +331,5 @@ def simulate(individuals:List[Individual],system:System):
     day_end(system,individuals)
     stat.log_stat()
     # save_logframes(system)
-
+    
 # %%
