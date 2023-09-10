@@ -48,7 +48,8 @@ class analysis:
   def rob_accepted(self, index):
     self.rob_accept[index]+=1
     
-  def obey(self, index, target):
+  # index obey to target
+  def obey(self, target, index):
     self.obey_[index]=target
     count = 0
     for b in self.obey_:
@@ -135,7 +136,6 @@ def simulate(individuals:List[Individual],system:System):
                       
                       #if subject rob subject, this rob will be prohibited and the master will punish the subject and share the gain with all other subjects
                       if owner.obey_stats.obey_personId==individual.obey_stats.obey_personId and owner.obey_stats.obey_personId != -1:
-                        stat.update_obey(system)
                         print("DETECT: subject rob subject, pushiment will be given.")
                         punishment(owner, system)
                       
@@ -145,11 +145,11 @@ def simulate(individuals:List[Individual],system:System):
                             #if master rob subject, subject will accept instead of obey, where obey only refer to the first obey that happen between two individuals without subject-master relationship
                             if owner.attributes["id"] !=  individual.obey_stats.obey_personId:
                               owner.add_rob(individual.attributes['id'],True)
-                              stat.obey(owner.attributes["id"], individual.attributes["id"])
                               system.console_log.append(f"{individual.attributes['id']}: Obey {response_action.ownerid}")
                               individual.obey(response_action.ownerid,system)
                               owner.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
                               individual.memory.append(f"I obeyed to {owner.attributes['name']} and now I have to listen to all his commands and can never betray him.")
+                              stat.obey(owner.attributes["id"], individual.attributes["id"])
                             else:
                               owner =system.individuals[response_action.ownerid]
                               owner.add_rob(individual.attributes['id'],True)
