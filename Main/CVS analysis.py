@@ -3,7 +3,7 @@ import csv
 file_name=input()
 data=[]
 #The 3 parameters below should be changed based on the experiment and excel format.
-TOTAL_DAYS=50
+TOTAL_DAYS=5
 POPULATION=9
 start_index=1 #The index at which actual data starts.
 sheet=pd.read_csv(file_name)
