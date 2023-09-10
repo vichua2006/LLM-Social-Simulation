@@ -109,7 +109,7 @@ def simulate(individuals:List[Individual],system:System):
             return
           index:int = individuals.index(individual)
           passive=not individual.pending_action.empty()
-          while individual.attributes['action']>0 or passive:
+          while individual.attributes['action']>0 or not individual.pending_action.empty():
             passive=not individual.pending_action.empty()
             print(f"Person {index} is responding...\n")
             response_action: AIAction = individual.pending_action.get() if passive else None
