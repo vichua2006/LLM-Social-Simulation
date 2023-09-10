@@ -25,7 +25,8 @@ class analysis:
     self.trade_accept=[0]*population
     self.obey_amount = 0
     self.obey_=[-1] * population
-    head = []
+    special = [population]
+    head = [f"day"]
     for i in range(population):
       head = head + [f"rob_count_{i}", f"rob_accepted_{i}", f"trade_count_{i}",
                     f"trade_accepted_{i}", f"obey_to_{i}", f"farm_count_{i}"]
@@ -64,7 +65,7 @@ class analysis:
         csv_writer.writerow(["Common Wealth achived on day "+ str(self.day_)])
       
     self.day_+=1
-    log = []
+    log = [self.day_]
     for i in range(population):
       log =  log + [self.rob_[i], self.rob_accept[i], self.trade_[i], self.trade_accept[i],
             self.obey_[i], self.farm_[i]]
