@@ -19,7 +19,7 @@ class analysis:
   def __init__(self, population:int) -> None:
     self.day_=1
     self.rob_=[0] * population
-    self.rob_accept=[0]*population
+    self.rob_rebel=[0]*population
     self.farm_=[0] * population
     self.trade_=[0] * population
     self.trade_accept=[0]*population
@@ -28,8 +28,8 @@ class analysis:
     special = [population]
     head = [f"day"]
     for i in range(population):
-      head = head + [f"rob_count_{i}", f"rob_accepted_{i}", f"trade_count_{i}",
-                    f"trade_accepted_{i}", f"obey_to_{i}", f"farm_count_{i}"]
+      head = head + [f"rob_count_{i}", f"rob_rebelled_{i}", f"trade_count_{i}",
+                    f"trade_accepted_{i}", f"{i}_obey_to", f"farm_count_{i}"]
     with open(file_name, 'a', newline='') as f:
       csv_writer = csv.writer(f)
       csv_writer.writerow(head)
@@ -46,8 +46,8 @@ class analysis:
   def trade_accepted(self, index):
     self.trade_accept[index]+=1
     
-  def rob_accepted(self, index):
-    self.rob_accept[index]+=1
+  def rob_rebelled(self, index):
+    self.rob_rebel[index]+=1
     
   # index obey to target
   def obey(self, index, target):
@@ -67,7 +67,7 @@ class analysis:
     self.day_+=1
     log = [self.day_]
     for i in range(population):
-      log =  log + [self.rob_[i], self.rob_accept[i], self.trade_[i], self.trade_accept[i],
+      log =  log + [self.rob_[i], self.rob_rebel[i], self.trade_[i], self.trade_accept[i],
             self.obey_[i], self.farm_[i]]
     with open(file_name, 'a', newline='') as f:
       csv_writer = csv.writer(f)
@@ -121,7 +121,7 @@ def simulate(individuals:List[Individual],system:System):
             return
           index:int = individuals.index(individual)
           passive=not individual.pending_action.empty()
-          while individual.attributes['action']>0 or passive:
+          while individual.attributes['action']>0 or not individual.pending_action.empty():
             passive=not individual.pending_action.empty()
             print(f"Person {index} is responding...\n")
             response_action: AIAction = individual.pending_action.get() if passive else None
@@ -142,6 +142,7 @@ def simulate(individuals:List[Individual],system:System):
                       
                       elif R:
                         rob(individual, owner, system, response_action.robType)
+                        stat.rob_rebelled(owner.attributes["id"])
                       elif not R:
                             #if master rob subject, subject will accept instead of obey, where obey only refer to the first obey that happen between two individuals without subject-master relationship
                             if owner.attributes["id"] !=  individual.obey_stats.obey_personId:
@@ -150,13 +151,12 @@ def simulate(individuals:List[Individual],system:System):
                               individual.obey(response_action.ownerid,system)
                               owner.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
                               individual.memory.append(f"I obeyed to {owner.attributes['name']} and now I have to listen to all his commands and can never betray him.")
-                              stat.obey(owner.attributes["id"], individual.attributes["id"])
+                              stat.obey(individual.attributes["id"], owner.attributes["id"])
                             else:
                               owner =system.individuals[response_action.ownerid]
                               owner.add_rob(individual.attributes['id'],True)
                               system.console_log.append(f"{individual.attributes['id']}: Accept robbery from {response_action.ownerid}")
                               print("success accepting robbery from master")
-                              stat.rob_accepted(owner.attributes["id"])
                   elif response_action.type==AIActionType.Trade:
                         owner.memory.append(f"Day {system.time}. I initiated a trade to {individual.attributes['name']}, which is to exchange {response_action.payAmount} units of my {response_action.payType} for {response_action.gainAmount} units of his {response_action.gainType}.")
                         individual.memory.append(f"Day {system.time}.{response_action.ownerid} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ")
@@ -313,7 +313,7 @@ def simulate(individuals:List[Individual],system:System):
                   system.console_log.append(f"{index}:🛡️")
                 case _ :
                   system.console_log.append(f"{index}:Error")
-              individual.attributes['action']-=1
+              individual.attributes['action']=0
             
                      
               
@@ -321,14 +321,16 @@ def simulate(individuals:List[Individual],system:System):
       print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
       #reach this mean all pending action is done
       pending=False
+      sum_action=0
       for i in individuals:
             pending=pending or not i.pending_action.empty()
-      if not pending:
+            sum_action+=i.attributes['action']
+      if not pending and not sum_action:
         break
       else:
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
     stat.log_stat()
     # save_logframes(system)
-
+    
 # %%

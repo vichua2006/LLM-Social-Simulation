@@ -168,13 +168,19 @@ def main():
         
         #update 
         #update console log
+        #lb_widget = window[f'-SPECIAL OUTPUT'].Widget
         window[f'-OUTPUT-'].update()
+        
+        #remain the scroll position of special output
+        special_output_widget = window[f'-SPECIAL OUTPUT-'].Widget
+        special_output_scroll_position = special_output_widget.yview()
+        window[f'-SPECIAL OUTPUT-'].update(system.console_log.content)
+        special_output_widget.yview_moveto(special_output_scroll_position[0])
         
         for i, person in enumerate(individuals):
             #Update person attributes
             window[f'-AGGRESSIVENESS{i}-'].update(person.attributes["aggressiveness"])
             window[f'-COVETOUSNESS{i}-'].update(person.attributes["covetousness"])
-            
             window[f'-STRENGTH{i}-'].update(person.attributes["strength"])
             window[f'-SOCIALPOSITION{i}-'].update(person.attributes["social_position"])
             window[f'-FOOD{i}-'].update(person.attributes["food"])
@@ -182,11 +188,9 @@ def main():
             window[f'-Action{i}-'].update(person.attributes['action'])
             window[f'-CURRENTACTIONTYPE{i}-'].update(person.current_action_type)
             window[f'-OBEYPERSONID{i}-'].update(person.obey_stats.obey_personId)
-            window[f'-SPECIAL OUTPUT-'].update(system.console_log.content)
-            window[f'-ROBTIMESLIST{i}-'].update(person.robbing_stats.get_rob_times_list())
 
             # Update Listbox, Remain the listbox scroll position
-            for key in [f'-PENDINGACTION{i}-', f'-OBEYSUBJECT{i}-', f'-MEMORY{i}-']:
+            for key in [f'-PENDINGACTION{i}-', f'-OBEYSUBJECT{i}-', f'-MEMORY{i}-', f'-ROBTIMESLIST{i}-']:
                 # Access the tkinter Listbox widget
                 lb_widget = window[key].Widget
 
@@ -199,6 +203,8 @@ def main():
                         new_values = person.obey_stats.subjectid
                     case _ if (_ := f'-MEMORY{i}-') == key:
                         new_values = person.memory
+                    case _ if (_ := f'-ROBTIMESLIST{i}-') == key:
+                        new_values = person.robbing_stats.get_rob_times_list()
                 
                 
                 window[key].update(new_values)
