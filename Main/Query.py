@@ -112,7 +112,7 @@ def query_individual(individual:Individual,system:System,response_action):
     would rather lose your lives than suffer slander, though 
     under all the other circumstances, you have a strong desire 
     to live peacefully and avoid violent death.""" if False else ""}
-    {"""You have the motivation to trade with others on foods and 
+    {"""You have the motivation to trade with others on food and 
     lands, but you don't trust them when you don't know them, as 
     others can betray the trade and take your food.
     You have the motivation to communicate with others on any 
@@ -121,7 +121,7 @@ def query_individual(individual:Individual,system:System,response_action):
     therefore fight with you, even though you may have no 
     intention to rob with them.""" if False else""}
     If food is less than 1, your next action will be to rob 
-    foods. You also have the covetousness of gaining foods when 
+    food. You also have the covetousness of gaining food when 
     food is more than 1.
     Your memory affects how you judge 
     things. If something is not in your memory, then you 
@@ -229,7 +229,7 @@ def query_individual(individual:Individual,system:System,response_action):
             value: int (only select one int number from 0 to {len(system.individuals)-1})
           }}
           RobType{{
-            description: "The type of resource you want to rob from others, only select from one of the [land, foods]",
+            description: "The type of resource you want to rob from others, only select from one of the [land, food]",
             value: string 
           }}
         }}
@@ -330,7 +330,7 @@ def query_individual(individual:Individual,system:System,response_action):
             value: int (only select one int number from 0 to {len(system.individuals)-1})
           }}
           RobType{{
-            description: "The type of resource you want to rob from others, only select from one of the [land, foods]",
+            description: "The type of resource you want to rob from others, only select from one of the [land, food]",
             value: string 
           }}
         }}
