@@ -312,7 +312,7 @@ def simulate(individuals:List[Individual],system:System):
                   system.console_log.append(f"{index}:🛡️")
                 case _ :
                   system.console_log.append(f"{index}:Error")
-              individual.attributes['action']-=1
+              individual.attributes['action']=0
             
                      
               
