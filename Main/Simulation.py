@@ -49,7 +49,7 @@ class analysis:
     self.rob_accept[index]+=1
     
   # index obey to target
-  def obey(self, target, index):
+  def obey(self, index, target):
     self.obey_[index]=target
     count = 0
     for b in self.obey_:
