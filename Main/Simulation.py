@@ -121,7 +121,7 @@ def simulate(individuals:List[Individual],system:System):
             return
           index:int = individuals.index(individual)
           passive=not individual.pending_action.empty()
-          while individual.attributes['action']>0 or not individual.pending_action.empty():
+          if individual.attributes['action']>0 or not individual.pending_action.empty():
             passive=not individual.pending_action.empty()
             print(f"Person {index} is responding...\n")
             response_action: AIAction = individual.pending_action.get() if passive else None
@@ -246,12 +246,7 @@ def simulate(individuals:List[Individual],system:System):
                     continue
               
               #Prevent master to trade with subjects
-              is_subject = "False"
-              for id in individual.obey_stats.subjectid:
-                if id == ai_action.targetid:
-                  is_subject = "True"
-              
-              while ai_action.type == AIActionType.Trade and is_subject == "True":
+              while ai_action.type == AIActionType.Trade and ai_action.targetid in individual.obey_stats.subjectid:
                 action:str=query_individual(individual,system,response_action)
                 try:
                   action = deserialize_first_json_object(action.lower())
