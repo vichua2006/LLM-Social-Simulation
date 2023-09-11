@@ -282,7 +282,7 @@ def simulate(individuals:List[Individual],system:System):
                     target_master=target.obey_stats.obey_personId
                     if target_master==individual.attributes['id']:
                           pass
-                    elif target_master!=-1:
+                    elif target_master!=-1 and target_master!=individual.obey_stats.obey_personId:
                             individual.memory.append(f"I tried to rob {target.attributes['name']}, but it turns out that he is a subject of Person {target_master}, so I am in essense robbing him instead of {target.attributes['name']}.")
                             ai_action.targetid=target_master
                             print(f"Rob target {target.attributes['name']} DEFLECTED to the target's master, Person {target_master}.")
