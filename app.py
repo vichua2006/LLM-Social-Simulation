@@ -87,7 +87,7 @@ def main():
     opened = [True for i in range(10)]
         # Redirect stdout to the sg.Output element
     while True:             # Event Loop
-        event, values = window.read(timeout=100) #update every 100ms
+        event, values = window.read(timeout=500) #update every 500ms
         if event == sg.WIN_CLOSED:
             break
         elif event == '-OUTPUT THREAD-':
