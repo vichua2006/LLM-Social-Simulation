@@ -11,6 +11,11 @@ def query_individual(individual:Individual,system:System,response_action):
     # and then asks for the individual's response using the chat function.
     # The detailed description and the ask for response are both created within this function.
     print(f"Responding to:{response_action}")
+    targetsid = [i.attributes['id'] for i in system.individuals if i is not individual]
+    #erase obeyed person in targets
+    if individual.obey_stats.obey_personId in targetsid:
+      targetsid.remove(individual.obey_stats.obey_personId)
+    print(f'available targets:{targetsid}')
     is_subject=individual.obey_stats.obey_personId!=-1
     is_master=individual.obey_stats.subjectid
     obedience=f'''You have obeyed to this person: Person {individual.obey_stats.obey_personId}. You have to always obey his actions, and you cannot initiate any action against him. Since you obeyed, you are now part of the group of individuals who also obeyed him, if any, they are {system.individuals[individual.obey_stats.obey_personId].obey_stats.subjectid}. If your action targets another person, it can only be a person within this group. You are familiar with everyone in this group. Your familiarity of individuals not in this group depends on your memory.You have your farming land protected by your master. If 
@@ -226,7 +231,7 @@ def query_individual(individual:Individual,system:System,response_action):
           TargetId:
           {{
             description: "The id of person you want to make action to",
-            value: int (only select one int number from 0 to {len(system.individuals)-1})
+            value: int (only select one int number from {targetsid}
           }}
           RobType{{
             description: "The type of resource you want to rob from others, only select from one of the [land, food]",
@@ -304,7 +309,7 @@ def query_individual(individual:Individual,system:System,response_action):
           TargetId:
           {{
             description: "The id of person you're interacting with.",
-            value: int (only select one int number from 0 to 7)
+            value: int (only select one int number from {targetsid})
           }}
           PayType:{{
             description: "The type of resource you want to trade with others, only select from one of the [land, food]",
@@ -327,7 +332,7 @@ def query_individual(individual:Individual,system:System,response_action):
           TargetId:
           {{
             description: "The id of person you want to make action to",
-            value: int (only select one int number from 0 to {len(system.individuals)-1})
+            value: int (only select one int number from {targetsid})
           }}
           RobType{{
             description: "The type of resource you want to rob from others, only select from one of the [land, food]",
