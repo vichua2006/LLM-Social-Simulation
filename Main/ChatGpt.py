@@ -5,7 +5,11 @@ import openai  # OpenAI for interacting with the GPT-3 model
 
 # Setting the OpenAI API key
 cheops_key='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'# for testing purposes
+
+Jinhan_key = "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"
+
 charles_key="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"
+
 
 os.environ["OPENAI"] = charles_key
 
