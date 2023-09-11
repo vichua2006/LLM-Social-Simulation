@@ -1,2 +1,4 @@
 PySimpleGUI
 jsonpickle
+pandas
+numpy
