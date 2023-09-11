@@ -1,4 +1,8 @@
 # LLM-Social-Simulation
+Check your git version using the following command:
+``` 
+git --version
+```
 First, you should git clone this repo using the following command:
 ```
 git clone https://github.com/CyborSphinx/LLM-Social-Simulation
