@@ -22,10 +22,10 @@ class Individual:
         self.attributes = {
             "id": id, # The index of the individual in the system
             "name": name,  # The name of the individual
-            "aggressiveness": np.random.uniform(-1, 1),  # Randomly assigned aggressiveness level
-            "covetousness": np.random.uniform(0.9, 1.6),  # Randomly assigned covetousness level
+            "aggressiveness": np.random.normal(0,1),  # Randomly assigned aggressiveness level
+            "covetousness": np.random.normal(1.25,0.5),  # Randomly assigned covetousness level
             
-            "strength": np.random.uniform(0.5, 0.9),  # Randomly assigned strength level
+            "strength": np.random.normal(0.7, 0.2),  # Randomly assigned strength level
             "social_position": 0,  # Initial social position is 0
             "land": 10,  # Land owned by the individual
             "food": 2,  # Initial food is 2
@@ -34,7 +34,7 @@ class Individual:
         }
 
 
-        self.INTELLIGENCE=1 #np.random.beta(40,20)
+        self.INTELLIGENCE=1#np.random.beta(100,10)
         self.pending_action:SeralizeQueue[AIAction] = SeralizeQueue() # The pending action that the individual need to deal with
         self.current_action_type:AIActionType = AIActionType.Default
         self.robbing_stats = RobStats()
