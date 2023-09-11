@@ -62,7 +62,7 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
 
 
 def start_simulate(system:System):
-    for i in range(50):
+    while system.time<50:
         print(f"DAY {system.time+1} HAS STARTED.")
         simulate(system.individuals, system)
 def main():
