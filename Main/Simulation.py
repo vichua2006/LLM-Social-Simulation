@@ -17,7 +17,7 @@ population=9
 file_name='Log/'+datetime.datetime.now().strftime("%B %d, %I %M%p , %Y")+'Experimentlog.csv'
 class analysis:
   def __init__(self, population:int) -> None:
-    self.day_=1
+    self.day_=0
     self.rob_=[0] * population
     self.rob_rebel=[0]*population
     self.farm_=[0] * population
