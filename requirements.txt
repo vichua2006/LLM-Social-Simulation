@@ -2,3 +2,4 @@ PySimpleGUI
 jsonpickle
 pandas
 numpy
+openai

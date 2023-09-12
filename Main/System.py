@@ -1,5 +1,8 @@
 from typing import List
-from GUI.CustomConsoleLog import CustomConsoleLog      
+from GUI.CustomConsoleLog import CustomConsoleLog     
+from PySimpleGUI.PySimpleGUI import Window
+
+from Main.CsvAnalysis import CsvAnalysis 
 class Individual:
     pass
 
@@ -16,10 +19,15 @@ class System:
         self.time=0
         self.is_stop=False
         self.obey_frequence=[]
+
+    def set_csv_analysis(self, csv_analysis:CsvAnalysis):
+        self.csv_analysis = csv_analysis
         
     def set_console_log(self, console_log:CustomConsoleLog):
         self.console_log = console_log
-
+    def set_window(self, window:Window):
+        self.window = window
+        
     def __getstate__(self):
         return self.__dict__
     def __setstate__(self, state):

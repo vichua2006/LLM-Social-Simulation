@@ -1,6 +1,0 @@
-Start
-Person 0 is responding...
-
-Response action:None
-ACTIVE STATE
-Stop

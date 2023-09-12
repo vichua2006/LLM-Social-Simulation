@@ -2,6 +2,7 @@ import jsonpickle
 import threading
 from typing import List
 from Main.Calculation import increase_food, punishment, rob, winner_loser
+from Main.CsvAnalysis import CsvAnalysis
 from Main.Individual import Individual
 from Main.System import System
 from Main.Query import query_individual
@@ -11,71 +12,6 @@ from Main.PendingAction import append_to_pending_action, str_to_ai_action
 from Main.SaveLoad import init_save, save_logframes
 import random
 import datetime
-import csv
-
-population=9
-file_name='Log/'+datetime.datetime.now().strftime("%B %d, %I %M%p , %Y")+'Experimentlog.csv'
-class analysis:
-  def __init__(self, population:int) -> None:
-    self.day_=0
-    self.rob_=[0] * population
-    self.rob_rebel=[0]*population
-    self.farm_=[0] * population
-    self.trade_=[0] * population
-    self.trade_accept=[0]*population
-    self.obey_amount = 0
-    self.obey_=[-1] * population
-    self.common_wealth=False
-    special = [population]
-    head = [f"day"]
-    for i in range(population):
-      head = head + [f"rob_count_{i}", f"rob_rebelled_{i}", f"trade_count_{i}",
-                    f"trade_accepted_{i}", f"{i}_obey_to", f"farm_count_{i}"]
-    with open(file_name, 'a', newline='') as f:
-      csv_writer = csv.writer(f)
-      csv_writer.writerow(head)
-  
-  def trade(self, index):
-    self.trade_[index]+=1
-  
-  def farm(self, index):
-    self.farm_[index]+=1
-    
-  def rob(self, index):
-    self.rob_[index]+=1
-    
-  def trade_accepted(self, index):
-    self.trade_accept[index]+=1
-    
-  def rob_rebelled(self, index):
-    self.rob_rebel[index]+=1
-    
-  # index obey to target
-  def obey(self, index, target):
-    self.obey_[index.attributes["id"]]=index.obey_stats.obey_personId
-    count = 0
-    for b in self.obey_:
-      if b != -1:
-        count +=1
-    self.obey_amount=count
-    
-  def log_stat(self):
-    if not self.common_wealth:
-      if self.obey_amount==population-1:
-        self.common_wealth=True
-        with open(file_name, 'a', newline='') as f:
-          csv_writer = csv.writer(f)
-          csv_writer.writerow(["Common Wealth achived on day "+ str(self.day_)])
-    self.day_+=1
-    log = [self.day_]
-    for i in range(population):
-      log =  log + [self.rob_[i], self.rob_rebel[i], self.trade_[i], self.trade_accept[i],
-            self.obey_[i], self.farm_[i]]
-    with open(file_name, 'a', newline='') as f:
-      csv_writer = csv.writer(f)
-      csv_writer.writerow(log)
-
-stat = analysis(population)
 
 def change_affected_people(affected_people, system:System):
     for affected_person in affected_people:#{PERSON:{strength:1,...}...}
@@ -94,12 +30,15 @@ def day_end(system,individuals:List[Individual]):
         # Limit the memory to the last 60 events
         forget = len(individual.memory) - 60
         individual.memory = individual.memory[forget:]
+
     system.time+=1
+
+file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
 def initialize():
     # Initialize individuals and environment
     individuals=[]
     lands=[]
-    POPULATION=population
+    POPULATION=9
     #POPULATIONLIST=[x for x in range(POPULATION)]
     #random id
     #random_numbers = random.sample(POPULATIONLIST, POPULATION)
@@ -109,11 +48,14 @@ def initialize():
     #individuals.sort(key=lambda x: x.attributes['id'])
     #default
     for i in range(POPULATION):
-      individuals.append(Individual(i,f'person {i}'))
+      individual = Individual(i,f'person {i}')
+      individuals.append(individual)
       lands.append(f'land {i}')
     system=System(individuals,lands)
     # init_save(system)
+    system.set_csv_analysis(CsvAnalysis(POPULATION, file_name))
     return system
+
 
 def simulate(individuals:List[Individual],system:System):
     while True:
@@ -144,7 +86,7 @@ def simulate(individuals:List[Individual],system:System):
                       
                       elif R:
                         rob(individual, owner, system, response_action.robType)
-                        stat.rob_rebelled(owner.attributes["id"])
+                        system.csv_analysis.rob_rebelled(owner.attributes["id"])
                       elif not R:
                             #if master rob subject, subject will accept instead of obey, where obey only refer to the first obey that happen between two individuals without subject-master relationship
                             if owner.attributes["id"] !=  individual.obey_stats.obey_personId:
@@ -153,7 +95,7 @@ def simulate(individuals:List[Individual],system:System):
                               individual.obey(response_action.ownerid,system)
                               owner.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
                               individual.memory.append(f"I obeyed to {owner.attributes['name']} and now I have to listen to all his commands and can never betray him.")
-                              stat.obey(individual, owner)
+                              system.csv_analysis.obey(individual.attributes["id"], owner.attributes["id"])
                             else:
                               owner =system.individuals[response_action.ownerid]
                               owner.add_rob(individual.attributes['id'],True)
@@ -175,7 +117,7 @@ def simulate(individuals:List[Individual],system:System):
                               if validO and validI:
                                 individual.memory.append(f'I accepted the trade and it has been executed.')
                                 owner.memory.append("He accepted the trade and the trade has been executed.")
-                                stat.trade_accepted(owner.attributes["id"])
+                                system.csv_analysis.trade_accepted(owner.attributes["id"])
                                 individual.attributes[gainT]-=gainA
                                 individual.attributes[payT]+=payA
                                 owner.attributes[gainT]+=gainA
@@ -184,11 +126,11 @@ def simulate(individuals:List[Individual],system:System):
                                 if not validO:
                                       owner.memory.append("He accepted the trade but it couldn't go through since I don't have enough resource for it, and I got nothing out of this trade while I lost my action opportunity of today.")
                                       individual.memory.append("I accepted the trade but it couldn't go through because he doesn't have enough resources to pay me accordingly.")
-                                      stat.trade_accepted(owner.attributes["id"])
+                                      system.csv_analysis.trade_accepted(owner.attributes["id"])
                                 if not validI:
                                       owner.memory.append("He accepted the trade but it could't go through because he didn't have enough resources to pay me accordingly. I lost my action opportunity of today.")
                                       individual.memory.append("I accepted the trade but I don't have enough resources to pay him accordingly so it failed to execute.")
-                                      stat.trade_accepted(owner.attributes["id"])
+                                      system.csv_analysis.trade_accepted(owner.attributes["id"])
                                   
                   #query_judge(f'In response to Person {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}. {add_context}',response_action,individual,system)
             elif not passive:
@@ -298,24 +240,24 @@ def simulate(individuals:List[Individual],system:System):
               match individual.current_action_type:
                 case AIActionType.Farm:
                   system.console_log.append(f"{index}:🌾")
-                  stat.farm(index)
+                  system.csv_analysis.farm(index)
                   increase_food(individual)
                 case AIActionType.Trade:
-                  stat.trade(index)
+                  system.csv_analysis.trade(index)
                   system.console_log.append(f"{index}:🤝")
                 case AIActionType.Rob:
-                  stat.rob(index)
+                  system.csv_analysis.rob(index)
                   system.console_log.append(f"{index}:🗡️")
                 case AIActionType.BeRobbed:
                   system.console_log.append(f"{index}:🛡️")
                 case _ :
                   system.console_log.append(f"{index}:Error")
               individual.attributes['action']=0
-            
+              
                      
               
       system.ranking.update({x: x.attributes["social_position"] for x in system.individuals})
-      print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
+      #print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
       #reach this mean all pending action is done
       pending=False
       sum_action=0
@@ -327,7 +269,7 @@ def simulate(individuals:List[Individual],system:System):
       else:
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
-    stat.log_stat()
+    system.csv_analysis.log_stat(file_name)
     # save_logframes(system)
     
 # %%
