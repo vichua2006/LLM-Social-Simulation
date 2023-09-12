@@ -32,7 +32,8 @@ def day_end(system,individuals:List[Individual]):
         individual.memory = individual.memory[forget:]
 
     system.time+=1
-    
+
+file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
 def initialize():
     # Initialize individuals and environment
     individuals=[]
@@ -52,11 +53,11 @@ def initialize():
       lands.append(f'land {i}')
     system=System(individuals,lands)
     # init_save(system)
+    system.set_csv_analysis(CsvAnalysis(POPULATION, file_name))
     return system
 
+
 def simulate(individuals:List[Individual],system:System):
-    file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
-    stat = CsvAnalysis(len(system.individuals), file_name)
     while True:
       for individual in individuals:
           if system.is_stop:
@@ -85,7 +86,7 @@ def simulate(individuals:List[Individual],system:System):
                       
                       elif R:
                         rob(individual, owner, system, response_action.robType)
-                        stat.rob_rebelled(owner.attributes["id"])
+                        system.csv_analysis.rob_rebelled(owner.attributes["id"])
                       elif not R:
                             #if master rob subject, subject will accept instead of obey, where obey only refer to the first obey that happen between two individuals without subject-master relationship
                             if owner.attributes["id"] !=  individual.obey_stats.obey_personId:
@@ -94,7 +95,7 @@ def simulate(individuals:List[Individual],system:System):
                               individual.obey(response_action.ownerid,system)
                               owner.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
                               individual.memory.append(f"I obeyed to {owner.attributes['name']} and now I have to listen to all his commands and can never betray him.")
-                              stat.obey(individual, owner)
+                              system.csv_analysis.obey(individual.attributes["id"], owner.attributes["id"])
                             else:
                               owner =system.individuals[response_action.ownerid]
                               owner.add_rob(individual.attributes['id'],True)
@@ -116,7 +117,7 @@ def simulate(individuals:List[Individual],system:System):
                               if validO and validI:
                                 individual.memory.append(f'I accepted the trade and it has been executed.')
                                 owner.memory.append("He accepted the trade and the trade has been executed.")
-                                stat.trade_accepted(owner.attributes["id"])
+                                system.csv_analysis.trade_accepted(owner.attributes["id"])
                                 individual.attributes[gainT]-=gainA
                                 individual.attributes[payT]+=payA
                                 owner.attributes[gainT]+=gainA
@@ -125,11 +126,11 @@ def simulate(individuals:List[Individual],system:System):
                                 if not validO:
                                       owner.memory.append("He accepted the trade but it couldn't go through since I don't have enough resource for it, and I got nothing out of this trade while I lost my action opportunity of today.")
                                       individual.memory.append("I accepted the trade but it couldn't go through because he doesn't have enough resources to pay me accordingly.")
-                                      stat.trade_accepted(owner.attributes["id"])
+                                      system.csv_analysis.trade_accepted(owner.attributes["id"])
                                 if not validI:
                                       owner.memory.append("He accepted the trade but it could't go through because he didn't have enough resources to pay me accordingly. I lost my action opportunity of today.")
                                       individual.memory.append("I accepted the trade but I don't have enough resources to pay him accordingly so it failed to execute.")
-                                      stat.trade_accepted(owner.attributes["id"])
+                                      system.csv_analysis.trade_accepted(owner.attributes["id"])
                                   
                   #query_judge(f'In response to Person {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}. {add_context}',response_action,individual,system)
             elif not passive:
@@ -239,20 +240,20 @@ def simulate(individuals:List[Individual],system:System):
               match individual.current_action_type:
                 case AIActionType.Farm:
                   system.console_log.append(f"{index}:🌾")
-                  stat.farm(index)
+                  system.csv_analysis.farm(index)
                   increase_food(individual)
                 case AIActionType.Trade:
-                  stat.trade(index)
+                  system.csv_analysis.trade(index)
                   system.console_log.append(f"{index}:🤝")
                 case AIActionType.Rob:
-                  stat.rob(index)
+                  system.csv_analysis.rob(index)
                   system.console_log.append(f"{index}:🗡️")
                 case AIActionType.BeRobbed:
                   system.console_log.append(f"{index}:🛡️")
                 case _ :
                   system.console_log.append(f"{index}:Error")
               individual.attributes['action']=0
-            
+              
                      
               
       system.ranking.update({x: x.attributes["social_position"] for x in system.individuals})
@@ -268,7 +269,7 @@ def simulate(individuals:List[Individual],system:System):
       else:
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
-    stat.log_stat()
+    system.csv_analysis.log_stat(file_name)
     # save_logframes(system)
     
 # %%

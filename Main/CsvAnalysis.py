@@ -1,8 +1,8 @@
 
 import csv
+
 class CsvAnalysis:
   def __init__(self, population:int, file_name:str) -> None:
-    self.name = file_name
     self.population = population
     self.day_=0
     self.rob_=[0] * population
@@ -45,9 +45,9 @@ class CsvAnalysis:
         count +=1
     self.obey_amount=count
     
-  def log_stat(self):
+  def log_stat(self, filename:str):
     if self.obey_amount==self.population-1:
-      with open(self.name, 'a', newline='') as f:
+      with open(filename, 'a', newline='') as f:
         csv_writer = csv.writer(f)
         #csv_writer.writerow(["Common Wealth achived on day "+ str(self.day_)])
       
@@ -56,6 +56,6 @@ class CsvAnalysis:
     for i in range(self.population):
       log =  log + [self.rob_[i], self.rob_rebel[i], self.trade_[i], self.trade_accept[i],
             self.obey_[i], self.farm_[i]]
-    with open(self.name, 'a', newline='') as f:
+    with open(filename, 'a', newline='') as f:
       csv_writer = csv.writer(f)
       csv_writer.writerow(log)
