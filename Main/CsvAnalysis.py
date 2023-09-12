@@ -1,4 +1,3 @@
-
 import csv
 
 class CsvAnalysis:
@@ -45,8 +44,9 @@ class CsvAnalysis:
         count +=1
     self.obey_amount=count
     
-  def log_stat(self, filename:str):
+  def log_stat(self, system, filename:str):
     if self.obey_amount==self.population-1:
+      system.day_end_counter = 1 
       with open(filename, 'a', newline='') as f:
         csv_writer = csv.writer(f)
         #csv_writer.writerow(["Common Wealth achived on day "+ str(self.day_)])

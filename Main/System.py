@@ -19,6 +19,8 @@ class System:
         self.time=0
         self.is_stop=False
         self.obey_frequence=[]
+        self.day_end_counter=0
+        self.should_stop=False
 
     def set_csv_analysis(self, csv_analysis:CsvAnalysis):
         self.csv_analysis = csv_analysis
