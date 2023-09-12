@@ -59,6 +59,18 @@ class Individual:
         # Update the total win rob times towards the person if applicable
         if win_rob:
             self.robbing_stats.win_rob_times[person_id] + 1
+    
+        #return the person id if all individual obey to the same person except for the person who is obeyed
+    def check_is_common_wealth(self, system:System)->bool:
+        obey_person_id:int = self.obey_stats.obey_personId
+        if obey_person_id==-1:
+            return -1
+        for individual in system.individuals:
+            if individual.obey_stats.obey_personId!=obey_person_id and individual.attributes['id']!=obey_person_id:
+                return -1
+        return obey_person_id
+        
+        
     def obey(self, person_id: int, system:System) -> None:
         #if already obey to anyone, directly return
         if self.obey_stats.obey_personId!=-1:
@@ -82,6 +94,11 @@ class Individual:
             system.individuals[person_id].obey_stats.subjectid.append(subject)
         self.obey_stats.subjectid=[]
         
+        common_wealth_id = self.check_is_common_wealth(system)
+        if common_wealth_id!=-1:
+            system.window.write_event_value('-COMMONWEALTH-', common_wealth_id)
+            
+
     
     # Check if the individual is the responser of the action
     def check_is_responser(self, action:AIAction)->None:

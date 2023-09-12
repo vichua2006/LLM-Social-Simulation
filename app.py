@@ -83,6 +83,7 @@ def main():
     
     thread: threading.Thread
     system.set_console_log(CustomConsoleLog(window, '-SPECIAL OUTPUT-'))
+    system.set_window(window)
     isappStarted = False
     opened = [True for i in range(10)]
         # Redirect stdout to the sg.Output element
@@ -163,8 +164,11 @@ def main():
             print("DEBUG")
             print("A")
 
-        
-        
+        elif event == '-COMMONWEALTH-':
+            number_received = values['-COMMONWEALTH-']
+            #pop up a window to show that the commonwealth is formed
+            sg.popup(f'Commonwealth is formed! The common power is {number_received}')
+
         
         #update 
         #update console log

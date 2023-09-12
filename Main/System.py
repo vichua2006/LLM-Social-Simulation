@@ -1,5 +1,6 @@
 from typing import List
-from GUI.CustomConsoleLog import CustomConsoleLog      
+from GUI.CustomConsoleLog import CustomConsoleLog     
+from PySimpleGUI.PySimpleGUI import Window 
 class Individual:
     pass
 
@@ -19,7 +20,9 @@ class System:
         
     def set_console_log(self, console_log:CustomConsoleLog):
         self.console_log = console_log
-
+    def set_window(self, window:Window):
+        self.window = window
+        
     def __getstate__(self):
         return self.__dict__
     def __setstate__(self, state):

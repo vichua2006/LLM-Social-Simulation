@@ -2,6 +2,7 @@ import jsonpickle
 import threading
 from typing import List
 from Main.Calculation import increase_food, punishment, rob, winner_loser
+from Main.CsvAnalysis import CsvAnalysis
 from Main.Individual import Individual
 from Main.System import System
 from Main.Query import query_individual
@@ -11,69 +12,6 @@ from Main.PendingAction import append_to_pending_action, str_to_ai_action
 from Main.SaveLoad import init_save, save_logframes
 import random
 import datetime
-import csv
-
-class analysis:
-  def __init__(self, population:int, file_name:str) -> None:
-    self.name = file_name
-    self.population = population
-    self.day_=0
-    self.rob_=[0] * population
-    self.rob_rebel=[0]*population
-    self.farm_=[0] * population
-    self.trade_=[0] * population
-    self.trade_accept=[0]*population
-    self.obey_amount = 0
-    self.obey_=[-1] * population
-    special = [population]
-    head = [f"day"]
-    for i in range(population):
-      head = head + [f"rob_count_{i}", f"rob_rebelled_{i}", f"trade_count_{i}",
-                    f"trade_accepted_{i}", f"{i}_obey_to", f"farm_count_{i}"]
-    with open(file_name, 'a', newline='') as f:
-      csv_writer = csv.writer(f)
-      csv_writer.writerow(head)
-  
-  def trade(self, index):
-    self.trade_[index]+=1
-  
-  def farm(self, index):
-    self.farm_[index]+=1
-    
-  def rob(self, index):
-    self.rob_[index]+=1
-    
-  def trade_accepted(self, index):
-    self.trade_accept[index]+=1
-    
-  def rob_rebelled(self, index):
-    self.rob_rebel[index]+=1
-    
-  # index obey to target
-  def obey(self, index, target):
-    self.obey_[index]=target
-    count = 0
-    for b in self.obey_:
-      if b != -1:
-        count +=1
-    self.obey_amount=count
-    
-  def log_stat(self):
-    if self.obey_amount==self.population-1:
-      with open(self.name, 'a', newline='') as f:
-        csv_writer = csv.writer(f)
-        #csv_writer.writerow(["Common Wealth achived on day "+ str(self.day_)])
-      
-    self.day_+=1
-    log = [self.day_]
-    for i in range(self.population):
-      log =  log + [self.rob_[i], self.rob_rebel[i], self.trade_[i], self.trade_accept[i],
-            self.obey_[i], self.farm_[i]]
-    with open(self.name, 'a', newline='') as f:
-      csv_writer = csv.writer(f)
-      csv_writer.writerow(log)
-
-
 def change_affected_people(affected_people, system:System):
     for affected_person in affected_people:#{PERSON:{strength:1,...}...}
     #avoid if affected_person is "person 0" instead of "0"
@@ -91,7 +29,9 @@ def day_end(system,individuals:List[Individual]):
         # Limit the memory to the last 60 events
         forget = len(individual.memory) - 60
         individual.memory = individual.memory[forget:]
+
     system.time+=1
+    
 def initialize():
     # Initialize individuals and environment
     individuals=[]
@@ -106,7 +46,8 @@ def initialize():
     #individuals.sort(key=lambda x: x.attributes['id'])
     #default
     for i in range(POPULATION):
-      individuals.append(Individual(i,f'person {i}'))
+      individual = Individual(i,f'person {i}')
+      individuals.append(individual)
       lands.append(f'land {i}')
     system=System(individuals,lands)
     # init_save(system)
@@ -114,7 +55,7 @@ def initialize():
 
 def simulate(individuals:List[Individual],system:System):
     file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
-    stat = analysis(len(system.individuals), file_name)
+    stat = CsvAnalysis(len(system.individuals), file_name)
     while True:
       for individual in individuals:
           if system.is_stop:
@@ -314,7 +255,7 @@ def simulate(individuals:List[Individual],system:System):
                      
               
       system.ranking.update({x: x.attributes["social_position"] for x in system.individuals})
-      print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
+      #print(f'OVERALL TRUST LEVEL:{sum([x.attributes["trust_of_others"] for x in system.individuals])}\n\n\n')
       #reach this mean all pending action is done
       pending=False
       sum_action=0
