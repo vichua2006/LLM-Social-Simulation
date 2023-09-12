@@ -13,10 +13,10 @@ import random
 import datetime
 import csv
 
-population=9
-file_name='Log/'+datetime.datetime.now().strftime("%B %d, %I %M%p , %Y")+'Experimentlog.csv'
 class analysis:
-  def __init__(self, population:int) -> None:
+  def __init__(self, population:int, file_name:str) -> None:
+    self.name = file_name
+    self.population = population
     self.day_=0
     self.rob_=[0] * population
     self.rob_rebel=[0]*population
@@ -59,21 +59,20 @@ class analysis:
     self.obey_amount=count
     
   def log_stat(self):
-    if self.obey_amount==population-1:
-      with open(file_name, 'a', newline='') as f:
+    if self.obey_amount==self.population-1:
+      with open(self.name, 'a', newline='') as f:
         csv_writer = csv.writer(f)
-        csv_writer.writerow(["Common Wealth achived on day "+ str(self.day_)])
+        #csv_writer.writerow(["Common Wealth achived on day "+ str(self.day_)])
       
     self.day_+=1
     log = [self.day_]
-    for i in range(population):
+    for i in range(self.population):
       log =  log + [self.rob_[i], self.rob_rebel[i], self.trade_[i], self.trade_accept[i],
             self.obey_[i], self.farm_[i]]
-    with open(file_name, 'a', newline='') as f:
+    with open(self.name, 'a', newline='') as f:
       csv_writer = csv.writer(f)
       csv_writer.writerow(log)
 
-stat = analysis(population)
 
 def change_affected_people(affected_people, system:System):
     for affected_person in affected_people:#{PERSON:{strength:1,...}...}
@@ -97,7 +96,7 @@ def initialize():
     # Initialize individuals and environment
     individuals=[]
     lands=[]
-    POPULATION=population
+    POPULATION=9
     #POPULATIONLIST=[x for x in range(POPULATION)]
     #random id
     #random_numbers = random.sample(POPULATIONLIST, POPULATION)
@@ -114,6 +113,8 @@ def initialize():
     return system
 
 def simulate(individuals:List[Individual],system:System):
+    file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
+    stat = analysis(len(system.individuals), file_name)
     while True:
       for individual in individuals:
           if system.is_stop:
