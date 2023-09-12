@@ -23,7 +23,7 @@ class Individual:
             "id": id, # The index of the individual in the system
             "name": name,  # The name of the individual
             "aggressiveness": np.random.normal(0,1),  # Randomly assigned aggressiveness level
-            "covetousness": np.random.normal(1.25,0),  # Randomly assigned covetousness level
+            "covetousness": np.random.normal(1.25,0.5),  # Randomly assigned covetousness level
             
             "strength": np.random.normal(0.7, 0.2),  # Randomly assigned strength level
             "social_position": 0,  # Initial social position is 0
