@@ -85,7 +85,7 @@ def main():
     sys.stdout = ConsoleLog(window, '-OUTPUT-', '-OUTPUT THREAD-')
     last_log_update = datetime.now()  # Initialize the last log update time
     last_log = ""  # Initialize the last log content
-    timeout_duration = timedelta(minutes=1)  # Set the timeout duration to 5 minutes
+    timeout_duration = timedelta(minutes=1)  # Set the timeout duration to 1 minutes
     thread: threading.Thread
     system.set_console_log(CustomConsoleLog(window, '-SPECIAL OUTPUT-'))
     system.set_window(window)
@@ -129,27 +129,27 @@ def main():
                 save(system, console_log, filepath)
                 # Save the console log
                 print(f"Log successfully saved to {filepath}")
-        if event=='-OPEN LEFTSEC-':
+        elif event=='-OPEN LEFTSEC-':
             opened[0] = not opened[0]
             window['-OPEN LEFTSEC-'].update(SYMBOL_DOWN if opened[0] else SYMBOL_UP)
             window['-LEFTSEC-'].update(visible=opened[0])
-        if event=='-OPEN RIGHTSEC-':
+        elif event=='-OPEN RIGHTSEC-':
             opened[1] = not opened[1]
             window['-OPEN RIGHTSEC-'].update(SYMBOL_DOWN if opened[1] else SYMBOL_UP)
             window['-RIGHTSEC-'].update(visible=opened[1])
-        if event=='-OPEN ROBTXT-':
+        elif event=='-OPEN ROBTXT-':
             opened[2] = not opened[2]
             window['-OPEN ROBTXT-'].update(SYMBOL_DOWN if opened[2] else SYMBOL_UP)
             window['-ROBTXT-'].update(visible=opened[2])
-        if event=='-OPEN PENDINGACTION-':
+        elif event=='-OPEN PENDINGACTION-':
             opened[3] = not opened[3]
             window['-OPEN PENDINGACTION-'].update(SYMBOL_DOWN if opened[3] else SYMBOL_UP)
             window['-PENDINGACTION-'].update(visible=opened[3])
-        if event=='-OPEN OBEYSUBJECT-':
+        elif event=='-OPEN OBEYSUBJECT-':
             opened[4] = not opened[4]
             window['-OPEN OBEYSUBJECT-'].update(SYMBOL_DOWN if opened[4] else SYMBOL_UP)
             window['-OBEYSUBJECT-'].update(visible=opened[4])
-        if event=='-OPEN MEMORY-':
+        elif event=='-OPEN MEMORY-':
             opened[5] = not opened[5]
             window['-OPEN MEMORY-'].update(SYMBOL_DOWN if opened[5] else SYMBOL_UP)
             window['-MEMORY-'].update(visible=opened[5])
@@ -173,7 +173,12 @@ def main():
             number_received = values['-COMMONWEALTH-']
             #pop up a window to show that the commonwealth is formed
             sg.popup(f'Commonwealth is formed! The common power is {number_received}')
-        
+            
+        # System automatically exit if the commonwealth is formed and 10 days passed
+        if system.should_stop:
+            print("Common Wealth achieved. Exiting...")
+            system.is_stop = False
+            isappStarted = False
          # Check if the console log has been updated
         current_log = window['-OUTPUT-'].get()
         if current_log != last_log:
