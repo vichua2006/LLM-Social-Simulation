@@ -88,6 +88,7 @@ def main():
     timeout_duration = timedelta(minutes=1)  # Set the timeout duration to 5 minutes
     thread: threading.Thread
     system.set_console_log(CustomConsoleLog(window, '-SPECIAL OUTPUT-'))
+    system.set_window(window)
     isappStarted = False
     opened = [True for i in range(10)]
         # Redirect stdout to the sg.Output element
@@ -168,6 +169,10 @@ def main():
             print("DEBUG")
             print("A")
 
+        elif event == '-COMMONWEALTH-':
+            number_received = values['-COMMONWEALTH-']
+            #pop up a window to show that the commonwealth is formed
+            sg.popup(f'Commonwealth is formed! The common power is {number_received}')
         
          # Check if the console log has been updated
         current_log = window['-OUTPUT-'].get()
@@ -188,7 +193,7 @@ def main():
             window.write_event_value('-START-', '')
             # Reset the last log update time
             last_log_update = datetime.now()
-        
+
         #update 
         #update console log
         #lb_widget = window[f'-SPECIAL OUTPUT'].Widget
