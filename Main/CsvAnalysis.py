@@ -1,4 +1,4 @@
-
+import Main.System
 import csv
 
 class CsvAnalysis:
@@ -37,8 +37,9 @@ class CsvAnalysis:
     self.rob_rebel[index]+=1
     
   # index obey to target
-  def obey(self, index, target):
-    self.obey_[index]=target
+  def obey(self, system):
+    for person in system.individuals:
+      self.obey_[person.attributes["id"]]=person.obey_stats.obey_personId
     count = 0
     for b in self.obey_:
       if b != -1:
