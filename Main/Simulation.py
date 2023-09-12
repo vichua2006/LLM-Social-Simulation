@@ -32,6 +32,10 @@ def day_end(system,individuals:List[Individual]):
         individual.memory = individual.memory[forget:]
 
     system.time+=1
+    if system.day_end_counter > 0:
+        system.day_end_counter += 1
+    if system.day_end_counter > 10:
+        system.should_exit = True
 
 file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
 def initialize():
@@ -269,7 +273,7 @@ def simulate(individuals:List[Individual],system:System):
       else:
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
-    system.csv_analysis.log_stat(file_name)
+    system.csv_analysis.log_stat(system, file_name)
     # save_logframes(system)
     
 # %%
