@@ -15,6 +15,9 @@ from Main.Simulation import initialize, simulate
 from datetime import datetime
 import sys
 
+from datetime import datetime, timedelta
+import time
+
 SYMBOL_UP =    '▲'
 SYMBOL_DOWN =  '▼'
 
@@ -80,7 +83,9 @@ def main():
     window = sg.Window('LLM Social Simulation', layout)
     #redirect stdout to the sg.Output element
     sys.stdout = ConsoleLog(window, '-OUTPUT-', '-OUTPUT THREAD-')
-    
+    last_log_update = datetime.now()  # Initialize the last log update time
+    last_log = ""  # Initialize the last log content
+    timeout_duration = timedelta(minutes=1)  # Set the timeout duration to 5 minutes
     thread: threading.Thread
     system.set_console_log(CustomConsoleLog(window, '-SPECIAL OUTPUT-'))
     isappStarted = False
@@ -164,7 +169,25 @@ def main():
             print("A")
 
         
-        
+         # Check if the console log has been updated
+        current_log = window['-OUTPUT-'].get()
+        if current_log != last_log:
+            last_log = current_log
+            last_log_update = datetime.now()
+
+        # Check for timeout
+        if datetime.now() - last_log_update > timeout_duration:
+            print("Log hasn't been updated for 1 minutes. Restarting simulation.")
+            # Programmatically press "Stop" twice
+            window.write_event_value('-STOP-', '')
+            window.write_event_value('-STOP-', '')
+            # Wait for 5 seconds
+            time.sleep(5)
+            # Programmatically press "Start" twice
+            window.write_event_value('-START-', '')
+            window.write_event_value('-START-', '')
+            # Reset the last log update time
+            last_log_update = datetime.now()
         
         #update 
         #update console log
