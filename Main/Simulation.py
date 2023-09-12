@@ -25,6 +25,7 @@ class analysis:
     self.trade_accept=[0]*population
     self.obey_amount = 0
     self.obey_=[-1] * population
+    self.common_wealth=False
     special = [population]
     head = [f"day"]
     for i in range(population):
@@ -51,7 +52,7 @@ class analysis:
     
   # index obey to target
   def obey(self, index, target):
-    self.obey_[index]=target
+    self.obey_[index.attributes["id"]]=index.obey_stats.obey_personId
     count = 0
     for b in self.obey_:
       if b != -1:
@@ -59,11 +60,12 @@ class analysis:
     self.obey_amount=count
     
   def log_stat(self):
-    if self.obey_amount==population-1:
-      with open(file_name, 'a', newline='') as f:
-        csv_writer = csv.writer(f)
-        csv_writer.writerow(["Common Wealth achived on day "+ str(self.day_)])
-      
+    if not self.common_wealth:
+      if self.obey_amount==population-1:
+        self.common_wealth=True
+        with open(file_name, 'a', newline='') as f:
+          csv_writer = csv.writer(f)
+          csv_writer.writerow(["Common Wealth achived on day "+ str(self.day_)])
     self.day_+=1
     log = [self.day_]
     for i in range(population):
@@ -151,7 +153,7 @@ def simulate(individuals:List[Individual],system:System):
                               individual.obey(response_action.ownerid,system)
                               owner.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
                               individual.memory.append(f"I obeyed to {owner.attributes['name']} and now I have to listen to all his commands and can never betray him.")
-                              stat.obey(individual.attributes["id"], owner.attributes["id"])
+                              stat.obey(individual, owner)
                             else:
                               owner =system.individuals[response_action.ownerid]
                               owner.add_rob(individual.attributes['id'],True)
