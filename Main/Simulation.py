@@ -12,6 +12,7 @@ from Main.PendingAction import append_to_pending_action, str_to_ai_action
 from Main.SaveLoad import init_save, save_logframes
 import random
 import datetime
+
 def change_affected_people(affected_people, system:System):
     for affected_person in affected_people:#{PERSON:{strength:1,...}...}
     #avoid if affected_person is "person 0" instead of "0"
@@ -93,7 +94,7 @@ def simulate(individuals:List[Individual],system:System):
                               individual.obey(response_action.ownerid,system)
                               owner.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
                               individual.memory.append(f"I obeyed to {owner.attributes['name']} and now I have to listen to all his commands and can never betray him.")
-                              stat.obey(individual.attributes["id"], owner.attributes["id"])
+                              stat.obey(individual, owner)
                             else:
                               owner =system.individuals[response_action.ownerid]
                               owner.add_rob(individual.attributes['id'],True)
