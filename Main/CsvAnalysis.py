@@ -1,4 +1,4 @@
-import Main.System
+from Main import System
 import csv
 
 class CsvAnalysis:
