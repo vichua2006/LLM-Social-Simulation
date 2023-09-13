@@ -1,3 +1,4 @@
+import os
 import jsonpickle
 import threading
 from typing import List
@@ -38,6 +39,9 @@ def day_end(system,individuals:List[Individual]):
         system.should_exit = True
 
 file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
+#if file name alread exist, datetime will be as detail as second
+if os.path.exists(file_name):
+  file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M %S%p")+'.csv'
 def initialize():
     # Initialize individuals and environment
     individuals=[]
