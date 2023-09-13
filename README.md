@@ -27,3 +27,14 @@ Run the following codes to start the simulations:
 python app.py
 ```
 
+You will see this panel if it open successfully:
+![image](https://github.com/CharlieDreemur/LLM-Social-Simulation/assets/91376582/0fc52c6f-9793-42dc-80d7-245f3c718da6)
+
+
+Click **start** to start simulate, click **stop** to stop simulate
+
+If the convergence achieve, there will be a pop up that show *Commonwealth is formed!*:
+![image](https://github.com/CharlieDreemur/LLM-Social-Simulation/assets/91376582/fe5a02cf-ffd4-4399-9b25-5c190e0a4f6a)
+
+the program will automatically stop 10 days after the pop up *Commonwealth is formed!*
+the experiement is done and you will get a csv with name such as '12, 01 40 AM' that contains the all stats around experiment
