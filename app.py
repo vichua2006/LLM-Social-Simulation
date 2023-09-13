@@ -167,7 +167,7 @@ def main():
                 print(f"{filepath} successfully loaded")
         elif event == '-DEBUG-':
             print("DEBUG")
-            print("A")
+            sg.popup(f'Commonwealth is formed! The common power is {1}')
 
         elif event == '-COMMONWEALTH-':
             number_received = values['-COMMONWEALTH-']
@@ -186,7 +186,7 @@ def main():
             last_log_update = datetime.now()
 
         # Check for timeout
-        if datetime.now() - last_log_update > timeout_duration:
+        if isappStarted and datetime.now() - last_log_update > timeout_duration:
             print("Log hasn't been updated for 1 minutes. Restarting simulation.")
             # Programmatically press "Stop" twice
             window.write_event_value('-STOP-', '')
