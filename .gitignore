@@ -10,6 +10,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+*.png
 *.csv
 .Python
 build/
