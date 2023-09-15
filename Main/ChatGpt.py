@@ -26,7 +26,7 @@ def chat(system, user_assistant,top_prob):
     msgs = system_msg + user_assistant_msgs
     try:
       # Interact with the GPT-3 model
-      response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=msgs,top_p=top_prob)
+      response = openai.ChatCompletion.create(model="gpt-4", messages=msgs,top_p=top_prob)
       # Check the status of the response
       status_code = response["choices"][0]["finish_reason"]
       assert status_code == "stop", f"The status code was {status_code}."

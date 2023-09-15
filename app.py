@@ -60,7 +60,7 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
 
         left = sg.Column(new_left_section, size=(None, None))
         section = [[left, sg.Column(right_section)]]
-        person_layout.append(sg.Tab(f'Person {id}', section, key=section_key))
+        person_layout.append(sg.Tab(f'{id}', section, key=section_key, ))
     return sg.TabGroup([person_layout])
 
 
@@ -72,7 +72,7 @@ def main():
     system=initialize()
     individuals = system.individuals
     
-    person_layout = [[create_individual_layout(individuals)]]
+    person_layout = [[create_individual_layout(individuals), ]]
     special_log_layout = [[sg.Multiline(size=(80,10), key='-SPECIAL OUTPUT-', autoscroll=False)]]
     layout_left = person_layout + special_log_layout
     console_log_layout = [[sg.Multiline(size=(80,30), key='-OUTPUT-', autoscroll=False)]]
