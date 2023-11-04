@@ -5,6 +5,8 @@ from Main.AIAction import AIActionType, AIAction, RobAction
 import queue
 from Main.System import System
 
+from Memory import MemoryStream
+
 
 class SeralizeQueue(queue.Queue):
     def __getstate__(self):
@@ -39,6 +41,7 @@ class Individual:
         self.current_action_type:AIActionType = AIActionType.Default
         self.robbing_stats = RobStats()
         self.obey_stats = ObeyStats()
+        self.memorystream = MemoryStream()
         # Initialize memory of the individual
         self.memory = ['None']*30
         self.DESIRE_FOR_GLORY=10
