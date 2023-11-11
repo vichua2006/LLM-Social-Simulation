@@ -5,7 +5,7 @@ from Main.AIAction import AIActionType, AIAction, RobAction
 import queue
 from Main.System import System
 
-from Memory import MemoryStream
+from Main.Memory import MemoryStream
 
 
 class SeralizeQueue(queue.Queue):
