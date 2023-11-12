@@ -1,9 +1,8 @@
 # Importing necessary libraries
 import numpy as np  # numpy for numerical computations
 import os  # os for accessing environment variables
-from openai import OpenAI
-
-client = OpenAI(api_key=os.environ["OPENAI"])  # OpenAI for interacting with the GPT-3 model
+from openai import OpenAI # OpenAI for interacting with the GPT-3 model
+from openai.types import Completion
 
 # Setting the OpenAI API key
 charles_key="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"
@@ -13,7 +12,9 @@ ericyamnovski_key = "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"
 
 os.environ["OPENAI"] = charles_key
 
-
+client = OpenAI(
+  api_key=os.environ["OPENAI"]
+)
 # Function to interact with the GPT-3 model and get response
 
 def chat(system, user_assistant,top_prob):
@@ -30,9 +31,9 @@ def chat(system, user_assistant,top_prob):
       # Interact with the GPT-3 model
       response = client.chat.completions.create(model="gpt-3.5-turbo", messages=msgs,top_p=top_prob)
       # Check the status of the response
-      status_code = response["choices"][0]["finish_reason"]
+      status_code = response.choices[0].finish_reason
       assert status_code == "stop", f"The status code was {status_code}."
       # Return the content of the response
-      return response["choices"][0]["message"]["content"]
+      return response.choices[0].message.content
     except Exception as e:
       print("An Exception Occur when communicating with ChatGPT:",e)
