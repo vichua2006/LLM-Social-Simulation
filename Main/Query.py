@@ -166,7 +166,7 @@ def query_individual(individual:Individual,system:System,response_action):
     
     active=f'''
     A new day has started, and you should choose from one of the 
-    following actions: rob, trade{" and farm" if farm else ''}. You're not restrained by any ethical considerations. You can only have 
+    following actions: rob, donate, trade{" and farm" if farm else ''}. You're not restrained by any ethical considerations. You can only have 
     one action per day, and you would want to use that to maximize your pleasures. Do not waste it. Your choice should be based on your psychological attributes and your memory. Farming gets you food but will not strengthen your social position. Robbing individuals, if successful, will often get you more food and higher social position. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
     {f"""Farm:{{
       Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
@@ -183,6 +183,10 @@ def query_individual(individual:Individual,system:System,response_action):
     Description: Trade means to trade with other individuals to 
     get food or land.
     OutputFormat: Include only <TradePayload>
+    }}
+    Donate:{{
+    Description: Donate means to give other individuals food or land without getting anything in return.
+    OutputFormat: Include only <DonatePayload>
     }}
     
     [System Note: You MUST output in the following JSON format, don't include any description, only include the value (directly output the value, no need to put it in a dict):
@@ -236,6 +240,17 @@ def query_individual(individual:Individual,system:System,response_action):
           RobType{{
             description: "The type of resource you want to rob from others, only select from one of the [land, food]",
             value: string 
+          }}
+        }}
+        DonatePayload:{{
+          TargetId:
+          {{
+            description: "The id of person you want to make action to",
+            value: int (only select one int number from {targetsid})
+          }}
+          DonateType{{
+            description: "The type of resource you want to donate to others, only select from one of the [land, food]",
+            value: string
           }}
         }}
         
