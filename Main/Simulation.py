@@ -2,7 +2,7 @@ import os
 import jsonpickle
 import threading
 from typing import List
-from Main.Calculation import increase_food, punishment, rob, winner_loser
+from Main.Calculation import donate, increase_food, punishment, rob, winner_loser
 from Main.CsvAnalysis import CsvAnalysis
 from Main.Individual import Individual
 from Main.System import System
@@ -237,6 +237,11 @@ def simulate(individuals:List[Individual],system:System):
                   
               elif ai_action.type==AIActionType.Trade:
                     append_to_pending_action(ai_action, system)
+              
+              elif ai_action.type==AIActionType.Donate:
+                target=system.individuals[ai_action.targetid]
+                owner = system.individuals[ai_action.ownerid]
+                donate(target,owner, system, ai_action.donateType)
                   
               else:
                     print(f'Problem, the type of the action is:{ai_action.type}')
