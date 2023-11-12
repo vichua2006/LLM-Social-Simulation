@@ -1,13 +1,12 @@
 from typing import List
-from openai import OpenAI
+import openai
 
-client = OpenAI()
 
 def get_embedding(text, model="text-embedding-ada-002"):
     text = text.replace("\n", " ")
     if not text: 
       text = "this is blank"
-    return client.embeddings.create(input=[text], model=model)['data'][0]['embedding']
+    return openai.Embedding.create(input=[text], model=model)['data'][0]['embedding']
     
 class ConceptNode: 
   def __init__(self,
