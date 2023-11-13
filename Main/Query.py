@@ -506,7 +506,7 @@ def query_individual(individual:Individual,system:System,response_action):
       print('PASSIVE STATE')
           
     else: 
-      ask_for_response=test_active
+      ask_for_response=active
       if individual.obey_stats.obey_personId != -1:
         ask_for_response = active_for_subject
         ask_for_response = ask_for_response + additional_active_to_master
