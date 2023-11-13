@@ -263,6 +263,9 @@ def simulate(individuals:List[Individual],system:System):
                   system.console_log.append(f"{index}:🗡️")
                 case AIActionType.BeRobbed:
                   system.console_log.append(f"{index}:🛡️")
+                case AIActionType.Donate:
+                  system.csv_analysis.donate(index)
+                  system.console_log.append(f"{index}:D")
                 case _ :
                   system.console_log.append(f"{index}:Error")
               individual.attributes['action']=0

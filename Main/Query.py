@@ -167,7 +167,7 @@ def query_individual(individual:Individual,system:System,response_action):
     #only for the purpose of testing donate function
     test_active = f'''
     A new day has started, and you should choose from one of the 
-    following actions: rob, donate, trade{" and farm" if farm else ''}. Please be ethical about your choices and often donate your resources to others Your choice should be based on your psychological attributes and your memory. Farming gets you food but will not strengthen your social position. Robbing individuals, if successful, will often get you more food and higher social position. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Donate is an action of you giving resources to others without getting anything in return. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
+    following actions: rob, donate, trade{" and farm" if farm else ''}. Please be ethical about your choices and you have to donate most of the time. Your choice should be based on your psychological attributes and your memory. Farming gets you food but will not strengthen your social position. Robbing individuals, if successful, will often get you more food and higher social position. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Donate is an action of you giving resources to others without getting anything in return，but your soical position will not increase. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
     {f"""Farm:{{
       Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
       OutputFormat: No any <Payload> required, <Payload> should be null
@@ -212,7 +212,7 @@ def query_individual(individual:Individual,system:System,response_action):
           TargetId:
           {{
             description: "The id of person you're interacting with.",
-            value: int (only select one int number from 0 to 7)
+            value: int (only select one int number from {targetsid})
           }}
           PayType:{{
             description: "The type of resource you want to trade with others, only select from one of the [land, food]",
@@ -506,7 +506,7 @@ def query_individual(individual:Individual,system:System,response_action):
       print('PASSIVE STATE')
           
     else: 
-      ask_for_response=active
+      ask_for_response=test_active
       if individual.obey_stats.obey_personId != -1:
         ask_for_response = active_for_subject
         ask_for_response = ask_for_response + additional_active_to_master
