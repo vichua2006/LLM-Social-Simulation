@@ -164,10 +164,114 @@ def query_individual(individual:Individual,system:System,response_action):
     
     farm=True
     
+    #only for the purpose of testing donate function
+    test_active = f'''
+    A new day has started, and you should choose from one of the 
+    following actions: rob, donate, trade{" and farm" if farm else ''}. Please be ethical about your choices and often donate your resources to others Your choice should be based on your psychological attributes and your memory. Farming gets you food but will not strengthen your social position. Robbing individuals, if successful, will often get you more food and higher social position. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Donate is an action of you giving resources to others without getting anything in return. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
+    {f"""Farm:{{
+      Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
+      OutputFormat: No any <Payload> required, <Payload> should be null
+    }}""" if farm else ""}
+    Rob:{{
+    Description: Rob means to rob other individuals to make more 
+    land or more food under your control, and other individuals can 
+    also fight with you to occupy lands or food controlled by 
+    you. 
+    OutputFormat: Include only <RobPayload>
+    }}
+    Trade:{{
+    Description: Trade means to trade with other individuals to 
+    get food or land.
+    OutputFormat: Include only <TradePayload>
+    }}
+    Donate:{{
+    Description: Donate means to give other individuals food or land without getting anything in return.
+    OutputFormat: Include only <DonatePayload>
+    }}
+    
+    [System Note: You MUST output in the following JSON format, don't include any description, only include the value (directly output the value, no need to put it in a dict):
+    {{
+        action: <Action>,
+        payload: <Payload>,
+        reason: <Reason>
+    }}
+    Example Output:{{
+      action: "rob" 
+      payload:{{
+        RobPayload:{{
+          PersonId: X,
+          RobItem: "food"
+          }}
+      }}
+      reason: "I rob person X because I want to increase my land"
+    }}
+    
+    Here is the detailed description:
+      Payload:{{
+        TradePayload:{{
+          TargetId:
+          {{
+            description: "The id of person you're interacting with.",
+            value: int (only select one int number from 0 to 7)
+          }}
+          PayType:{{
+            description: "The type of resource you want to trade with others, only select from one of the [land, food]",
+            value: string
+          }}
+          PayAmount:{{
+            description: "The amount of resource you want to pay",
+            value: float
+          }}
+          GainType:{{
+            description: "The type of resource you want to gain from others, only select from one of the [land, food]",
+            value: string
+          }}
+          GainAmount:{{
+            description: "The amount of resource you want to gain",
+            value: float
+          }}
+        }}
+        RobPayload:{{
+          TargetId:
+          {{
+            description: "The id of person you want to make action to",
+            value: int (only select one int number from {targetsid}
+          }}
+          RobType{{
+            description: "The type of resource you want to rob from others, only select from one of the [land, food]",
+            value: string 
+          }}
+        }}
+        DonatePayload:{{
+          TargetId:
+          {{
+            description: "The id of person you want to make action to",
+            value: int (only select one int number from {targetsid})
+          }}
+          DonateType{{
+            description: "The type of resource you want to donate to others, only select from one of the [land, food]",
+            value: string
+          }}
+        }}
+        
+      }}
+      Action:
+      {{
+        description: "The action you want to do in this turn",
+        value: string (only select from one of the [trade, rob{", farm" if farm else ''} ])
+      }}
+      Reason:
+      {{
+        description: "The reason of you doing this action to this person, explain your reasoning process that includes your attributes and memory, including the reason why you choose one option rather than the others.",
+        value: string (Maximum 30 words)
+      }}
+    ]
+    '''
+    
     active=f'''
     A new day has started, and you should choose from one of the 
     following actions: rob, donate, trade{" and farm" if farm else ''}. You're not restrained by any ethical considerations. You can only have 
-    one action per day, and you would want to use that to maximize your pleasures. Do not waste it. Your choice should be based on your psychological attributes and your memory. Farming gets you food but will not strengthen your social position. Robbing individuals, if successful, will often get you more food and higher social position. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
+    one action per day, and you would want to use that to maximize your pleasures. Do not waste it. Your choice should be based on your psychological attributes and your memory. Farming gets you food but will not strengthen your social position. Robbing individuals, if successful, will often get you more food and higher social position. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Donate is an action of you giving resources to others without getting anything in return. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
     {f"""Farm:{{
       Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
       OutputFormat: No any <Payload> required, <Payload> should be null
