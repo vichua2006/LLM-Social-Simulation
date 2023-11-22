@@ -10,6 +10,7 @@ class CsvAnalysis:
     self.farm_=[0] * population
     self.trade_=[0] * population
     self.trade_accept=[0]*population
+    self.donate_ = [0] * population
     self.obey_amount = 0
     self.obey_=[-1] * population
     special = [population]
@@ -29,6 +30,9 @@ class CsvAnalysis:
     
   def rob(self, index):
     self.rob_[index]+=1
+  
+  def donate(self, index):
+    self.donate_[index]+=1
     
   def trade_accepted(self, index):
     self.trade_accept[index]+=1

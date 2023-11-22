@@ -55,6 +55,18 @@ def share_rob_lost(master:Individual, robAmount:float, robType:str, system:Syste
     print(f"SHARE_LOST_FOOD: {master.attributes['name']} got {robAmount} units of {robType} from {len(master.obey_stats.subjectid)} subjects.")
     return
 
+#only allow free individuals to donate
+def donate_lost(master:Individual, donateAmount:float, donateType:str, system:System) -> None:
+    
+    master.attributes[donateType]= master.attributes[donateType] - donateAmount
+    return
+
+def donate_gain(master:Individual, donateAmount:float, donateType:str, system:System) -> None:
+    
+    master.attributes[donateType]= master.attributes[donateType] + donateAmount
+    return
+    
+
 def rob(target: Individual, rob_person:Individual, system: System, robType: str)->None:
     #cannot rob self
     if target.attributes['id']==rob_person.attributes['id']:
@@ -102,6 +114,29 @@ def rob(target: Individual, rob_person:Individual, system: System, robType: str)
 
     print("Robbing process finished")
     return
+
+def donate(target: Individual, donate_person:Individual, system: System, donateType: str)->None:
+    #cannot donate self
+    if target.attributes['id']==donate_person.attributes['id']:
+        print("DONATEERROR: cannot donate self.")
+        return
+    
+    donate_perosn_id:int=donate_person.attributes['id']
+    if donateType == "food":
+        donate_person.memory.append(f"Day {system.time}. I donated to 1 unit fo food to {target.attributes['name']}.")
+        target.memory.append(f"Day {system.time}. {donate_person.attributes['name']} donate 1 unit of food to me.")
+    elif donateType == "land":
+        donate_person.memory.append(f"Day {system.time}. I donated to 1 unit fo land to {target.attributes['name']}.")
+        target.memory.append(f"Day {system.time}. {donate_person.attributes['name']} donate 1 unit of land to me.")
+    else:
+        print(f'Error: rob type does not match anyting. Rob type: {donateType}')
+    
+    donate_lost(donate_person,1, donateType, system)
+    donate_gain(target,1, donateType, system)
+    
+    print("Donate process finished")
+    return
+
 
 #master punish subject, get his food and land and share it to other subjects except the subject being punished
 def punishment(subject:Individual, system:System) -> None:

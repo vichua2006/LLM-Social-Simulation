@@ -18,8 +18,10 @@ class AIActionType(str, Enum, metaclass=StringEnumMeta):
     Farm = "farm"
     Rob = "rob"
     Trade = "trade"
+    Donate = "donate"
     BeRobbed = "be robbed"
     BeTraded = "be traded"
+    BeDonated = "be donated"
     
 #class Type(str, Enum, metaclass=StringEnumMeta):
  #   Land = "land"
@@ -50,4 +52,10 @@ class TradeAction(AIAction):
         self.gainAmount: float = gainAmount
     def __str__(self) -> str:
         return f"{self.type}, owner: {self.ownerid}, target: {self.targetid}, payType: {self.payType}, payAmount: {self.payAmount}, gainType: {self.gainType}, gainAmount: {self.gainAmount}" 
-    
+
+class DonateAction(AIAction):
+    def __init__(self, owner:int, target:int, donateType:str) -> None:
+        super().__init__(AIActionType.Donate, owner, target)
+        self.donateType:str= donateType
+    def __str__(self) -> str:
+        return f"{self.type}, owner: {self.ownerid}, target: {self.targetid}, donateType: {self.donateType}"
