@@ -3,3 +3,4 @@ jsonpickle
 pandas
 numpy
 openai==1.2.3 #Note that old openai version need a migrate to work
+pyautogen #python >= 3.8
