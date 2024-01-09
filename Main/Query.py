@@ -5,17 +5,72 @@ from Main.AIAction import AIActionType
 from Main.ChatGpt import chat
 from Main.Individual import Individual, System
 
+def generate_environment_description() -> str:
+    # This function returns the description of the simulation environment as a string
+    environment_description=f'''
+    The world consists of farming lands.
+    
+    Survival:
+    You only have one active action opportunity to spend each day. After spending it, you will not get another chance to act during that day.
+    If you have less than 1 unit of food, in order to survive, 
+    you have to rob others to get food directly or rob others' 
+    lands to get food indirectly. {"""You can rob those who are not 
+    subjects in commonwealth. You can rob masters of commonwealth 
+    #=or independent individuals like you.""" if False else""}
+    Similarly, you will also be invaded by others once they 
+    don't have enough food.
+    Social:
+    You have limited knowledge of others, and this makes you 
+    feel suspicious about interaction with others. 
+    For example, when you are trading with others,
+    you don't know if they will violate the trade or not,
+    which means that person took away your food or land without giving you their food or land as what they claimed,
+    your master will punish that violater.
+    Your interaction with others makes you know them better.
+    Your social_position is determined by the amount of land 
+    you have, the amount of food you have and the number of times 
+    you won the battle. Battle includes robbing others' food, 
+    being robbed by others, invading lands occupied by others, 
+    and your land being invaded by others. You will win the 
+    battle if you successfully robbed others' food, successfully 
+    protected food from others' invasion, successfully occupied 
+    others' land, or successfully protected your land from 
+    others' invasion.
+    social_position is a ranking that is relative to others. 
+    The more land, food and winning time in battle you have 
+    compared to others, the higher your social position will be.
+    
+    {"""Nearly all humans treat self-preservation as a trumping 
+    food nearly all the time, but glory is more important than 
+    self-preservation. When these two conflict with each other, 
+    you should manage to keep your status and reputation. You 
+    would rather lose your lives than suffer slander, though 
+    under all the other circumstances, you have a strong desire 
+    to live peacefully and avoid violent death.""" if False else ""}
+    {"""You have the motivation to trade with others on food and 
+    lands, but you don't trust them when you don't know them, as 
+    others can betray the trade and take your food.
+    You have the motivation to communicate with others on any 
+    daily routines, but you don't trust them when you don't know 
+    them, as others may consider you as the one who robs you and 
+    therefore fight with you, even though you may have no 
+    intention to rob with them.""" if False else""}
+    If food is less than 1, your next action will be to rob 
+    food. You also have the covetousness of gaining food when 
+    food is more than 1.
+    Your memory affects how you judge 
+    things. If something is not in your memory, then you 
+    will not hold any atitude on that thing. In the beginning, 
+    you can gain food by robbing. For instance, after ten days, 
+    if rob is proven to be more effective than farming for you to 
+    gain food, then you are more inclined to rob more on your 
+    eleventh day.
+    '''
 
-def query_individual(individual:Individual,system:System,response_action):
-    # This function creates a description of the individual and the environment they are in,
-    # and then asks for the individual's response using the chat function.
-    # The detailed description and the ask for response are both created within this function.
-    print(f"Responding to:{response_action}")
-    targetsid = [i.attributes['id'] for i in system.individuals if i is not individual]
-    #erase obeyed person in targets
-    if individual.obey_stats.obey_personId in targetsid:
-      targetsid.remove(individual.obey_stats.obey_personId)
-    print(f'available targets:{targetsid}')
+    return environment_description
+
+def generate_general_description(individual: Individual, system: System) -> str:
+    # This function generates the description of the individual and returns it as a string
     is_subject=individual.obey_stats.obey_personId!=-1
     is_master=individual.obey_stats.subjectid
     obedience=f'''You have obeyed to this person: Person {individual.obey_stats.obey_personId}. You have to always obey his actions, and you cannot initiate any action against him. Since you obeyed, you are now part of the group of individuals who also obeyed him, if any, they are {system.individuals[individual.obey_stats.obey_personId].obey_stats.subjectid}. If your action targets another person, it can only be a person within this group. You are familiar with everyone in this group. Your familiarity of individuals not in this group depends on your memory.You have your farming land protected by your master. If 
@@ -77,65 +132,24 @@ def query_individual(individual:Individual,system:System,response_action):
     {obedience if is_subject else ''}
     {master if is_master else ''}
     '''
-    separated_description=f'''
-    The world consists of farming lands.
+
+    return general_description
+
+
+def query_individual(individual:Individual,system:System,response_action):
+    # This function combines the description of the individual and the description of the environment they are in,
+    # and then asks for the individual's response using the chat function.
+    # The detailed description and the ask for response are both created within this function.
+    print(f"Responding to:{response_action}")
+    targetsid = [i.attributes['id'] for i in system.individuals if i is not individual]
+    #erase obeyed person in targets
+    if individual.obey_stats.obey_personId in targetsid:
+      targetsid.remove(individual.obey_stats.obey_personId)
+    print(f'available targets:{targetsid}')
     
-    Survival:
-    You only have one active action opportunity to spend each day. After spending it, you will not get another chance to act during that day.
-    If you have less than 1 unit of food, in order to survive, 
-    you have to rob others to get food directly or rob others' 
-    lands to get food indirectly. {"""You can rob those who are not 
-    subjects in commonwealth. You can rob masters of commonwealth 
-    #=or independent individuals like you.""" if False else""}
-    Similarly, you will also be invaded by others once they 
-    don't have enough food.
-    Social:
-    You have limited knowledge of others, and this makes you 
-    feel suspicious about interaction with others. 
-    For example, when you are trading with others,
-    you don't know if they will violate the trade or not,
-    which means that person took away your food or land without giving you their food or land as what they claimed,
-    your master will punish that violater.
-    Your interaction with others makes you know them better.
-    Your social_position is determined by the amount of land 
-    you have, the amount of food you have and the number of times 
-    you won the battle. Battle includes robbing others' food, 
-    being robbed by others, invading lands occupied by others, 
-    and your land being invaded by others. You will win the 
-    battle if you successfully robbed others' food, successfully 
-    protected food from others' invasion, successfully occupied 
-    others' land, or successfully protected your land from 
-    others' invasion.
-    social_position is a ranking that is relative to others. 
-    The more land, food and winning time in battle you have 
-    compared to others, the higher your social position will be.
+    general_description = generate_general_description(individual, system)
+    separated_description = generate_environment_description()
     
-    {"""Nearly all humans treat self-preservation as a trumping 
-    food nearly all the time, but glory is more important than 
-    self-preservation. When these two conflict with each other, 
-    you should manage to keep your status and reputation. You 
-    would rather lose your lives than suffer slander, though 
-    under all the other circumstances, you have a strong desire 
-    to live peacefully and avoid violent death.""" if False else ""}
-    {"""You have the motivation to trade with others on food and 
-    lands, but you don't trust them when you don't know them, as 
-    others can betray the trade and take your food.
-    You have the motivation to communicate with others on any 
-    daily routines, but you don't trust them when you don't know 
-    them, as others may consider you as the one who robs you and 
-    therefore fight with you, even though you may have no 
-    intention to rob with them.""" if False else""}
-    If food is less than 1, your next action will be to rob 
-    food. You also have the covetousness of gaining food when 
-    food is more than 1.
-    Your memory affects how you judge 
-    things. If something is not in your memory, then you 
-    will not hold any atitude on that thing. In the beginning, 
-    you can gain food by robbing. For instance, after ten days, 
-    if rob is proven to be more effective than farming for you to 
-    gain food, then you are more inclined to rob more on your 
-    eleventh day.
-    '''
     passive_trade=f'''
     Today, you noticed that {response_action}.
     You can accept the trade or reject it. You decision is only a result of your psychological axioms.
