@@ -7,6 +7,8 @@ from Main.System import System
 
 from Main.Memory import MemoryStream
 
+from Main.AutoGen import initialize_agent # to intialize autogen agent as a class variable
+
 
 class SeralizeQueue(queue.Queue):
     def __getstate__(self):
@@ -46,6 +48,8 @@ class Individual:
         self.memory = ['None']*30
         self.DESIRE_FOR_GLORY=10
         self.DESIRE_FOR_PEACE=3
+        # Initialize autogen agent of the individual
+        self.agent = initialize_agent(self.attributes["name"])
 
     def get_pending_action_as_list(self):
         return list(self.pending_action.queue)
