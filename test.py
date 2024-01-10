@@ -37,7 +37,7 @@ llm_config = {
 }
 
 agent_memories = [
-    "You are in a virtual social scenerio where you are a farmer.You farm land to get food and You need policy that prone to the production and selling of food.",
+    "You are in a virtual social scenerio where you are a farmer.You farm land to get food and You need a policy that prone to the production and selling of food.",
     "You are in a virtual social scenerio where you are a good producer. You produce luxury goods. You need policy that prone to the production and selling of luxury good.",
     "You are in a virtual social scenerio where you are a good producer. You produce luxury goods. You have been robbed a lot by other people, and you want that to stop.",
     "You are in a virtual social scenerio where you are a farmer.You farm land to get food, but you really enjoy luxury goods and want more of it.",

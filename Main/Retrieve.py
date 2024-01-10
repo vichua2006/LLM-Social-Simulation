@@ -1,4 +1,4 @@
-import Memory
+from .Memory import get_embedding
 
 from numpy import dot
 from numpy.linalg import norm
@@ -78,7 +78,7 @@ def extract_relevance(nodes, focal_pt):
     relevance_out: A dictionary whose keys are the node.node_id and whose values
                  are the float that represents the relevance score. 
   """
-  focal_embedding = Memory.get_embedding(focal_pt)
+  focal_embedding = get_embedding(focal_pt)
 
   relevance_out = dict()
   for count, node in enumerate(nodes): 

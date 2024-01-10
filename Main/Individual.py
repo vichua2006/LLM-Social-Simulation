@@ -7,8 +7,26 @@ from Main.System import System
 
 from Main.Memory import MemoryStream
 
-from Main.AutoGen import initialize_agent # to intialize autogen agent as a class variable
+from autogen import AssistantAgent
 
+################# TEMPORARY #######################
+# Not sure how api keys and config want to be handled
+
+
+victor_key = "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"
+
+config_list = [
+    {
+        "model": "gpt-3.5-turbo",
+        "api_key": victor_key,
+    },  
+]
+
+AGENT_LLM_CONFIG = {
+    "config_list": config_list, 
+    "temperature": 0.0, 
+}
+##################################################
 
 class SeralizeQueue(queue.Queue):
     def __getstate__(self):
@@ -49,7 +67,11 @@ class Individual:
         self.DESIRE_FOR_GLORY=10
         self.DESIRE_FOR_PEACE=3
         # Initialize autogen agent of the individual
-        self.agent = initialize_agent(self.attributes["name"])
+        self.agent = AssistantAgent(
+            name=self.attributes["name"],
+            system_message="",
+            llm_config=AGENT_LLM_CONFIG
+        )
 
     def get_pending_action_as_list(self):
         return list(self.pending_action.queue)
@@ -117,6 +139,14 @@ class Individual:
     
     def get_win_rate(self, target:Individual):
         return self.robbing_stats.win_rob_times[target]/self.robbing_stats.rob_times[target]
+    
+    def get_agent(self):
+        # return the agent variable
+        return self.agent
+    
+    def update_agent_prompt(self, prompt:str):
+        # updates the agent's system message
+        self.agent.update_system_message(prompt)
     
     def __getstate__(self):
         return self.__dict__

@@ -1,30 +1,29 @@
+from typing import List, Optional
 from autogen import AssistantAgent
+from Main.Individual import Individual
+from Main.Query import generate_environment_description, generate_general_description
+from Main.System import System
+from Main.Retrieve import new_retrieve
 
-################# TEMPORARY #######################
-# Not sure how api keys and config want to be handled
 
-victor_key = "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"
+def converse(individuals: List[Individual], system: System, chat_topic: str, temp_personalities: List[str]) -> str:
+    '''
+    initiate a conversation between individuals with AutoGen GroupChat
+    returns the conversation content as a json string
 
-config_list = [
-    {
-        "model": "gpt-3.5-turbo",
-        "api_key": victor_key,
-    },  
-]
+    chat_topic: a string describing the topic of discussion for this groupchat. It will be used to retrieve relevant memories
 
-llm_config = {
-    "config_list": config_list, 
-    "temperature": 0.0, 
-}
+    temp_personalities is a temporary variable to pass in the personality descriptions (big 5) of each individual; not sure how it should be done
+    '''
 
-#####################################################
+    # udpate the system message of each agent with game rules/ setting, retrieved memory, personality (incomplete), pleasure system output (not implemented), and personal status (not implemented)
+    for person in individuals:
 
-def termination_function():
-    # this function gets passed to GroupChatManager to determine when chatting terminates
-    # currently does nothing
-    pass
+        environment_description = generate_environment_description()
+        general_description = generate_general_description(person, system)
 
-def initialize_agent(name: str) -> AssistantAgent:
-    # this function initializes an AssistantAgent instance with the configurations in this file
-    # the system message is left blank; it will be updated before agents converse
-    return AssistantAgent(name=name, system_message="", llm_config=llm_config)
+        retrieved_memories = new_retrieve(person, )
+
+
+
+
