@@ -82,7 +82,7 @@ def extract_relevance(nodes, focal_pt):
 
   relevance_out = dict()
   for count, node in enumerate(nodes): 
-    node_embedding = node.embedding[1]
+    node_embedding = node.embedding
     relevance_out[node.node_id] = cos_sim(node_embedding, focal_embedding)
 
   return relevance_out
@@ -111,8 +111,8 @@ def normalize_dict_floats(d, target_min, target_max):
     target_min = -5
     target_max = 5
   """
-  min_val = min(val for val in d.values())
-  max_val = max(val for val in d.values())
+  min_val = min(list(d.values()))
+  max_val = max(list(d.values()))
   range_val = max_val - min_val
 
   if range_val == 0: 
@@ -174,7 +174,7 @@ def new_retrieve(person, focal_points, n_count=30):
     # Getting all nodes from the agent's memory 
     nodes = []
     
-    for memory in person.memorystream:
+    for memory in person.memorystream.concept_nodes:
         nodes.insert(0,memory)
         
     # Calculating the component dictionaries and normalizing them.
@@ -203,8 +203,8 @@ def new_retrieve(person, focal_points, n_count=30):
     master_out = top_highest_x_values(master_out, n_count)
     master_nodes = []
     
-    for key,value in master_out:
-        master_nodes.append(person.memstream.get_concept_node_by_id(id))
+    for key in master_out:
+        master_nodes.append(person.memorystream.get_concept_node_by_id(key))
 
     #Add the part to change the last access time to current time
       
