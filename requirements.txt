@@ -3,3 +3,8 @@ jsonpickle
 pandas
 numpy
 openai==1.2.3 #Note that old openai version need a migrate to work
+#Read google sheet, not used if use local file
+google-api-python-client 
+google-auth-httplib2 
+google-auth-oauthlib
+#end
