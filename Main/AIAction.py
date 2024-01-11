@@ -16,6 +16,7 @@ class StringEnumMeta(EnumMeta):
 class AIActionType(str, Enum, metaclass=StringEnumMeta):
     Default = "None"
     Farm = "farm"
+    ProduceLuxury = "produce luxury"
     Rob = "rob"
     Trade = "trade"
     Donate = "donate"

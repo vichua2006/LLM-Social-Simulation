@@ -5,11 +5,18 @@ from Main.Individual import Individual
 from Main.System import System
 #Utils
 #Food
-FOOD_INCREASE_MIN = 0.9
-FOOD_INCREASE_MAX = 1.1
 def increase_food(individual:Individual):
-    #increase food by random amount between FOOD_INCREASE_MIN and FOOD_INCREASE_MAX
-    individual.attributes['food']+=np.random.uniform(FOOD_INCREASE_MIN, FOOD_INCREASE_MAX)*individual.attributes["land"]/3
+    # Increase food based on individual's production #
+    gain = round(individual.food_production * individual.attributes["land"] / 3)
+    individual.attributes['food'] += gain
+    return gain
+    
+# Luxury Good
+def increase_luxury(individual: Individual):
+    # Increase luxury goods based on individual's production #
+    gain = round(individual.luxury_production * individual.attributes["land"] / 3)
+    individual.attributes["luxury_goods"] += gain
+    return gain
 
 #Rob
 #returns true if individual's strength > enemy's

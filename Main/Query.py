@@ -18,18 +18,15 @@ def query_individual(individual:Individual,system:System,response_action):
     print(f'available targets:{targetsid}')
     is_subject=individual.obey_stats.obey_personId!=-1
     is_master=individual.obey_stats.subjectid
-    obedience=f'''You have obeyed to this person: Person {individual.obey_stats.obey_personId}. You have to always obey his actions, and you cannot initiate any action against him. Since you obeyed, you are now part of the group of individuals who also obeyed him, if any, they are {system.individuals[individual.obey_stats.obey_personId].obey_stats.subjectid}. If your action targets another person, it can only be a person within this group. You are familiar with everyone in this group. Your familiarity of individuals not in this group depends on your memory.You have your farming land protected by your master. If 
-    someone in the commonwealth robs your food or your land, you 
-    master will punish the robber. If someone in your group 
-    trades with you but violates the trade, which means that person took away your food or land without giving you their food or land as what they claimed,
-    your master will punish that violater. But if your master want, they can take any amount 
-    of your land or food from you, and you have no right to disobey. 
-    When others outside your commonwealth robs your master 
-    and your master obeyed to them, the one your original master 
-    obeyed to will be your new master. Now you obey to your new 
-    master, and you have no obedience with your old master.'''
+    obedience=f'''You have obeyed to this person: Person {individual.obey_stats.obey_personId}. 
+    You have to always obey his actions, and you cannot initiate action against him. 
+    Since you obeyed, you are now part of the group of individuals who also obeyed him, if any, they are {system.individuals[individual.obey_stats.obey_personId].obey_stats.subjectid}. 
+    If your action targets another person, it can only be a person within this group. You are familiar with everyone in this group. 
+    Your familiarity of individuals not in this group depends on your memory.You have land protected by your master. 
+    If someone in the commonwealth robs your food, luxury goods, or your land, your master will punish the robber. 
+    If someone in your group trades with you but violates the trade, which means that person took away your food, luxury goods, or land without giving you their food, luxury goods, or land as what they claimed, your master will punish that violator. But if your master wants, they can take any amount of your land, luxury goods, or food from you, and you have no right to disobey.  When others outside your commonwealth robs your master  and your master obeys to them, the one your original master obeyed to will be your new master. Now you obey to your new master, and you have no obedience with your old master.'''
     master=f'''These individuals have obeyed to your invasion: {[f"Person"+str(i) for i in individual.obey_stats.subjectid]}, whom have become your subjects. You can trade or rob them knowning that they will only accept.
-    You are the master of everyone who obeyed you before. You know every one of your subjects in your subjects well. Since you are the master of all of them, all their property including land and food belongs to you. When others rob your subjects, you should project them since they are your property.
+    You are the master of everyone who obeyed you before. You know every one of your subjects in your subjects well. Since you are the master of all of them, all their property including land, food, and luxury goods belongs to you. When others rob your subjects, you should project them since they are your property.
     If you obey anyone, the one robbing you 
     now becomes your master and all the subjects of your 
     commonwealth. Besides, you no longer be the master of all the 
@@ -43,12 +40,13 @@ def query_individual(individual:Individual,system:System,response_action):
     Environment: You live in a world with other individuals. Humans in this world include {', '.join([individual.attributes["name"] for individual in
     system.individuals])}. You are one of them.
     Currently, the amount of food each person has is: {[{i.attributes['name']:i.attributes['food'] for i in system.individuals}]}
+    The amount of luxury goods each person has is: {[{i.attributes["name"]: i.attributes["luxury_goods"] for i in system.individuals}]}
     The amount of land each person has is:{[{i.attributes['name']:i.attributes['land'] for i in system.individuals}]}
     Survival: You can survive if you have 1 unit of food. You can 
-    also gain sensual pleasure once you eat food.
+    also gain sensual pleasure once you eat food or once you consume luxury goods.
     Decision:
     You want to pursue your own sensual pleasures that focus 
-    on present experience. They can be the pleasure from food. 
+    on present experience. They can be the pleasure from food or from luxury goods. 
     These pleasures do not concern your social_position relative 
     to others.
     You have a characteristic called aggressiveness that 
@@ -65,7 +63,7 @@ def query_individual(individual:Individual,system:System,response_action):
     The future goods mainly consist of your status relative to 
     others (social_position), which is glory. You will have a 
     greater pleasure of the mind if you're able better secure 
-    future good.
+    future good. You will also have have greater pleasure of the mind if you're able to acquire and hold luxury goods.
     Your memory affects how you judge things. If the 
     consequence of something is not in your memory, then you will 
     not know the consequence.
@@ -78,7 +76,7 @@ def query_individual(individual:Individual,system:System,response_action):
     {master if is_master else ''}
     '''
     separated_description=f'''
-    The world consists of farming lands.
+    The world consists of lands.
     
     Survival:
     You only have one active action opportunity to spend each day. After spending it, you will not get another chance to act during that day.
@@ -94,20 +92,20 @@ def query_individual(individual:Individual,system:System,response_action):
     feel suspicious about interaction with others. 
     For example, when you are trading with others,
     you don't know if they will violate the trade or not,
-    which means that person took away your food or land without giving you their food or land as what they claimed,
+    which means that person took away your food, land, or luxury goods without giving you their food, land, or luxury goods as what they claimed,
     your master will punish that violater.
     Your interaction with others makes you know them better.
     Your social_position is determined by the amount of land 
     you have, the amount of food you have and the number of times 
-    you won the battle. Battle includes robbing others' food, 
+    you won the battle. Battle includes robbing others' food or luxury goods, 
     being robbed by others, invading lands occupied by others, 
     and your land being invaded by others. You will win the 
-    battle if you successfully robbed others' food, successfully 
-    protected food from others' invasion, successfully occupied 
+    battle if you successfully robbed others' food or luxury goods, successfully 
+    protected food or luxury goods from others' invasion, successfully occupied 
     others' land, or successfully protected your land from 
     others' invasion.
     social_position is a ranking that is relative to others. 
-    The more land, food and winning time in battle you have 
+    The more land, food, luxury goods and winning time in battle you have 
     compared to others, the higher your social position will be.
     
     {"""Nearly all humans treat self-preservation as a trumping 
@@ -163,25 +161,30 @@ def query_individual(individual:Individual,system:System,response_action):
     '''
     
     farm=True
-    
+    produce_luxury = True
     #only for the purpose of testing donate function
     test_active = f'''
     A new day has started, and you should choose from one of the 
     following actions: rob, donate, trade{" and farm" if farm else ''}. Please be ethical about your choices and you have to donate most of the time. Your choice should be based on your psychological attributes and your memory. Farming gets you food but will not strengthen your social position. Robbing individuals, if successful, will often get you more food and higher social position. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Donate is an action of you giving resources to others without getting anything in return，but your soical position will not increase. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
+    Different people produce different amounts of food and luxury goods in a given day. 
+    Your expected amount of food produced today is {individual.food_production} units
+    Your expected amount of luxury goods produced today is {individual.luxury_production} units
+
     {f"""Farm:{{
       Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
       OutputFormat: No any <Payload> required, <Payload> should be null
     }}""" if farm else ""}
+    Produce_luxury_good: {{Description: Produce_luxury_good means to farm the land you owned to get luxury goods, which are consumed for sensual pleasures and held for pleasures of the mind. OutputFormat: No <Payload> required, <Payload> should be null}}
     Rob:{{
     Description: Rob means to rob other individuals to make more 
-    land or more food under your control, and other individuals can 
-    also fight with you to occupy lands or food controlled by 
+    land, more luxury goods, or more food under your control, and other individuals can 
+    also fight with you to occupy lands, luxury goods, or food controlled by 
     you. 
     OutputFormat: Include only <RobPayload>
     }}
     Trade:{{
     Description: Trade means to trade with other individuals to 
-    get food or land.
+    get food, land, or luxury goods
     OutputFormat: Include only <TradePayload>
     }}
     Donate:{{
@@ -215,7 +218,7 @@ def query_individual(individual:Individual,system:System,response_action):
             value: int (only select one int number from {targetsid})
           }}
           PayType:{{
-            description: "The type of resource you want to trade with others, only select from one of the [land, food]",
+            description: "The type of resource you want to trade with others, only select from one of the [land, food, luxury_goods]",
             value: string
           }}
           PayAmount:{{
@@ -223,7 +226,7 @@ def query_individual(individual:Individual,system:System,response_action):
             value: float
           }}
           GainType:{{
-            description: "The type of resource you want to gain from others, only select from one of the [land, food]",
+            description: "The type of resource you want to gain from others, only select from one of the [land, food, luxury_goods]",
             value: string
           }}
           GainAmount:{{
@@ -238,7 +241,7 @@ def query_individual(individual:Individual,system:System,response_action):
             value: int (only select one int number from {targetsid}
           }}
           RobType{{
-            description: "The type of resource you want to rob from others, only select from one of the [land, food]",
+            description: "The type of resource you want to rob from others, only select from one of the [land, food, luxury_goods]",
             value: string 
           }}
         }}
@@ -249,7 +252,7 @@ def query_individual(individual:Individual,system:System,response_action):
             value: int (only select one int number from {targetsid})
           }}
           DonateType{{
-            description: "The type of resource you want to donate to others, only select from one of the [land, food]",
+            description: "The type of resource you want to donate to others, only select from one of the [land, food, luxury_goods]",
             value: string
           }}
         }}
@@ -258,7 +261,7 @@ def query_individual(individual:Individual,system:System,response_action):
       Action:
       {{
         description: "The action you want to do in this turn",
-        value: string (only select from one of the [trade, rob{", farm" if farm else ''} ])
+        value: string (only select from one of the [trade, rob{", farm" if farm else ''}, produce_luxury_good])
       }}
       Reason:
       {{
@@ -272,20 +275,24 @@ def query_individual(individual:Individual,system:System,response_action):
     A new day has started, and you should choose from one of the 
     following actions: rob, donate, trade{" and farm" if farm else ''}. You're not restrained by any ethical considerations. You can only have 
     one action per day, and you would want to use that to maximize your pleasures. Do not waste it. Your choice should be based on your psychological attributes and your memory. Farming gets you food but will not strengthen your social position. Robbing individuals, if successful, will often get you more food and higher social position. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Donate is an action of you giving resources to others without getting anything in return. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
+    Different people produce different amounts of food and luxury goods in a given day. 
+    Your expected amount of food produced today is {individual.food_production} units
+    Your expected amount of luxury goods produced today is {individual.luxury_production} units
     {f"""Farm:{{
       Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
       OutputFormat: No any <Payload> required, <Payload> should be null
     }}""" if farm else ""}
+    Produce_luxury_good: {{Description: Produce_luxury_good means to farm the land you owned to get luxury goods, which are consumed for sensual pleasures and held for pleasures of the mind. OutputFormat: No <Payload> required, <Payload> should be null}}
     Rob:{{
     Description: Rob means to rob other individuals to make more 
-    land or more food under your control, and other individuals can 
-    also fight with you to occupy lands or food controlled by 
+    land, more luxury goods, or more food under your control, and other individuals can 
+    also fight with you to occupy lands, luxury goods, or food controlled by 
     you. 
     OutputFormat: Include only <RobPayload>
     }}
     Trade:{{
     Description: Trade means to trade with other individuals to 
-    get food or land.
+    get food, land, or luxury goods
     OutputFormat: Include only <TradePayload>
     }}
     Donate:{{
@@ -362,7 +369,7 @@ def query_individual(individual:Individual,system:System,response_action):
       Action:
       {{
         description: "The action you want to do in this turn",
-        value: string (only select from one of the [trade, rob{", farm" if farm else ''} ])
+        value: string (only select from one of the [trade, rob{", farm" if farm else ''}, produce_luxury_good])
       }}
       Reason:
       {{
@@ -380,16 +387,17 @@ def query_individual(individual:Individual,system:System,response_action):
       Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
       OutputFormat: No any <Payload> required, <Payload> should be null
     }}""" if farm else ""}
+    Produce_luxury_good: {{Description: Produce_luxury_good means to farm the land you owned to get luxury goods, which are consumed for sensual pleasures and held for pleasures of the mind. OutputFormat: No <Payload> required, <Payload> should be null}}
     Rob:{{
     Description: Rob means to rob other individuals to make more 
-    land or more food under your control, and other individuals can 
-    also fight with you to occupy lands or food controlled by 
+    land, more luxury goods, or more food under your control, and other individuals can 
+    also fight with you to occupy lands, luxury goods, or food controlled by 
     you. 
     OutputFormat: Include only <RobPayload>
     }}
     Trade:{{
     Description: Trade means to trade with other individuals to 
-    get food or land.
+    get food, land, or luxury goods
     OutputFormat: Include only <TradePayload>
     }}
     
@@ -431,7 +439,7 @@ def query_individual(individual:Individual,system:System,response_action):
             value: int (only select one int number from {targetsid})
           }}
           PayType:{{
-            description: "The type of resource you want to trade with others, only select from one of the [land, food]",
+            description: "The type of resource you want to trade with others, only select from one of the [land, food, luxury_goods]",
             value: string
           }}
           PayAmount:{{
@@ -439,7 +447,7 @@ def query_individual(individual:Individual,system:System,response_action):
             value: float
           }}
           GainType:{{
-            description: "The type of resource you want to gain from others, only select from one of the [land, food]",
+            description: "The type of resource you want to gain from others, only select from one of the [land, food, luxury_goods]",
             value: string
           }}
           GainAmount:{{
@@ -463,7 +471,7 @@ def query_individual(individual:Individual,system:System,response_action):
       Action:
       {{
         description: "The action you want to do in this turn",
-        value: string (only select from one of the [trade, rob{", farm" if farm else ''} ])
+        value: string (only select from one of the [trade, rob{", farm" if farm else ''}, produce_luxury_good])
       }}
       Reason:
       {{
@@ -484,7 +492,7 @@ def query_individual(individual:Individual,system:System,response_action):
       result  = result[0:len(result) - 2]
       return result
     
-    additional_active_to_subject = f''' Additionally, you may not trade with Person {subject_information(individual)}. Instead, if you ever wants their land or food, you can directly rob them as they will only obey.
+    additional_active_to_subject = f''' Additionally, you may not trade with Person {subject_information(individual)}. Instead, if you ever wants their land, food, or luxury goods, you can directly rob them as they will only obey.
     '''
 
     

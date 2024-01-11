@@ -2,7 +2,7 @@ import os
 import jsonpickle
 import threading
 from typing import List
-from Main.Calculation import donate, increase_food, punishment, rob, winner_loser
+from Main.Calculation import donate, increase_food, increase_luxury, punishment, rob, winner_loser
 from Main.CsvAnalysis import CsvAnalysis
 from Main.Individual import Individual
 from Main.System import System
@@ -11,6 +11,7 @@ from Main.StringUtils import deserialize_first_json_object
 from Main.AIAction import AIAction, AIActionType
 from Main.PendingAction import append_to_pending_action, str_to_ai_action
 from Main.SaveLoad import init_save, save_logframes
+import numpy as np
 import random
 import datetime
 
@@ -20,7 +21,11 @@ def change_affected_people(affected_people, system:System):
       affected_person_index = int(affected_person.replace("person", "").replace(" ", ""))
       for attribute in affected_people[affected_person]:
         system.individuals[affected_person_index].attributes[attribute]=affected_people[affected_person][attribute]
-      
+
+# General food/luxury production numbers
+food_production = np.random.normal(4, 1)
+luxury_production = np.random.normal(2, 1)
+
 # %%
 # Function to update the state of each individual at the end of the day
 def day_end(system,individuals:List[Individual]):
@@ -31,6 +36,11 @@ def day_end(system,individuals:List[Individual]):
         # Limit the memory to the last 60 events
         forget = len(individual.memory) - 60
         individual.memory = individual.memory[forget:]
+        
+         # Generate food/luxury production numbers for specific individuals based general distribution
+        individual.food_production = round(np.random.normal(food_production, 1))
+        individual.luxury_production = round(np.random.normal(luxury_production, 1))
+
 
     system.time+=1
     if system.day_end_counter > 0:
@@ -42,6 +52,7 @@ file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
 #if file name alread exist, datetime will be as detail as second
 if os.path.exists(file_name):
   file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M %S%p")+'.csv'
+
 def initialize():
     # Initialize individuals and environment
     individuals=[]
@@ -55,10 +66,17 @@ def initialize():
       #lands.append(f'land {i}')
     #individuals.sort(key=lambda x: x.attributes['id'])
     #default
+
     for i in range(POPULATION):
       individual = Individual(i,f'person {i}')
+      
+      # Generate food/luxury production numbers for specific individuals based general distribution
+      individual.food_production = round(np.random.normal(food_production, 1))
+      individual.luxury_production = round(np.random.normal(luxury_production, 1))
+
       individuals.append(individual)
       lands.append(f'land {i}')
+
     system=System(individuals,lands)
     # init_save(system)
     system.set_csv_analysis(CsvAnalysis(POPULATION, file_name))
@@ -218,22 +236,24 @@ def simulate(individuals:List[Individual],system:System):
               
               individual.current_action_type = ai_action.type
               if ai_action.type==AIActionType.Farm:
-                    land=individual.attributes['land']
-                    gain=land*random.random()*0.3 if land>1 else 1
-                    individual.attributes['food']+=gain
-                    individual.memory.append(f'On day {system.time}. I farmed and gained {gain} units of food.')
-                    print("Farm is successful.")
+                  gain = increase_food(individual)
+                  individual.attributes['food']+=gain
+                  individual.memory.append(f'On day {system.time}. I farmed and gained {gain} units of food.')
+                  print("Farm is successful.")
+              elif ai_action.type == AIActionType.ProduceLuxury:
+                  gain = increase_luxury(individual)
+                  individual.memory.append(f'On day {system.time}. I produced luxury goods and gained {gain} units of luxury goods')
+                  print("Producing luxury goods is successful")
               elif ai_action.type==AIActionType.Rob:
-                    
-                    target=system.individuals[ai_action.targetid]
-                    target_master=target.obey_stats.obey_personId
-                    if target_master==individual.attributes['id']:
-                          pass
-                    elif target_master!=-1 and target_master!=individual.obey_stats.obey_personId:
-                            individual.memory.append(f"I tried to rob {target.attributes['name']}, but it turns out that he is a subject of Person {target_master}, so I am in essense robbing him instead of {target.attributes['name']}.")
-                            ai_action.targetid=target_master
-                            print(f"Rob target {target.attributes['name']} DEFLECTED to the target's master, Person {target_master}.")
-                    append_to_pending_action(ai_action, system)
+                target=system.individuals[ai_action.targetid]
+                target_master=target.obey_stats.obey_personId
+                if target_master==individual.attributes['id']:
+                      pass
+                elif target_master!=-1 and target_master!=individual.obey_stats.obey_personId:
+                        individual.memory.append(f"I tried to rob {target.attributes['name']}, but it turns out that he is a subject of Person {target_master}, so I am in essense robbing him instead of {target.attributes['name']}.")
+                        ai_action.targetid=target_master
+                        print(f"Rob target {target.attributes['name']} DEFLECTED to the target's master, Person {target_master}.")
+                append_to_pending_action(ai_action, system)
                   
               elif ai_action.type==AIActionType.Trade:
                     append_to_pending_action(ai_action, system)
