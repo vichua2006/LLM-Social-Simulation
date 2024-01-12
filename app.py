@@ -40,7 +40,7 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
                    [sg.Text('SocialPosition:'), sg.Input(person.attributes["social_position"], size = (10, None), key=f'-SOCIALPOSITION{i}-')],
                    [sg.Text('Food:'), sg.Input(person.attributes["food"], size = (10, None), key=f'-FOOD{i}-')],
                    [sg.Text('Land:'), sg.Input(person.attributes["land"], size = (10, None), key=f'-LAND{i}-')],
-                   [sg.Text('Luxury Goods::'), sg.Input(person.attributes["luxury_goods"], size = (10, None), key=f'-LUXURYGOODS{i}-')],
+                   [sg.Text('Luxury Goods:'), sg.Input(person.attributes["luxury_goods"], size = (10, None), key=f'-LUXURYGOODS{i}-')],
                    [sg.Text('Action:'), sg.Input(person.attributes["action"], size = (10, None), key=f'-Action{i}-')],
                    [sg.Text('CurrentActionType:'), sg.Input(person.current_action_type, size = (10, None), key=f'-CURRENTACTIONTYPE{i}-')],
                    [sg.Text('ObeyTo:'), sg.Input(person.obey_stats.obey_personId, size = (10, None), key=f'-OBEYPERSONID{i}-')],
