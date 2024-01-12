@@ -1,5 +1,5 @@
-from .Memory import get_embedding
-
+from typing import Dict, List
+from .Memory import ConceptNode, get_embedding
 from numpy import dot
 from numpy.linalg import norm
 
@@ -149,7 +149,7 @@ def top_highest_x_values(d, x):
   return top_v
 
 
-def new_retrieve(person, focal_points, n_count=30): 
+def new_retrieve(person, focal_points, n_count=30) -> Dict[str, List[ConceptNode]]: 
   """
   Given the current individual and focal points (focal points are events or 
   thoughts for which we are retrieving), we retrieve a set of nodes for each

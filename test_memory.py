@@ -10,11 +10,16 @@ chat_memory = ConceptNode(3, "chat", 2, 0, "chat", [1,2], 0, "person 0 said \'Go
 
 farm_memory2 = ConceptNode(2,"farm",2, 0, "farm", [], 10, "person 0 farms and receives 15 units of food", 3)
 
-Person.memorystream.add_concept_node(rob_memory)
-Person.memorystream.add_concept_node(rob_memory)
-Person.memorystream.add_concept_node(rob_memory)
-Person.memorystream.add_concept_node(farm_memory2)
+# Person.memorystream.add_concept_node(rob_memory)
+# Person.memorystream.add_concept_node(rob_memory)
+# Person.memorystream.add_concept_node(farm_memory)
+# Person.memorystream.add_concept_node(chat_memory)
+# Person.memorystream.add_concept_node(farm_memory2)
 
 print(Person.memorystream)
 
-print(new_retrieve(person=Person, focal_points=["farming and food"]))
+d = new_retrieve(Person, ["food"])
+
+for key in d:
+    for m in d[key]:
+        print(m.description)

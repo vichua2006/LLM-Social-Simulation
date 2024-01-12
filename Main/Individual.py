@@ -69,7 +69,7 @@ class Individual:
         # Initialize autogen agent of the individual
         self.agent = AssistantAgent(
             name=self.attributes["name"],
-            system_message="",
+            system_message=self.attributes["name"],
             llm_config=AGENT_LLM_CONFIG
         )
 
@@ -145,7 +145,7 @@ class Individual:
         return self.agent
     
     def update_agent_prompt(self, prompt:str):
-        # updates the agent's system message
+        # updates the agent's system message and description
         self.agent.update_system_message(prompt)
     
     def __getstate__(self):
