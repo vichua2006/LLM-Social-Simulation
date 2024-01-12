@@ -53,14 +53,12 @@ manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=llm_config)
 
 # initiate chat with the first 
 
-# agents[0].initiate_chat(manager, message="system message: Now, several members of the social scenerio have gathered to discuss their thoughts on a policy that their master implemented which prioritized food production. Limit each response to 50 words.")
-
-print(agents[0].description)
+agents[0].initiate_chat(manager, message="system message: Now, several members of the social scenerio have gathered to discuss their thoughts on a policy that their master implemented which prioritized food production. Limit each response to 50 words.")
 
 # outputs all responses as a list of json objects to be passed on to the soverign
 
 # print(json.dumps(manager.chat_messages[agents[0]], indent=4))
 
-# print(groupchat.messages)
+print(json.dumps(groupchat.messages, indent=4))
 
 # both methods are reliable, the groupchat arguably more
