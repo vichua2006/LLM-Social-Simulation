@@ -14,6 +14,8 @@ from Main.SaveLoad import init_save, save_logframes
 import random
 import datetime
 
+from Main.Memory import ConceptNode
+
 def change_affected_people(affected_people, system:System):
     for affected_person in affected_people:#{PERSON:{strength:1,...}...}
     #avoid if affected_person is "person 0" instead of "0"
@@ -77,6 +79,7 @@ def simulate(individuals:List[Individual],system:System):
             passive=not individual.pending_action.empty()
             print(f"Person {index} is responding...\n")
             response_action: AIAction = individual.pending_action.get() if passive else None
+            print(response_action)
             action:str=query_individual(individual,system,response_action)
             
             if passive and response_action is not None:
@@ -101,7 +104,11 @@ def simulate(individuals:List[Individual],system:System):
                               owner.add_rob(individual.attributes['id'],True)
                               system.console_log.append(f"{individual.attributes['id']}: Obey {response_action.ownerid}")
                               individual.obey(response_action.ownerid,system)
+                              obey_node = ConceptNode(len(owner.memorystream.concept_nodes),"obey", system.time, owner.attributes["id"], "is obbeyed by", [individual.attributes["id"]], 0, f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.", 1)
+                              owner.memorystream.add_concept_node(obey_node)
                               owner.memory.append(f"I tried to robbed {individual.attributes['name']}, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.")
+                              obeyTo_node = ConceptNode(len(individual.memorystream.concept_nodes), "obey", system.time, owner.attributes["id"], "obey to", [individual.attributes["id"]], 0, f"I obeyed to {owner.attributes['name']} and now I have to listen to all his commands and can never betray him.", 1)
+                              individual.memorystream.add_concept_node(obeyTo_node)
                               individual.memory.append(f"I obeyed to {owner.attributes['name']} and now I have to listen to all his commands and can never betray him.")
                               system.csv_analysis.obey(system)
                             else:
@@ -110,10 +117,19 @@ def simulate(individuals:List[Individual],system:System):
                               system.console_log.append(f"{individual.attributes['id']}: Accept robbery from {response_action.ownerid}")
                               print("success accepting robbery from master")
                   elif response_action.type==AIActionType.Trade:
+                        trade_node = ConceptNode(len(owner.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f"Day {system.time}. I initiated a trade to {individual.attributes['name']}, which is to exchange {response_action.payAmount} units of my {response_action.payType} for {response_action.gainAmount} units of his {response_action.gainType}.", 1)
+                        owner.memorystream.add_concept_node(trade_node)
                         owner.memory.append(f"Day {system.time}. I initiated a trade to {individual.attributes['name']}, which is to exchange {response_action.payAmount} units of my {response_action.payType} for {response_action.gainAmount} units of his {response_action.gainType}.")
+                        trade_node_ = ConceptNode(len(individual.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f"Day {system.time}.{response_action.ownerid} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ", 1)
+                        individual.memorystream.add_concept_node(trade_node_)
                         individual.memory.append(f"Day {system.time}.{response_action.ownerid} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ")
+                        
                         if R:
+                              no_trade_node = ConceptNode(len(owner.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f'I rejected the trade offer by {response_action.ownerid}.', 1)
+                              individual.memorystream.add_concept_node(no_trade_node)
                               individual.memory.append(f'I rejected the trade offer by {response_action.ownerid}.')
+                              no_trade_node_ = ConceptNode(len(individual.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f"But he rejected it so I gained nothing and exhausted my action opportunity of today.", 1)
+                              owner.memorystream.add_concept_node(no_trade_node_)
                               owner.memory.append(f"But he rejected it so I gained nothing and exhausted my action opportunity of today.")
                         elif not R:
                               gainT=response_action.gainType
@@ -123,7 +139,11 @@ def simulate(individuals:List[Individual],system:System):
                               validO=owner.attributes[payT]>=payA
                               validI=individual.attributes[gainT]>=gainA#ADD conditionals here to invalidate unrealisitic trade offers
                               if validO and validI:
+                                yes_trade_node = ConceptNode(len(owner.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f'I accepted the trade and it has been executed.', 1)
+                                individual.memorystream.add_concept_node(yes_trade_node)
                                 individual.memory.append(f'I accepted the trade and it has been executed.')
+                                yes_trade_node_ = ConceptNode(len(individual.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, "He accepted the trade and the trade has been executed.", 1)
+                                owner.memorystream.add_concept_node(yes_trade_node_)
                                 owner.memory.append("He accepted the trade and the trade has been executed.")
                                 system.csv_analysis.trade_accepted(owner.attributes["id"])
                                 individual.attributes[gainT]-=gainA
@@ -221,6 +241,8 @@ def simulate(individuals:List[Individual],system:System):
                     land=individual.attributes['land']
                     gain=land*random.random()*0.3 if land>1 else 1
                     individual.attributes['food']+=gain
+                    farm_node = ConceptNode(len(individual.memorystream.concept_nodes), "farm", system.time, individual.attributes["id"], "farm", [], 0,f'On day {system.time}. I farmed and gained {gain} units of food.', 1)
+                    individual.memorystream.add_concept_node(farm_node)
                     individual.memory.append(f'On day {system.time}. I farmed and gained {gain} units of food.')
                     print("Farm is successful.")
               elif ai_action.type==AIActionType.Rob:
@@ -230,6 +252,8 @@ def simulate(individuals:List[Individual],system:System):
                     if target_master==individual.attributes['id']:
                           pass
                     elif target_master!=-1 and target_master!=individual.obey_stats.obey_personId:
+                            rob_target_node = ConceptNode(len(individual.memorystream.concept_nodes), "rob", system.time, individual.attributes["id"], "rob", [target.attributes["id"], target_master], 0, f"I tried to rob {target.attributes['name']}, but it turns out that he is a subject of Person {target_master}, so I am in essense robbing him instead of {target.attributes['name']}.",1)
+                            individual.memorystream.add_concept_node(rob_target_node)
                             individual.memory.append(f"I tried to rob {target.attributes['name']}, but it turns out that he is a subject of Person {target_master}, so I am in essense robbing him instead of {target.attributes['name']}.")
                             ai_action.targetid=target_master
                             print(f"Rob target {target.attributes['name']} DEFLECTED to the target's master, Person {target_master}.")

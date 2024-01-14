@@ -4,6 +4,7 @@ import json
 from Main.AIAction import AIActionType
 from Main.ChatGpt import chat
 from Main.Individual import Individual, System
+from Main.Retrieve import new_retrieve_active, new_retrieve, node_to_string
 
 
 def query_individual(individual:Individual,system:System,response_action):
@@ -39,7 +40,6 @@ def query_individual(individual:Individual,system:System,response_action):
     general_description=f'''
     You are {individual.attributes["name"]}
     You have those attributes {individual.attributes}.
-    You have memory:{individual.memory}
     Environment: You live in a world with other individuals. Humans in this world include {', '.join([individual.attributes["name"] for individual in
     system.individuals])}. You are one of them.
     Currently, the amount of food each person has is: {[{i.attributes['name']:i.attributes['food'] for i in system.individuals}]}
@@ -76,7 +76,13 @@ def query_individual(individual:Individual,system:System,response_action):
     
     {obedience if is_subject else ''}
     {master if is_master else ''}
+    
     '''
+    
+    active_memory = f'''
+    You have memory:{node_to_string(new_retrieve_active(individual))}
+    '''
+    
     separated_description=f'''
     The world consists of farming lands.
     
@@ -138,10 +144,13 @@ def query_individual(individual:Individual,system:System,response_action):
     '''
     passive_trade=f'''
     Today, you noticed that {response_action}.
-    You can accept the trade or reject it. You decision is only a result of your psychological axioms.
-    Reply with either ACCEPT or REJECT
+    You can accept the trade or reject it. You decision is only a result of your psychological axioms. '''
     
-    '''
+    if response_action != None:
+      passive_trade = passive_trade + f"""You have memory: {node_to_string(new_retrieve(individual, ["trade","Person "+str(response_action.ownerid)]))}
+      Reply with either ACCEPT or REJECT
+      """
+      
     passive_rob=f'''
     Today, you noticed that {response_action}. You can only either 
     obey them or physically rebel against them by fighting back.
@@ -151,10 +160,12 @@ def query_individual(individual:Individual,system:System,response_action):
     {individual.DESIRE_FOR_PEACE}. So only when you've lost many times to this person by rebelling would the utility of rebel be low enough so that it's no longer the correct option. You will pick the action with 
     the most utility. If you obey the one robbing you now, the 
     one robbing you now becomes your master, and you become their 
-    subjects.
+    subjects.'''
     
-    Reply exactly with either OBEY or REBEL
-    '''
+    if response_action != None:
+      passive_rob = passive_rob + f'''You have memory: {node_to_string(new_retrieve(individual, ["rob","Person "+str(response_action.ownerid)]))}
+      Reply exactly with either OBEY or REBEL
+      '''
     passive_rob_fromMaster = f'''
     Today, you noticed that {response_action}. You can only 
     obey them because there are your master.
@@ -506,12 +517,12 @@ def query_individual(individual:Individual,system:System,response_action):
       print('PASSIVE STATE')
           
     else: 
-      ask_for_response=active
+      ask_for_response=active_memory + active
       if individual.obey_stats.obey_personId != -1:
-        ask_for_response = active_for_subject
+        ask_for_response = active_memory+ active_for_subject
         ask_for_response = ask_for_response + additional_active_to_master
       if len(individual.obey_stats.subjectid) != 0:
-        ask_for_response  = ask_for_response + additional_active_to_subject
+        ask_for_response  = active_memory+ ask_for_response + additional_active_to_subject
 
 
     
