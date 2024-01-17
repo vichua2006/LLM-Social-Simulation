@@ -1,5 +1,5 @@
 from typing import List
-from Main.AIAction import AIAction, AIActionType, DonateAction, RobAction, TradeAction, ConsumeAction
+from Main.AIAction import AIAction, AIActionType, DonateAction, RobAction, TradeAction
 from Main.System import System
 from Main.Individual import Individual
 
@@ -11,9 +11,9 @@ def str_to_ai_action(action:str, id:int)->AIAction:
     elif action["action"]=='farm':
      return AIAction(AIActionType.Farm,id,None)
     elif action["action"] == "produce_luxury_good":
-       return AIAction(AIActionType.ProduceLuxury, id, None)
+      return AIAction(AIActionType.ProduceLuxury, id, None)
     elif action["action"] == "consume_luxury_good":
-       return ConsumeAction(id, None, action["payload"]["consumepayload"]["amount"])
+      return AIAction(AIActionType.ConsumeLuxury, id, None)
     elif action["action"] == "donate":
       return DonateAction(id, action["payload"]["donatepayload"]["targetid"], action["payload"]["donatepayload"]["donatetype"])
     else:print("Error: Invalid action type")

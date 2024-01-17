@@ -32,6 +32,13 @@ def day_end(system,individuals:List[Individual]):
     for individual in individuals:
         if individual.attributes['food'] >= 1:
             individual.attributes['food'] -= 1  # Decrease the food by 1
+        if individual.attributes["luxury_goods"] >= 1:
+            result: str = query_individual(individual, system, AIAction(AIActionType.ConsumeLuxury, id, None))
+            if result.lower() == "yes":
+              individual.attributes["luxury_goods"] -= 1
+              individual.memory.append(f'On day {system.time}. I consumed 1 luxury good and gained sensual pleasure')
+              print("Consuming luxury goods is successful")
+            
         individual.attributes['action'] += 1  # Increase the action points by 1
         # Limit the memory to the last 60 events
         forget = len(individual.memory) - 60
@@ -244,14 +251,6 @@ def simulate(individuals:List[Individual],system:System):
                   gain = increase_luxury(individual)
                   individual.memory.append(f'On day {system.time}. I produced luxury goods and gained {gain} units of luxury goods')
                   print("Producing luxury goods is successful")
-              elif ai_action.type == AIActionType.ConsumeLuxury:
-                if ai_action.amount > individual.attributes["luxury_goods"]:
-                  individual.memory.append("I tried consuming luxury goods but I didn't have enough. I got no sensual pleasure and lost my active opportunity for today.")
-                  print("Consuming luxury goods unsuccessful")
-                else:
-                  individual.attributes["luxury_goods"] -= ai_action.amount
-                  individual.memory.append(f'On day {system.time}. I consumed {ai_action.amount} luxury goods and gained sensual pleasure')
-                  print("Consuming luxury goods is successful")
               elif ai_action.type==AIActionType.Rob:
                 target=system.individuals[ai_action.targetid]
                 target_master=target.obey_stats.obey_personId

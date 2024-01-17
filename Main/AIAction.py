@@ -36,13 +36,6 @@ class AIAction:
         self.targetid:int = target
     def __str__(self) -> str:
         return f"{self.type}, owner: {self.ownerid}, target: {self.targetid}"
-
-class ConsumeAction(AIAction):
-    def __init__(self, owner:int, target:int, amount:int) -> None:
-        super().__init__(AIActionType.ConsumeLuxury, owner, target)
-        self.amount:int = amount
-    def __str__(self) -> str:
-        return f"{self.type}, amount: {self.amount}"
     
 class RobAction(AIAction):
     def __init__(self, owner:int, target:int, robType:str) -> None:
