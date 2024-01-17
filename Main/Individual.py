@@ -45,7 +45,7 @@ class Individual:
         self.current_action_type:AIActionType = AIActionType.Default
         self.robbing_stats = RobStats()
         self.obey_stats = ObeyStats()
-        self.memorystream = MemoryStream()
+        self.memorystream = MemoryStream(id)
         # Initialize memory of the individual
         self.memory = ['None']*30
         self.DESIRE_FOR_GLORY=10
