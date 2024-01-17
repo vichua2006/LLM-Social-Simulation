@@ -31,8 +31,10 @@ class Individual:
             "social_position": 0,  # Initial social position is 0
             "land": 10,  # Land owned by the individual
             "food": 2,  # Initial food is 2
-            "action": 1  # Initial action point is 1
-            ,"trust_of_others":0
+            "action": 1,  # Initial action point is 1
+            "trust_of_others":0,
+            "starved":0
+            
         }
 
 
@@ -46,6 +48,7 @@ class Individual:
         self.memory = ['None']*30
         self.DESIRE_FOR_GLORY=10
         self.DESIRE_FOR_PEACE=3
+        self.death = False
 
     def get_pending_action_as_list(self):
         return list(self.pending_action.queue)
