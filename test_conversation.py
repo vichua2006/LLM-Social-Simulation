@@ -16,18 +16,18 @@ for i, person in enumerate(individuals):
     person.memorystream.add_concept_node(ConceptNode(1,"rob",1,0,"rob",[1],10, f"person {i} rob person {(i + 1) % POPULATION}", 6))
 
 characteristics = [
-    "You are enduring and optimistic, always maintaining a positive outlook. You are shy",
-    "You are detail-oriented, with a strong focus on order and quality.",
-    "You are generous and community-minded, always willing to help others.",
-    "You are business-savvy and strategic in trade and negotiations.",
-    "You are determined and hardworking, with a strong sense of dedication to your work.",
+    "gets picked a lot",
+    "gets picked a lot",
+    "does not get picked often",
+    "gets picked a lot",
+    "does not get picked often",
 ] # gpt generated personalities
 
-topic = "a policy that offers 20 percent subsidy to those who produce luxury goods."
-# topic = "talk about who recently robbed you. simply list off who robbed you, do not go in depth or apologise"
+# topic = "talk about the world you live in"
+topic = "a policy that provides a 20 percent subsidy for people who create luxury goods."
 
 conversation = converse(individuals, system, topic, characteristics)
 
-add_memory_after_conversation(individuals, conversation)
+# add_memory_after_conversation(individuals, conversation)
 
-print(individuals[0].memorystream.concept_nodes[-1].description)
+# print(individuals[0].memorystream.concept_nodes[-1].description )

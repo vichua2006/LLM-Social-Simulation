@@ -1,32 +1,13 @@
 from __future__ import annotations # Allow self-reference in type annotations
 import numpy as np  # numpy for numerical computations
-from typing import Any, List, Dict, Tuple
+from typing import Any, List, Dict, Tuple, Optional, Callable, Literal, Union
 from Main.AIAction import AIActionType, AIAction, RobAction
 import queue
 from Main.System import System
-
 from Main.Memory import MemoryStream
+from Main.SpeakingAgent import SpeakingAgent
+from Main.config import AUTOGEN_LLM_CONFIG
 
-from autogen import AssistantAgent
-
-################# TEMPORARY #######################
-# Not sure how api keys and config want to be handled
-
-
-victor_key = "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"
-
-config_list = [
-    {
-        "model": "gpt-3.5-turbo",
-        "api_key": victor_key,
-    },  
-]
-
-AGENT_LLM_CONFIG = {
-    "config_list": config_list, 
-    "temperature": 0.0, 
-}
-##################################################
 
 class SeralizeQueue(queue.Queue):
     def __getstate__(self):
@@ -67,10 +48,10 @@ class Individual:
         self.DESIRE_FOR_GLORY=10
         self.DESIRE_FOR_PEACE=3
         # Initialize autogen agent of the individual
-        self.agent = AssistantAgent(
+        self.agent = SpeakingAgent(
             name=self.attributes["name"],
             system_message=self.attributes["name"],
-            llm_config=AGENT_LLM_CONFIG
+            llm_config=AUTOGEN_LLM_CONFIG
         )
 
     def get_pending_action_as_list(self):
@@ -148,6 +129,9 @@ class Individual:
         # updates the agent's system message and description
         self.agent.update_system_message(prompt)
     
+    def update_agent_personality(self, prompt:str):
+        self.agent.update_personality(prompt)
+
     def __getstate__(self):
         return self.__dict__
     def __setstate__(self, state):

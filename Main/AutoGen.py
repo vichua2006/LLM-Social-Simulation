@@ -1,16 +1,16 @@
 import json
 from openai import OpenAI
-from typing import List, Optional, Dict
-from autogen import AssistantAgent, GroupChat, GroupChatManager
+from typing import List, Optional, Dict, Union, Callable, Literal
+from autogen import ConversableAgent, GroupChat, GroupChatManager, Agent
 from Main.Individual import Individual
 from Main.System import System
 from Main.Memory import ConceptNode
+from Main.SpeakingAgent import CustomGroupChat
 from Main.Query import generate_environment_description, generate_general_description
 from Main.Retrieve import new_retrieve
 
-from Main.Individual import AGENT_LLM_CONFIG # there has to be a better way to do this
-client = OpenAI(api_key=AGENT_LLM_CONFIG["config_list"][0]["api_key"])
-
+from Main.config import AUTOGEN_LLM_CONFIG 
+client = OpenAI(api_key=AUTOGEN_LLM_CONFIG["config_list"][0]["api_key"])
 
 def converse(individuals: List[Individual], system: System, chat_topic: str, temp_personalities: List[str], pleasure_system_input: str = None) -> List[Dict[str, str]]:
     '''
@@ -24,12 +24,12 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, tem
 
     speak_for_yourself_msg = """DO NOT GENERATE RESPONSES FOR OTHER AGENTS, ONLY SPEAK FOR YOURSELF."""
 
-    terminate_chat_when_agreed_msg = """When everyone in the conversation has formed an agreement on a topic, reply "TERMINATE" """
+    terminate_chat_when_agreed_msg = """When EVERYONE in the conversation has CLEARLY formed an agreement on a topic, reply "TERMINATE" """
 
     system_msg = f"""
     [System Note: 
     {speak_for_yourself_msg} 
-    {terminate_chat_when_agreed_msg}
+    {terminate_chat_when_agreed_msg if False else ""}
     ]
     """
 
@@ -46,20 +46,21 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, tem
 
         personality = temp_personalities[i]
 
-        new_msg = "\n".join([environment_description, general_description, relevant_memory_descriptions, personality, system_msg])
+        new_msg = "\n".join([environment_description, general_description, relevant_memory_descriptions, system_msg])
         person.update_agent_prompt(new_msg)
+        person.update_agent_personality(personality)
     
 
 
     # create a groupchat
     agents = [person.get_agent() for person in individuals]
-    groupchat = GroupChat(agents=agents, messages=[], max_round=100)
-    manager = GroupChatManager(groupchat=groupchat, llm_config=AGENT_LLM_CONFIG)
+    groupchat = CustomGroupChat(agents=agents, messages=[], max_round=100)
+    manager = GroupChatManager(groupchat=groupchat, llm_config=AUTOGEN_LLM_CONFIG)
 
     initial_msg = f"""
     System Message: Now, several members of the society have gathered to discuss their opinion about the society that they live in.
     The topic is: {chat_topic}.
-    You MUST speak and reply based on your personality and memories. Limit each response to 50 words.
+    Limit each response to 50 words.
     """
 
     # initiate conversation. silent=False for testing/debugging
