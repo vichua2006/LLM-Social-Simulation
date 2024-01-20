@@ -32,8 +32,8 @@ luxury_production = np.random.normal(2, 1)
 # Function to update the state of each individual at the end of the day
 def day_end(system,individuals:List[Individual]):
     for individual in individuals:
-        if individual.attributes['food'] >= 1:
-            individual.attributes['food'] -= 1  # Decrease the food by 1
+        if individual.attributes['food'] >= 3:
+            individual.attributes['food'] -= 3  # Decrease the food by 3
         if individual.attributes["luxury_goods"] >= 1:
             result: str = query_individual(individual, system, AIAction(AIActionType.ConsumeLuxury, id, None))
             if result.lower() == "yes":
@@ -264,8 +264,8 @@ def simulate(individuals:List[Individual],system:System):
               if ai_action.type==AIActionType.Farm:
                   gain = increase_food(individual)
                   individual.attributes['food']+=gain
-                    farm_node = ConceptNode(len(individual.memorystream.concept_nodes), "farm", system.time, individual.attributes["id"], "farm", [], 0,f'On day {system.time}. I farmed and gained {gain} units of food.', 1)
-                    individual.memorystream.add_concept_node(farm_node)
+                  farm_node = ConceptNode(len(individual.memorystream.concept_nodes), "farm", system.time, individual.attributes["id"], "farm", [], 0,f'On day {system.time}. I farmed and gained {gain} units of food.', 1)
+                  individual.memorystream.add_concept_node(farm_node)
                   individual.memory.append(f'On day {system.time}. I farmed and gained {gain} units of food.')
                   print("Farm is successful.")
               elif ai_action.type == AIActionType.ProduceLuxury:
