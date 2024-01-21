@@ -2,7 +2,7 @@ import os
 import jsonpickle
 import threading
 from typing import List
-from Main.Calculation import donate, increase_food, punishment, rob, winner_loser
+from Main.Calculation import donate, increase_food, punishment, rob_rebelled, winner_loser
 from Main.CsvAnalysis import CsvAnalysis
 from Main.Individual import Individual
 from Main.System import System
@@ -96,7 +96,7 @@ def simulate(individuals:List[Individual],system:System):
                         punishment(owner, system)
                       
                       elif R:
-                        rob(individual, owner, system, response_action.robType)
+                        rob_rebelled(individual, owner, system, response_action.robType)
                         system.csv_analysis.rob_rebelled(owner.attributes["id"])
                       elif not R:
                             #if master rob subject, subject will accept instead of obey, where obey only refer to the first obey that happen between two individuals without subject-master relationship
