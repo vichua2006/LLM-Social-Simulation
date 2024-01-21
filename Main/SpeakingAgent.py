@@ -17,7 +17,7 @@ class SpeakingAgent(ConversableAgent):
         default_auto_reply: Optional[Union[str, Dict, None]] = "",
         description: Optional[str] = None,
     ):
-        '''redefining constructor to add personality (speaking tendencies) variable'''
+        '''redefining constructor to add personality variable'''
         super().__init__(
             name,
             system_message,
@@ -36,7 +36,6 @@ class SpeakingAgent(ConversableAgent):
     def update_personality(self, description: str) -> None:
         '''
         updates the agent's personality variable 
-        example: "talks a lot", "doesn't like to talk"
         '''
         self.personality = description
 
@@ -53,7 +52,8 @@ class CustomGroupChat(GroupChat):
             agents = self.agents
         statement = f'''
         Read the above conversation. Then select the next role from {[agent.name for agent in agents]} to play.
-        Keep in mind the personality of each role: {[f"{agent.name} {agent.personality}" for agent in agents]}.
+        Keep in mind how often each role gets selected: {[f"{agent.name} {agent.personality}" for agent in agents]}.
+        ONLY select the roles that get selected often. DO NOT select the roles that are not selected often.
         Only return the role.
         '''
 

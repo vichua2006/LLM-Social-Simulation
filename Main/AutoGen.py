@@ -29,7 +29,7 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, tem
     system_msg = f"""
     [System Note: 
     {speak_for_yourself_msg} 
-    {terminate_chat_when_agreed_msg if False else ""}
+    {terminate_chat_when_agreed_msg if True else ""}
     ]
     """
 
@@ -87,9 +87,14 @@ def add_memory_after_conversation(individuals: Individual, conversation: List[Di
 
     for person in individuals:
         # system message instructing gpt to summarize the conversation
-        system_msg = {"role": "system", "content": f"Please read the following conversation, and summarize the contents from the perspective of {person.attributes['name']}. Ignore the contents of the first and very last message"}
-        # generate description 
-        response = client.chat.completions.create(model="gpt-3.5-turbo", messages=[system_msg] + conversation,top_p=person.INTELLIGENCE)
+        content = f'''
+        Please read the following conversation, and summarize the contents pretending to be {person.attributes['name']}, from a first person perspective.
+        Talk about your specific actions, a focus more on yourself. 
+        Limit the summary to 50 words'''
+
+        system_msg = {"role": "system", "content": content}
+        # generate description; exclude the first and last message
+        response = client.chat.completions.create(model="gpt-3.5-turbo", messages=[system_msg] + conversation[1:-1],top_p=person.INTELLIGENCE)
         memory_description = response.choices[0].message.content
 
         # create a new concept node
