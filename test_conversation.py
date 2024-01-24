@@ -1,6 +1,6 @@
 from Main.Individual import Individual
 from Main.System import System
-from Main.AutoGen import converse, add_memory_after_conversation
+from Main.Conversation import converse, add_memory_after_conversation
 from Main.Memory import ConceptNode
 
 POPULATION = 5
@@ -21,7 +21,7 @@ characteristics = [
     "does not get selected often",
     "gets selected a lot",
     "does not get selected often",
-] # gpt generated personalities
+]
 
 # topic = "talk about the world you live in"
 topic = "a policy that provides a 20 percent subsidy for people who create luxury goods."

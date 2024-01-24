@@ -53,7 +53,7 @@ class CustomGroupChat(GroupChat):
         statement = f'''
         Read the above conversation. Then select the next role from {[agent.name for agent in agents]} to play.
         Keep in mind how often each role gets selected: {[f"{agent.name} {agent.personality}" for agent in agents]}.
-        ONLY select the roles that get selected often. DO NOT select the roles that are not selected often.
+        {'ONLY select the roles that get selected often. DO NOT select the roles that are not selected often.' if True else ''}
         Only return the role.
         '''
 

@@ -48,6 +48,7 @@ class Individual:
         self.DESIRE_FOR_GLORY=10
         self.DESIRE_FOR_PEACE=3
         # Initialize autogen agent of the individual
+        # system message is updated by the converse() function
         self.agent = SpeakingAgent(
             name=self.attributes["name"],
             system_message=self.attributes["name"],

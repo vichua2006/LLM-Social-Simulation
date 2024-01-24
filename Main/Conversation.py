@@ -1,11 +1,11 @@
 import json
 from openai import OpenAI
-from typing import List, Optional, Dict, Union, Callable, Literal
-from autogen import ConversableAgent, GroupChat, GroupChatManager, Agent
+from typing import List, Dict
+from autogen import GroupChatManager
 from Main.Individual import Individual
 from Main.System import System
 from Main.Memory import ConceptNode
-from Main.SpeakingAgent import CustomGroupChat
+from Main.SpeakingAgent import SpeakingAgent, CustomGroupChat
 from Main.Query import generate_environment_description, generate_general_description
 from Main.Retrieve import new_retrieve
 
@@ -57,6 +57,10 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, tem
     groupchat = CustomGroupChat(agents=agents, messages=[], max_round=100)
     manager = GroupChatManager(groupchat=groupchat, llm_config=AUTOGEN_LLM_CONFIG)
 
+    # create a agent for system message exclusively
+    system_agent = SpeakingAgent(name="temp", system_message="", llm_config=AUTOGEN_LLM_CONFIG)
+
+
     initial_msg = f"""
     System Message: Now, several members of the society have gathered to discuss their opinion about the society that they live in.
     The topic is: {chat_topic}.
@@ -64,7 +68,7 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, tem
     """
 
     # initiate conversation. silent=False for testing/debugging
-    agents[0].initiate_chat(manager, message=initial_msg, silent=False)
+    system_agent.initiate_chat(manager, message=initial_msg, silent=False)
 
     # returns the messages as a json object
     messages = groupchat.messages
