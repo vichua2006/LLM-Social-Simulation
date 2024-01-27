@@ -58,12 +58,13 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, tem
     manager = GroupChatManager(groupchat=groupchat, llm_config=AUTOGEN_LLM_CONFIG)
 
     # create a agent for system message exclusively
-    system_agent = SpeakingAgent(name="temp", system_message="", llm_config=AUTOGEN_LLM_CONFIG)
+    system_agent = SpeakingAgent(name="system", system_message="", llm_config=AUTOGEN_LLM_CONFIG)
 
 
     initial_msg = f"""
-    System Message: Now, several members of the society have gathered to discuss their opinion about the society that they live in.
+    System Message: Now, several members of the society have gathered to discuss their opinion about the world that they live in.
     The topic is: {chat_topic}.
+    You are allowed to debate with other people for your opinions
     Limit each response to 50 words.
     """
 

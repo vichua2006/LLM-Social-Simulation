@@ -1,5 +1,6 @@
 from typing import Optional, Union, List, Dict, Literal, Callable
 from autogen import ConversableAgent, GroupChat
+from autogen.agentchat.agent import Agent
 
 #included in individual file to resolve 
 class SpeakingAgent(ConversableAgent):
@@ -43,18 +44,30 @@ class SpeakingAgent(ConversableAgent):
 class CustomGroupChat(GroupChat):
     '''
     overrode one method to include agent personality in speaker selection
-    Temporary solution until personality mechanisms are determined/implemented
     '''
 
     def select_speaker_prompt(self, agents: Optional[List[SpeakingAgent]] = None) -> str:
         """This is always the *last* message in the context. The personality of each agent is appended to the end of the message, and the LM is told to consider their personalities"""
         if agents is None:
             agents = self.agents
+        
+        priorities = "\n".join([f"{agent.name} : {agent.personality}" for agent in agents])
+    
         statement = f'''
-        Read the above conversation. Then select the next role from {[agent.name for agent in agents]} to play.
-        Keep in mind how often each role gets selected: {[f"{agent.name} {agent.personality}" for agent in agents]}.
-        {'ONLY select the roles that get selected often. DO NOT select the roles that are not selected often.' if True else ''}
+        Read the above conversation and consider the label of each role. Then select the next role from {[agent.name for agent in agents]} to play.
+
+        Select them in somewhat random fashion. Not every role has to be selected.
+        Here are the labels of each role: 
+        {priorities}
+        OFTEN select roles labeled as FREQUENT.
+        OCCASIONALLY select roles labeled as SOMETIMES
+        ALMOST NEVER select the roles labeled as SELDOM.
+
+
         Only return the role.
         '''
 
         return statement
+
+    def select_speaker_msg(self, agents: List[Agent]) -> str:
+        return super().select_speaker_msg(agents)
