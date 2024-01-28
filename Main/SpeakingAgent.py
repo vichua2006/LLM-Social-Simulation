@@ -63,7 +63,6 @@ class CustomGroupChat(GroupChat):
         OCCASIONALLY select roles labeled as SOMETIMES
         ALMOST NEVER select the roles labeled as SELDOM.
 
-
         Only return the role.
         '''
 

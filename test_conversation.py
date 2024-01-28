@@ -1,6 +1,6 @@
 from Main.Individual import Individual
 from Main.System import System
-from Main.Conversation import converse, add_memory_after_conversation
+from Main.Conversation import converse, add_memory_after_conversation, evaluate_speaking_tendencies
 from Main.Memory import ConceptNode
 
 POPULATION = 5
@@ -18,19 +18,31 @@ for i, person in enumerate(individuals):
 individuals[3].memorystream.add_concept_node(ConceptNode(1,"rob",1,0,"rob",[1],10, "You REALLY want to produce luxury goods.", 6))
 
 characteristics = [
-    "SELDOM",
-    "SOMETIMES",
-    "SELDOM",
     "FREQUENT",
+    "SOMETIMES",
+    "FREQUENT",
+    "SELDOM",
     "FREQUENT",
 ]
 
-topic = "talk about the world you live in"
-# topic = "choose between a policy that provides a 20 percent subsidy for people who create luxury goods or a policy that reduces people's income by 5 percent"
+personalities = [
+    "Very solitary and reserved, prefers to be alone.",
+    "Somewhat reserved, but can be sociable in familiar settings.",
+    "Balanced, enjoys social interaction but also values solitude.",
+    "Generally outgoing and energetic, enjoys being around people.",
+    "Extremely outgoing, loves being in social settings, and thrives on interactions."
+]
 
-conversation = converse(individuals, system, topic, characteristics)
+for p in personalities:
+    print(evaluate_speaking_tendencies(p))
 
-# add_memory_after_conversation(individuals, conversation)
+    
+# # topic = "talk about the world you live in"
+# topic = "a policy that provides a 20 percent subsidy for people who create luxury goods"
 
-# for person in individuals:
-#     print(f"{person.attributes['name']}: {person.memorystream.concept_nodes[-1].description}", end="\n\n\n")
+# conversation = converse(individuals, system, topic, characteristics)
+
+# # add_memory_after_conversation(individuals, conversation)
+
+# # for person in individuals:
+# #     print(f"{person.attributes['name']}: {person.memorystream.concept_nodes[-1].description}", end="\n\n\n")

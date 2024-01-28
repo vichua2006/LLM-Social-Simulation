@@ -105,14 +105,35 @@ def add_memory_after_conversation(individuals: Individual, conversation: List[Di
         # create a new concept node
 
         # what should node ID be? create? amount? poigancy?
-        # how long should memory_description be?
 
         node = ConceptNode(-1, "chat", -1, person.attributes["id"], "chat with", individuals_ids, -1, memory_description, -1)
         person.memorystream.add_concept_node(node)
 
+def evaluate_speaking_tendencies(personality_description: str) -> str:
+    '''
+    Given the personality (big 5) of an individual, ask gpt to return "FREQUENT", "SOMETIMES", or "SELDOM"
+    as their speaking tendency
+    '''
 
+    msg = {"role": "system", "content": personality_description}
 
+    task_description = '''
+    Please read the above description of someone's personality traits.
+    Then, choose one of the three words below that best describe how often this person would speak during a group conversation:
 
+    FREQUENT: This person speaks very often throughout the entire conversation.
+    SOMETIMES: This person speaks occasionally at times throughout the conversation.
+    SELDOM: This person rarely speaks out during a group conversation.
+
+    Only return the word. No description is needed.
+    '''
+
+    system_msg = {"role": "system", "content": task_description}
+
+    response = client.chat.completions.create(model="gpt-3.5-turbo", messages=[msg, system_msg])
+    speaking_tendency = response.choices[0].message.content
+
+    return speaking_tendency
 
 
 
