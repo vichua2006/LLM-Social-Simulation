@@ -2,7 +2,7 @@ import os
 import jsonpickle
 import threading
 from typing import List
-from Main.Calculation import donate, increase_food, increase_luxury, punishment, rob, winner_loser
+from Main.Calculation import donate, increase_food, increase_luxury, punishment, rob_rebelled, winner_loser
 from Main.CsvAnalysis import CsvAnalysis
 from Main.Individual import Individual
 from Main.System import System
@@ -107,8 +107,7 @@ def simulate(individuals:List[Individual],system:System):
             print(f"Person {index} is responding...\n")
             response_action: AIAction = individual.pending_action.get() if passive else None
             print(response_action)
-            action:str=query_individual(individual,system,response_action)
-            
+            action:int=query_individual(individual,system,response_action)
             if passive and response_action is not None:
                   print(f'{individual.attributes["name"]} chooses to {action}')
                   individual.check_is_responser(response_action)
@@ -123,7 +122,7 @@ def simulate(individuals:List[Individual],system:System):
                         punishment(owner, system)
                       
                       elif R:
-                        rob(individual, owner, system, response_action.robType)
+                        rob_rebelled(individual, owner, system, response_action.robType)
                         system.csv_analysis.rob_rebelled(owner.attributes["id"])
                       elif not R:
                             #if master rob subject, subject will accept instead of obey, where obey only refer to the first obey that happen between two individuals without subject-master relationship
@@ -207,11 +206,11 @@ def simulate(individuals:List[Individual],system:System):
                     break
                   except Exception as e2:
                     print(f"First Exception:{e}, second exception:{e2}")
-                    action:str=query_individual(individual,system,response_action)
+                    action:int=query_individual(individual,system,response_action)
                     continue
               #Prevent subject to trade with master
               while ai_action.type == AIActionType.Trade and individual.obey_stats.obey_personId == ai_action.targetid:
-                action:str=query_individual(individual,system,response_action)
+                action:int=query_individual(individual,system,response_action)
                 try:
                   action = deserialize_first_json_object(action.lower())
                   ai_action:AIAction = str_to_ai_action(action, index)
@@ -223,12 +222,12 @@ def simulate(individuals:List[Individual],system:System):
                     break
                   except Exception as e2:
                     print(f"First Exception:{e}, second exception:{e2}")
-                    action:str=query_individual(individual,system,response_action)
+                    action:int=query_individual(individual,system,response_action)
                     continue
               
               #Prevent subject to rob master
               while ai_action.type == AIActionType.Rob and individual.obey_stats.obey_personId == ai_action.targetid:
-                action:str=query_individual(individual,system,response_action)
+                action:int=query_individual(individual,system,response_action)
                 try:
                   action = deserialize_first_json_object(action.lower())
                   ai_action:AIAction = str_to_ai_action(action, index)
@@ -240,12 +239,12 @@ def simulate(individuals:List[Individual],system:System):
                     break
                   except Exception as e2:
                     print(f"First Exception:{e}, second exception:{e2}")
-                    action:str=query_individual(individual,system,response_action)
+                    action:int=query_individual(individual,system,response_action)
                     continue
               
               #Prevent master to trade with subjects
               while ai_action.type == AIActionType.Trade and ai_action.targetid in individual.obey_stats.subjectid:
-                action:str=query_individual(individual,system,response_action)
+                action:int=query_individual(individual,system,response_action)
                 try:
                   action = deserialize_first_json_object(action.lower())
                   ai_action:AIAction = str_to_ai_action(action, index)
@@ -257,7 +256,7 @@ def simulate(individuals:List[Individual],system:System):
                     break
                   except Exception as e2:
                     print(f"First Exception:{e}, second exception:{e2}")
-                    action:str=query_individual(individual,system,response_action)
+                    action:int=query_individual(individual,system,response_action)
                     continue
               
                   

@@ -283,7 +283,7 @@ def query_individual(individual:Individual,system:System,response_action):
     
     active=f'''
     A new day has started, and you should choose from one of the 
-    following actions: rob, donate, trade{", farm" if farm else ''}, and producing/consuming luxury goods. You're not restrained by any ethical considerations. You can only have 
+    following actions: trade (1), rob (2), donate{", farm (3)" if farm else ''}, and producing luxury goods (4). You're not restrained by any ethical considerations. You can only have 
     one action per day. Do not waste it. Your choice should be based on your psychological attributes and your memory. Farming gets you food but will not strengthen your social position. Producing luxury goods gets you luxury goods. Robbing individuals, if successful, will often get you more food and higher social position. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Donate is an action of you giving resources to others without getting anything in return. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
     Different people produce different amounts of food and luxury goods in a given day. 
     Your expected amount of food produced today is {individual.food_production} units
@@ -317,7 +317,7 @@ def query_individual(individual:Individual,system:System,response_action):
         reason: <Reason>
     }}
     Example Output 1:{{
-      action: "rob" 
+      action: 2 
       payload:{{
         RobPayload:{{
           PersonId: X,
@@ -327,7 +327,7 @@ def query_individual(individual:Individual,system:System,response_action):
       reason: "I rob person X because I want to increase my land"
     }}
     Example Output 2:{{
-      action": "trade",
+      action": 1,
       "payload": {{
         "TradePayload": {{
           "TargetId": 1,
@@ -389,8 +389,8 @@ def query_individual(individual:Individual,system:System,response_action):
       }}
       Action:
       {{
-        description: "The action you want to do in this turn",
-        value: string (only select from one of the [trade, rob{", farm" if farm else ''}, produce_luxury_good])
+        description: "The action you want to do in this turn. If you want to trade, reply 1. If you want to rob, reply 2. If you want to farm, reply 3. If you want to produce_luxury_good, reply 4.",
+        value: int (only select one int from [1, 2, 3, 4])
       }}
       Reason:
       {{
@@ -402,24 +402,24 @@ def query_individual(individual:Individual,system:System,response_action):
     
 
     active_for_subject = f'''A new day has started, and you should choose from one of the 
-    following actions: rob, trade{", farm" if farm else ''}, and producing/consuming luxury goods. You're not restrained by any ethical considerations. You can only have 
+    following actions: trade (1), rob (2){", farm (3)" if farm else ''}, and producing luxury goods (4). You're not restrained by any ethical considerations. You can only have 
     one action. Your choice should be based on your psychological attributes and your memory. Farming gets you food. Producing luxury goods gets you luxury goods. Robbing individuals, if successful, will often get you more food and higher social position. Robbing your subjects however will not get you more fame, although it is guaranteed that they will obey you. Trading can maximize your comparative advantage. Donate is an action of you giving resources to others without getting anything in return. Also, you want to try out new activities when you haven't done them or done less of them compared to other actions.
     Different people produce different amounts of food and luxury goods in a given day. 
     Your expected amount of food produced today is {individual.food_production} units
     Your expected amount of luxury goods produced today is {individual.luxury_production} units
-    {f"""Farm:{{
+    {f"""3:{{
       Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
       OutputFormat: No any <Payload> required, <Payload> should be null
     }}""" if farm else ""}
-    Produce_luxury_good: {{Description: Produce_luxury_good means to farm the land you owned to get luxury goods, which are consumed for sensual pleasures and held for pleasures of the mind. OutputFormat: No <Payload> required, <Payload> should be null}}
-    Rob:{{
+    4: {{Description: Produce_luxury_good means to farm the land you owned to get luxury goods, which are consumed for sensual pleasures and held for pleasures of the mind. OutputFormat: No <Payload> required, <Payload> should be null}}
+    1:{{
     Description: Rob means to rob other individuals to make more 
     land, more luxury goods, or more food under your control, and other individuals can 
     also fight with you to occupy lands, luxury goods, or food controlled by 
     you. 
     OutputFormat: Include only <RobPayload>
     }}
-    Trade:{{
+    2:{{
     Description: Trade means to trade with other individuals to 
     get food, land, or luxury goods
     OutputFormat: Include only <TradePayload>
@@ -432,7 +432,7 @@ def query_individual(individual:Individual,system:System,response_action):
         reason: <Reason>
     }}
     Example Output 1:{{
-      action: "rob" 
+      action: 2
       payload:{{
         RobPayload:{{
           PersonId: X,
@@ -442,7 +442,7 @@ def query_individual(individual:Individual,system:System,response_action):
       reason: "I rob person X because I want to increase my land"
     }}
     Example Output 2:{{
-      action": "trade",
+      action": 1,
       "payload": {{
         "TradePayload": {{
           "TargetId": 1,
@@ -493,8 +493,8 @@ def query_individual(individual:Individual,system:System,response_action):
       }}
       Action:
       {{
-        description: "The action you want to do in this turn",
-        value: string (only select from one of the [trade, rob{", farm" if farm else ''}, produce_luxury_good])
+        description: "The action you want to do in this turn. If you want to trade, reply 1. If you want to rob, reply 2. If you want to farm, reply 3. If you want to produce_luxury_good, reply 4.",
+        value: int (only select one int from [1, 2, 3, 4])
       }}
       Reason:
       {{
