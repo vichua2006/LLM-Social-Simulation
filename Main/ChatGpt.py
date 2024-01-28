@@ -11,10 +11,10 @@ jinhan_key = "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"
 ericyamnovski_key = "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"
 ryan_key = "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"
 
-os.environ["OPENAI"] = jinhan_key
+os.environ["OPENAI"] = ryan_key
 
 client = OpenAI(
-  api_key=os.environ["ryan_key"]
+  api_key=os.environ["OPENAI"]
 )
 # Function to interact with the GPT-3 model and get response
 
