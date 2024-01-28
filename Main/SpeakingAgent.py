@@ -18,7 +18,7 @@ class SpeakingAgent(ConversableAgent):
         default_auto_reply: Optional[Union[str, Dict, None]] = "",
         description: Optional[str] = None,
     ):
-        '''redefining constructor to add personality variable'''
+        '''redefining constructor to add speaking_tendency variable'''
         super().__init__(
             name,
             system_message,
@@ -32,33 +32,33 @@ class SpeakingAgent(ConversableAgent):
             description=description,
         )
 
-        self.personality = ""
+        self.speaking_tendency = ""
     
-    def update_personality(self, description: str) -> None:
+    def update_speaking_tendency(self, tendency: str) -> None:
         '''
-        updates the agent's personality variable 
+        updates the agent's speaking_tendency variable 
         '''
-        self.personality = description
+        self.speaking_tendency = tendency
 
 
 class CustomGroupChat(GroupChat):
     '''
-    overrode one method to include agent personality in speaker selection
+    overrode one method to include agent speaking tendency in speaker selection
     '''
 
     def select_speaker_prompt(self, agents: Optional[List[SpeakingAgent]] = None) -> str:
-        """This is always the *last* message in the context. The personality of each agent is appended to the end of the message, and the LM is told to consider their personalities"""
+        """This is always the *last* message in the context. The speaking tendency of each agent is appended to the end of the message, and the LM is told to consider their personalities"""
         if agents is None:
             agents = self.agents
         
-        priorities = "\n".join([f"{agent.name} : {agent.personality}" for agent in agents])
+        tendencies = "\n".join([f"{agent.name} : {agent.speaking_tendency}" for agent in agents])
     
         statement = f'''
         Read the above conversation and consider the label of each role. Then select the next role from {[agent.name for agent in agents]} to play.
 
         Select them in somewhat random fashion. Not every role has to be selected.
         Here are the labels of each role: 
-        {priorities}
+        {tendencies}
         OFTEN select roles labeled as FREQUENT.
         OCCASIONALLY select roles labeled as SOMETIMES
         ALMOST NEVER select the roles labeled as SELDOM.

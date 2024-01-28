@@ -78,6 +78,9 @@ class MemoryStream:
       self.concept_nodes[index] = new_node
     else:
       print("Index out of range. Modification failed.")
+  
+  def get_memory_length(self):
+    return len(self.concept_nodes)
 
   def __str__(self):
     return "\n".join([f"Concept Node {i}: {node.spo_summary()}" for i, node in enumerate(self.concept_nodes)])

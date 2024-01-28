@@ -130,8 +130,8 @@ class Individual:
         # updates the agent's system message and description
         self.agent.update_system_message(prompt)
     
-    def update_agent_personality(self, prompt:str):
-        self.agent.update_personality(prompt)
+    def update_agent_speaking_tendency(self, prompt:str):
+        self.agent.update_speaking_tendency(prompt)
 
     def __getstate__(self):
         return self.__dict__
