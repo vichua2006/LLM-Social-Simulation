@@ -33,7 +33,9 @@ class Individual:
             "food": 2,  # Initial food is 2,
             "luxury_goods": 0, # Initial luxury goods is 0
             "action": 1,  # Initial action point is 1
-            "trust_of_others":0
+            "trust_of_others":0,
+            "starved":0
+            
         }
         
         # Individual specific production numbers
@@ -50,6 +52,7 @@ class Individual:
         self.memory = ['None']*30
         self.DESIRE_FOR_GLORY=10
         self.DESIRE_FOR_PEACE=3
+        self.death = False
 
     def get_pending_action_as_list(self):
         return list(self.pending_action.queue)

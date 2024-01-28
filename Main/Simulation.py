@@ -38,6 +38,8 @@ def day_end(system,individuals:List[Individual]):
             result: str = query_individual(individual, system, AIAction(AIActionType.ConsumeLuxury, id, None))
             if result.lower() == "yes":
               individual.attributes["luxury_goods"] -= 1
+              consume_node = ConceptNode(len(individual.memorystream.concept_nodes), "consume_luxury", system.time, individual.attributes["id"], "consume_luxury", [], 0, f'On day {system.time}. I consumed 1 luxury good and gained sensual pleasure', 1)
+              individual.memorystream.add_concept_node(consume_node)
               individual.memory.append(f'On day {system.time}. I consumed 1 luxury good and gained sensual pleasure')
               print("Consuming luxury goods is successful")
             
@@ -270,6 +272,8 @@ def simulate(individuals:List[Individual],system:System):
                   print("Farm is successful.")
               elif ai_action.type == AIActionType.ProduceLuxury:
                   gain = increase_luxury(individual)
+                  luxury_node = ConceptNode(len(individual.memorystream.concept_nodes), "produce_luxury", system.time, individual.attributes["id"], "produce_luxury", [], 0, f'On day {system.time}. I produced luxury goods and gained {gain} units of luxury goods', 1)
+                  individual.memorystream.add_concept_node(luxury_node)
                   individual.memory.append(f'On day {system.time}. I produced luxury goods and gained {gain} units of luxury goods')
                   print("Producing luxury goods is successful")
               elif ai_action.type==AIActionType.Rob:
