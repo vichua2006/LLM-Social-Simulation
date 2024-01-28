@@ -24,6 +24,7 @@ def change_affected_people(affected_people, system:System):
 # %%
 # Function to update the state of each individual at the end of the day
 def day_end(system,individuals:List[Individual]):
+    count = 0
     for individual in individuals:
         if individual.attributes['food'] >= 1:
           individual.attributes['food'] -= 1  # Decrease the food by 1
@@ -31,11 +32,12 @@ def day_end(system,individuals:List[Individual]):
         else:
           individual.attributes['starved'] += 1
           if individual.attributes['starved'] > 3:
-            indivisual_death(system, )
+            indivisual_death(system, count)
         individual.attributes['action'] += 1  # Increase the action points by 1
         # Limit the memory to the last 60 events
         forget = len(individual.memory) - 60
         individual.memory = individual.memory[forget:]
+        count += 1
 
     system.time+=1
     if system.day_end_counter > 0:
