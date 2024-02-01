@@ -6,6 +6,7 @@ import queue
 from Main.System import System
 
 from Main.Memory import MemoryStream
+from Main.Personalities import generate_personality
 
 
 class SeralizeQueue(queue.Queue):
@@ -46,6 +47,7 @@ class Individual:
         self.memory = ['None']*30
         self.DESIRE_FOR_GLORY=10
         self.DESIRE_FOR_PEACE=3
+        self.personalities = generate_personality()
 
     def get_pending_action_as_list(self):
         return list(self.pending_action.queue)
