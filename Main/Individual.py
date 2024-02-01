@@ -52,7 +52,6 @@ class Individual:
         self.memory = ['None']*30
         self.DESIRE_FOR_GLORY=10
         self.DESIRE_FOR_PEACE=3
-        self.death = False
 
     def get_pending_action_as_list(self):
         return list(self.pending_action.queue)

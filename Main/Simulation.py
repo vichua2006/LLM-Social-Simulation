@@ -25,40 +25,53 @@ def change_affected_people(affected_people, system:System):
         system.individuals[affected_person_index].attributes[attribute]=affected_people[affected_person][attribute]
 
 # General food/luxury production numbers
-food_production = np.random.normal(4, 1)
-luxury_production = np.random.normal(2, 1)
+food_production = np.random.normal(4, 0.5)
+luxury_production = np.random.normal(2, 0.5)
 
 # %%
 # Function to update the state of each individual at the end of the day
 def day_end(system,individuals:List[Individual]):
-    for individual in individuals:
-        if individual.attributes['food'] >= 3:
-            individual.attributes['food'] -= 3  # Decrease the food by 3
-        if individual.attributes["luxury_goods"] >= 1:
-            result: str = query_individual(individual, system, AIAction(AIActionType.ConsumeLuxury, id, None))
-            if result.lower() == "yes":
-              individual.attributes["luxury_goods"] -= 1
-              consume_node = ConceptNode(len(individual.memorystream.concept_nodes), "consume_luxury", system.time, individual.attributes["id"], "consume_luxury", [], 0, f'On day {system.time}. I consumed 1 luxury good and gained sensual pleasure', 1)
-              individual.memorystream.add_concept_node(consume_node)
-              individual.memory.append(f'On day {system.time}. I consumed 1 luxury good and gained sensual pleasure')
-              print("Consuming luxury goods is successful")
-            
-        individual.attributes['action'] += 1  # Increase the action points by 1
-        # Limit the memory to the last 60 events
-        forget = len(individual.memory) - 60
-        individual.memory = individual.memory[forget:]
-        
-         # Generate food/luxury production numbers for specific individuals based general distribution
-        individual.food_production = round(np.random.normal(food_production, 1))
-        individual.luxury_production = round(np.random.normal(luxury_production, 1))
+  count = 0
+  for individual in individuals:
+    if individual.attributes['food'] >= 3:
+      individual.attributes['food'] -= 3 # Decrease the food by 3
+      individual.attributes["starved"] = 0
+    else:
+      individual.attributes['starved'] += 1
+      if individual.attributes['starved'] >= 3:
+        indivisual_death(system, individuals, count)
+    if individual.attributes["luxury_goods"] >= 1:
+      result: str = query_individual(individual, system, AIAction(AIActionType.ConsumeLuxury, id, None))
+      if result.lower() == "yes":
+        individual.attributes["luxury_goods"] -= 1
+        consume_node = ConceptNode(len(individual.memorystream.concept_nodes), "consume_luxury", system.time, individual.attributes["id"], "consume_luxury", [], 0, f'On day {system.time}. I consumed 1 luxury good and gained sensual pleasure', 1)
+        individual.memorystream.add_concept_node(consume_node)
+        individual.memory.append(f'On day {system.time}. I consumed 1 luxury good and gained sensual pleasure')
+        print("Consuming luxury goods is successful")
+          
+    individual.attributes['action'] += 1  # Increase the action points by 1
+    # Limit the memory to the last 60 events
+    forget = len(individual.memory) - 60
+    individual.memory = individual.memory[forget:]
+    
+    # Generate food/luxury production numbers for specific individuals based general distribution
+    individual.food_production = round(np.random.normal(food_production, 0.5))
+    individual.luxury_production = round(np.random.normal(luxury_production, 0.5))
 
+    count += 1
 
-    system.time+=1
-    if system.day_end_counter > 0:
-        system.day_end_counter += 1
-    if system.day_end_counter > 10:
-        system.should_exit = True
+  system.time+=1
+  if system.day_end_counter > 0:
+      system.day_end_counter += 1
+  if system.day_end_counter > 10:
+      system.should_exit = True
+  print("TOTAL DEATHS: ", system.deaths)
 
+def indivisual_death(system, individuals:List[Individual], index):
+  print("Dead" + str(index))
+  system.deaths += 1
+  individuals[index].__init__(index, f'person {index}')
+  
 file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
 #if file name alread exist, datetime will be as detail as second
 if os.path.exists(file_name):
@@ -106,7 +119,6 @@ def simulate(individuals:List[Individual],system:System):
             passive=not individual.pending_action.empty()
             print(f"Person {index} is responding...\n")
             response_action: AIAction = individual.pending_action.get() if passive else None
-            print(response_action)
             action:int=query_individual(individual,system,response_action)
             if passive and response_action is not None:
                   print(f'{individual.attributes["name"]} chooses to {action}')
@@ -264,7 +276,6 @@ def simulate(individuals:List[Individual],system:System):
               individual.current_action_type = ai_action.type
               if ai_action.type==AIActionType.Farm:
                   gain = increase_food(individual)
-                  individual.attributes['food']+=gain
                   farm_node = ConceptNode(len(individual.memorystream.concept_nodes), "farm", system.time, individual.attributes["id"], "farm", [], 0,f'On day {system.time}. I farmed and gained {gain} units of food.', 1)
                   individual.memorystream.add_concept_node(farm_node)
                   individual.memory.append(f'On day {system.time}. I farmed and gained {gain} units of food.')

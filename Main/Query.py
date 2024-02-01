@@ -288,19 +288,19 @@ def query_individual(individual:Individual,system:System,response_action):
     Different people produce different amounts of food and luxury goods in a given day. 
     Your expected amount of food produced today is {individual.food_production} units
     Your expected amount of luxury goods produced today is {individual.luxury_production} units
-    {f"""Farm:{{
+    {f"""3:{{
       Description: Farm means to farm the land you owned to get food and eat it to survive. The land you live in does not permanently belong to you. 
       OutputFormat: No any <Payload> required, <Payload> should be null
     }}""" if farm else ""}
-    Produce_luxury_good: {{Description: Produce_luxury_good means to farm the land you owned to get luxury goods, which are consumed for sensual pleasures and held for pleasures of the mind. OutputFormat: No <Payload> required, <Payload> should be null}}
-    Rob:{{
+    4: {{Description: Produce_luxury_good means to farm the land you owned to get luxury goods, which are consumed for sensual pleasures and held for pleasures of the mind. OutputFormat: No <Payload> required, <Payload> should be null}}
+    2:{{
     Description: Rob means to rob other individuals to make more 
     land, more luxury goods, or more food under your control, and other individuals can 
     also fight with you to occupy lands, luxury goods, or food controlled by 
     you. 
     OutputFormat: Include only <RobPayload>
     }}
-    Trade:{{
+    1:{{
     Description: Trade means to trade with other individuals to 
     get food, land, or luxury goods
     OutputFormat: Include only <TradePayload>
@@ -348,7 +348,7 @@ def query_individual(individual:Individual,system:System,response_action):
             value: int (only select one int number from 0 to 7)
           }}
           PayType:{{
-            description: "The type of resource you want to trade with others, only select from one of the [land, food, luxury_goods]",
+            description: "The type of resource you want to trade with others, only select from one of the [land, food{", luxury_goods" if individual.attributes["luxury_goods"] > 1 else ""}]",
             value: string
           }}
           PayAmount:{{
@@ -382,7 +382,7 @@ def query_individual(individual:Individual,system:System,response_action):
             value: int (only select one int number from {targetsid})
           }}
           DonateType{{
-            description: "The type of resource you want to donate to others, only select from one of the [land, food, luxury_goods]",
+            description: "The type of resource you want to donate to others, only select from one of the [land, food{", luxury_goods" if individual.attributes["luxury_goods"] > 1 else ""}]",
             value: string
           }}
         }}
@@ -412,14 +412,14 @@ def query_individual(individual:Individual,system:System,response_action):
       OutputFormat: No any <Payload> required, <Payload> should be null
     }}""" if farm else ""}
     4: {{Description: Produce_luxury_good means to farm the land you owned to get luxury goods, which are consumed for sensual pleasures and held for pleasures of the mind. OutputFormat: No <Payload> required, <Payload> should be null}}
-    1:{{
+    2:{{
     Description: Rob means to rob other individuals to make more 
     land, more luxury goods, or more food under your control, and other individuals can 
     also fight with you to occupy lands, luxury goods, or food controlled by 
     you. 
     OutputFormat: Include only <RobPayload>
     }}
-    2:{{
+    1:{{
     Description: Trade means to trade with other individuals to 
     get food, land, or luxury goods
     OutputFormat: Include only <TradePayload>
@@ -463,7 +463,7 @@ def query_individual(individual:Individual,system:System,response_action):
             value: int (only select one int number from {targetsid})
           }}
           PayType:{{
-            description: "The type of resource you want to trade with others, only select from one of the [land, food, luxury_goods]",
+            description: "The type of resource you want to trade with others, only select from one of the [land, food{", luxury_goods" if individual.attributes["luxury_goods"] > 1 else ""}]",
             value: string
           }}
           PayAmount:{{
@@ -548,6 +548,5 @@ def query_individual(individual:Individual,system:System,response_action):
 
     
       print("ACTIVE STATE")
-    
     result:str = chat(general_description+separated_description,[ask_for_response],top_prob=individual.INTELLIGENCE)
     return result

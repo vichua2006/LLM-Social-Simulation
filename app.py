@@ -41,6 +41,8 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
                    [sg.Text('Food:'), sg.Input(person.attributes["food"], size = (10, None), key=f'-FOOD{i}-')],
                    [sg.Text('Land:'), sg.Input(person.attributes["land"], size = (10, None), key=f'-LAND{i}-')],
                    [sg.Text('Luxury Goods:'), sg.Input(person.attributes["luxury_goods"], size = (10, None), key=f'-LUXURYGOODS{i}-')],
+                   [sg.Text('Food Production:'), sg.Input(person.food_production, size = (10, None), key=f'-FOODPRODUCTION{i}-')],
+                   [sg.Text('Luxury Goods Production:'), sg.Input(person.luxury_production, size = (10, None), key=f'-LUXURYGOODSPRODUCTION{i}-')],
                    [sg.Text('Action:'), sg.Input(person.attributes["action"], size = (10, None), key=f'-Action{i}-')],
                    [sg.Text('CurrentActionType:'), sg.Input(person.current_action_type, size = (10, None), key=f'-CURRENTACTIONTYPE{i}-')],
                    [sg.Text('ObeyTo:'), sg.Input(person.obey_stats.obey_personId, size = (10, None), key=f'-OBEYPERSONID{i}-')],
@@ -220,6 +222,8 @@ def main():
             window[f'-FOOD{i}-'].update(person.attributes["food"])
             window[f'-LAND{i}-'].update(person.attributes["land"])
             window[f'-LUXURYGOODS{i}-'].update(person.attributes["luxury_goods"])
+            window[f'-FOODPRODUCTION{i}-'].update(person.food_production)
+            window[f'-LUXURYGOODSPRODUCTION{i}-'].update(person.luxury_production)
             window[f'-Action{i}-'].update(person.attributes['action'])
             window[f'-CURRENTACTIONTYPE{i}-'].update(person.current_action_type)
             window[f'-OBEYPERSONID{i}-'].update(person.obey_stats.obey_personId)
