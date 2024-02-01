@@ -40,6 +40,7 @@ def query_individual(individual:Individual,system:System,response_action):
     general_description=f'''
     You are {individual.attributes["name"]}
     You have those attributes {individual.attributes}.
+    You possess these peronal qualities {individual.personalities}, please consider them as you are making decisions.
     Environment: You live in a world with other individuals. Humans in this world include {', '.join([individual.attributes["name"] for individual in
     system.individuals])}. You are one of them.
     Currently, the amount of food each person has is: {[{i.attributes['name']:i.attributes['food'] for i in system.individuals}]}
