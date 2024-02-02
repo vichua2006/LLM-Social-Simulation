@@ -7,6 +7,8 @@ from Main.System import System
 from Main.Memory import MemoryStream
 from Main.SpeakingAgent import SpeakingAgent
 from Main.config import AUTOGEN_LLM_CONFIG
+from Main.Personalities import generate_personality
+
 
 
 class SeralizeQueue(queue.Queue):
@@ -42,7 +44,7 @@ class Individual:
         self.current_action_type:AIActionType = AIActionType.Default
         self.robbing_stats = RobStats()
         self.obey_stats = ObeyStats()
-        self.memorystream = MemoryStream()
+        self.memorystream = MemoryStream(id)
         # Initialize memory of the individual
         self.memory = ['None']*30
         self.DESIRE_FOR_GLORY=10
@@ -54,6 +56,8 @@ class Individual:
             system_message=self.attributes["name"],
             llm_config=AUTOGEN_LLM_CONFIG
         )
+
+        self.personalities = generate_personality()
 
     def get_pending_action_as_list(self):
         return list(self.pending_action.queue)

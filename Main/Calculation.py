@@ -66,8 +66,8 @@ def donate_gain(master:Individual, donateAmount:float, donateType:str, system:Sy
     master.attributes[donateType]= master.attributes[donateType] + donateAmount
     return
     
-
-def rob(target: Individual, rob_person:Individual, system: System, robType: str)->None:
+#Only happen when rob_person rob target and target rebelled
+def rob_rebelled(target: Individual, rob_person:Individual, system: System, robType: str)->None:
     #cannot rob self
     if target.attributes['id']==rob_person.attributes['id']:
         print("ROBERROR: cannot rob self.")

@@ -7,10 +7,10 @@ from openai.types import Completion
 # Setting the OpenAI API key
 charles_key="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"
 taitienchi_key="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"
-Jinhan_key = "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"
+jinhan_key = "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"
 ericyamnovski_key = "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"
 
-os.environ["OPENAI"] = charles_key
+os.environ["OPENAI"] = jinhan_key
 
 client = OpenAI(
   api_key=os.environ["OPENAI"]
@@ -37,3 +37,10 @@ def chat(system, user_assistant,top_prob):
       return response.choices[0].message.content
     except Exception as e:
       print("An Exception Occur when communicating with ChatGPT:",e)
+
+
+def get_embedding(text, model="text-embedding-ada-002"):
+    text = text.replace("\n", " ")
+    if not text: 
+      text = "this is blank"
+    return client.embeddings.create(input=[text], model=model).data[0].embedding
