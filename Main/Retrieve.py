@@ -1,4 +1,7 @@
-import Memory
+
+from typing import Dict, List
+import Main.Memory
+import Main.ChatGpt
 
 from numpy import dot
 from numpy.linalg import norm
@@ -78,11 +81,12 @@ def extract_relevance(nodes, focal_pt):
     relevance_out: A dictionary whose keys are the node.node_id and whose values
                  are the float that represents the relevance score. 
   """
-  focal_embedding = Memory.get_embedding(focal_pt)
+
+  focal_embedding = Main.ChatGpt.get_embedding(focal_pt)
 
   relevance_out = dict()
   for count, node in enumerate(nodes): 
-    node_embedding = node.embedding[1]
+    node_embedding = node.embedding
     relevance_out[node.node_id] = cos_sim(node_embedding, focal_embedding)
 
   return relevance_out
@@ -111,8 +115,8 @@ def normalize_dict_floats(d, target_min, target_max):
     target_min = -5
     target_max = 5
   """
-  min_val = min(val for val in d.values())
-  max_val = max(val for val in d.values())
+  min_val = min(list(d.values()))
+  max_val = max(list(d.values()))
   range_val = max_val - min_val
 
   if range_val == 0: 
@@ -148,8 +152,13 @@ def top_highest_x_values(d, x):
                       reverse=True)[:x])
   return top_v
 
+def new_retrieve_active(person, n_count = 30):
+  retrieved = person.memorystream.concept_nodes[-n_count:]
+  return retrieved
 
-def new_retrieve(person, focal_points, n_count=30): 
+
+def new_retrieve(person, focal_points, n_count=30) -> Dict[str, List[ConceptNode]]: 
+
   """
   Given the current individual and focal points (focal points are events or 
   thoughts for which we are retrieving), we retrieve a set of nodes for each
@@ -168,22 +177,21 @@ def new_retrieve(person, focal_points, n_count=30):
     individual = <individual> object 
     focal_points = ["How are you?", "Jane is swimming in the pond"]
   """
-  # <retrieved> is the main dictionary that we are returning
-  retrieved = dict() 
-  for focal_pt in focal_points: 
-    # Getting all nodes from the agent's memory 
-    nodes = []
+  retrieved = []
+  if len(person.memorystream.concept_nodes) != 0:
+    # <retrieved> is the main dictionary that we are returning
+    #retrieved = dict() 
     
-    for memory in person.memorystream:
+    for memory in person.memorystream.concept_nodes:
         nodes.insert(0,memory)
         
-    # Calculating the component dictionaries and normalizing them.
-    recency_out = extract_recency(nodes)
-    recency_out = normalize_dict_floats(recency_out, 0, 1)
-    importance_out = extract_importance(nodes)
-    importance_out = normalize_dict_floats(importance_out, 0, 1)  
-    relevance_out = extract_relevance(nodes, focal_pt)
-    relevance_out = normalize_dict_floats(relevance_out, 0, 1)
+      # Calculating the component dictionaries and normalizing them.
+      recency_out = extract_recency(nodes)
+      recency_out = normalize_dict_floats(recency_out, 0, 1)
+      importance_out = extract_importance(nodes)
+      importance_out = normalize_dict_floats(importance_out, 0, 1)  
+      relevance_out = extract_relevance(nodes, focal_pt)
+      relevance_out = normalize_dict_floats(relevance_out, 0, 1)
 
     # Computing the final scores that combines the component values. 
     # Note to self: test out different weights. [1, 1, 1] tends to work
@@ -191,23 +199,31 @@ def new_retrieve(person, focal_points, n_count=30):
     # perhaps through an RL-like process.
     # gw = [1, 1, 1]
     # gw = [1, 2, 1]
-    gw = [0.5, 3, 2]
-    master_out = dict()
-    for key in recency_out.keys(): 
-      master_out[key] = recency_out[key]*gw[0] + relevance_out[key]*gw[1] + importance_out[key]*gw[2]
+      gw = [0.5, 3, 2]
+      master_out = dict()
+      for key in recency_out.keys(): 
+        master_out[key] = recency_out[key]*gw[0] + relevance_out[key]*gw[1] + importance_out[key]*gw[2]
 
     # Extracting the highest x values.
     # <master_out> has the key of node.id and value of float. Once we get the 
     # highest x values, we want to translate the node.id into nodes and return
     # the list of nodes.
-    master_out = top_highest_x_values(master_out, n_count)
-    master_nodes = []
+      master_out = top_highest_x_values(master_out, n_count)
+      master_nodes = []
     
-    for key,value in master_out:
-        master_nodes.append(person.memstream.get_concept_node_by_id(id))
+      for key in master_out:
+          master_nodes.append(person.memorystream.get_concept_node_by_id(key))
 
     #Add the part to change the last access time to current time
       
-    retrieved[focal_pt] = master_nodes
+    #retrieved[focal_pt] = master_nodes
+      retrieved = retrieved + master_nodes
 
   return retrieved
+
+def node_to_string(concept_nodes):
+  description = []
+  for node in concept_nodes:
+    description = description + [node.description]
+  
+  return description

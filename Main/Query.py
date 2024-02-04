@@ -4,80 +4,11 @@ import json
 from Main.AIAction import AIActionType
 from Main.ChatGpt import chat
 from Main.Individual import Individual, System
+from Main.Retrieve import new_retrieve_active, new_retrieve, node_to_string
 
-
-def query_individual(individual:Individual,system:System,response_action):
-    # This function creates a description of the individual and the environment they are in,
-    # and then asks for the individual's response using the chat function.
-    # The detailed description and the ask for response are both created within this function.
-    print(f"Responding to:{response_action}")
-    targetsid = [i.attributes['id'] for i in system.individuals if i is not individual]
-    #erase obeyed person in targets
-    if individual.obey_stats.obey_personId in targetsid:
-      targetsid.remove(individual.obey_stats.obey_personId)
-    print(f'available targets:{targetsid}')
-    is_subject=individual.obey_stats.obey_personId!=-1
-    is_master=individual.obey_stats.subjectid
-    obedience=f'''You have obeyed to this person: Person {individual.obey_stats.obey_personId}. You have to always obey his actions, and you cannot initiate any action against him. Since you obeyed, you are now part of the group of individuals who also obeyed him, if any, they are {system.individuals[individual.obey_stats.obey_personId].obey_stats.subjectid}. If your action targets another person, it can only be a person within this group. You are familiar with everyone in this group. Your familiarity of individuals not in this group depends on your memory.You have your farming land protected by your master. If 
-    someone in the commonwealth robs your food or your land, you 
-    master will punish the robber. If someone in your group 
-    trades with you but violates the trade, which means that person took away your food or land without giving you their food or land as what they claimed,
-    your master will punish that violater. But if your master want, they can take any amount 
-    of your land or food from you, and you have no right to disobey. 
-    When others outside your commonwealth robs your master 
-    and your master obeyed to them, the one your original master 
-    obeyed to will be your new master. Now you obey to your new 
-    master, and you have no obedience with your old master.'''
-    master=f'''These individuals have obeyed to your invasion: {[f"Person"+str(i) for i in individual.obey_stats.subjectid]}, whom have become your subjects. You can trade or rob them knowning that they will only accept.
-    You are the master of everyone who obeyed you before. You know every one of your subjects in your subjects well. Since you are the master of all of them, all their property including land and food belongs to you. When others rob your subjects, you should project them since they are your property.
-    If you obey anyone, the one robbing you 
-    now becomes your master and all the subjects of your 
-    commonwealth. Besides, you no longer be the master of all the 
-    subjects you have in your commonwealth. All of the subjects 
-    you once had and you are now the subject of the one you obey 
-    to.'''
-    general_description=f'''
-    You are {individual.attributes["name"]}
-    You have those attributes {individual.attributes}.
-    You have memory:{individual.memory}
-    Environment: You live in a world with other individuals. Humans in this world include {', '.join([individual.attributes["name"] for individual in
-    system.individuals])}. You are one of them.
-    Currently, the amount of food each person has is: {[{i.attributes['name']:i.attributes['food'] for i in system.individuals}]}
-    The amount of land each person has is:{[{i.attributes['name']:i.attributes['land'] for i in system.individuals}]}
-    Survival: You can survive if you have 1 unit of food. You can 
-    also gain sensual pleasure once you eat food.
-    Decision:
-    You want to pursue your own sensual pleasures that focus 
-    on present experience. They can be the pleasure from food. 
-    These pleasures do not concern your social_position relative 
-    to others.
-    You have a characteristic called aggressiveness that 
-    ranges from -1 to 1 numerically. Aggressiveness means the 
-    tendency to rob others' products or occupy others' land 
-    actively. The higher the number you have, the more aggressive 
-    you are.
-    You have a characteristic called covetousness that ranges 
-    from 1.1 to 1.6 numerically. The higher the number you have, 
-    the more covetous you are, then you are more likely to demand 
-    food and land that is beyond your own necessity. You want to 
-    pursue your pleasures of the mind. Pleasure of the mind 
-    consists in reflecting on your ability to secure future good. 
-    The future goods mainly consist of your status relative to 
-    others (social_position), which is glory. You will have a 
-    greater pleasure of the mind if you're able better secure 
-    future good.
-    Your memory affects how you judge things. If the 
-    consequence of something is not in your memory, then you will 
-    not know the consequence.
-    You are self-centered. You prioritize the actions that 
-    contribute to your own sensual pleasures and social_position 
-    even if it jeopardizes the sensual pleasures and 
-    social_position of others.
-    
-    {obedience if is_subject else ''}
-    {master if is_master else ''}
-    '''
-    separated_description=f'''
+def generate_environment_description() -> str:
+    # This function returns the description of the simulation environment as a string
+    environment_description=f'''
     The world consists of farming lands.
     
     Survival:
@@ -136,12 +67,104 @@ def query_individual(individual:Individual,system:System,response_action):
     gain food, then you are more inclined to rob more on your 
     eleventh day.
     '''
-    passive_trade=f'''
-    Today, you noticed that {response_action}.
-    You can accept the trade or reject it. You decision is only a result of your psychological axioms.
-    Reply with either ACCEPT or REJECT
+
+    return environment_description
+
+def generate_general_description(individual: Individual, system: System) -> str:
+    # This function generates the description of the individual and returns it as a string
+    is_subject=individual.obey_stats.obey_personId!=-1
+    is_master=individual.obey_stats.subjectid
+    obedience=f'''You have obeyed to this person: Person {individual.obey_stats.obey_personId}. You have to always obey his actions, and you cannot initiate any action against him. Since you obeyed, you are now part of the group of individuals who also obeyed him, if any, they are {system.individuals[individual.obey_stats.obey_personId].obey_stats.subjectid}. If your action targets another person, it can only be a person within this group. You are familiar with everyone in this group. Your familiarity of individuals not in this group depends on your memory.You have your farming land protected by your master. If 
+    someone in the commonwealth robs your food or your land, you 
+    master will punish the robber. If someone in your group 
+    trades with you but violates the trade, which means that person took away your food or land without giving you their food or land as what they claimed,
+    your master will punish that violater. But if your master want, they can take any amount 
+    of your land or food from you, and you have no right to disobey. 
+    When others outside your commonwealth robs your master 
+    and your master obeyed to them, the one your original master 
+    obeyed to will be your new master. Now you obey to your new 
+    master, and you have no obedience with your old master.'''
+    master=f'''These individuals have obeyed to your invasion: {[f"Person"+str(i) for i in individual.obey_stats.subjectid]}, whom have become your subjects. You can trade or rob them knowning that they will only accept.
+    You are the master of everyone who obeyed you before. You know every one of your subjects in your subjects well. Since you are the master of all of them, all their property including land and food belongs to you. When others rob your subjects, you should project them since they are your property.
+    If you obey anyone, the one robbing you 
+    now becomes your master and all the subjects of your 
+    commonwealth. Besides, you no longer be the master of all the 
+    subjects you have in your commonwealth. All of the subjects 
+    you once had and you are now the subject of the one you obey 
+    to.'''
+    general_description=f'''
+    You are {individual.attributes["name"]}
+    You have those attributes {individual.attributes}.
+    You possess these peronal qualities {individual.personalities}, please consider them as you are making decisions.
+    Environment: You live in a world with other individuals. Humans in this world include {', '.join([individual.attributes["name"] for individual in
+    system.individuals])}. You are one of them.
+    Currently, the amount of food each person has is: {[{i.attributes['name']:i.attributes['food'] for i in system.individuals}]}
+    The amount of land each person has is:{[{i.attributes['name']:i.attributes['land'] for i in system.individuals}]}
+    Survival: You can survive if you have 1 unit of food. You can 
+    also gain sensual pleasure once you eat food.
+    Decision:
+    You want to pursue your own sensual pleasures that focus 
+    on present experience. They can be the pleasure from food. 
+    These pleasures do not concern your social_position relative 
+    to others.
+    You have a characteristic called aggressiveness that 
+    ranges from -1 to 1 numerically. Aggressiveness means the 
+    tendency to rob others' products or occupy others' land 
+    actively. The higher the number you have, the more aggressive 
+    you are.
+    You have a characteristic called covetousness that ranges 
+    from 1.1 to 1.6 numerically. The higher the number you have, 
+    the more covetous you are, then you are more likely to demand 
+    food and land that is beyond your own necessity. You want to 
+    pursue your pleasures of the mind. Pleasure of the mind 
+    consists in reflecting on your ability to secure future good. 
+    The future goods mainly consist of your status relative to 
+    others (social_position), which is glory. You will have a 
+    greater pleasure of the mind if you're able better secure 
+    future good.
+    Your memory affects how you judge things. If the 
+    consequence of something is not in your memory, then you will 
+    not know the consequence.
+    You are self-centered. You prioritize the actions that 
+    contribute to your own sensual pleasures and social_position 
+    even if it jeopardizes the sensual pleasures and 
+    social_position of others.
+    
+    {obedience if is_subject else ''}
+    {master if is_master else ''}
     
     '''
+    
+    active_memory = f'''
+    You have memory:{node_to_string(new_retrieve_active(individual))}
+    '''
+
+    return general_description
+
+
+def query_individual(individual:Individual,system:System,response_action):
+    # This function combines the description of the individual and the description of the environment they are in,
+    # and then asks for the individual's response using the chat function.
+    # The detailed description and the ask for response are both created within this function.
+    print(f"Responding to:{response_action}")
+    targetsid = [i.attributes['id'] for i in system.individuals if i is not individual]
+    #erase obeyed person in targets
+    if individual.obey_stats.obey_personId in targetsid:
+      targetsid.remove(individual.obey_stats.obey_personId)
+    print(f'available targets:{targetsid}')
+
+    general_description = generate_general_description(individual, system)
+    separated_description = generate_environment_description()
+    
+    passive_trade=f'''
+    Today, you noticed that {response_action}.
+    You can accept the trade or reject it. You decision is only a result of your psychological axioms. '''
+    
+    if response_action != None:
+      passive_trade = passive_trade + f"""You have memory: {node_to_string(new_retrieve(individual, ["trade","Person "+str(response_action.ownerid)]))}
+      Reply with either ACCEPT or REJECT
+      """
+      
     passive_rob=f'''
     Today, you noticed that {response_action}. You can only either 
     obey them or physically rebel against them by fighting back.
@@ -151,10 +174,12 @@ def query_individual(individual:Individual,system:System,response_action):
     {individual.DESIRE_FOR_PEACE}. So only when you've lost many times to this person by rebelling would the utility of rebel be low enough so that it's no longer the correct option. You will pick the action with 
     the most utility. If you obey the one robbing you now, the 
     one robbing you now becomes your master, and you become their 
-    subjects.
+    subjects.'''
     
-    Reply exactly with either OBEY or REBEL
-    '''
+    if response_action != None:
+      passive_rob = passive_rob + f'''You have memory: {node_to_string(new_retrieve(individual, ["rob","Person "+str(response_action.ownerid)]))}
+      Reply exactly with either OBEY or REBEL
+      '''
     passive_rob_fromMaster = f'''
     Today, you noticed that {response_action}. You can only 
     obey them because there are your master.
@@ -506,12 +531,12 @@ def query_individual(individual:Individual,system:System,response_action):
       print('PASSIVE STATE')
           
     else: 
-      ask_for_response=active
+      ask_for_response=active_memory + active
       if individual.obey_stats.obey_personId != -1:
-        ask_for_response = active_for_subject
+        ask_for_response = active_memory+ active_for_subject
         ask_for_response = ask_for_response + additional_active_to_master
       if len(individual.obey_stats.subjectid) != 0:
-        ask_for_response  = ask_for_response + additional_active_to_subject
+        ask_for_response  = active_memory+ ask_for_response + additional_active_to_subject
 
 
     
