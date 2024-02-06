@@ -13,6 +13,7 @@ def query_individual(individual:Individual,system:System,response_action):
     # The detailed description and the ask for response are both created within this function.
     print(f"Responding to:{response_action}")
     targetsid = [i.attributes['id'] for i in system.individuals if i is not individual]
+  
     #erase obeyed person in targets
     if individual.obey_stats.obey_personId in targetsid:
       targetsid.remove(individual.obey_stats.obey_personId)

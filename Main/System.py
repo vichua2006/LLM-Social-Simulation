@@ -22,6 +22,7 @@ class System:
         self.day_end_counter=0
         self.should_stop=False
         self.individual_count = len(individuals)
+        self.max_indivisual_index = len(individuals)
         self.deaths = 0
 
     def set_csv_analysis(self, csv_analysis:CsvAnalysis):
