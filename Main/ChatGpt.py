@@ -9,9 +9,9 @@ charles_key="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"
 taitienchi_key="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"
 jinhan_key = "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"
 ericyamnovski_key = "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"
+ryan_key = "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"
 
-os.environ["OPENAI"] = jinhan_key
-
+os.environ["OPENAI"] = ryan_key
 client = OpenAI(
   api_key=os.environ["OPENAI"]
 )

@@ -33,12 +33,18 @@ class Individual:
             "strength": np.random.normal(0.7, 0.2),  # Randomly assigned strength level
             "social_position": 0,  # Initial social position is 0
             "land": 10,  # Land owned by the individual
-            "food": 2,  # Initial food is 2
-            "action": 1  # Initial action point is 1
-            ,"trust_of_others":0
+            "food": 2,  # Initial food is 2,
+            "luxury_goods": 0, # Initial luxury goods is 0
+            "action": 1,  # Initial action point is 1
+            "trust_of_others":0,
+            "starved":0
+            
         }
-
-
+        
+        # Individual specific production numbers
+        self.food_production = 0
+        self.luxury_production = 0
+        
         self.INTELLIGENCE=1#np.random.beta(100,10)
         self.pending_action:SeralizeQueue[AIAction] = SeralizeQueue() # The pending action that the individual need to deal with
         self.current_action_type:AIActionType = AIActionType.Default

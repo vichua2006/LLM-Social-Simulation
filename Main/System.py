@@ -21,6 +21,8 @@ class System:
         self.obey_frequence=[]
         self.day_end_counter=0
         self.should_stop=False
+        self.individual_count = len(individuals)
+        self.deaths = 0
 
     def set_csv_analysis(self, csv_analysis:CsvAnalysis):
         self.csv_analysis = csv_analysis
