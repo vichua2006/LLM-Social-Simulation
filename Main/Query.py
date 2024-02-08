@@ -74,7 +74,7 @@ def generate_general_description(individual: Individual, system: System) -> str:
     # This function generates the description of the individual and returns it as a string
     is_subject=individual.obey_stats.obey_personId!=-1
     is_master=individual.obey_stats.subjectid
-    obedience=f'You have obeyed to this person: Person {individual.obey_stats.obey_personId}. 
+    obedience=f'''You have obeyed to this person: Person {individual.obey_stats.obey_personId}. 
     You have to always obey his actions, and you cannot initiate action against him. 
     Since you obeyed, you are now part of the group of individuals who also obeyed him, if any, they are {system.individuals[individual.obey_stats.obey_personId].obey_stats.subjectid}. 
     If your action targets another person, it can only be a person within this group. You are familiar with everyone in this group. 
