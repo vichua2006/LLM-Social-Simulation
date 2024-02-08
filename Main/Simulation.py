@@ -38,7 +38,7 @@ def day_end(system,individuals:List[Individual]):
       individual.attributes["starved"] = 0
     else:
       individual.attributes['starved'] += 1
-      if individual.attributes['starved'] >= 0:
+      if individual.attributes['starved'] > 3:
         indivisual_death(system, individuals, count)
     if individual.attributes["luxury_goods"] >= 1:
       result: str = query_individual(individual, system, AIAction(AIActionType.ConsumeLuxury, id, None))
@@ -99,7 +99,6 @@ def initialize():
       # Generate food/luxury production numbers for specific individuals based general distribution
       individual.food_production = round(np.random.normal(food_production, 0.5))
       individual.luxury_production = round(np.random.normal(luxury_production, 0.5))
-      individual.food_production = 0
 
       individuals.append(individual)
       lands.append(f'land {i}')

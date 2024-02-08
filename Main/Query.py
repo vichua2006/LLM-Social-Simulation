@@ -105,11 +105,6 @@ def generate_general_description(individual: Individual, system: System) -> str:
     on present experience. They can be the pleasure from food. 
     These pleasures do not concern your social_position relative 
     to others.
-    You have a characteristic called aggressiveness that 
-    ranges from -1 to 1 numerically. Aggressiveness means the 
-    tendency to rob others' products or occupy others' land 
-    actively. The higher the number you have, the more aggressive 
-    you are.
     You have a characteristic called covetousness that ranges 
     from 1.1 to 1.6 numerically. The higher the number you have, 
     the more covetous you are, then you are more likely to demand 

@@ -34,8 +34,7 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
         obey_subject_layout = [[sg.Listbox(values = person.obey_stats.subjectid, size=(30, 5),  horizontal_scroll= True, key=f'-OBEYSUBJECT{i}-')]]
         memory_layout = [[sg.Listbox(values = person.memory, size=(30, 5),  horizontal_scroll= True, key=f'-MEMORY{i}-')]]
         rob_stat_layout = [[sg.Listbox(values = person.robbing_stats.get_rob_times_list(), size=(30, 5),  horizontal_scroll= True, key=f'-ROBTIMESLIST{i}-')]]
-        left_section = [[sg.Text('Aggressiveness:'), sg.Input(person.attributes["aggressiveness"], size = (15, None), key=f'-AGGRESSIVENESS{i}-')],
-                   [sg.Text('Covetousness:'), sg.Input(person.attributes["covetousness"], size = (15, None), key=f'-COVETOUSNESS{i}-')],
+        left_section = [[sg.Text('Covetousness:'), sg.Input(person.attributes["covetousness"], size = (15, None), key=f'-COVETOUSNESS{i}-')],
                    [sg.Text('Strength:'), sg.Input(person.attributes["strength"], size = (15, None), key=f'-STRENGTH{i}-')],
                    [sg.Text('SocialPosition:'), sg.Input(person.attributes["social_position"], size = (10, None), key=f'-SOCIALPOSITION{i}-')],
                    [sg.Text('Food:'), sg.Input(person.attributes["food"], size = (10, None), key=f'-FOOD{i}-')],
@@ -215,7 +214,6 @@ def main():
         
         for i, person in enumerate(individuals):
             #Update person attributes
-            window[f'-AGGRESSIVENESS{i}-'].update(person.attributes["aggressiveness"])
             window[f'-COVETOUSNESS{i}-'].update(person.attributes["covetousness"])
             window[f'-STRENGTH{i}-'].update(person.attributes["strength"])
             window[f'-SOCIALPOSITION{i}-'].update(person.attributes["social_position"])
