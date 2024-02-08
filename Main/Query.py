@@ -132,10 +132,6 @@ def generate_general_description(individual: Individual, system: System) -> str:
     {master if is_master else ''}
     
     '''
-    
-    active_memory = f'''
-    You have memory:{node_to_string(new_retrieve_active(individual))}
-    '''
 
     return general_description
 
@@ -552,6 +548,10 @@ def query_individual(individual:Individual,system:System,response_action):
             print('The passive action is not matched with anything.')
       print('PASSIVE STATE')   
     else: 
+          
+      active_memory = f'''
+      You have memory:{node_to_string(new_retrieve_active(individual))}
+      '''
       ask_for_response=active_memory + active
       if individual.obey_stats.obey_personId != -1:
         ask_for_response = active_memory+ active_for_subject

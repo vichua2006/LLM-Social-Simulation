@@ -157,7 +157,7 @@ def new_retrieve_active(person, n_count = 30):
   return retrieved
 
 
-def new_retrieve(person, focal_points, n_count=30) -> Dict[str, List[ConceptNode]]: 
+def new_retrieve(person, focal_points, n_count=30) -> Dict[str, List[Main.Memory.ConceptNode]]: 
 
   """
   Given the current individual and focal points (focal points are events or 
@@ -181,8 +181,9 @@ def new_retrieve(person, focal_points, n_count=30) -> Dict[str, List[ConceptNode
   if len(person.memorystream.concept_nodes) != 0:
     # <retrieved> is the main dictionary that we are returning
     #retrieved = dict() 
-    
-    for memory in person.memorystream.concept_nodes:
+    for focal_pt in focal_points: 
+      nodes = []
+      for memory in person.memorystream.concept_nodes:
         nodes.insert(0,memory)
         
     # Calculating the component dictionaries and normalizing them.
