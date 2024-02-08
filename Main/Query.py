@@ -105,9 +105,7 @@ def generate_general_description(individual: Individual, system: System) -> str:
     on present experience. They can be the pleasure from food. 
     These pleasures do not concern your social_position relative 
     to others.
-    You have a characteristic called covetousness that ranges 
-    from 1.1 to 1.6 numerically. The higher the number you have, 
-    the more covetous you are, then you are more likely to demand 
+    You have a characteristic called covetousness which determines how often you are more likely to demand 
     food and land that is beyond your own necessity. You want to 
     pursue your pleasures of the mind. Pleasure of the mind 
     consists in reflecting on your ability to secure future good. 
