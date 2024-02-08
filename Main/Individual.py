@@ -1,11 +1,14 @@
 from __future__ import annotations # Allow self-reference in type annotations
 import numpy as np  # numpy for numerical computations
-from typing import Any, List, Dict, Tuple
+from typing import Any, List, Dict, Tuple, Optional, Callable, Literal, Union
 from Main.AIAction import AIActionType, AIAction, RobAction
 import queue
 from Main.System import System
-
 from Main.Memory import MemoryStream
+from Main.SpeakingAgent import SpeakingAgent
+from Main.config import AUTOGEN_LLM_CONFIG
+from Main.Personalities import generate_personality
+
 
 
 class SeralizeQueue(queue.Queue):
@@ -52,6 +55,15 @@ class Individual:
         self.memory = ['None']*30
         self.DESIRE_FOR_GLORY=10
         self.DESIRE_FOR_PEACE=3
+        # Initialize autogen agent of the individual
+        # system message is updated by the converse() function
+        self.agent = SpeakingAgent(
+            name=self.attributes["name"],
+            system_message=self.attributes["name"],
+            llm_config=AUTOGEN_LLM_CONFIG
+        )
+
+        self.personalities = generate_personality()
 
     def get_pending_action_as_list(self):
         return list(self.pending_action.queue)
@@ -120,6 +132,17 @@ class Individual:
     def get_win_rate(self, target:Individual):
         return self.robbing_stats.win_rob_times[target]/self.robbing_stats.rob_times[target]
     
+    def get_agent(self):
+        # return the agent variable
+        return self.agent
+    
+    def update_agent_prompt(self, prompt:str):
+        # updates the agent's system message and description
+        self.agent.update_system_message(prompt)
+    
+    def update_agent_speaking_tendency(self, prompt:str):
+        self.agent.update_speaking_tendency(prompt)
+
     def __getstate__(self):
         return self.__dict__
     def __setstate__(self, state):

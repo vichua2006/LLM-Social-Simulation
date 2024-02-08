@@ -1,3 +1,5 @@
+
+from typing import Dict, List
 import Main.Memory
 import Main.ChatGpt
 
@@ -79,6 +81,7 @@ def extract_relevance(nodes, focal_pt):
     relevance_out: A dictionary whose keys are the node.node_id and whose values
                  are the float that represents the relevance score. 
   """
+
   focal_embedding = Main.ChatGpt.get_embedding(focal_pt)
 
   relevance_out = dict()
@@ -112,8 +115,8 @@ def normalize_dict_floats(d, target_min, target_max):
     target_min = -5
     target_max = 5
   """
-  min_val = min(val for val in d.values())
-  max_val = max(val for val in d.values())
+  min_val = min(list(d.values()))
+  max_val = max(list(d.values()))
   range_val = max_val - min_val
 
   if range_val == 0: 
@@ -153,7 +156,9 @@ def new_retrieve_active(person, n_count = 30):
   retrieved = person.memorystream.concept_nodes[-n_count:]
   return retrieved
 
-def new_retrieve(person, focal_points, n_count=20): 
+
+def new_retrieve(person, focal_points, n_count=30) -> Dict[str, List[ConceptNode]]: 
+
   """
   Given the current individual and focal points (focal points are events or 
   thoughts for which we are retrieving), we retrieve a set of nodes for each
@@ -177,12 +182,8 @@ def new_retrieve(person, focal_points, n_count=20):
     # <retrieved> is the main dictionary that we are returning
     #retrieved = dict() 
     
-    for focal_pt in focal_points: 
-      # Getting all nodes from the agent's memory 
-      nodes = []
-    
-      for memory in person.memorystream.concept_nodes:
-          nodes.insert(0,memory)
+    for memory in person.memorystream.concept_nodes:
+        nodes.insert(0,memory)
         
       # Calculating the component dictionaries and normalizing them.
       recency_out = extract_recency(nodes)
