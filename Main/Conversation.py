@@ -42,7 +42,7 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, per
         # retrieves relevant memories 
         retrieved_memories = new_retrieve(person, [chat_topic], 1)
         # iterate through all relavant memories and concatenate as one string
-        relevant_memory_descriptions = "Here are some relevant memories that you have:\n" + "\n".join([node.description for node in retrieved_memories[chat_topic]])
+        relevant_memory_descriptions = "Here are some relevant memories that you have:\n" + "\n".join([node.description for node in retrieved_memories])
 
         personality_description = f'''
         Here are some descriptions about your personality. You must talk and behave according to these descriptions.

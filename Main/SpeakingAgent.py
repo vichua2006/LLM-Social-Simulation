@@ -16,7 +16,7 @@ class SpeakingAgent(ConversableAgent):
         code_execution_config: Optional[Union[Dict, Literal[False]]] = None,
         llm_config: Optional[Union[Dict, Literal[False]]] = None,
         default_auto_reply: Optional[Union[str, Dict, None]] = "",
-        #description: Optional[str] = None,
+        description: Optional[str] = None,
     ):
         '''redefining constructor to add speaking_tendency variable'''
         super().__init__(
@@ -29,7 +29,7 @@ class SpeakingAgent(ConversableAgent):
             code_execution_config=code_execution_config,
             llm_config=llm_config,
             default_auto_reply=default_auto_reply,
-            #description=description,
+            description=description,
         )
 
         self.speaking_tendency = ""

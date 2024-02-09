@@ -161,17 +161,14 @@ def new_retrieve(person, focal_points, n_count=30) -> Dict[str, List[Main.Memory
 
   """
   Given the current individual and focal points (focal points are events or 
-  thoughts for which we are retrieving), we retrieve a set of nodes for each
-  of the focal points and return a dictionary. 
+  thoughts for which we are retrieving), we retrieve a set of nodes and return a list 
 
   INPUT: 
     persona: The current individual object whose memory we are retrieving. 
     focal_points: A list of focal points (string description of the events or
                   thoughts that is the focus of current retrieval).
   OUTPUT: 
-    retrieved: A dictionary whose keys are a string focal point, and whose 
-               values are a list of Node object in the agent's associative 
-               memory.
+    retrieved: a list of Node object in the agent's associative memory.
 
   Example input:
     individual = <individual> object 
@@ -179,12 +176,11 @@ def new_retrieve(person, focal_points, n_count=30) -> Dict[str, List[Main.Memory
   """
   retrieved = []
   if len(person.memorystream.concept_nodes) != 0:
-    # <retrieved> is the main dictionary that we are returning
-    #retrieved = dict() 
+
     for focal_pt in focal_points: 
       nodes = []
       for memory in person.memorystream.concept_nodes:
-        nodes.insert(0,memory)
+        nodes.append(memory)
         
       # Calculating the component dictionaries and normalizing them.
       recency_out = extract_recency(nodes)
@@ -218,7 +214,7 @@ def new_retrieve(person, focal_points, n_count=30) -> Dict[str, List[Main.Memory
     #Add the part to change the last access time to current time
       
     #retrieved[focal_pt] = master_nodes
-      retrieved = retrieved + master_nodes
+      retrieved.extend(master_nodes)
 
   return retrieved
 

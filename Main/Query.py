@@ -4,7 +4,6 @@ import json
 from Main.AIAction import AIActionType
 from Main.ChatGpt import chat
 from Main.Individual import Individual, System
-from Main.Retrieve import new_retrieve_active, new_retrieve, node_to_string
 
 def generate_environment_description() -> str:
     # This function returns the description of the simulation environment as a string
@@ -95,7 +94,7 @@ def generate_general_description(individual: Individual, system: System) -> str:
     general_description=f'''
     You are {individual.attributes["name"]}
     You have those attributes {individual.attributes}.
-    You possess these peronal qualities {individual.personalities}, please consider them as you are making decisions.
+    You have memory:{individual.memory}
     Environment: You live in a world with other individuals. Humans in this world include {', '.join([individual.attributes["name"] for individual in
     system.individuals])}. You are one of them.
     Currently, the amount of food each person has is: {[{i.attributes['name']:i.attributes['food'] for i in system.individuals}]}
@@ -132,7 +131,6 @@ def generate_general_description(individual: Individual, system: System) -> str:
     
     {obedience if is_subject else ''}
     {master if is_master else ''}
-    
     '''
 
     return general_description
@@ -148,19 +146,16 @@ def query_individual(individual:Individual,system:System,response_action):
     if individual.obey_stats.obey_personId in targetsid:
       targetsid.remove(individual.obey_stats.obey_personId)
     print(f'available targets:{targetsid}')
-
+    
     general_description = generate_general_description(individual, system)
     separated_description = generate_environment_description()
     
     passive_trade=f'''
     Today, you noticed that {response_action}.
-    You can accept the trade or reject it. You decision is only a result of your psychological axioms. '''
+    You can accept the trade or reject it. You decision is only a result of your psychological axioms.
+    Reply with either ACCEPT or REJECT
     
-    if response_action != None:
-      passive_trade = passive_trade + f"""You have memory: {node_to_string(new_retrieve(individual, ["trade","Person "+str(response_action.ownerid)]))}
-      Reply with either ACCEPT or REJECT
-      """
-      
+    '''
     passive_rob=f'''
     Today, you noticed that {response_action}. You can only either 
     obey them or physically rebel against them by fighting back.
@@ -170,12 +165,10 @@ def query_individual(individual:Individual,system:System,response_action):
     {individual.DESIRE_FOR_PEACE}. So only when you've lost many times to this person by rebelling would the utility of rebel be low enough so that it's no longer the correct option. You will pick the action with 
     the most utility. If you obey the one robbing you now, the 
     one robbing you now becomes your master, and you become their 
-    subjects.'''
+    subjects.
     
-    if response_action != None:
-      passive_rob = passive_rob + f'''You have memory: {node_to_string(new_retrieve(individual, ["rob","Person "+str(response_action.ownerid)]))}
-      Reply exactly with either OBEY or REBEL
-      '''
+    Reply exactly with either OBEY or REBEL
+    '''
     passive_rob_fromMaster = f'''
     Today, you noticed that {response_action}. You can only 
     obey them because there are your master.
@@ -527,16 +520,12 @@ def query_individual(individual:Individual,system:System,response_action):
       print('PASSIVE STATE')
           
     else: 
-          
-      active_memory = f'''
-      You have memory:{node_to_string(new_retrieve_active(individual))}
-      '''
-      ask_for_response=active_memory + active
+      ask_for_response=active
       if individual.obey_stats.obey_personId != -1:
-        ask_for_response = active_memory+ active_for_subject
+        ask_for_response = active_for_subject
         ask_for_response = ask_for_response + additional_active_to_master
       if len(individual.obey_stats.subjectid) != 0:
-        ask_for_response  = active_memory+ ask_for_response + additional_active_to_subject
+        ask_for_response  = ask_for_response + additional_active_to_subject
 
 
     
