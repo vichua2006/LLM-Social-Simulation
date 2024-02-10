@@ -12,14 +12,13 @@ from Main.Retrieve import new_retrieve
 from Main.config import AUTOGEN_LLM_CONFIG 
 client = OpenAI(api_key=AUTOGEN_LLM_CONFIG["config_list"][0]["api_key"])
 
-def converse(individuals: List[Individual], system: System, chat_topic: str, personalities: List[str], pleasure_system_input: str = None) -> List[Dict[str, str]]:
+def converse(individuals: List[Individual], system: System, chat_topic: str, pleasure_system_input: str = None) -> List[Dict[str, str]]:
     '''
     initiate a conversation between individuals with AutoGen GroupChat
     returns the conversation content as a json object
 
     chat_topic: a string describing the topic of discussion for this groupchat. It will be used to retrieve relevant memories
 
-    personalities is a temporary variable to pass in the personality descriptions (big 5) of each individual; not sure how it should be done
     '''
 
     speak_for_yourself_msg = """DO NOT GENERATE RESPONSES FOR OTHER AGENTS, ONLY SPEAK FOR YOURSELF."""
@@ -44,22 +43,25 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, per
         # iterate through all relavant memories and concatenate as one string
         relevant_memory_descriptions = "Here are some relevant memories that you have:\n" + "\n".join([node.description for node in retrieved_memories])
 
+        personality_string = "\n".join(person.get_personality())
+
         personality_description = f'''
         Here are some descriptions about your personality. You must talk and behave according to these descriptions.
-        {personalities[i]}
+        {personality_string}
         '''
 
         # update the agent with the new system prompt
         new_msg = "\n".join([environment_description, general_description, personality_description, relevant_memory_descriptions, system_msg])
         person.update_agent_prompt(new_msg)
         # update its speaking tendency
-        tendency = evaluate_speaking_tendencies(personalities[i])
+        tendency = evaluate_speaking_tendencies(personality_string)
         person.update_agent_speaking_tendency(tendency)
 
         # testing
-        print(tendency)
+        print(personality_string)
     
 
+    return
 
     # create a groupchat
     agents = [person.get_agent() for person in individuals]
@@ -82,9 +84,6 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, per
 
     # returns the messages as a json object
     messages = groupchat.messages
-
-    # debugging
-    print(json.dumps(messages, indent=4))
 
     return messages
 

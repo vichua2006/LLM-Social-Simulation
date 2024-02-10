@@ -1,4 +1,6 @@
-l = [1,2,3,4,5,6,6]
+from Main.Personalities import generate_personality
+from Main.Conversation import evaluate_speaking_tendencies
 
 
-print(l[1:-1])
+for i in range(10):
+    print(generate_personality())

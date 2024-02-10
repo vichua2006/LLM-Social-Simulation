@@ -57,6 +57,7 @@ class Individual:
             llm_config=AUTOGEN_LLM_CONFIG
         )
 
+        # a list of 5 strings, denoting the person's openness, conscientiousness, agreeableness, neuroticism respectively
         self.personalities = generate_personality()
 
     def get_pending_action_as_list(self):
@@ -129,6 +130,9 @@ class Individual:
     def get_agent(self):
         # return the agent variable
         return self.agent
+    
+    def get_personality(self) -> List[str]:
+        return self.personalities
     
     def update_agent_prompt(self, prompt:str):
         # updates the agent's system message and description
