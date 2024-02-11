@@ -187,7 +187,7 @@ def main():
 
         # Check for timeout
         if isappStarted and datetime.now() - last_log_update > timeout_duration:
-            print("Log hasn't been updated for 1 minutes. Restarting simulation.")
+            print(f"Log hasn't been updated for {timeout_duration} minutes. Restarting simulation.")
             # Programmatically press "Stop" twice
             window.write_event_value('-STOP-', '')
             window.write_event_value('-STOP-', '')
