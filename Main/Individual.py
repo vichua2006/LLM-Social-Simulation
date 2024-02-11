@@ -36,7 +36,7 @@ class Individual:
             "luxury_goods": 0, # Initial luxury goods is 0
             "action": 1,  # Initial action point is 1
             "trust_of_others":0,
-            "starved":0
+            "starved":0,
             "land": land,  # Land owned by the individual
             "food": food,  # Initial food as long tail distribution
             "action": 1  # Initial action point is 1
