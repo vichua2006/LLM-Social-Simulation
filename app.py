@@ -45,6 +45,7 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
                    [sg.Text('CurrentActionType:'), sg.Input(person.current_action_type, size = (10, None), key=f'-CURRENTACTIONTYPE{i}-')],
                    [sg.Text('ObeyTo:'), sg.Input(person.obey_stats.obey_personId, size = (10, None), key=f'-OBEYPERSONID{i}-')],
                    [sg.Text('TotalRobTimes:'), sg.Input(person.robbing_stats.total_rob_times, size = (10, None), key=f'-TOTALROBTIMES{i}-')],
+                   [sg.Text('Personality:'), sg.Multiline(person.personalities, size = (20, 20), key=f'-PERSONALITY{i}-')]
                    ]
         right_section = [[sg.T(SYMBOL_DOWN, enable_events=True, k='-OPEN PENDINGACTION-', text_color='white'), sg.T('Pending Action', enable_events=True, text_color='white', k='-OPEN PENDINGACTION-TEXT')],
                          [collapse(pending_action_layout, '-PENDINGACTION-')],
@@ -52,15 +53,12 @@ def create_individual_layout(individual: List[Individual]) -> sg.TabGroup:
                          [collapse(obey_subject_layout, '-OBEYSUBJECT-')],
                          [sg.T(SYMBOL_DOWN, enable_events=True, k='-OPEN MEMORY-', text_color='white'), sg.T('Memory', enable_events=True, text_color='white', k='-OPEN MEMORY-TEXT')],
                          [collapse(memory_layout, '-MEMORY-')],
+                         [sg.T(SYMBOL_DOWN, enable_events=True, k='-OPEN ROBTXT-', text_color='white'), sg.T('RobTimes', enable_events=True, text_color='white', k='-OPEN ROBTXT-TEXT')],
+                         [collapse(rob_stat_layout, '-ROBTXT-')]
                          ]
-        new_left_section = [[sg.T(SYMBOL_DOWN, enable_events=True, k='-OPEN LEFTSEC-', text_color='white'), sg.T('Attibute', enable_events=True, text_color='white', k='-OPEN LEFTSEC-TEXT')],
-                            [collapse(left_section, '-LEFTSEC-')],
-                            [sg.T(SYMBOL_DOWN, enable_events=True, k='-OPEN ROBTXT-', text_color='white'), sg.T('RobTimes', enable_events=True, text_color='white', k='-OPEN ROBTXT-TEXT')],
-                            [collapse(rob_stat_layout, '-ROBTXT-')]
-                            ]
 
-        left = sg.Column(new_left_section, size=(None, None))
-        section = [[left, sg.Column(right_section)]]
+
+        section = [[sg.Column(left_section), sg.Column(right_section)]]
         person_layout.append(sg.Tab(f'{id}', section, key=section_key, ))
     return sg.TabGroup([person_layout])
 
@@ -74,13 +72,14 @@ def main():
     individuals = system.individuals
     
     person_layout = [[create_individual_layout(individuals), ]]
-    special_log_layout = [[sg.Multiline(size=(80,10), key='-SPECIAL OUTPUT-', autoscroll=False)]]
-    layout_left = person_layout + special_log_layout
-    console_log_layout = [[sg.Multiline(size=(80,30), key='-OUTPUT-', autoscroll=False)]]
+    special_log_layout = [[sg.Multiline(size=(5,35), key='-SPECIAL OUTPUT-', autoscroll=False)]]
+    layout_left = person_layout
+    console_log_layout = [[sg.Multiline(size=(80,34), key='-OUTPUT-', autoscroll=False)]]
     button_layout = [[sg.Button('Start', key= '-START-'), sg.Button('Stop', key= '-STOP-'), sg.Button('Clear', key= '-Clear-'), sg.Button('Exit', key= '-Exit-') ,sg.Button('Export', key= '-Export-'), sg.Button('Save', key= '-Save-') ,sg.Button('Load', key= '-Load-'), sg.Button('DEBUG', key= '-DEBUG-')]]
-    layout_right = console_log_layout+ button_layout
+    layout_middle = console_log_layout+ button_layout
+
     #column layout of person_layout and console_log_layout
-    layout = [[sg.Column(layout_left), sg.Column(layout_right)]]
+    layout = [[sg.Column(layout_left), sg.Column(layout_middle), sg.Column(special_log_layout)]]
     window = sg.Window('LLM Social Simulation', layout)
     #redirect stdout to the sg.Output element
     sys.stdout = ConsoleLog(window, '-OUTPUT-', '-OUTPUT THREAD-')
@@ -223,7 +222,8 @@ def main():
             window[f'-Action{i}-'].update(person.attributes['action'])
             window[f'-CURRENTACTIONTYPE{i}-'].update(person.current_action_type)
             window[f'-OBEYPERSONID{i}-'].update(person.obey_stats.obey_personId)
-
+            window[f'-TOTALROBTIMES{i}-'].update(person.robbing_stats.total_rob_times) 
+            window[f'-PERSONALITY{i}-'].update(person.personalities)
             # Update Listbox, Remain the listbox scroll position
             for key in [f'-PENDINGACTION{i}-', f'-OBEYSUBJECT{i}-', f'-MEMORY{i}-', f'-ROBTIMESLIST{i}-']:
                 # Access the tkinter Listbox widget
