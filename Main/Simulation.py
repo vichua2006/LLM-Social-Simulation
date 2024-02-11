@@ -23,6 +23,9 @@ if os.path.exists(csv_file_name):
 
 conversation_dir = f"conversation_and_memory_log/{datetime.datetime.now().strftime('%d, %I %M %S%p')}/"
 
+# number of days between conversations
+days_between_conversation = 1
+
 def discuss_topic(system: System, individuals: List[Individual], topic: str, day_count: int):
   '''
   Initiate a conversation between individuals on a topic for discussion. 
@@ -345,7 +348,7 @@ def simulate(individuals:List[Individual],system:System):
     day_end(system,individuals)
     system.csv_analysis.log_stat(system, csv_file_name)
 
-    if (system.time % 1 == 0):
+    if (system.time % days_between_conversation == 0):
       topic = "Is there anything you think that needs to be changed? What will make your life better?"
 
       print("Conversation starting...")
