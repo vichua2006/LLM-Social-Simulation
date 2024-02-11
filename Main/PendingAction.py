@@ -18,5 +18,5 @@ def str_to_ai_action(action:int, id:int)->AIAction:
       
 def append_to_pending_action(action:AIAction, system:System)->None:
     id:int = action.targetid
-    person:Individual = system.individuals[id]
+    person:Individual = next((person for person in system.individuals if person.attributes["id"] == id), None)
     person.pending_action.put(action)

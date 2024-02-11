@@ -2,7 +2,7 @@ import os
 import jsonpickle
 import threading
 from typing import List
-from Main.Calculation import donate, increase_food, punishment, rob, winner_loser
+from Main.Calculation import donate, increase_food, increase_luxury, punishment, rob_rebelled, winner_loser
 from Main.CsvAnalysis import CsvAnalysis
 from Main.Individual import Individual
 from Main.System import System
@@ -38,7 +38,7 @@ def day_end(system,individuals:List[Individual]):
       individual.attributes["starved"] = 0
     else:
       individual.attributes['starved'] += 1
-      if individual.attributes['starved'] >= 3:
+      if individual.attributes['starved'] > 3:
         indivisual_death(system, individuals, count)
     if individual.attributes["luxury_goods"] >= 1:
       result: str = query_individual(individual, system, AIAction(AIActionType.ConsumeLuxury, id, None))
@@ -70,7 +70,9 @@ def day_end(system,individuals:List[Individual]):
 def indivisual_death(system, individuals:List[Individual], index):
   print("Dead" + str(index))
   system.deaths += 1
-  individuals[index].__init__(index, f'person {index}')
+  individuals[index].death = True
+  individuals[index].__init__(system.max_indivisual_index, f'person {system.max_indivisual_index}')
+  system.max_indivisual_index += 1
   
 file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
 #if file name alread exist, datetime will be as detail as second
@@ -95,8 +97,8 @@ def initialize():
       individual = Individual(i,f'person {i}')
       
       # Generate food/luxury production numbers for specific individuals based general distribution
-      individual.food_production = round(np.random.normal(food_production, 1))
-      individual.luxury_production = round(np.random.normal(luxury_production, 1))
+      individual.food_production = round(np.random.normal(food_production, 0.5))
+      individual.luxury_production = round(np.random.normal(luxury_production, 0.5))
 
       individuals.append(individual)
       lands.append(f'land {i}')
@@ -135,7 +137,7 @@ def simulate(individuals:List[Individual],system:System):
                       
                       elif R:
                         rob_rebelled(individual, owner, system, response_action.robType)
-                        system.csv_analysis.rob_rebelled(owner.attributes["id"])
+                        system.csv_analysis.rob_rebelled(individuals.index(owner))
                       elif not R:
                             #if master rob subject, subject will accept instead of obey, where obey only refer to the first obey that happen between two individuals without subject-master relationship
                             if owner.attributes["id"] !=  individual.obey_stats.obey_personId:
@@ -183,7 +185,7 @@ def simulate(individuals:List[Individual],system:System):
                                 yes_trade_node_ = ConceptNode(len(individual.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, "He accepted the trade and the trade has been executed.", 1)
                                 owner.memorystream.add_concept_node(yes_trade_node_)
                                 owner.memory.append("He accepted the trade and the trade has been executed.")
-                                system.csv_analysis.trade_accepted(owner.attributes["id"])
+                                system.csv_analysis.trade_accepted(individuals.index(owner))
                                 individual.attributes[gainT]-=gainA
                                 individual.attributes[payT]+=payA
                                 owner.attributes[gainT]+=gainA
@@ -192,11 +194,11 @@ def simulate(individuals:List[Individual],system:System):
                                 if not validO:
                                       owner.memory.append("He accepted the trade but it couldn't go through since I don't have enough resource for it, and I got nothing out of this trade while I lost my action opportunity of today.")
                                       individual.memory.append("I accepted the trade but it couldn't go through because he doesn't have enough resources to pay me accordingly.")
-                                      system.csv_analysis.trade_accepted(owner.attributes["id"])
+                                      system.csv_analysis.trade_accepted(individuals.index(owner))
                                 if not validI:
                                       owner.memory.append("He accepted the trade but it could't go through because he didn't have enough resources to pay me accordingly. I lost my action opportunity of today.")
                                       individual.memory.append("I accepted the trade but I don't have enough resources to pay him accordingly so it failed to execute.")
-                                      system.csv_analysis.trade_accepted(owner.attributes["id"])
+                                      system.csv_analysis.trade_accepted(individuals.index(owner))
                                   
                   #query_judge(f'In response to Person {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}. {add_context}',response_action,individual,system)
             elif not passive:
@@ -288,7 +290,7 @@ def simulate(individuals:List[Individual],system:System):
                   print("Producing luxury goods is successful")
               elif ai_action.type==AIActionType.Rob:
                     
-                    target=system.individuals[ai_action.targetid]
+                    target = next((person for person in system.individuals if person.attributes["id"] == ai_action.targetid), None)
                     target_master=target.obey_stats.obey_personId
                     if target_master==individual.attributes['id']:
                           pass
@@ -322,9 +324,6 @@ def simulate(individuals:List[Individual],system:System):
                 case AIActionType.ProduceLuxury:
                   system.console_log.append(f"{index}:💎")
                   system.csv_analysis.produce_luxury(index)
-                case AIActionType.ConsumeLuxury:
-                    system.console_log.append(f"{index}:👄")
-                    system.csv_analysis.consume_luxury(index)
                 case AIActionType.Trade:
                   system.csv_analysis.trade(index)
                   system.console_log.append(f"{index}:🤝")
