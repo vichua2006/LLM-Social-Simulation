@@ -2,7 +2,7 @@ import os
 import jsonpickle
 import threading
 from typing import List
-from Main.Calculation import donate, increase_food, punishment, rob_rebelled, winner_loser
+from Main.Calculation import donate, increase_food, increase_luxury, punishment, rob_rebelled, winner_loser
 from Main.CsvAnalysis import CsvAnalysis
 from Main.Individual import Individual
 from Main.System import System
@@ -11,6 +11,7 @@ from Main.StringUtils import deserialize_first_json_object
 from Main.AIAction import AIAction, AIActionType
 from Main.PendingAction import append_to_pending_action, str_to_ai_action
 from Main.SaveLoad import init_save, save_logframes
+import numpy as np
 import random
 import datetime
 
@@ -22,28 +23,62 @@ def change_affected_people(affected_people, system:System):
       affected_person_index = int(affected_person.replace("person", "").replace(" ", ""))
       for attribute in affected_people[affected_person]:
         system.individuals[affected_person_index].attributes[attribute]=affected_people[affected_person][attribute]
-      
+
+# General food/luxury production numbers
+food_production = np.random.normal(4, 0.5)
+luxury_production = np.random.normal(2, 0.5)
+
 # %%
 # Function to update the state of each individual at the end of the day
 def day_end(system,individuals:List[Individual]):
-    for individual in individuals:
-        if individual.attributes['food'] >= 1:
-            individual.attributes['food'] -= 1  # Decrease the food by 1
-        individual.attributes['action'] += 1  # Increase the action points by 1
-        # Limit the memory to the last 60 events
-        forget = len(individual.memory) - 60
-        individual.memory = individual.memory[forget:]
+  count = 0
+  for individual in individuals:
+    if individual.attributes['food'] >= 3:
+      individual.attributes['food'] -= 3 # Decrease the food by 3
+      individual.attributes["starved"] = 0
+    else:
+      individual.attributes['starved'] += 1
+      if individual.attributes['starved'] > 3:
+        indivisual_death(system, individuals, count)
+    if individual.attributes["luxury_goods"] >= 1:
+      result: str = query_individual(individual, system, AIAction(AIActionType.ConsumeLuxury, id, None))
+      if result.lower() == "yes":
+        individual.attributes["luxury_goods"] -= 1
+        consume_node = ConceptNode(len(individual.memorystream.concept_nodes), "consume_luxury", system.time, individual.attributes["id"], "consume_luxury", [], 0, f'On day {system.time}. I consumed 1 luxury good and gained sensual pleasure', 1)
+        individual.memorystream.add_concept_node(consume_node)
+        individual.memory.append(f'On day {system.time}. I consumed 1 luxury good and gained sensual pleasure')
+        print("Consuming luxury goods is successful")
+          
+    individual.attributes['action'] += 1  # Increase the action points by 1
+    # Limit the memory to the last 60 events
+    forget = len(individual.memory) - 60
+    individual.memory = individual.memory[forget:]
+    
+    # Generate food/luxury production numbers for specific individuals based general distribution
+    individual.food_production = round(np.random.normal(food_production, 0.5))
+    individual.luxury_production = round(np.random.normal(luxury_production, 0.5))
 
-    system.time+=1
-    if system.day_end_counter > 0:
-        system.day_end_counter += 1
-    if system.day_end_counter > 10:
-        system.should_exit = True
+    count += 1
 
+  system.time+=1
+  if system.day_end_counter > 0:
+      system.day_end_counter += 1
+  if system.day_end_counter > 10:
+      system.should_exit = True
+  print("TOTAL DEATHS: ", system.deaths)
+
+def indivisual_death(system, individuals:List[Individual], index):
+  print("Dead" + str(index))
+  system.deaths += 1
+  individuals[index].death = True
+  individuals[index].__init__(system.max_indivisual_index, f'person {system.max_indivisual_index}')
+  system.max_indivisual_index += 1
+  
 file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
 #if file name alread exist, datetime will be as detail as second
 if os.path.exists(file_name):
   file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M %S%p")+'.csv'
+
 def initialize():
     # Initialize individuals and environment
     individuals=[]
@@ -57,10 +92,17 @@ def initialize():
       #lands.append(f'land {i}')
     #individuals.sort(key=lambda x: x.attributes['id'])
     #default
+
     for i in range(POPULATION):
       individual = Individual(i,f'person {i}')
+      
+      # Generate food/luxury production numbers for specific individuals based general distribution
+      individual.food_production = round(np.random.normal(food_production, 0.5))
+      individual.luxury_production = round(np.random.normal(luxury_production, 0.5))
+
       individuals.append(individual)
       lands.append(f'land {i}')
+
     system=System(individuals,lands)
     # init_save(system)
     system.set_csv_analysis(CsvAnalysis(POPULATION, file_name))
@@ -79,9 +121,7 @@ def simulate(individuals:List[Individual],system:System):
             passive=not individual.pending_action.empty()
             print(f"Person {index} is responding...\n")
             response_action: AIAction = individual.pending_action.get() if passive else None
-            print(response_action)
-            action:str=query_individual(individual,system,response_action)
-            
+            action:int=query_individual(individual,system,response_action)
             if passive and response_action is not None:
                   print(f'{individual.attributes["name"]} chooses to {action}')
                   individual.check_is_responser(response_action)
@@ -97,7 +137,7 @@ def simulate(individuals:List[Individual],system:System):
                       
                       elif R:
                         rob_rebelled(individual, owner, system, response_action.robType)
-                        system.csv_analysis.rob_rebelled(owner.attributes["id"])
+                        system.csv_analysis.rob_rebelled(individuals.index(owner))
                       elif not R:
                             #if master rob subject, subject will accept instead of obey, where obey only refer to the first obey that happen between two individuals without subject-master relationship
                             if owner.attributes["id"] !=  individual.obey_stats.obey_personId:
@@ -145,7 +185,7 @@ def simulate(individuals:List[Individual],system:System):
                                 yes_trade_node_ = ConceptNode(len(individual.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, "He accepted the trade and the trade has been executed.", 1)
                                 owner.memorystream.add_concept_node(yes_trade_node_)
                                 owner.memory.append("He accepted the trade and the trade has been executed.")
-                                system.csv_analysis.trade_accepted(owner.attributes["id"])
+                                system.csv_analysis.trade_accepted(individuals.index(owner))
                                 individual.attributes[gainT]-=gainA
                                 individual.attributes[payT]+=payA
                                 owner.attributes[gainT]+=gainA
@@ -154,11 +194,11 @@ def simulate(individuals:List[Individual],system:System):
                                 if not validO:
                                       owner.memory.append("He accepted the trade but it couldn't go through since I don't have enough resource for it, and I got nothing out of this trade while I lost my action opportunity of today.")
                                       individual.memory.append("I accepted the trade but it couldn't go through because he doesn't have enough resources to pay me accordingly.")
-                                      system.csv_analysis.trade_accepted(owner.attributes["id"])
+                                      system.csv_analysis.trade_accepted(individuals.index(owner))
                                 if not validI:
                                       owner.memory.append("He accepted the trade but it could't go through because he didn't have enough resources to pay me accordingly. I lost my action opportunity of today.")
                                       individual.memory.append("I accepted the trade but I don't have enough resources to pay him accordingly so it failed to execute.")
-                                      system.csv_analysis.trade_accepted(owner.attributes["id"])
+                                      system.csv_analysis.trade_accepted(individuals.index(owner))
                                   
                   #query_judge(f'In response to Person {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}. {add_context}',response_action,individual,system)
             elif not passive:
@@ -180,12 +220,11 @@ def simulate(individuals:List[Individual],system:System):
                     break
                   except Exception as e2:
                     print(f"First Exception:{e}, second exception:{e2}")
-                    action:str=query_individual(individual,system,response_action)
+                    action:int=query_individual(individual,system,response_action)
                     continue
-                
               #Prevent subject to trade with master
               while ai_action.type == AIActionType.Trade and individual.obey_stats.obey_personId == ai_action.targetid:
-                action:str=query_individual(individual,system,response_action)
+                action:int=query_individual(individual,system,response_action)
                 try:
                   action = deserialize_first_json_object(action.lower())
                   ai_action:AIAction = str_to_ai_action(action, index)
@@ -197,12 +236,12 @@ def simulate(individuals:List[Individual],system:System):
                     break
                   except Exception as e2:
                     print(f"First Exception:{e}, second exception:{e2}")
-                    action:str=query_individual(individual,system,response_action)
+                    action:int=query_individual(individual,system,response_action)
                     continue
               
               #Prevent subject to rob master
               while ai_action.type == AIActionType.Rob and individual.obey_stats.obey_personId == ai_action.targetid:
-                action:str=query_individual(individual,system,response_action)
+                action:int=query_individual(individual,system,response_action)
                 try:
                   action = deserialize_first_json_object(action.lower())
                   ai_action:AIAction = str_to_ai_action(action, index)
@@ -214,12 +253,12 @@ def simulate(individuals:List[Individual],system:System):
                     break
                   except Exception as e2:
                     print(f"First Exception:{e}, second exception:{e2}")
-                    action:str=query_individual(individual,system,response_action)
+                    action:int=query_individual(individual,system,response_action)
                     continue
               
               #Prevent master to trade with subjects
               while ai_action.type == AIActionType.Trade and ai_action.targetid in individual.obey_stats.subjectid:
-                action:str=query_individual(individual,system,response_action)
+                action:int=query_individual(individual,system,response_action)
                 try:
                   action = deserialize_first_json_object(action.lower())
                   ai_action:AIAction = str_to_ai_action(action, index)
@@ -231,23 +270,27 @@ def simulate(individuals:List[Individual],system:System):
                     break
                   except Exception as e2:
                     print(f"First Exception:{e}, second exception:{e2}")
-                    action:str=query_individual(individual,system,response_action)
+                    action:int=query_individual(individual,system,response_action)
                     continue
               
                   
               
               individual.current_action_type = ai_action.type
               if ai_action.type==AIActionType.Farm:
-                    land=individual.attributes['land']
-                    gain=land*random.random()*0.3 if land>1 else 1
-                    individual.attributes['food']+=gain
-                    farm_node = ConceptNode(len(individual.memorystream.concept_nodes), "farm", system.time, individual.attributes["id"], "farm", [], 0,f'On day {system.time}. I farmed and gained {gain} units of food.', 1)
-                    individual.memorystream.add_concept_node(farm_node)
-                    individual.memory.append(f'On day {system.time}. I farmed and gained {gain} units of food.')
-                    print("Farm is successful.")
+                  gain = increase_food(individual)
+                  farm_node = ConceptNode(len(individual.memorystream.concept_nodes), "farm", system.time, individual.attributes["id"], "farm", [], 0,f'On day {system.time}. I farmed and gained {gain} units of food.', 1)
+                  individual.memorystream.add_concept_node(farm_node)
+                  individual.memory.append(f'On day {system.time}. I farmed and gained {gain} units of food.')
+                  print("Farm is successful.")
+              elif ai_action.type == AIActionType.ProduceLuxury:
+                  gain = increase_luxury(individual)
+                  luxury_node = ConceptNode(len(individual.memorystream.concept_nodes), "produce_luxury", system.time, individual.attributes["id"], "produce_luxury", [], 0, f'On day {system.time}. I produced luxury goods and gained {gain} units of luxury goods', 1)
+                  individual.memorystream.add_concept_node(luxury_node)
+                  individual.memory.append(f'On day {system.time}. I produced luxury goods and gained {gain} units of luxury goods')
+                  print("Producing luxury goods is successful")
               elif ai_action.type==AIActionType.Rob:
                     
-                    target=system.individuals[ai_action.targetid]
+                    target = next((person for person in system.individuals if person.attributes["id"] == ai_action.targetid), None)
                     target_master=target.obey_stats.obey_personId
                     if target_master==individual.attributes['id']:
                           pass
@@ -278,7 +321,9 @@ def simulate(individuals:List[Individual],system:System):
                 case AIActionType.Farm:
                   system.console_log.append(f"{index}:🌾")
                   system.csv_analysis.farm(index)
-                  increase_food(individual)
+                case AIActionType.ProduceLuxury:
+                  system.console_log.append(f"{index}:💎")
+                  system.csv_analysis.produce_luxury(index)
                 case AIActionType.Trade:
                   system.csv_analysis.trade(index)
                   system.console_log.append(f"{index}:🤝")

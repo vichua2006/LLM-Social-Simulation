@@ -8,6 +8,8 @@ class CsvAnalysis:
     self.rob_=[0] * population
     self.rob_rebel=[0]*population
     self.farm_=[0] * population
+    self.produce_luxury_ = [0] * population
+    self.consume_luxury_ = [0] * population
     self.trade_=[0] * population
     self.trade_accept=[0]*population
     self.donate_ = [0] * population
@@ -17,7 +19,7 @@ class CsvAnalysis:
     head = [f"day"]
     for i in range(population):
       head = head + [f"rob_count_{i}", f"rob_rebelled_{i}", f"trade_count_{i}",
-                    f"trade_accepted_{i}", f"{i}_obey_to", f"farm_count_{i}"]
+                    f"trade_accepted_{i}", f"{i}_obey_to", f"farm_count_{i}", f"produce_luxury_count_{i}", f"consume_luxury_count_{i}"]
     with open(file_name, 'a', newline='') as f:
       csv_writer = csv.writer(f)
       csv_writer.writerow(head)
@@ -27,6 +29,12 @@ class CsvAnalysis:
   
   def farm(self, index):
     self.farm_[index]+=1
+  
+  def produce_luxury(self, index):
+    self.produce_luxury_[index] += 1
+
+  def consume_luxury(self, index):
+    self.consume_luxury_[index] += 1
     
   def rob(self, index):
     self.rob_[index]+=1
@@ -61,7 +69,7 @@ class CsvAnalysis:
     log = [self.day_]
     for i in range(self.population):
       log =  log + [self.rob_[i], self.rob_rebel[i], self.trade_[i], self.trade_accept[i],
-            self.obey_[i], self.farm_[i]]
+            self.obey_[i], self.farm_[i], self.produce_luxury_[i], self.consume_luxury_[i]]
     with open(filename, 'a', newline='') as f:
       csv_writer = csv.writer(f)
       csv_writer.writerow(log)
