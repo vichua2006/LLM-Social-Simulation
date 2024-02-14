@@ -10,6 +10,6 @@ AUTOGEN_LLM_CONFIG = {
             "api_key": victor_opeai_key,
         },  
     ], 
-    "temperature": 0.0, 
-    "top_p": 1,
+    "temperature": 0.0, # has been set to 0 from the very start of implementing conversation
+    "top_p": 1, # 1 by default
 }
