@@ -4,8 +4,9 @@ from Main.System import System
 from Main.Conversation import converse, add_memory_after_conversation, evaluate_speaking_tendencies
 from Main.Memory import ConceptNode
 from Main.Retrieve import new_retrieve
+from Main.Query import generate_general_description
 
-POPULATION = 3
+POPULATION = 5
 
 # similar initialization as simulation
 individuals = [Individual(i, f"person_{i + 1}") for i in range(POPULATION)]
@@ -19,12 +20,16 @@ for i, person in enumerate(individuals):
 
 individuals[2].memorystream.add_concept_node(ConceptNode(2,"rob",1,0,"rob",[1],10, "You REALLY want to produce luxury goods.", 6))
 
+individuals[0].attributes["food"] = 25
+individuals[2].attributes["land"] = 15
 
-# topic = "people who want to produce luxury goods."
-topic = "a policy that provides a 20 percent subsidy for people who create luxury goods"
 
+topic = "talk about how much resources you have, and whether or not the distribution is fair."
+# topic = "Is there anything you think that needs to be changed? What will make your life better?"
+# topic = "a policy that provides a 20 percent subsidy for people who create luxury goods"
 
 conversation = converse(individuals, system, topic)
+
 
 # add_memory_after_conversation(individuals, conversation)
 

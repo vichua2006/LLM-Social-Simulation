@@ -85,7 +85,7 @@ def initialize():
     # Initialize individuals and environment
     individuals=[]
     lands=[]
-    POPULATION=3
+    POPULATION=9
     #POPULATIONLIST=[x for x in range(POPULATION)]
     #random id
     #random_numbers = random.sample(POPULATIONLIST, POPULATION)

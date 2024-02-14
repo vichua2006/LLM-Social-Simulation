@@ -11,4 +11,5 @@ AUTOGEN_LLM_CONFIG = {
         },  
     ], 
     "temperature": 0.0, 
+    "top_p": 1,
 }

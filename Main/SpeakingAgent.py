@@ -154,7 +154,7 @@ class SpeakingAgent(ConversableAgent):
         message: Union[Dict, str],
         recipient: Agent,
         request_reply: Optional[bool] = None,
-        silent: Optional[bool] = True,
+        silent: Optional[bool] = False,
     ):
         '''
         overrode method; silent is now true by default
@@ -199,16 +199,3 @@ class CustomGroupChat(GroupChat):
     def select_speaker_msg(self, agents: List[Agent]) -> str:
         return super().select_speaker_msg(agents)
     
-class SilentManager(GroupChatManager):
-    
-    def send(
-        self,
-        message: Union[Dict, str],
-        recipient: Agent,
-        request_reply: Optional[bool] = None,
-        silent: Optional[bool] = True,
-    ):
-        '''
-        overrode method; silent is now true by default
-        '''
-        super().send(message, recipient, request_reply, silent)

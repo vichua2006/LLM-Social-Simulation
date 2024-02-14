@@ -1,10 +1,11 @@
 import json
 from openai import OpenAI
+from autogen import GroupChatManager
 from typing import List, Dict
 from Main.Individual import Individual
 from Main.System import System
 from Main.Memory import ConceptNode
-from Main.SpeakingAgent import SpeakingAgent, CustomGroupChat, SilentManager
+from Main.SpeakingAgent import SpeakingAgent, CustomGroupChat
 from Main.Query import generate_environment_description, generate_general_description
 from Main.Retrieve import new_retrieve
 
@@ -24,60 +25,60 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, ple
 
     terminate_chat_when_agreed_msg = """When EVERYONE in the conversation has CLEARLY formed an agreement on a topic, reply the word "TERMINATE" by itself"""
 
-    system_msg = f"""
-    [System Note: 
-    {speak_for_yourself_msg} 
-    {terminate_chat_when_agreed_msg if True else ""}
-    ]
-    """
+    consider_traits_msg = """You should really consider how your personality traits and memory influences you before you respond, you are self-centered, so you're making policies that best satisfy your own interests. Your citizens' interests are your interests"""
+
+    system_msg = f"""[System Note: {speak_for_yourself_msg}\n{terminate_chat_when_agreed_msg if True else ""}\n{consider_traits_msg}\n]\n"""
 
     # udpate the system message of each agent with game rules/ setting, retrieved memory, personality, pleasure system output (not implemented), and personal status (not implemented)
     for i, person in enumerate(individuals, 0):
 
-        environment_description = generate_environment_description()
         general_description = generate_general_description(person, system)
 
         # retrieves relevant memories 
-        retrieved_memories = new_retrieve(person, [chat_topic], 1)
+        retrieved_memories = new_retrieve(person, [chat_topic], 10)
         # iterate through all relavant memories and concatenate as one string
-        relevant_memory_descriptions = "Here are some relevant memories that you have:\n" + "\n".join([node.description for node in retrieved_memories])
+        relevant_memory_descriptions = "Relevant memories:\n" + "\n".join([node.description for node in retrieved_memories])
 
         personality_string = "\n".join(person.get_personality())
 
-        personality_description = f'''
-        Here are some descriptions about your personality. You must talk and behave according to these descriptions.
-        {personality_string}
-        '''
+        personality_description = f'''Personality traits: you are {personality_string}'''
 
         # update the agent with the new system prompt
-        new_msg = "\n".join([environment_description, general_description, personality_description, relevant_memory_descriptions, system_msg])
+        new_msg = "\n".join([general_description, personality_description, relevant_memory_descriptions, system_msg])
         person.update_agent_prompt(new_msg)
         # update its speaking tendency
         tendency = evaluate_speaking_tendencies(personality_string)
         person.update_agent_speaking_tendency(tendency)
-
-        # testing
-        # print(personality_string)
     
 
     # create a groupchat
     agents = [person.get_agent() for person in individuals]
     groupchat = CustomGroupChat(agents=agents, messages=[], max_round=100)
-    manager = SilentManager(groupchat=groupchat, llm_config=AUTOGEN_LLM_CONFIG)
+    manager = GroupChatManager(groupchat=groupchat, llm_config=AUTOGEN_LLM_CONFIG)
 
     # create a agent for system message exclusively
     system_agent = SpeakingAgent(name="system", system_message="", llm_config=AUTOGEN_LLM_CONFIG)
 
+    example_responses = [
+        "I have mixed feelings about the policy. While I understand the potential benefits of offering a subsidy for luxury goods production, I am somewhat cautious about its impact on overall societal well-being. I believe it is important to consider the allocation of resources and ensure that basic needs, such as food, are adequately met before prioritizing luxury goods."
+        "I am generally organized and prefer routine. I believe that offering a 20 percent subsidy to luxury goods producers could potentially disrupt the balance of our society. It may lead to an overemphasis on luxury goods production, which could divert resources and attention away from essential needs like food production. We should prioritize maintaining a balanced economy and ensuring the availability of essential goods for all.",
+    ]
+
+    example_responses_str = '\n'.join(example_responses)
 
     initial_msg = f"""
     System Message: Now, several members of the society have gathered to discuss their opinion about the world that they live in.
-    The topic is: {chat_topic}.
-    You are allowed to debate with other people for your opinions
+    The topic is: {chat_topic}
+    You are allowed to debate with other people for your opinions.
+    DO NOT use modern terms that are too abstract for the world setting.
     Limit each response to 50 words.
+
+    Here are several examples of how your should structure your responses:
+    {example_responses_str}
     """
 
     # initiate conversation. silent=False for testing/debugging
-    system_agent.initiate_chat(manager, message=initial_msg, silent=True)
+    system_agent.initiate_chat(manager, message=initial_msg, silent=False)
 
     # returns the messages as a json object
     messages = groupchat.messages
