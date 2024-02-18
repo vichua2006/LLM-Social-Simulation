@@ -3,18 +3,21 @@ from Main.AIAction import AIAction, AIActionType, DonateAction, RobAction, Trade
 from Main.System import System
 from Main.Individual import Individual
 
-def str_to_ai_action(action:str, id:int)->AIAction:
-    if(action["action"]=="trade"):
-      return TradeAction(id, action["payload"]["tradepayload"]["targetid"], action["payload"]["tradepayload"]["paytype"], action["payload"]["tradepayload"]["payamount"], action["payload"]["tradepayload"]["gaintype"], action["payload"]["tradepayload"]["gainamount"])
-    elif action["action"]=="rob":
-      return RobAction(id, action["payload"]["robpayload"]["targetid"], action["payload"]["robpayload"]["robtype"])
-    elif action["action"]=='farm':
-          return AIAction(AIActionType.Farm,id,None)
+def str_to_ai_action(action:int, id:int)->AIAction:
+    if(action["action"] == "trade"):
+      return TradeAction(id, action["payload"]["targetid"], action["payload"]["paytype"], action["payload"]["payamount"], action["payload"]["gaintype"], action["payload"]["gainamount"])
+    elif action["action"] == "rob":
+      return RobAction(id, action["payload"]["targetid"], action["payload"]["robtype"])
+    elif action["action"] == "farm":
+     return AIAction(AIActionType.Farm,id,None)
+    elif action["action"] == "produce":
+      return AIAction(AIActionType.ProduceLuxury, id, None)
     elif action["action"] == "donate":
-      return DonateAction(id, action["payload"]["donatepayload"]["targetid"], action["payload"]["donatepayload"]["donatetype"])
+      return DonateAction(id, action["payload"]["targetid"], action["payload"]["donatetype"])
     else:print("Error: Invalid action type")
+    return None
       
 def append_to_pending_action(action:AIAction, system:System)->None:
     id:int = action.targetid
-    person:Individual = system.individuals[id]
+    person:Individual = next((person for person in system.individuals if person.attributes["id"] == id), None)
     person.pending_action.put(action)

@@ -11,8 +11,12 @@ def deserialize_first_json_object(json_string):
 
     
     json_string = json_string[start_bracket_index:end_bracket_index + 1]
-    try: return json.loads(json_string)
-    except Exception as e: print(f'Error:{e}')
+    try: 
+        return json.loads(json_string)
+    except Exception as e:
+        print("erroc when deserialize_first_json_object")
+        print("original string: ", json_string)
+        print(f'Error:{e}')
 
 def get_corresponding_end_bracket_index(json_str, start_bracket_index):
     open_brackets = 0
