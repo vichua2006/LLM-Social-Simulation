@@ -24,8 +24,8 @@ individuals[0].attributes["food"] = 25
 individuals[2].attributes["land"] = 15
 
 
-topic = "talk about how much resources you have, and whether or not the distribution is fair."
-# topic = "Is there anything you think that needs to be changed? What will make your life better?"
+# topic = "talk about how much resources you have, and whether or not the distribution is fair."
+topic = "Is there anything you think that needs to be changed? What will make your life better?"
 # topic = "a policy that provides a 20 percent subsidy for people who create luxury goods"
 
 conversation = converse(individuals, system, topic)

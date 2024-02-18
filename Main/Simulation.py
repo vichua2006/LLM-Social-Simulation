@@ -24,7 +24,7 @@ if os.path.exists(csv_file_name):
 conversation_dir = f"conversation_and_memory_log/{datetime.datetime.now().strftime('%d, %I %M %S%p')}/"
 
 # number of days between conversations
-days_between_conversation = 1
+days_between_conversation = 7
 
 def discuss_topic(system: System, individuals: List[Individual], topic: str, day_count: int):
   '''
@@ -85,7 +85,7 @@ def initialize():
     # Initialize individuals and environment
     individuals=[]
     lands=[]
-    POPULATION=9
+    POPULATION=5
     #POPULATIONLIST=[x for x in range(POPULATION)]
     #random id
     #random_numbers = random.sample(POPULATIONLIST, POPULATION)
