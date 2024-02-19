@@ -54,20 +54,19 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, ple
         tendency = evaluate_speaking_tendencies(personality_string)
         person.update_agent_speaking_tendency(tendency)
 
-        print(new_msg)
-    
-
     # create a groupchat
     agents = [person.get_agent() for person in individuals]
     groupchat = CustomGroupChat(agents=agents, messages=[], max_round=100)
-    manager = GroupChatManager(groupchat=groupchat, llm_config=AUTOGEN_LLM_CONFIG)
+    manager = GroupChatManager(groupchat=groupchat, llm_config=AUTOGEN_LLM_CONFIG, human_input_mode="NEVER")
 
     # create a agent for system message exclusively
     system_agent = SpeakingAgent(name="system", system_message="", llm_config=AUTOGEN_LLM_CONFIG)
 
     example_responses = [
-        "response 1: I have mixed feelings about the policy. While I understand the potential benefits of offering a subsidy for luxury goods production, I am somewhat cautious about its impact on overall societal well-being. I believe it is important to consider the allocation of resources and ensure that basic needs, such as food, are adequately met before prioritizing luxury goods."
+        "response 1: I have mixed feelings about the policy. While I understand the potential benefits of offering a subsidy for luxury goods production, I am somewhat cautious about its impact on overall societal well-being. I believe it is important to consider the allocation of resources and ensure that basic needs, such as food, are adequately met before prioritizing luxury goods.",
         "response 2: I am generally organized and prefer routine. I believe that offering a 20 percent subsidy to luxury goods producers could potentially disrupt the balance of our society. It may lead to an overemphasis on luxury goods production, which could divert resources and attention away from essential needs like food production. We should prioritize maintaining a balanced economy and ensuring the availability of essential goods for all.",
+        "response 3: I am self-centered. Since I have 50 units of food, which is more than most of the other people, I don't support the redistibution of resources as my food would be taken from me and given to other people. This is bad because it lowers my chances of survival."
+        "response 3: Since I only have 1 unit of food left but have 30 units of luxury goods, I support the idea of increased trading, as that will allow me to trade off some of my luxury good and quickly gain food."
     ]
 
     example_responses_str = '\n'.join(example_responses)

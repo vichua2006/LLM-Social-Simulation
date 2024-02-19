@@ -85,7 +85,7 @@ def main():
     sys.stdout = ConsoleLog(window, '-OUTPUT-', '-OUTPUT THREAD-')
     last_log_update = datetime.now()  # Initialize the last log update time
     last_log = ""  # Initialize the last log content
-    timeout_duration = timedelta(minutes=5)  # Set the timeout duration to 1 minutes
+    timeout_duration = timedelta(minutes=1.5)  # Set the timeout duration to 1 minutes
     thread: threading.Thread
     system.set_console_log(CustomConsoleLog(window, '-SPECIAL OUTPUT-'))
     system.set_window(window)
