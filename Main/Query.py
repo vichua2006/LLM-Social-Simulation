@@ -6,7 +6,7 @@ from Main.Individual import Individual, System
 from Main.Retrieve import new_retrieve_active, new_retrieve, node_to_string
 
 output_format = """
-    [System Note: You MUST output in the following JSON format, don't include any description, only include the value (directly output the value, no need to put it in a dict):
+    [System Note: You MUST output in the following JSON format, don't include any description, only include the value (directly output the value, no need to put it in a dict), and <Action> must be a word, NOT a number:
     {{
         "action": <Action>,
         "reason": <Reason>,
@@ -32,7 +32,7 @@ output_format = """
       }}
     }}
     Example Output for farm:{{
-      "action": "farm ",
+      "action": "farm",
       "reason": "include you reason here"
     }}
     Example Output for produce_luxury_good:{{
