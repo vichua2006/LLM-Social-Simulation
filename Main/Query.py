@@ -190,12 +190,12 @@ def generate_general_description(individual: Individual, system: System) -> str:
     general_description = f"""
     You are {individual.attributes["name"]}
     You have those attributes {individual.attributes}.
-    You possess these peronal qualities {individual.personalities}, please consider them as you are making decisions.
     Environment: You live in a world with other individuals. Humans in this world include {', '.join([individual.attributes["name"] for individual in
     system.individuals])}. You are one of them.
     Currently, the amount of food each person has is: {[{i.attributes['name']:i.attributes['food'] for i in system.individuals}]}
     The amount of luxury goods each person has is: {[{i.attributes["name"]: i.attributes["luxury_goods"] for i in system.individuals}]}
     The amount of land each person has is:{[{i.attributes['name']:i.attributes['land'] for i in system.individuals}]}
+    You currently have {individual.attributes["food"]} units of food, {individual.attributes["luxury_goods"]} units of luxury_goods, and {individual.attributes["land"]} units of land.
     Survival: You can survive if you have 1 unit of food. You can 
     also gain sensual pleasure once you eat food or once you consume luxury goods.
     Decision:

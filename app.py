@@ -85,7 +85,7 @@ def main():
     sys.stdout = ConsoleLog(window, '-OUTPUT-', '-OUTPUT THREAD-')
     last_log_update = datetime.now()  # Initialize the last log update time
     last_log = ""  # Initialize the last log content
-    timeout_duration = timedelta(minutes=1)  # Set the timeout duration to 1 minutes
+    timeout_duration = timedelta(minutes=1.5)  # Set the timeout duration to 1 minutes
     thread: threading.Thread
     system.set_console_log(CustomConsoleLog(window, '-SPECIAL OUTPUT-'))
     system.set_window(window)
@@ -187,7 +187,7 @@ def main():
 
         # Check for timeout
         if isappStarted and datetime.now() - last_log_update > timeout_duration:
-            print("Log hasn't been updated for 1 minutes. Restarting simulation.")
+            print(f"Log hasn't been updated for {timeout_duration} minutes. Restarting simulation.")
             # Programmatically press "Stop" twice
             window.write_event_value('-STOP-', '')
             window.write_event_value('-STOP-', '')

@@ -1,6 +1,5 @@
 import os
-import jsonpickle
-import threading
+import json
 from typing import List
 from Main.Calculation import donate, increase_food, increase_luxury, punishment, rob_rebelled, winner_loser
 from Main.CsvAnalysis import CsvAnalysis
@@ -12,10 +11,52 @@ from Main.AIAction import AIAction, AIActionType
 from Main.PendingAction import append_to_pending_action, str_to_ai_action
 from Main.SaveLoad import init_save, save_logframes
 import numpy as np
+from Main.Memory import ConceptNode
+from Main.Conversation import converse, add_memory_after_conversation
 import random
 import datetime
 
-from Main.Memory import ConceptNode
+
+csv_file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
+#if file name alread exist, datetime will be as detail as second
+if os.path.exists(csv_file_name):
+    csv_file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M %S%p")+'.csv'
+
+conversation_dir = f"conversation_and_memory_log/{datetime.datetime.now().strftime('%d, %I %M %S%p')}/"
+
+# number of days between conversations
+days_between_conversation = 2
+
+def discuss_topic(system: System, individuals: List[Individual], topic: str, day_count: int):
+  '''
+  Initiate a conversation between individuals on a topic for discussion. 
+  Their memories are updated afterwards with the contents of the conversation from their own perspective.
+  '''
+
+  # let agents converse
+  conversation = converse(individuals, system, topic)
+  # update the memory of each agent afterward
+  add_memory_after_conversation(individuals, conversation)
+
+  # record store the conversation and generated memories as text files to be later analysed
+
+  memories = []
+  for person in individuals:
+    memories.append(person.memorystream.concept_nodes[-1].description)
+  
+  if not (os.path.exists(conversation_dir)):
+    os.mkdir(conversation_dir)
+  
+  with open(f"{conversation_dir}day_{day_count}_conversation.txt", "w") as f:
+    f.write(json.dumps(conversation, indent=4))
+  with open(f"{conversation_dir}day_{day_count}_memory.txt", "w") as f:
+    for memory in memories:
+      f.write(memory)
+      f.write("\n")
+  
+  return
+  
+
 
 def change_affected_people(affected_people, system:System):
     for affected_person in affected_people:#{PERSON:{strength:1,...}...}
@@ -83,7 +124,7 @@ def initialize():
     # Initialize individuals and environment
     individuals=[]
     lands=[]
-    POPULATION=9
+    POPULATION=5
     #POPULATIONLIST=[x for x in range(POPULATION)]
     #random id
     #random_numbers = random.sample(POPULATIONLIST, POPULATION)
@@ -94,7 +135,7 @@ def initialize():
     #default
 
     for i in range(POPULATION):
-      individual = Individual(i,f'person {i}')
+      individual = Individual(i,f'person_{i}')
       
       # Generate food/luxury production numbers for specific individuals based general distribution
       individual.food_production = round(np.random.normal(food_production, 0.5))
@@ -105,7 +146,7 @@ def initialize():
 
     system=System(individuals,lands)
     # init_save(system)
-    system.set_csv_analysis(CsvAnalysis(POPULATION, file_name))
+    system.set_csv_analysis(CsvAnalysis(POPULATION, csv_file_name))
     return system
 
 
@@ -354,7 +395,14 @@ def simulate(individuals:List[Individual],system:System):
       else:
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
-    system.csv_analysis.log_stat(system, file_name)
+    system.csv_analysis.log_stat(system, csv_file_name)
+
+    if (system.time % days_between_conversation == 0):
+      topic = "Is there anything you think that needs to be changed? What will make your life better?"
+
+      print("Conversation starting...")
+      discuss_topic(system, individuals, topic, system.time)
+      print("conversation ended")
     # save_logframes(system)
     
 # %%
