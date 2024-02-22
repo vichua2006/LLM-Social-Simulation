@@ -40,7 +40,13 @@ Rates of activities:{rate_of_activities}.
 Distribution of goods production: {goods_distribution}.
 Conversations:{conversations}
 '''
-policy_explanation=""#Explain what policies are possible, formatting, etc. Where you insert this paragraph can change based on how function call is done.
+policy_explanation='''You want to make policies in accordance with your objective. You have the highest power in this group and has flexibility in policy making. First, you have to specify the group of people that you policy applies to. There are two layers to group specification.
+You first specify the action that triggers your policy, it could be quantifiable: farm, luxury good production, trade, trade acceptance, or non-quantifiable: robbery, death, birth, being robbed, or as interval: the policy is triggered each n days. Then, if it is quantifiable, you choose the amount that will trigger the policy, for farm it is how much food produced, for trade it is how much value is being traded, for luxury good it is how much luxury good is produced.
+Then, when you specified the trigger event, you specify the category of change that you want to make, which includes land, food, and luxury good. You have a national bank that stores all the government's wealth. You have to periodically replenish it. You can take people's resources and replenish your national bank, or you can use your national bank's resources to compensate people, or you can take some people's resources to compensate for other people.
+Several examples of policy is listed below in textual format, although you will have to output in a different format:
+Quantifiable: if someone farms more than 20 units a day, gives one of this person's land to the poorest person.
+Non-quantifiable: if someone robbes another person, this person has to compensate 10 units of food to the victim.
+Interval: every 10 days, each person is taxed 10 percent of their luxury good holdings.'''#Explain what policies are possible, formatting, etc. Where you insert this paragraph can change based on how function call is done.
 query=f'''
 Q: You are about to make policies. You can use any modern analysis tools you know of and any number of them, to make a policy that you think will help you achieve you objective.{policy_explanation} What is your policy?
 A: Let's think step by step.
