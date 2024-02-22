@@ -25,7 +25,7 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, ple
 
     terminate_chat_when_agreed_msg = "When EVERYONE in the conversation has CLEARLY formed an agreement on a topic, reply the word 'TERMINATE' by itself"
 
-    consider_traits_msg = "You should really consider how your personality traits, memory, and how much resources you have influences you before you respond. If you have talked about a similar topic in before in your memory, try talking about a different topic."
+    consider_traits_msg = "You should really consider how your personality traits and memory influences you before you respond. Consider how much food, land, and luxury good you have compared to others"
 
     self_centered_msg = "you are self-centered, so you're making policies that best satisfy your own interests. Your citizens' interests are your interests"
 
@@ -65,8 +65,8 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, ple
     example_responses = [
         "response 1: I have mixed feelings about the policy. While I understand the potential benefits of offering a subsidy for luxury goods production, I am somewhat cautious about its impact on overall societal well-being. I believe it is important to consider the allocation of resources and ensure that basic needs, such as food, are adequately met before prioritizing luxury goods.",
         "response 2: I am generally organized and prefer routine. I believe that offering a 20 percent subsidy to luxury goods producers could potentially disrupt the balance of our society. It may lead to an overemphasis on luxury goods production, which could divert resources and attention away from essential needs like food production. We should prioritize maintaining a balanced economy and ensuring the availability of essential goods for all.",
-        "response 3: I am self-centered. Since I have 50 units of food, which is more than most of the other people, I don't support the redistibution of resources as my food would be taken from me and given to other people. This is bad because it lowers my chances of survival."
-        "response 3: Since I only have 1 unit of food left but have 30 units of luxury goods, I support the idea of increased trading, as that will allow me to trade off some of my luxury good and quickly gain food."
+        "response 3: I am self-centered. Since I more food than most of the other people, I don't support the redistibution of resources as my food would be taken from me and given to other people. This is bad because it lowers my chances of survival.",
+        "response 4: Since I only have 1 unit of food left but have 30 units of luxury goods, I support the idea of increased trading, as that will allow me to trade off some of my luxury good and quickly gain food so that I won't starve.",
     ]
 
     example_responses_str = '\n'.join(example_responses)

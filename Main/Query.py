@@ -195,6 +195,7 @@ def generate_general_description(individual: Individual, system: System) -> str:
     Currently, the amount of food each person has is: {[{i.attributes['name']:i.attributes['food'] for i in system.individuals}]}
     The amount of luxury goods each person has is: {[{i.attributes["name"]: i.attributes["luxury_goods"] for i in system.individuals}]}
     The amount of land each person has is:{[{i.attributes['name']:i.attributes['land'] for i in system.individuals}]}
+    You currently have {individual.attributes["food"]} units of food, {individual.attributes["luxury_goods"]} units of luxury_goods, and {individual.attributes["land"]} units of land.
     Survival: You can survive if you have 1 unit of food. You can 
     also gain sensual pleasure once you eat food or once you consume luxury goods.
     Decision:

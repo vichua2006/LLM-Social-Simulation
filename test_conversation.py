@@ -20,18 +20,19 @@ for i, person in enumerate(individuals):
 
 individuals[2].memorystream.add_concept_node(ConceptNode(2,"rob",1,0,"rob",[1],10, "You REALLY want to produce luxury goods.", 6))
 
+
+for i in individuals:
+    i.attributes["food"] = 1
+    i.attributes["land"] = 0
+
+individuals[0].attributes["food"] = 1000
+
 print([i.attributes['food'] for i in system.individuals])
-
-individuals[0].attributes["food"] = 1
-individuals[2].attributes["land"] = 15
-
-
 # topic = "talk about how much resources you have, numerically specific, and compare it to the amount others have"
 # topic = "Is there anything you think that needs to be changed? What will make your life better?"
-topic = "a policy that decreases trading activities but also increases luxury good productions"
+topic = "a redistribution of resources for equality"
 
 conversation = converse(individuals, system, topic)
-
 
 # add_memory_after_conversation(individuals, conversation)
 
