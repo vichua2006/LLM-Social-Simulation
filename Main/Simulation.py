@@ -25,7 +25,7 @@ if os.path.exists(csv_file_name):
 conversation_dir = f"conversation_and_memory_log/{datetime.datetime.now().strftime('%d, %I %M %S%p')}/"
 
 # number of days between conversations
-days_between_conversation = 2
+days_between_conversation = 5
 
 def discuss_topic(system: System, individuals: List[Individual], topic: str, day_count: int):
   '''

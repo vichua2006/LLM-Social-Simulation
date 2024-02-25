@@ -25,7 +25,7 @@ class Individual:
     def __init__(self, id:int, name:str):
         # Define the characteristics of the individual
         long_tail_sampler=np.random.gamma(2.0,0.9) #sampling from long tail
-        land=int(10*long_tail_sampler+1) #+1 so that no one has zero land
+        land=int(3*long_tail_sampler+1) #+1 so that no one has zero land
         food=int(land**1.3) # land compounds so as exponetial effect to food.
 
         self.attributes = {
