@@ -1,7 +1,7 @@
 import json
 from openai import OpenAI
-from typing import List, Dict
 from autogen import GroupChatManager
+from typing import List, Dict
 from Main.Individual import Individual
 from Main.System import System
 from Main.Memory import ConceptNode
@@ -12,69 +12,74 @@ from Main.Retrieve import new_retrieve
 from Main.config import AUTOGEN_LLM_CONFIG 
 client = OpenAI(api_key=AUTOGEN_LLM_CONFIG["config_list"][0]["api_key"])
 
-def converse(individuals: List[Individual], system: System, chat_topic: str, personalities: List[str], pleasure_system_input: str = None) -> List[Dict[str, str]]:
+def converse(individuals: List[Individual], system: System, chat_topic: str, pleasure_system_input: str = None) -> List[Dict[str, str]]:
     '''
     initiate a conversation between individuals with AutoGen GroupChat
     returns the conversation content as a json object
 
     chat_topic: a string describing the topic of discussion for this groupchat. It will be used to retrieve relevant memories
 
-    personalities is a temporary variable to pass in the personality descriptions (big 5) of each individual; not sure how it should be done
     '''
 
-    speak_for_yourself_msg = """DO NOT GENERATE RESPONSES FOR OTHER AGENTS, ONLY SPEAK FOR YOURSELF."""
+    speak_for_yourself_msg = "DO NOT GENERATE RESPONSES FOR OTHER AGENTS, ONLY SPEAK FOR YOURSELF."
 
-    terminate_chat_when_agreed_msg = """When EVERYONE in the conversation has CLEARLY formed an agreement on a topic, reply the word "TERMINATE" by itself"""
+    terminate_chat_when_agreed_msg = "When EVERYONE in the conversation has CLEARLY formed an agreement on a topic, reply the word 'TERMINATE' by itself"
 
-    system_msg = f"""
-    [System Note: 
-    {speak_for_yourself_msg} 
-    {terminate_chat_when_agreed_msg if True else ""}
-    ]
-    """
+    consider_traits_msg = "You should really consider how your personality traits and memory influences you before you respond. Consider how much food, land, and luxury good you have compared to others"
+
+    self_centered_msg = "you are self-centered, so you're making policies that best satisfy your own interests. Your citizens' interests are your interests"
+
+    system_msg = f"""[System Note: {speak_for_yourself_msg}\n{terminate_chat_when_agreed_msg}\n{consider_traits_msg}\n{self_centered_msg}]\n"""
 
     # udpate the system message of each agent with game rules/ setting, retrieved memory, personality, pleasure system output (not implemented), and personal status (not implemented)
     for i, person in enumerate(individuals, 0):
 
         environment_description = generate_environment_description()
+
         general_description = generate_general_description(person, system)
 
         # retrieves relevant memories 
-        retrieved_memories = new_retrieve(person, [chat_topic], 1)
+        retrieved_memories = new_retrieve(person, [chat_topic], 10)
         # iterate through all relavant memories and concatenate as one string
-        relevant_memory_descriptions = "Here are some relevant memories that you have:\n" + "\n".join([node.description for node in retrieved_memories[chat_topic]])
+        relevant_memory_descriptions = "Relevant memories:\n" + "\n".join([node.description for node in retrieved_memories])
 
-        personality_description = f'''
-        Here are some descriptions about your personality. You must talk and behave according to these descriptions.
-        {personalities[i]}
-        '''
+        personality_string = "\n".join(person.get_personality())
+
+        personality_description = f'''Personality traits: you are {personality_string}'''
 
         # update the agent with the new system prompt
         new_msg = "\n".join([environment_description, general_description, personality_description, relevant_memory_descriptions, system_msg])
         person.update_agent_prompt(new_msg)
         # update its speaking tendency
-        tendency = evaluate_speaking_tendencies(personalities[i])
+        tendency = evaluate_speaking_tendencies(personality_string)
         person.update_agent_speaking_tendency(tendency)
-
-        # testing
-        print(tendency)
-    
-
 
     # create a groupchat
     agents = [person.get_agent() for person in individuals]
     groupchat = CustomGroupChat(agents=agents, messages=[], max_round=100)
-    manager = GroupChatManager(groupchat=groupchat, llm_config=AUTOGEN_LLM_CONFIG)
+    manager = GroupChatManager(groupchat=groupchat, llm_config=AUTOGEN_LLM_CONFIG, human_input_mode="NEVER")
 
     # create a agent for system message exclusively
     system_agent = SpeakingAgent(name="system", system_message="", llm_config=AUTOGEN_LLM_CONFIG)
 
+    example_responses = [
+        "response 1: I have mixed feelings about the policy. While I understand the potential benefits of offering a subsidy for luxury goods production, I am somewhat cautious about its impact on overall societal well-being. I believe it is important to consider the allocation of resources and ensure that basic needs, such as food, are adequately met before prioritizing luxury goods.",
+        "response 2: I am generally organized and prefer routine. I believe that offering a 20 percent subsidy to luxury goods producers could potentially disrupt the balance of our society. It may lead to an overemphasis on luxury goods production, which could divert resources and attention away from essential needs like food production. We should prioritize maintaining a balanced economy and ensuring the availability of essential goods for all.",
+        "response 3: I am self-centered. Since I more food than most of the other people, I don't support the redistibution of resources as my food would be taken from me and given to other people. This is bad because it lowers my chances of survival.",
+        "response 4: Since I only have 1 unit of food left but have 30 units of luxury goods, I support the idea of increased trading, as that will allow me to trade off some of my luxury good and quickly gain food so that I won't starve.",
+    ]
+
+    example_responses_str = '\n'.join(example_responses)
 
     initial_msg = f"""
     System Message: Now, several members of the society have gathered to discuss their opinion about the world that they live in.
-    The topic is: {chat_topic}.
-    You are allowed to debate with other people for your opinions
+    The topic is: {chat_topic}
+    You are allowed to debate with other people for your opinions.
+    DO NOT use modern terms that are too abstract for the world setting.
     Limit each response to 50 words.
+
+    Here are several examples of how your should structure your responses:
+    {example_responses_str}
     """
 
     # initiate conversation. silent=False for testing/debugging
@@ -82,9 +87,6 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, per
 
     # returns the messages as a json object
     messages = groupchat.messages
-
-    # debugging
-    print(json.dumps(messages, indent=4))
 
     return messages
 

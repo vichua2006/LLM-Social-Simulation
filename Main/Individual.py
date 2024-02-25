@@ -24,21 +24,29 @@ class SeralizeQueue(queue.Queue):
 class Individual:
     def __init__(self, id:int, name:str):
         # Define the characteristics of the individual
+        long_tail_sampler=np.random.gamma(2.0,0.9) #sampling from long tail
+        land=int(3*long_tail_sampler+1) #+1 so that no one has zero land
+        food=int(land**1.3) # land compounds so as exponetial effect to food.
+
         self.attributes = {
             "id": id, # The index of the individual in the system
             "name": name,  # The name of the individual
-            "aggressiveness": np.random.normal(0,1),  # Randomly assigned aggressiveness level
-            "covetousness": np.random.normal(1.25,5),  # Randomly assigned covetousness level
-            
             "strength": np.random.normal(0.7, 0.2),  # Randomly assigned strength level
             "social_position": 0,  # Initial social position is 0
-            "land": 10,  # Land owned by the individual
-            "food": 2,  # Initial food is 2
+            "luxury_goods": 0, # Initial luxury goods is 0
+            "action": 1,  # Initial action point is 1
+            "trust_of_others":0,
+            "starved":0,
+            "land": land,  # Land owned by the individual
+            "food": food,  # Initial food as long tail distribution
             "action": 1  # Initial action point is 1
             ,"trust_of_others":0
         }
-
-
+        
+        # Individual specific production numbers
+        self.food_production = 0
+        self.luxury_production = 0
+        
         self.INTELLIGENCE=1#np.random.beta(100,10)
         self.pending_action:SeralizeQueue[AIAction] = SeralizeQueue() # The pending action that the individual need to deal with
         self.current_action_type:AIActionType = AIActionType.Default
@@ -57,6 +65,7 @@ class Individual:
             llm_config=AUTOGEN_LLM_CONFIG
         )
 
+        # a list of 5 strings, denoting the person's openness, conscientiousness, agreeableness, neuroticism respectively
         self.personalities = generate_personality()
 
     def get_pending_action_as_list(self):
@@ -129,6 +138,9 @@ class Individual:
     def get_agent(self):
         # return the agent variable
         return self.agent
+    
+    def get_personality(self) -> List[str]:
+        return self.personalities
     
     def update_agent_prompt(self, prompt:str):
         # updates the agent's system message and description

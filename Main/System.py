@@ -26,6 +26,9 @@ class System:
         self.trade_factor = [1] * len(individuals)
         self.lux_factor = [1] * len(individuals)
         self.bank = Bank.Bank()
+        self.individual_count = len(individuals)
+        self.max_indivisual_index = len(individuals)
+        self.deaths = 0
 
     def production_factor(self, ratio, index):
         self.food_factor[index] *= ratio
