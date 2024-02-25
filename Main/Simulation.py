@@ -44,6 +44,8 @@ file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
 #if file name alread exist, datetime will be as detail as second
 if os.path.exists(file_name):
   file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M %S%p")+'.csv'
+  
+
 def initialize():
     # Initialize individuals and environment
     individuals=[]
@@ -146,10 +148,13 @@ def simulate(individuals:List[Individual],system:System):
                                 owner.memorystream.add_concept_node(yes_trade_node_)
                                 owner.memory.append("He accepted the trade and the trade has been executed.")
                                 system.csv_analysis.trade_accepted(owner.attributes["id"])
-                                individual.attributes[gainT]-=gainA
-                                individual.attributes[payT]+=payA
-                                owner.attributes[gainT]+=gainA
-                                owner.attributes[payT]-=payA
+                                individual.attributes[gainT]-=gainA / system.trade_factor[index]
+                                individual.attributes[payT]+=payA / system.trade_factor[index]
+                                owner.attributes[gainT]+=gainA  * system.trade_factor[index] # goverment tax lol
+                                owner.attributes[payT]-=payA  * system.trade_factor[index]
+                                if response_action.gainType == "Food":
+                                  system.bank.addFood(gainA - gainA * system.trade_factor[index])
+                                  system.bank.addFood(payA - payA * system.trade_factor[index])
                               else:
                                 if not validO:
                                       owner.memory.append("He accepted the trade but it couldn't go through since I don't have enough resource for it, and I got nothing out of this trade while I lost my action opportunity of today.")
@@ -240,7 +245,8 @@ def simulate(individuals:List[Individual],system:System):
               if ai_action.type==AIActionType.Farm:
                     land=individual.attributes['land']
                     gain=land*random.random()*0.3 if land>1 else 1
-                    individual.attributes['food']+=gain
+                    individual.attributes['food']+=gain * system.food_factor
+                    system.bank.addFood(gain - gain * system.food_factor)
                     farm_node = ConceptNode(len(individual.memorystream.concept_nodes), "farm", system.time, individual.attributes["id"], "farm", [], 0,f'On day {system.time}. I farmed and gained {gain} units of food.', 1)
                     individual.memorystream.add_concept_node(farm_node)
                     individual.memory.append(f'On day {system.time}. I farmed and gained {gain} units of food.')
