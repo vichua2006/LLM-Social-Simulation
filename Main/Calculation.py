@@ -2,21 +2,22 @@ import random
 
 import numpy as np
 from Main.Individual import Individual
-from Main.System import System
+from Main.System import System, Bank
+
 #Utils
 #Food
-def increase_food(individual:Individual):
+def increase_food(individual:Individual, factor):
     # Increase food based on individual's production #
     gain = round(individual.food_production * individual.attributes["land"] / 3)
-    individual.attributes['food'] += gain
-    return gain
+    individual.attributes['food'] += gain* factor
+    return gain *factor
     
 # Luxury Good
-def increase_luxury(individual: Individual):
+def increase_luxury(individual: Individual, factor):
     # Increase luxury goods based on individual's production #
     gain = round(individual.luxury_production * individual.attributes["land"] / 3)
-    individual.attributes["luxury_goods"] += gain
-    return gain
+    individual.attributes["luxury_goods"] += gain *factor
+    return gain*factor
 
 #Rob
 #returns true if individual's strength > enemy's

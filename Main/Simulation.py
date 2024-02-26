@@ -120,6 +120,7 @@ file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
 if os.path.exists(file_name):
   file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M %S%p")+'.csv'
 
+
 def initialize():
     # Initialize individuals and environment
     individuals=[]
@@ -226,11 +227,15 @@ def simulate(individuals:List[Individual],system:System):
                                 yes_trade_node_ = ConceptNode(len(individual.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, "He accepted the trade and the trade has been executed.", 1)
                                 owner.memorystream.add_concept_node(yes_trade_node_)
                                 owner.memory.append("He accepted the trade and the trade has been executed.")
-                                system.csv_analysis.trade_accepted(individuals.index(owner))
-                                individual.attributes[gainT]-=gainA
-                                individual.attributes[payT]+=payA
-                                owner.attributes[gainT]+=gainA
-                                owner.attributes[payT]-=payA
+                                system.csv_analysis.trade_accepted(owner.attributes["id"])
+                                individual.attributes[gainT]-=gainA / system.trade_factor[index]
+                                individual.attributes[payT]+=payA / system.trade_factor[index]
+                                owner.attributes[gainT]+=gainA  * system.trade_factor[index] # goverment tax lol
+                                owner.attributes[payT]-=payA  * system.trade_factor[index]
+                                if response_action.gainType == "Food":
+                                  system.bank.addFood(gainA - gainA * system.trade_factor[index])
+                                  system.bank.addFood(payA - payA * system.trade_factor[index])
+
                               else:
                                 if not validO:
                                       owner.memory.append("He accepted the trade but it couldn't go through since I don't have enough resource for it, and I got nothing out of this trade while I lost my action opportunity of today.")
@@ -318,13 +323,15 @@ def simulate(individuals:List[Individual],system:System):
               
               individual.current_action_type = ai_action.type
               if ai_action.type==AIActionType.Farm:
-                  gain = increase_food(individual)
+                  gain = increase_food(individual, system.food_factor[individual.attributes['id']])
+                  system.bank.addFood(gain - gain * system.food_factor[individual.attributes['id']])
                   farm_node = ConceptNode(len(individual.memorystream.concept_nodes), "farm", system.time, individual.attributes["id"], "farm", [], 0,f'On day {system.time}. I farmed and gained {gain} units of food.', 1)
                   individual.memorystream.add_concept_node(farm_node)
                   individual.memory.append(f'On day {system.time}. I farmed and gained {gain} units of food.')
                   print("Farm is successful.")
               elif ai_action.type == AIActionType.ProduceLuxury:
-                  gain = increase_luxury(individual)
+                  gain = increase_luxury(individual, system.food_factor[individual.attributes['id']])
+                  system.bank.addLux(gain - gain * system.lux_factor[individual.attributes['id']])
                   luxury_node = ConceptNode(len(individual.memorystream.concept_nodes), "produce_luxury", system.time, individual.attributes["id"], "produce_luxury", [], 0, f'On day {system.time}. I produced luxury goods and gained {gain} units of luxury goods', 1)
                   individual.memorystream.add_concept_node(luxury_node)
                   individual.memory.append(f'On day {system.time}. I produced luxury goods and gained {gain} units of luxury goods')
