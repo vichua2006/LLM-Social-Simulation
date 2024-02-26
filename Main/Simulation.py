@@ -398,7 +398,7 @@ def simulate(individuals:List[Individual],system:System):
     system.csv_analysis.log_stat(system, csv_file_name)
 
     if (system.time % days_between_conversation == 0):
-      topic = "Is there anything you think that needs to be changed? What will make your life better?"
+      topic = "share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?"
 
       print("Conversation starting...")
       discuss_topic(system, individuals, topic, system.time)

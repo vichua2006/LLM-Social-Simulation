@@ -183,6 +183,7 @@ class CustomGroupChat(GroupChat):
     
         statement = f'''
         Read the above conversation and consider the label of each role. Then select the next role from {[agent.name for agent in agents]} to play.
+        You may only select roles that are in that list. DO NOT select roles that do not exists.
 
         Select them in somewhat random fashion. Every role has to be selected at least once.
         Here are the labels of each role: 

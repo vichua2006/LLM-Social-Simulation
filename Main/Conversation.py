@@ -45,14 +45,13 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, ple
 
         personality_string = "\n".join(person.get_personality())
 
-        personality_description = f'''Personality traits: you are {personality_string}'''
-
         # update the agent with the new system prompt
-        new_msg = "\n".join([environment_description, general_description, personality_description, relevant_memory_descriptions, system_msg])
+        new_msg = "\n".join([environment_description, general_description, relevant_memory_descriptions, system_msg])
         person.update_agent_prompt(new_msg)
         # update its speaking tendency
         tendency = evaluate_speaking_tendencies(personality_string)
         person.update_agent_speaking_tendency(tendency)
+
 
     # create a groupchat
     agents = [person.get_agent() for person in individuals]
@@ -63,10 +62,13 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, ple
     system_agent = SpeakingAgent(name="system", system_message="", llm_config=AUTOGEN_LLM_CONFIG)
 
     example_responses = [
-        "response 1: I have mixed feelings about the policy. While I understand the potential benefits of offering a subsidy for luxury goods production, I am somewhat cautious about its impact on overall societal well-being. I believe it is important to consider the allocation of resources and ensure that basic needs, such as food, are adequately met before prioritizing luxury goods.",
-        "response 2: I am generally organized and prefer routine. I believe that offering a 20 percent subsidy to luxury goods producers could potentially disrupt the balance of our society. It may lead to an overemphasis on luxury goods production, which could divert resources and attention away from essential needs like food production. We should prioritize maintaining a balanced economy and ensuring the availability of essential goods for all.",
-        "response 3: I am self-centered. Since I more food than most of the other people, I don't support the redistibution of resources as my food would be taken from me and given to other people. This is bad because it lowers my chances of survival.",
-        "response 4: Since I only have 1 unit of food left but have 30 units of luxury goods, I support the idea of increased trading, as that will allow me to trade off some of my luxury good and quickly gain food so that I won't starve.",
+        # "response 1: I have mixed feelings about the policy. While I understand the potential benefits of offering a subsidy for luxury goods production, I am somewhat cautious about its impact on overall societal well-being. I believe it is important to consider the allocation of resources and ensure that basic needs, such as food, are adequately met before prioritizing luxury goods.",
+        # "response 2: I am generally organized and prefer routine. I believe that offering a 20 percent subsidy to luxury goods producers could potentially disrupt the balance of our society. It may lead to an overemphasis on luxury goods production, which could divert resources and attention away from essential needs like food production. We should prioritize maintaining a balanced economy and ensuring the availability of essential goods for all.",
+        # "response 3: I am self-centered. Since I more food than most of the other people, I don't support the redistibution of resources as my food would be taken from me and given to other people. This is bad because it lowers my chances of survival.",
+        # "response 4: Since I only have 1 unit of food left but have 30 units of luxury goods, I support the idea of increased trading, as that will allow me to trade off some of my luxury good and quickly gain food so that I won't starve.",
+        "Example response 1: I'm quite satisfied with my life. As someone who mainly produces food from my land of 10 units, I'm self-sufficient. I also trade my food with others in exchange for luxury good. Consuming them brings me a lot of pleasures.",
+        "Example response 2: I felt my life sucked. I have only 2 unit of land and produce food from there. I often felt starved. I can hardly sustain myself. I need more food to survive. If possible I also wish to get some luxury good for my pleasure.",
+        "Example response 3: I have a mixed feeling of my lives. I have a lot of food and land so I don't have to worry about my survival too much. But I have a poor ability to produce luxury good. I have to trade luxury goods from others with my food, which is quite costly. I hope the trade would be more fairer.",
     ]
 
     example_responses_str = '\n'.join(example_responses)
