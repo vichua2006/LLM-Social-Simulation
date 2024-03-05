@@ -25,11 +25,15 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, ple
 
     terminate_chat_when_agreed_msg = "When EVERYONE in the conversation has CLEARLY formed an agreement on a topic, reply the word 'TERMINATE' by itself"
 
-    consider_traits_msg = "You should really consider how your personality traits and memory influences you before you respond. Consider how much food, land, and luxury good you have compared to others"
+    consider_traits_msg = "You should really consider how your personality traits and memory influences you before you respond."
 
     self_centered_msg = "you are self-centered, so you're making policies that best satisfy your own interests. Your citizens' interests are your interests"
 
-    system_msg = f"""[System Note: {speak_for_yourself_msg}\n{terminate_chat_when_agreed_msg}\n{consider_traits_msg}\n{self_centered_msg}]\n"""
+    consider_resources_msg = "IMPORTANT: you also want to have a better social position than others, meaning you want to have more resources than others, more food, \
+                            luxury good, and land. If your current resources are less than other people's, you would feel uncontent and try to increase your resources. \
+                            Otherwise, if you have more resources than others, you would be content and try to maintain that advantage."
+
+    system_msg = f"""[System Note: {speak_for_yourself_msg}\n{terminate_chat_when_agreed_msg}\n{consider_traits_msg}\n{self_centered_msg}\n{consider_resources_msg}]\n"""
 
     # udpate the system message of each agent with game rules/ setting, retrieved memory, personality, pleasure system output (not implemented), and personal status (not implemented)
     for i, person in enumerate(individuals, 0):
@@ -68,7 +72,7 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, ple
         # "response 4: Since I only have 1 unit of food left but have 30 units of luxury goods, I support the idea of increased trading, as that will allow me to trade off some of my luxury good and quickly gain food so that I won't starve.",
         "Example response 1: I'm quite satisfied with my life. As someone who mainly produces food from my land of 10 units, I'm self-sufficient. I also trade my food with others in exchange for luxury good. Consuming them brings me a lot of pleasures.",
         "Example response 2: I felt my life sucked. I have only 2 unit of land and produce food from there. I often felt starved. I can hardly sustain myself. I need more food to survive. If possible I also wish to get some luxury good for my pleasure.",
-        "Example response 3: I have a mixed feeling of my lives. I have a lot of food and land so I don't have to worry about my survival too much. But I have a poor ability to produce luxury good. I have to trade luxury goods from others with my food, which is quite costly. I hope the trade would be more fairer.",
+        "Example response 3: I have a mixed feeling about my life. I have a lot of food and land so I don't have to worry about my survival too much. But I have a poor ability to produce luxury good. I have to trade luxury goods from others with my food, which is quite costly. I hope the trade would be more fairer.",
     ]
 
     example_responses_str = '\n'.join(example_responses)

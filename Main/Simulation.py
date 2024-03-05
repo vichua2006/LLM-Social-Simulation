@@ -136,7 +136,8 @@ def initialize():
     #default
 
     for i in range(POPULATION):
-      individual = Individual(i,f'person_{i}')
+      # have 1-indexed naming to prevent "person 5" issue
+      individual = Individual(i,f'person_{i + 1}')
       
       # Generate food/luxury production numbers for specific individuals based general distribution
       individual.food_production = round(np.random.normal(food_production, 0.5))
