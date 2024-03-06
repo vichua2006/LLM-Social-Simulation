@@ -30,6 +30,10 @@ class System:
         self.max_indivisual_index = len(individuals)
         self.deaths = 0
 
+        #set food mechanism
+        self.consumption_rate=1
+        self.days_of_starvation=3
+
     def production_factor(self, ratio, index):
         self.food_factor[index] *= ratio
 

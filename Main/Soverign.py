@@ -3,10 +3,10 @@ class Report:
     def __init__(self, population:int, file_name:str) -> None:
         analysis=CsvAnalysis(population,file_name)
         
-        interval_of_properity=["poor","medium income","affluent"]# DATA: to be swapped with integer two touple values.
+        interval_of_properity=["poor","medium income","affluent"] #DATA: to be swapped with integer two touple values.
         society_description=None #Describe the society and the things going on. The mechanisms of each actions. how much one consumes, how much one produce. How much people. General context can include the contextual prompts we’ve written before, just adding the sovereign and other parts.
         equality_purpose_statement="You are a wise king who cares for the people, and you want to promote equity in your realm of control so that it can be a just society where each person leads a life of equality and respect."
-        food_std,food_mean,land_std,land_mean=None#data
+        food_std,food_mean,land_std,land_mean=None #data
         self.fixed_context=f'''You are the king of the society. {society_description}
         {equality_purpose_statement}
         Society's food Mean {"[{},{})".format(interval_of_properity[0][0],interval_of_properity[0][1])}: poor
