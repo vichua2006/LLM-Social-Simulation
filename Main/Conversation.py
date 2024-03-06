@@ -73,6 +73,7 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, ple
         "Example response 1: I'm quite satisfied with my life. As someone who mainly produces food from my land of 10 units, I'm self-sufficient. I also trade my food with others in exchange for luxury good. Consuming them brings me a lot of pleasures.",
         "Example response 2: I felt my life sucked. I have only 2 unit of land and produce food from there. I often felt starved. I can hardly sustain myself. I need more food to survive. If possible I also wish to get some luxury good for my pleasure.",
         "Example response 3: I have a mixed feeling about my life. I have a lot of food and land so I don't have to worry about my survival too much. But I have a poor ability to produce luxury good. I have to trade luxury goods from others with my food, which is quite costly. I hope the trade would be more fairer.",
+        "Example response 4: I'm not quite happy with the society. Although I have 100 units of food and 50 units of luxury good, Someone else in our society has 500 units of food and 300 units of luxury good. That's not fair. I want to have more resources as well."
     ]
 
     example_responses_str = '\n'.join(example_responses)
