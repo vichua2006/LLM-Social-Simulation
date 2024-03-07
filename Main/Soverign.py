@@ -29,7 +29,8 @@ class Report:
         enumerate_wealth=""
         for i in individual_wealth:enumerate_wealth+='{} has {} in farmer currency.'.format(i,individual_wealth[i])
         gdp=sum(individual_wealth.items())
-        gini=None#DATA
+        gini_land=None#DATA
+        gini_food=None#Data
         person_change_in_wealth={}#DATA
         enumerate_change=""
         for i in person_change_in_wealth:
@@ -43,7 +44,7 @@ class Report:
         self.live_data=f'''LIVE DATA: The individuals wealth listed below in descending order along with their change in wealth:{enumerate_wealth, enumerate_change }
 
         Collective wealth GDP is {gdp}.
-        GINI coefficient:{gini}.
+        GINI coefficient of land:{gini_land}, GINI coefficient of food:{gini_food}.
         Collective change in wealth:{dGDP}
         Daily average household production: {mean_production}.
 
