@@ -98,23 +98,23 @@ class CsvAnalysis:
       csv_writer.writerow(log)
 
   def calculate_interval_statistics(self):
-        # Calculate statistics for the last 2 days
-        food_stats = np.array(self.food_daily[-2:])
-        land_stats = np.array(self.land_daily[-2:])
+    # Calculate statistics for the last 2 days
+    food_stats = np.array(self.food_daily[-2:])
+    land_stats = np.array(self.land_daily[-2:])
 
-        # Compute mean, median, std, and Gini for both food and land
-        food_mean, land_mean = np.mean(food_stats, axis=0), np.mean(land_stats, axis=0)
-        food_median, land_median = np.median(food_stats, axis=0), np.median(land_stats, axis=0)
-        food_std, land_std = np.std(food_stats, axis=0), np.std(land_stats, axis=0)
-        gini_food, gini_land = CsvAnalysis.calculate_gini_coefficient(food_stats.flatten()), CsvAnalysis.calculate_gini_coefficient(land_stats.flatten())
+    # Compute mean, median, std, and Gini for both food and land
+    food_mean, land_mean = np.mean(food_stats, axis=0), np.mean(land_stats, axis=0)
+    food_median, land_median = np.median(food_stats, axis=0), np.median(land_stats, axis=0)
+    food_std, land_std = np.std(food_stats, axis=0), np.std(land_stats, axis=0)
+    gini_food, gini_land = CsvAnalysis.calculate_gini_coefficient(food_stats.flatten()), CsvAnalysis.calculate_gini_coefficient(land_stats.flatten())
 
-        # Identify richest and poorest for food and land
-        total_food, total_land = np.sum(food_stats, axis=0), np.sum(land_stats, axis=0)
-        richest_food, poorest_food = np.argmax(total_food), np.argmin(total_food)
-        richest_land, poorest_land = np.argmax(total_land), np.argmin(total_land)
+    # Identify richest and poorest for food and land
+    total_food, total_land = np.sum(food_stats, axis=0), np.sum(land_stats, axis=0)
+    richest_food, poorest_food = np.argmax(total_food), np.argmin(total_food)
+    richest_land, poorest_land = np.argmax(total_land), np.argmin(total_land)
 
-        return [food_mean, food_median, food_std, richest_food, poorest_food, gini_food, land_mean, land_median, land_std, richest_land, poorest_land, gini_land]
+    return [food_mean, food_median, food_std, richest_food, poorest_food, gini_food, land_mean, land_median, land_std, richest_land, poorest_land, gini_land]
   
   def calculate_gini_coefficient(data):
-        diff_sum = np.sum(np.abs(np.subtract.outer(data, data)))
-        return diff_sum / (2 * len(data) * np.sum(data))
+    diff_sum = np.sum(np.abs(np.subtract.outer(data, data)))
+    return diff_sum / (2 * len(data) * np.sum(data))
