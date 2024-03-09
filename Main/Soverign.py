@@ -12,7 +12,8 @@ class Report:
 
         food_std,food_mean,land_std,land_mean=None #data
         individual_wealth={} #DATA: dict{name:wealth}, make it sorted, descending order.
-        gini=None#DATA
+        gini_land=None#DATA
+        gini_food=None#Data
         person_change_in_wealth={}#DATA
         dGDP=None#DATA
         mean_production=None#DATA
@@ -41,7 +42,6 @@ class Report:
         '''
         enumerate_wealth = " ".join(['{} has {} in farmer currency.'.format(i,individual_wealth[i]) for i in individual_wealth])
         gdp=sum(individual_wealth.items())
-
         enumerate_change=""
         enumerate_change_str_list = []
         for i in person_change_in_wealth:
@@ -53,7 +53,7 @@ class Report:
         self.live_data=f'''LIVE DATA: The individuals wealth listed below in descending order along with their change in wealth:{enumerate_wealth, enumerate_change }
 
         Collective wealth GDP is {gdp}.
-        GINI coefficient:{gini}.
+        GINI coefficient of land:{gini_land}, GINI coefficient of food:{gini_food}.
         Collective change in wealth:{dGDP}
         Daily average household production: {mean_production}.
 
