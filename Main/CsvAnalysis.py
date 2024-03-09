@@ -1,10 +1,11 @@
 from Main import System
+from typing import Optional
 import csv
 import numpy as np
 
 
 class CsvAnalysis:
-  def __init__(self, population:int, file_name:str) -> None:
+  def __init__(self, population:int, file_name: Optional[str] = None) -> None:
    self.population = population
    self.sorted_individual_wealth = {}
    self.day_=0
@@ -35,9 +36,12 @@ class CsvAnalysis:
                     "SD Land", "Richest Land (ID | AMount)", "Poorest Land (ID | AMount)", "Gini Land", "Mean Luxury Goods", "Median Luxury Goods", "SD Luxury Goods", "Richest Luxury Goods (ID | Amount)", "Poorest Luxury Goods (ID | Amount)", "Gini Luxury Goods", "Overall Land Mean", "Overall Land Median", "Overall Land Std", "Overall Food Mean", "Overall Food Median", "Overall Food Std", "Overall Luxury Goods Mean", "Overall Luxury Goods Median", "Overall Luxury Goods Std", "Trade Initiated Ratio", "Trade Accepted Ratio", 
                       "Produce Luxury Ratio", "Produce Food Ratio", "Rob Initiated Ratio", 
                       "GDP Growth"])
-   with open(file_name, 'a', newline='') as f:
-     csv_writer = csv.writer(f)
-     csv_writer.writerow(head)
+   if (file_name != None):
+    with open(file_name, 'a', newline='') as f:
+      csv_writer = csv.writer(f)
+      csv_writer.writerow(head)
+  
+
   def trade(self, index):
    self.trade_[index]+=1
   def farm(self, index):
