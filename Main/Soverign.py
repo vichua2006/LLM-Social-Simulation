@@ -5,20 +5,17 @@ class Report:
     def __init__(self, population:int, file_name:str,system:System) -> None:
         sample_space=system
         analysis=CsvAnalysis(population,file_name)
-        
-        
-        # [food_mean, food_median, food_std, richest_food, poorest_food, gini_food, land_mean, land_median, land_std, richest_land, poorest_land, gini_land]
-  
+    
+        food_std, food_mean, land_std, land_mean, \
+        individual_wealth, gini_food, gini_land, person_change_in_wealth, \
+        gdp, dGDP, mean_production, rate_of_activities, goods_distribution = analysis.report_to_soverign(sample_space)
+        # individual_wealth: dict{name:wealth}, make it sorted, descending order.
+        # person_change_in_wealth: dict{name:wealth}
 
-        food_std,food_mean,land_std,land_mean=None #data
-        individual_wealth={} #DATA: dict{name:wealth}, make it sorted, descending order.
-        gini_land=None#DATA
-        gini_food=None#Data
-        person_change_in_wealth={}#DATA
-        dGDP=None#DATA
-        mean_production=None#DATA
-        rate_of_activities=""#DATA
-        goods_distribution=""#DATA
+
+
+        # mean_production NOT FOUND
+        # goods_distribution NOT FOUND
 
         conversations=""#WIP
 
@@ -41,7 +38,6 @@ class Report:
         If someone's land ownership is above {land_mean}(mean) + 2*{land_std}(standard deviation)={land_mean+2*land_std}, then this person is relatively wealthy and might be proud of it.
         '''
         enumerate_wealth = " ".join(['{} has {} in farmer currency.'.format(i,individual_wealth[i]) for i in individual_wealth])
-        gdp=sum(individual_wealth.items())
         enumerate_change=""
         enumerate_change_str_list = []
         for i in person_change_in_wealth:

@@ -4,7 +4,7 @@ import numpy as np
 
 
 class CsvAnalysis:
- def __init__(self, population:int, file_name:str) -> None:
+  def __init__(self, population:int, file_name:str) -> None:
    self.population = population
    self.sorted_individual_wealth = {}
    self.day_=0
@@ -38,30 +38,30 @@ class CsvAnalysis:
    with open(file_name, 'a', newline='') as f:
      csv_writer = csv.writer(f)
      csv_writer.writerow(head)
- def trade(self, index):
+  def trade(self, index):
    self.trade_[index]+=1
- def farm(self, index):
+  def farm(self, index):
    self.farm_[index]+=1
- def produce_luxury(self, index):
+  def produce_luxury(self, index):
    self.produce_luxury_[index] += 1
 
 
- def consume_luxury(self, index):
+  def consume_luxury(self, index):
    self.consume_luxury_[index] += 1
   
- def rob(self, index):
+  def rob(self, index):
    self.rob_[index]+=1
- def donate(self, index):
+  def donate(self, index):
    self.donate_[index]+=1
   
- def trade_accepted(self, index):
+  def trade_accepted(self, index):
    self.trade_accept[index]+=1
   
- def rob_rebelled(self, index):
+  def rob_rebelled(self, index):
    self.rob_rebel[index]+=1
   
  # index obey to target
- def obey(self, system):
+  def obey(self, system):
    for person in system.individuals:
      self.obey_[person.attributes["id"]]=person.obey_stats.obey_personId
    count = 0
@@ -70,7 +70,7 @@ class CsvAnalysis:
        count +=1
    self.obey_amount=count
   
- def log_stat(self, system, filename:str):
+  def log_stat(self, system, filename:str):
    daily_change_in_wealth = [0] * self.population
    if self.obey_amount==self.population-1:
      system.day_end_counter = 1
@@ -146,7 +146,7 @@ class CsvAnalysis:
      csv_writer.writerow(log)
 
 
- def calculate_interval_statistics(self):
+  def calculate_interval_statistics(self):
        # Calculate statistics for the last 2 days
        food_stats = np.array(self.food_daily[-7:])
        land_stats = np.array(self.land_daily[-7:])
@@ -191,14 +191,14 @@ class CsvAnalysis:
       
 
        return [food_mean, food_median, food_std, richest_food_str, poorest_food_str, gini_food, land_mean, land_median, land_std, richest_land_str, poorest_land_str, gini_land, luxury_good_mean, luxury_good_median, luxury_goods_std, richest_luxury_str, poorest_luxury_str, gini_luxury_goods, overall_land_mean, overall_land_median, overall_land_std, overall_food_mean, overall_food_median, overall_food_std, overall_luxury_mean, overall_luxury_median, overall_luxury_std]
- def calculate_gini_coefficient(data):
+  def calculate_gini_coefficient(data):
        diff_sum = np.sum(np.abs(np.subtract.outer(data, data)))
        return diff_sum / (2 * len(data) * np.sum(data))
  
  
   
  
- def calculate_action_ratios(self):
+  def calculate_action_ratios(self):
     # Summing up the counts for each action over the 7-day period
     total_trade_initiated = sum(self.trade_)
     total_trade_accepted = sum(self.trade_accept)
@@ -216,7 +216,7 @@ class CsvAnalysis:
         'rob_initiated_ratio': total_rob_initiated / total_actions if total_actions > 0 else 0,
     }
     return ratios
- def calculate_gdp_growth_rate(self, current_gdp):
+  def calculate_gdp_growth_rate(self, current_gdp):
         # Check if start_interval_gdp is set
         if self.start_interval_gdp is not None:
             # Calculate and return GDP growth rate
@@ -226,7 +226,7 @@ class CsvAnalysis:
             # Return "N/A" or another placeholder if start_interval_gdp is not set
             return "N/A"
         
- def calculate_and_sort_wealth(self, system):
+  def calculate_and_sort_wealth(self, system):
     # Initial dictionary for individual wealth
     individual_wealth = {}
 
@@ -234,7 +234,7 @@ class CsvAnalysis:
         individual = system.individuals[i]
         # Calculate wealth based on luxury goods and food values
         wealth = (individual.attributes['luxury_goods'] * 2) + individual.attributes['food']
-        individual_wealth[i] = wealth  # Use individual's index as key and wealth as value
+        individual_wealth[individual.attributes['name']] = wealth  # Use individual's name as key and wealth as value
 
     # Sort the dictionary by wealth in descending order and return a dictionary
     sorted_individual_wealth = dict(sorted(individual_wealth.items(), key=lambda item: item[1], reverse=True))
@@ -243,10 +243,49 @@ class CsvAnalysis:
     self.sorted_individual_wealth = sorted_individual_wealth
 
 
+  def report_to_soverign(self, system: System):
+    '''
+    computes and returns all data needed for soverign to make decisions
+    MUST be called before log_stat is called in a simulation day
+    '''
 
+    individuals = system.individuals
+
+    # calculate all data 
+    food_mean, food_median, food_std, richest_food_str, poorest_food_str, gini_food, \
+    land_mean, land_median, land_std, richest_land_str, poorest_land_str, gini_land, \
+    luxury_good_mean, luxury_good_median, luxury_goods_std, richest_luxury_str, poorest_luxury_str, gini_luxury_goods, \
+    overall_land_mean, overall_land_median, overall_land_std, overall_food_mean, overall_food_median, overall_food_std, overall_luxury_mean, overall_luxury_median, overall_luxury_std = self.calculate_interval_statistics()
+
+    # re-sort wealth by person
+    self.calculate_and_sort_wealth(system)
+    individual_wealth = self.sorted_individual_wealth
+
+    # compute the change in wealth of each person
+    person_change_in_wealth = {}
+    for i in range(self.population):
+      individual = individuals[i]
+      food = individual.attributes['food']
+      land = individual.attributes['land']
+      luxury_goods = individual.attributes['luxury_goods']
+      current_wealth = luxury_goods * 2 + food
+      person_change_in_wealth[individual.attributes['name']] = current_wealth - self.previous_individual_wealth[i]
+
+    # compute GDP
+    total_food_units = sum([i.attributes['food'] for i in individuals])
+    total_luxury_units = sum([i.attributes['luxury_goods'] for i in individuals])
+    gdp = total_food_units + 2 * total_luxury_units
+
+    # compute dGDP
+    if self.previous_gdp != 0:  # To avoid division by zero on the first day
+          daily_gdp_growth_rate = ((gdp - self.previous_gdp) / self.previous_gdp) * 100  # Growth rate percentage
+    else:
+          daily_gdp_growth_rate = 0  # No growth on the first day
     
+    # compute the activity ratios and format them into a string
+    activity_ratios = self.calculate_action_ratios()
+    activity_ratio_str = ", ".join([f"{action}: {rate}" for action, rate in activity_ratios])
 
-
-
-
+    # mean_production value 
+    return food_std, food_mean, land_std, land_mean, individual_wealth, gini_food, gini_land, person_change_in_wealth, gdp, daily_gdp_growth_rate, None, activity_ratio_str, None
 
