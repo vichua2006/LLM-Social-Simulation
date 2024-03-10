@@ -3,13 +3,15 @@ from Main.System import System
 
 class Report:
     def __init__(self, system:System) -> None:
-        population = len(system.individuals)
-        sample_space=system
+        population = len(system.individuals) # should really be system.individual_count considering death system, but that also won't work
+        current_system=system
         analysis=system.csv_analysis
+        current_policies=system.policy #system.policy.toText() or something to make it a textual description
+        current_bank=system.bank #bank.toText() or something similar to above
     
         food_std, food_mean, land_std, land_mean, \
         individual_wealth, gini_food, gini_land, person_change_in_wealth, \
-        gdp, dGDP, mean_production, rate_of_activities, goods_distribution = analysis.report_to_soverign(sample_space)
+        gdp, dGDP, mean_production, rate_of_activities, goods_distribution = analysis.report_to_soverign(current_system)
         # individual_wealth: dict{name:wealth}, make it sorted, descending order.
         # person_change_in_wealth: dict{name:wealth}
 
@@ -24,7 +26,7 @@ class Report:
 
         society_description=f"""The society consists of you and {population} other civilians. People interact on a daily basis, if they choose to. They have a variety of actions to choose from, they can farm produce, produce luxury goods, trade, and rob. They can also converse with each other.
         They started out unfamiliar to each other, but will eventually get to know each other through conversations and other interactions. They sometimes will discuss about your policies.
-        In this world, each person need food for survival. Each day, each person consumes {sample_space.consumption_rate} units of food automatically for survival. Once they go without food for {sample_space.days_of_starvation} days, they die. Whether this world is peaceful or not depends on what people do. They define the society, whereas you influence them, so you can influence how this society behave.""" #Describe the society and the things going on. The mechanisms of each actions. how much one consumes, how much one produce. How much people. General context can include the contextual prompts we’ve written before, just adding the sovereign and other parts.
+        In this world, each person need food for survival. Each day, each person consumes {current_system.consumption_rate} units of food automatically for survival. Once they go without food for {current_system.days_of_starvation} days, they die. Whether this world is peaceful or not depends on what people do. They define the society, whereas you influence them, so you can influence how this society behave.""" #Describe the society and the things going on. The mechanisms of each actions. how much one consumes, how much one produce. How much people. General context can include the contextual prompts we’ve written before, just adding the sovereign and other parts.
         equality_purpose_statement="You are a wise king who cares for the people, and you want to promote equity in your realm of control so that it can be a just society where each person leads a life of equality and respect."
         self.fixed_context=f'''You are the king of the society. {society_description}
         {equality_purpose_statement}
@@ -66,8 +68,9 @@ class Report:
         Non-quantifiable: if someone robbes another person, this person has to compensate 10 units of food to the victim.
         Interval: every 10 days, each person is taxed 10 percent of their luxury good holdings.'''#Explain what policies are possible, formatting, etc. Where you insert this paragraph can change based on how function call is done.
         self.query=f'''
-        Q: You are about to make policies. You can use any modern analysis tools you know of and any number of them, to make a policy that you think will help you achieve you objective.{self.policy_explanation} What is your policy?
+        Q: You are about to make policies. You can use any modern analysis tools you know of and any number of them, to make a policy that you think will help you achieve you objective.{self.policy_explanation}. The current policies are {current_policies}. You have a budget of  What is your policy?
         A: Let's think step by step.
         '''
     def report(self):
         return self.fixed_context,self.live_data,self.policy_explanation,self.query
+    
