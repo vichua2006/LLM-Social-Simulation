@@ -33,7 +33,10 @@ class System:
         #set food mechanism
         self.consumption_rate=1
         self.days_of_starvation=3
+        
 
+        #policies running
+        self.policy=None #should be a policy class, which has a list of running policies together with their textual descriptions.
     def production_factor(self, ratio, index):
         self.food_factor[index] *= ratio
 
