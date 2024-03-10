@@ -1,5 +1,7 @@
 import os
 import json
+import random
+import datetime
 from typing import List
 from Main.Calculation import donate, increase_food, increase_luxury, punishment, rob_rebelled, winner_loser
 from Main.CsvAnalysis import CsvAnalysis
@@ -13,8 +15,7 @@ from Main.SaveLoad import init_save, save_logframes
 import numpy as np
 from Main.Memory import ConceptNode
 from Main.Conversation import converse, add_memory_after_conversation
-import random
-import datetime
+from Main.Soverign import Report
 
 
 csv_file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
@@ -25,7 +26,7 @@ if os.path.exists(csv_file_name):
 conversation_dir = f"conversation_and_memory_log/{datetime.datetime.now().strftime('%d, %I %M %S%p')}/"
 
 # number of days between conversations
-days_between_conversation = 5
+days_between_conversation = 3
 
 def discuss_topic(system: System, individuals: List[Individual], topic: str, day_count: int):
   '''
@@ -80,7 +81,8 @@ def day_end(system,individuals:List[Individual]):
     else:
       individual.attributes['starved'] += 1
       if individual.attributes['starved'] > 3:
-        indivisual_death(system, individuals, count)
+         pass
+        # indivisual_death(system, individuals, count)
     if individual.attributes["luxury_goods"] >= 1:
       result: str = query_individual(individual, system, AIAction(AIActionType.ConsumeLuxury, id, None))
       if result.lower() == "yes":
@@ -403,14 +405,21 @@ def simulate(individuals:List[Individual],system:System):
       else:
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
-    system.csv_analysis.log_stat(system, csv_file_name)
 
     if (system.time % days_between_conversation == 0):
-      topic = "share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?"
 
-      print("Conversation starting...")
-      discuss_topic(system, individuals, topic, system.time)
-      print("conversation ended")
+      # topic = "share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?"
+
+      # print("Conversation starting...")
+      # discuss_topic(system, individuals, topic, system.time)
+      # print("conversation ended")
+
+      r = Report(system).report()
+      for statement in r:
+         print(statement)
+      
+    system.csv_analysis.log_stat(system, csv_file_name)
+
     # save_logframes(system)
     
 # %%

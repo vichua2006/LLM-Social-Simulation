@@ -1,10 +1,11 @@
-from CsvAnalysis import CsvAnalysis
-from System import System
+from Main.CsvAnalysis import CsvAnalysis
+from Main.System import System
 
 class Report:
-    def __init__(self, population:int, file_name:str,system:System) -> None:
+    def __init__(self, system:System) -> None:
+        population = len(system.individuals)
         sample_space=system
-        analysis=CsvAnalysis(population,file_name)
+        analysis=system.csv_analysis
     
         food_std, food_mean, land_std, land_mean, \
         individual_wealth, gini_food, gini_land, person_change_in_wealth, \
@@ -42,7 +43,7 @@ class Report:
         enumerate_change_str_list = []
         for i in person_change_in_wealth:
             changed="dropped" if person_change_in_wealth[i]<0 else "increased"
-            enumerate_change_str_list.append('{}\'s wealth has {} by {}. '.format(i,changed,person_change_in_wealth[i]))
+            enumerate_change_str_list.append('{}\'s wealth has {} by {}. '.format(i,changed,abs(person_change_in_wealth[i])))
         
         enumerate_change = " ".join(enumerate_change_str_list)
 

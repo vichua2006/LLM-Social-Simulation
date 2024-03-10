@@ -288,8 +288,8 @@ class CsvAnalysis:
     
     # compute the activity ratios and format them into a string
     activity_ratios = self.calculate_action_ratios()
-    activity_ratio_str = ", ".join([f"{action}: {rate}" for action, rate in activity_ratios])
+    activity_ratio_str = ", ".join([f"{action}: {rate}" for action, rate in activity_ratios.items()])
 
     # mean_production value 
-    return food_std, food_mean, land_std, land_mean, individual_wealth, gini_food, gini_land, person_change_in_wealth, gdp, daily_gdp_growth_rate, None, activity_ratio_str, None
+    return overall_food_std, overall_food_mean, overall_land_std, overall_land_mean, individual_wealth, gini_food, gini_land, person_change_in_wealth, gdp, daily_gdp_growth_rate, None, activity_ratio_str, None
 
