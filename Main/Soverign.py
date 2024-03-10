@@ -6,6 +6,7 @@ class Report:
         current_system=system
         analysis=CsvAnalysis(population,file_name)
         current_policies=system.policy #system.policy.toText() or something to make it a textual description
+        current_bank=system.bank #bank.toText() or something similar to above
 
         interval_of_properity=["poor","medium income","affluent"] #DATA: to be swapped with integer two touple values.
         society_description=f"""The society consists of you and {population} other civilians. People interact on a daily basis, if they choose to. They have a variety of actions to choose from, they can farm produce, produce luxury goods, trade, and rob. They can also converse with each other.
@@ -60,7 +61,7 @@ class Report:
         Non-quantifiable: if someone robbes another person, this person has to compensate 10 units of food to the victim.
         Interval: every 10 days, each person is taxed 10 percent of their luxury good holdings.'''#Explain what policies are possible, formatting, etc. Where you insert this paragraph can change based on how function call is done.
         self.query=f'''
-        Q: You are about to make policies. You can use any modern analysis tools you know of and any number of them, to make a policy that you think will help you achieve you objective.{self.policy_explanation}. The current policies are {current_policies} What is your policy?
+        Q: You are about to make policies. You can use any modern analysis tools you know of and any number of them, to make a policy that you think will help you achieve you objective.{self.policy_explanation}. The current policies are {current_policies}. You have a budget of  What is your policy?
         A: Let's think step by step.
         '''
     def report(self):
