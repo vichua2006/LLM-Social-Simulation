@@ -1,0 +1,258 @@
+Start
+DAY 1 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "Prioritize gaining resources for sensual pleasure and future security of social position.",
+    "payload": {
+        "targetId": 2,
+        "robType": "food"
+    }
+}
+Person 1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "Maximizing food production to ensure survival.",
+    "payload": null
+}
+```
+Farm is successful.
+Person 2 is responding...
+
+Responding to:AIActionType.Rob, owner: 0, target: 2, robType: food
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+person_3 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_1, loser is person_3.
+Total rob times of the winner: 1
+SHARE_LOST_FOOD: no subject, directly lost the rob amount.
+SHARE_ROB_FOOD: no subject, directly get the rob amount.
+Robbing process finished
+Person 3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Maximizing future pleasure by producing luxury goods for sensual pleasure and pleasure of the mind.",
+    "payload": null
+}
+Producing luxury goods is successful
+Person 4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm today to ensure my survival by producing 5 units of food. Farming is a reliable way to secure my daily sustenance and maintain my strength.",
+    "payload": null
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+Person 2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+```json
+{
+    "action": "produce",
+    "reason": "Maximizing pleasure of the mind by acquiring luxury goods for future security.",
+    "payload": {
+        "description": "The action you want to do in this turn.",
+        "value": "produce"
+    }
+}
+```
+Producing luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4]
+PASSIVE STATE
+TOTAL DEATHS:  0
+DAY 2 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+
+    {
+        "action": "farm",
+        "reason": "Farming is a secure way to ensure food production for survival without risking conflict or unknown outcomes of other actions. It aligns with my self-centered nature and current focus on personal sensual pleasures.",
+        "payload": null
+    }
+Farm is successful.
+Person 1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "I will rob person_1 for food to satisfy my covetousness and secure my survival. Success in this action will provide immediate sensual pleasure.",
+    "payload": {
+        "targetId": 1,
+        "robType": "food"
+    }
+}
+Person 2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "I will farm the land to produce food for survival.",
+    "payload": null
+}
+Farm is successful.
+Person 3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "I choose to rob person_3 for food to fulfill my immediate need and increase my social position.",
+    "payload": {
+        "targetId": 3,
+        "robType": "food"
+    }
+}
+Person 4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "I choose to farm today to ensure my survival by producing 4 units of food, considering my memory of having farmed successfully on day 0 and the importance of maintaining a stable food source.",
+    "payload": null
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+Person 1 is responding...
+
+Responding to:AIActionType.Rob, owner: 1, target: 1, robType: food
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+person_2 chooses to REBEL
+ROBERROR: cannot rob self.
+Person 3 is responding...
+
+Responding to:AIActionType.Rob, owner: 3, target: 3, robType: food
+available targets:[0, 1, 2, 4]
+PASSIVE STATE
+person_4 chooses to REBEL
+ROBERROR: cannot rob self.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4]
+PASSIVE STATE
+TOTAL DEATHS:  0
+You are the king of the society. The society consists of you and 5 other civilians. People interact on a daily basis, if they choose to. They have a variety of actions to choose from, they can farm produce, produce luxury goods, trade, and rob. They can also converse with each other.
+        They started out unfamiliar to each other, but will eventually get to know each other through conversations and other interactions. They sometimes will discuss about your policies.
+        In this world, each person need food for survival. Each day, each person consumes 1 units of food automatically for survival. Once they go without food for 3 days, they die. Whether this world is peaceful or not depends on what people do. They define the society, whereas you influence them, so you can influence how this society behave.
+        You are a wise king who cares for the people, and you want to promote equity in your realm of control so that it can be a just society where each person leads a life of equality and respect.
+        Society's food Mean [p,o): poor
+        Society's food Mean [m,f): medium
+        Society's food Mean [a,f): affluent
+        If someone's food is below 13.3(mean) - 2*16.23607095328177(standard deviation)=-19.172141906563542, then this person is relatively poor, and might be ashamed of it.
+        If someone's food is above 13.3(mean) + 2*16.23607095328177(standard deviation)=45.77214190656355, then this person is relatively wealthy and might be proud of it.
+
+        Without land, individual cannot farm and produce food to survive. 
+        If someone's land ownership is below 5.6(mean) - 2*4.317406628984581(standard deviation)=-3.0348132579691622, then this person is relatively poor, and might be ashamed of it.
+        If someone's land ownership is above 5.6(mean) + 2*4.317406628984581(standard deviation)=14.234813257969162, then this person is relatively wealthy and might be proud of it.
+        
+LIVE DATA: The individuals wealth listed below in descending order along with their change in wealth:('person_2 has 43 in farmer currency. person_1 has 15 in farmer currency. person_3 has 7 in farmer currency. person_5 has 7 in farmer currency. person_4 has 4 in farmer currency.', "person_1's wealth has increased by 0.  person_2's wealth has increased by 0.  person_3's wealth has increased by 0.  person_4's wealth has increased by 0.  person_5's wealth has increased by 0. ")
+
+        Collective wealth GDP is 76.
+        GINI coefficient of land:0.37142857142857144, GINI coefficient of food:0.6022556390977444.
+        Collective change in wealth:0.0
+        Daily average household production: None.
+
+        Rates of activities:trade_initiated_ratio: 0.0, trade_accepted_ratio: 0.0, produce_luxury_ratio: 0.2, produce_food_ratio: 0.5, rob_initiated_ratio: 0.3.
+        Distribution of goods production: None.
+        Conversations:
+        
+You want to make policies in accordance with your objective. You have the highest power in this group and has flexibility in policy making. First, you have to specify the group of people that you policy applies to. There are two layers to group specification.
+        You first specify the action that triggers your policy, it could be quantifiable: farm, luxury good production, trade, trade acceptance, or non-quantifiable: robbery, death, birth, being robbed, or as interval: the policy is triggered each n days. Then, if it is quantifiable, you choose the amount that will trigger the policy, for farm it is how much food produced, for trade it is how much value is being traded, for luxury good it is how much luxury good is produced.
+        Then, when you specified the trigger event, you specify the category of change that you want to make, which includes land, food, and luxury good. You have a national bank that stores all the government's wealth. You have to periodically replenish it. You can take people's resources and replenish your national bank, or you can use your national bank's resources to compensate people, or you can take some people's resources to compensate for other people.
+        Several examples of policy is listed below in textual format, although you will have to output in a different format:
+        Quantifiable: if someone farms more than 20 units a day, gives one of this person's land to the poorest person.
+        Non-quantifiable: if someone robbes another person, this person has to compensate 10 units of food to the victim.
+        Interval: every 10 days, each person is taxed 10 percent of their luxury good holdings.
+
+        Q: You are about to make policies. You can use any modern analysis tools you know of and any number of them, to make a policy that you think will help you achieve you objective.You want to make policies in accordance with your objective. You have the highest power in this group and has flexibility in policy making. First, you have to specify the group of people that you policy applies to. There are two layers to group specification.
+        You first specify the action that triggers your policy, it could be quantifiable: farm, luxury good production, trade, trade acceptance, or non-quantifiable: robbery, death, birth, being robbed, or as interval: the policy is triggered each n days. Then, if it is quantifiable, you choose the amount that will trigger the policy, for farm it is how much food produced, for trade it is how much value is being traded, for luxury good it is how much luxury good is produced.
+        Then, when you specified the trigger event, you specify the category of change that you want to make, which includes land, food, and luxury good. You have a national bank that stores all the government's wealth. You have to periodically replenish it. You can take people's resources and replenish your national bank, or you can use your national bank's resources to compensate people, or you can take some people's resources to compensate for other people.
+        Several examples of policy is listed below in textual format, although you will have to output in a different format:
+        Quantifiable: if someone farms more than 20 units a day, gives one of this person's land to the poorest person.
+        Non-quantifiable: if someone robbes another person, this person has to compensate 10 units of food to the victim.
+        Interval: every 10 days, each person is taxed 10 percent of their luxury good holdings. What is your policy?
+        A: Let's think step by step.
+        
+DAY 3 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is a reliable way to ensure food production for survival. With an expected 4 units of food produced today, it is a practical choice to secure my sustenance.",
+    "payload": null
+}
+Farm is successful.
+Person 1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "I choose to rob person_3 for food to fulfill my immediate need and increase my food reserves.",
+    "payload": {
+        "targetId": 3,
+        "robType": "food"
+    }
+}
+Person 2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Prioritizing food production to ensure survival and fulfill present sensual pleasures."
+}
+Farm is successful.
+Person 3 is responding...
+
+Responding to:AIActionType.Rob, owner: 1, target: 3, robType: food
+available targets:[0, 1, 2, 4]
+PASSIVE STATE
+person_4 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_4, loser is person_2.
+Total rob times of the winner: 1
