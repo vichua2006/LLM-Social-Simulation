@@ -8,6 +8,7 @@ from Main.Memory import ConceptNode
 from Main.SpeakingAgent import SpeakingAgent, CustomGroupChat
 from Main.Query import generate_environment_description, generate_general_description
 from Main.Retrieve import new_retrieve
+from Main.ChatGpt import chat
 
 from Main.config import AUTOGEN_LLM_CONFIG 
 client = OpenAI(api_key=AUTOGEN_LLM_CONFIG["config_list"][0]["api_key"])
@@ -150,6 +151,84 @@ def evaluate_speaking_tendencies(personality_description: str) -> str:
     return speaking_tendency
 
 
+def summarize_conversation(conversations: List[List[Dict[str, str]]]) -> str:
+    '''
+    Given multiple conversations, ask gpt to summarize and categorize the contents by agent's sentiment (content, somewhat content, and not content)
+    and list who those people are, for want reason, and any suggested policy.
+    '''
+
+    messages = []
+
+    for i, convo in enumerate(conversations, 1):
+        messages.append({"role": "system", "content": f"This is the start of conversation number {i}"})
+        messages.extend(convo)
+
+    task_description_categorize = '''
+    Please read the above conversations of people in a society disscussing their opinions about the world they live in.
+    First, based on how their opinions about the world, categorize the people into one of the following category:
+    1. Content
+    2. Somewhat Content
+    3. Not Content
+
+    IMPORTANT: all individuals in the conversation must be included in exactly one category
+    if an category is empty, indicate it as "None".
+
+    Here is an example output:
+    Content: person_1, person_3, person_5
+    Somewhat Content: None
+    Not Content: person_2, person_4
+
+    '''
+    task_description_summarize = '''
+
+    Next, for each category, summarize the contents of their conversations into the format below. It MUST be strictly in this format:
+
+    Summary <the number of the summary here>:
+        Sentiment: <The category of this group of people. You MUST choose one of the three statements avaliable: "Content", "Somewhat Content", or "Not Content">
+        Individuals: <A list of the names of people who are in this category>
+        Reasons: <A list of reasons why those listed individuals feel this way. Only information presented in the conversation should be used to create these reasons, and these reasons should only be from the individuals that were listed above>
+        Suggested Changes: <A list of changes, if any, suggested by the individuals listed above. If they did not mention any changes, put "None">
+
+    If there are several reasons that are similar, combine them into one. 
+
+    Here is an example summary of the 3 categories:
+
+    Summary 1:
+        Sentiment: Not Content
+        Individuals: person_2, person_5
+        Reasons: both person_2 and person_5 currently have 0 units of food, and they often feel starved. 
+        Suggested Changes: increase the amount of food they receive from trading by 10 percent.
+
+    Summary 2:
+        Sentiment: Content
+        Individuals: person_1
+        Reasons: person_1 has 40 units of food and is able to sustain themselves.
+        Suggested Changes: None
+    
+    Summary 3:
+        Sentiment: Somewhat Content
+        Individuals: person_3, person_4
+        Reasons: person_3 has 20 units of food and is able to sustain themselves, but keeps getting robbed by other people. person_4 has enough food, but 0 units of luxury good.
+        Suggested Changes: None
+    
+    
+    Output the summaries strictly according to the given format
+    IMPORTANT: There may only be at most one summary for each category.
+    '''
+
+    categorization_msg = {"role": "system", "content": task_description_categorize}
+    messages.append(categorization_msg)
+    response = client.chat.completions.create(model="gpt-3.5-turbo", messages=messages, temperature=0.0)
+    categories = response.choices[0].message.content
+
+    system_msg = {"role": "system", "content": f"Here are the categories:\n{categories}"}
+    messages.append(system_msg)
+    summarization_msg = {"role": "system", "content": task_description_summarize}
+    messages.append(summarization_msg)
+    response = client.chat.completions.create(model="gpt-3.5-turbo", messages=messages, temperature=0.0)
+    summaries = response.choices[0].message.content
+
+    return summaries
 
 
 
