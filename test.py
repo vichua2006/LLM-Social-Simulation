@@ -2,5 +2,8 @@ from Main.Personalities import generate_personality
 from Main.Conversation import evaluate_speaking_tendencies
 
 
-for i in range(10):
-    print(generate_personality())
+
+d = {(1, 2), (3, 4)}
+
+for i, j in d:
+    print(i + j)
