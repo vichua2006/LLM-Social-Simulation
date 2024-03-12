@@ -31,7 +31,7 @@ class System:
         self.deaths = 0
 
         #set food mechanism
-        self.consumption_rate=1
+        self.consumption_rate=3
         self.days_of_starvation=3
         
 

@@ -72,15 +72,15 @@ luxury_production = np.random.normal(2, 0.5)
 
 # %%
 # Function to update the state of each individual at the end of the day
-def day_end(system,individuals:List[Individual]):
+def day_end(system:System,individuals:List[Individual]):
   count = 0
   for individual in individuals:
-    if individual.attributes['food'] >= 3:
-      individual.attributes['food'] -= 3 # Decrease the food by 3
+    if individual.attributes['food'] >= system.consumption_rate:
+      individual.attributes['food'] -= system.consumption_rate # Decrease the food by 3
       individual.attributes["starved"] = 0
     else:
       individual.attributes['starved'] += 1
-      if individual.attributes['starved'] > 3:
+      if individual.attributes['starved'] > system.days_of_starvation:
          pass
         # indivisual_death(system, individuals, count)
     if individual.attributes["luxury_goods"] >= 1:
