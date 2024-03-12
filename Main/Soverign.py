@@ -21,9 +21,11 @@ class Report:
         # goods_distribution NOT FOUND
 
         conversations=""#WIP
-
-        interval_of_properity=["poor","medium income","affluent"] #DATA: to be swapped with integer two touple values.
-
+        poor=(0,current_system.consumption_rate*population*2)
+        medium_income=(current_system.consumption_rate*population*2,current_system.consumption_rate*population*4)
+        affluent=(current_system.consumption_rate*population*4,current_system.consumption_rate*population*4,"+infinity")
+        interval_of_properity=[poor,medium_income,affluent] #DATA: to be swapped with integer two touple values.
+        
         society_description=f"""The society consists of you and {population} other civilians. People interact on a daily basis, if they choose to. They have a variety of actions to choose from, they can farm produce, produce luxury goods, trade, and rob. They can also converse with each other.
         They started out unfamiliar to each other, but will eventually get to know each other through conversations and other interactions. They sometimes will discuss about your policies.
         In this world, each person need food for survival. Each day, each person consumes {current_system.consumption_rate} units of food automatically for survival. Once they go without food for {current_system.days_of_starvation} days, they die. Whether this world is peaceful or not depends on what people do. They define the society, whereas you influence them, so you can influence how this society behave.""" #Describe the society and the things going on. The mechanisms of each actions. how much one consumes, how much one produce. How much people. General context can include the contextual prompts we’ve written before, just adding the sovereign and other parts.
@@ -50,7 +52,7 @@ class Report:
         enumerate_change = " ".join(enumerate_change_str_list)
 
         self.live_data=f'''LIVE DATA: The individuals wealth listed below in descending order along with their change in wealth:{enumerate_wealth, enumerate_change }
-
+        
         Collective wealth GDP is {gdp}.
         GINI coefficient of land:{gini_land}, GINI coefficient of food:{gini_food}.
         Collective change in wealth:{dGDP}
@@ -59,6 +61,8 @@ class Report:
         Rates of activities:{rate_of_activities}.
         Distribution of goods production: {goods_distribution}.
         Conversations:{conversations}
+
+        Additionally, below is the status of your national bank:{current_bank}
         '''
         self.policy_explanation='''You want to make policies in accordance with your objective. You have the highest power in this group and has flexibility in policy making. First, you have to specify the group of people that you policy applies to. There are two layers to group specification.
         You first specify the action that triggers your policy, it could be quantifiable: farm, luxury good production, trade, trade acceptance, or non-quantifiable: robbery, death, birth, being robbed, or as interval: the policy is triggered each n days. Then, if it is quantifiable, you choose the amount that will trigger the policy, for farm it is how much food produced, for trade it is how much value is being traded, for luxury good it is how much luxury good is produced.
