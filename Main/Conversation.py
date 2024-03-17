@@ -183,9 +183,8 @@ def summarize_conversation(conversations: List[List[Dict[str, str]]]) -> str:
 
     Next, for each category, summarize the contents of their conversations into the format below. It MUST be strictly in this format:
 
-    Summary <the number of the summary here>:
-        Sentiment: <The category of this group of people. You MUST choose one of the three statements avaliable: "Content", "Somewhat Content", or "Not Content">
-        Individuals: <A list of the names of people who are in this category>
+    Sentiment: <The category: "Content", "Somewhat Content", or "Not Content">
+        Individuals: <the people who are in this category>
         Reasons: <A list of reasons why those listed individuals feel this way. Only information presented in the conversation should be used to create these reasons, and these reasons should only be from the individuals that were listed above>
         Suggested Changes: <A list of changes, if any, suggested by the individuals listed above. If they did not mention any changes, put "None">
 
@@ -193,20 +192,18 @@ def summarize_conversation(conversations: List[List[Dict[str, str]]]) -> str:
 
     Here is an example summary of the 3 categories:
 
-    Summary 1:
-        Sentiment: Not Content
+
+    Sentiment: Not Content
         Individuals: person_2, person_5
         Reasons: both person_2 and person_5 currently have 0 units of food, and they often feel starved. 
         Suggested Changes: increase the amount of food they receive from trading by 10 percent.
 
-    Summary 2:
-        Sentiment: Content
+    Sentiment: Content
         Individuals: person_1
         Reasons: person_1 has 40 units of food and is able to sustain themselves.
         Suggested Changes: None
     
-    Summary 3:
-        Sentiment: Somewhat Content
+    Sentiment: Somewhat Content
         Individuals: person_3, person_4
         Reasons: person_3 has 20 units of food and is able to sustain themselves, but keeps getting robbed by other people. person_4 has enough food, but 0 units of luxury good.
         Suggested Changes: None
