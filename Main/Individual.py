@@ -40,7 +40,10 @@ class Individual:
             "land": land,  # Land owned by the individual
             "food": food,  # Initial food as long tail distribution
             "action": 1  # Initial action point is 1
-            ,"trust_of_others":0
+            ,"trust_of_others":0,
+            "food_production":0,
+            "luxury_production":0
+
         }
         
         # Individual specific production numbers

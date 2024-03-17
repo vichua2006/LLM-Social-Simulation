@@ -15,11 +15,6 @@ class Report:
         # individual_wealth: dict{name:wealth}, make it sorted, descending order.
         # person_change_in_wealth: dict{name:wealth}
 
-
-
-        # mean_production NOT FOUND
-        # goods_distribution NOT FOUND
-
         conversations=""#WIP
         poor=(0,current_system.consumption_rate*population*2)
         medium_income=(current_system.consumption_rate*population*2,current_system.consumption_rate*population*4)

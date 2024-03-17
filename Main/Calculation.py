@@ -7,9 +7,10 @@ from Main.System import System, Bank
 #Utils
 #Food
 def increase_food(individual:Individual, factor):
-    # Increase food based on individual's production #
+    # Increase food based on indivi dual's production #
     gain = round(individual.food_production * individual.attributes["land"] / 3)
     individual.attributes['food'] += gain* factor
+    individual.attributes["food_production"] += gain * factor
     return gain *factor
     
 # Luxury Good
@@ -17,6 +18,7 @@ def increase_luxury(individual: Individual, factor):
     # Increase luxury goods based on individual's production #
     gain = round(individual.luxury_production * individual.attributes["land"] / 3)
     individual.attributes["luxury_goods"] += gain *factor
+    individual.attributes["luxury_production"] += gain * factor
     return gain*factor
 
 #Rob

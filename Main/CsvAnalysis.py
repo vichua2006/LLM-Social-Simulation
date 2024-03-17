@@ -25,6 +25,8 @@ class CsvAnalysis:
    self.food_daily = [] 
    self.land_daily = []
    self.luxury_goods_daily = []  
+   self.food_production_daily = []
+   self.luxury_production_daily = []
    special = [population]
    head = [f"day"]
    head.extend(["1st Wealthiest", "2nd Wealthiest", "3rd Wealthiest", "4th Wealthiest", "5th Wealthiest", "6th Wealthiest", "7th Wealthiest", "8th Wealthiest", "9th Wealthiest"])
@@ -33,8 +35,7 @@ class CsvAnalysis:
                    f"trade_accepted_{i}", f"{i}_obey_to", f"farm_count_{i}", f"produce_luxury_count_{i}", f"consume_luxury_count_{i}", f"food_{i}", f"land_{i}", f"luxury_goods_{i}", f"daily_change_in_wealth_{i}"]
    head.extend(["GDP", "Daily GDP Growth Rate", "Mean Food", "Median Food", "SD Food", "Richest Food (ID | Amount)",
                     "Poorest Food (ID | Amount)", "Gini Food", "Mean Land", "Median Land",
-                    "SD Land", "Richest Land (ID | AMount)", "Poorest Land (ID | AMount)", "Gini Land", "Mean Luxury Goods", "Median Luxury Goods", "SD Luxury Goods", "Richest Luxury Goods (ID | Amount)", "Poorest Luxury Goods (ID | Amount)", "Gini Luxury Goods", "Overall Land Mean", "Overall Land Median", "Overall Land Std", "Overall Food Mean", "Overall Food Median", "Overall Food Std", "Overall Luxury Goods Mean", "Overall Luxury Goods Median", "Overall Luxury Goods Std", "Trade Initiated Ratio", "Trade Accepted Ratio", 
-                      "Produce Luxury Ratio", "Produce Food Ratio", "Rob Initiated Ratio", 
+                    "SD Land", "Richest Land (ID | AMount)", "Poorest Land (ID | AMount)", "Gini Land", "Mean Luxury Goods", "Median Luxury Goods", "SD Luxury Goods", "Richest Luxury Goods (ID | Amount)", "Poorest Luxury Goods (ID | Amount)", "Gini Luxury Goods", "Overall Land Mean", "Overall Land Median", "Overall Land Std", "Overall Food Mean", "Overall Food Median", "Overall Food Std", "Overall Luxury Goods Mean", "Overall Luxury Goods Median", "Overall Luxury Goods Std", "Average Luxury Good Production", "Average Food Production", "Good Distribution Ratio (Food/Luxury)", "Trade Initiated Ratio", "Trade Accepted Ratio", "Produce Luxury Ratio", "Produce Food Ratio", "Rob Initiated Ratio", 
                       "GDP Growth"])
    if (file_name != None):
     with open(file_name, 'a', newline='') as f:
@@ -86,10 +87,14 @@ class CsvAnalysis:
    daily_food = []
    daily_land = []
    daily_luxury_goods = []
+   food_production_daily = []
+   luxury_production_daily = []
    self.calculate_and_sort_wealth(system)
    log = [self.day_]
    total_food_units = 0
    total_luxury_units = 0
+   total_food_production_units = 0
+   total_luxury_production_units = 0
    top_wealthy_indices = list(self.sorted_individual_wealth.keys())[:9]  # Adjust as needed
    for rank, index in enumerate(top_wealthy_indices, start=1):
         wealth = self.sorted_individual_wealth[index]
@@ -101,6 +106,8 @@ class CsvAnalysis:
      individual = system.individuals[i]
      food = individual.attributes['food']
      land = individual.attributes['land']
+     food_production = individual.attributes['food_production']
+     luxury_production = individual.attributes['luxury_production']
      luxury_goods = individual.attributes['luxury_goods']
      current_wealth = luxury_goods * 2 + food
      daily_change_in_wealth[i] = current_wealth - self.previous_individual_wealth[i]
@@ -108,12 +115,16 @@ class CsvAnalysis:
      daily_food.append(food)
      daily_land.append(land)
      daily_luxury_goods.append(luxury_goods)
+     food_production_daily.append(food_production)
+     luxury_production_daily.append(luxury_production)
      total_food_units += food
      total_luxury_units += luxury_goods
+     total_food_production_units += food_production
+     total_luxury_production_units += luxury_production
      
      log.extend([self.rob_[i], self.rob_rebel[i], self.trade_[i], self.trade_accept[i],
                        self.obey_[i], self.farm_[i], self.produce_luxury_[i], self.consume_luxury_[i], food, land, luxury_goods, daily_change_in_wealth[i]])
-   gdp = total_food_units + 2 * total_luxury_units
+   gdp = total_food_production_units + 2 * total_luxury_production_units
    if self.previous_gdp != 0:  # To avoid division by zero on the first day
         gdp_growth_rate = ((gdp - self.previous_gdp) / self.previous_gdp) * 100  # Growth rate percentage
    else:
@@ -129,6 +140,8 @@ class CsvAnalysis:
    log.append(gdp_growth_rate)
    self.food_daily.append(daily_food)
    self.land_daily.append(daily_land)
+   self.food_production_daily.append(food_production_daily)
+   self.luxury_production_daily.append(luxury_production_daily)
    self.luxury_goods_daily.append(daily_luxury_goods)
    if (self.day_ - 1) % 7 == 0:  # Assuming a 2-day interval; adjust as needed
         self.start_interval_gdp = gdp
@@ -151,50 +164,60 @@ class CsvAnalysis:
 
 
   def calculate_interval_statistics(self):
-       # Calculate statistics for the last 2 days
-       food_stats = np.array(self.food_daily[-7:])
-       land_stats = np.array(self.land_daily[-7:])
-       luxury_goods_stats = np.array(self.luxury_goods_daily[-7:])
+        # Calculate statistics for the last 2 days
+        food_stats = np.array(self.food_daily[-7:])
+        land_stats = np.array(self.land_daily[-7:])
+        luxury_goods_stats = np.array(self.luxury_goods_daily[-7:])
+        luxury_production_stats = np.array(self.luxury_production_daily[-7:])
+        food_production_stats = np.array(self.food_production_daily[-7:])
 
 
-       food_mean, land_mean, luxury_good_mean = np.mean(food_stats, axis=0), np.mean(land_stats, axis=0), np.mean(luxury_goods_stats, axis=0)
-       food_median, land_median, luxury_good_median = np.median(food_stats, axis=0), np.median(land_stats, axis=0), np.median(luxury_goods_stats, axis=0)
-       food_std, land_std, luxury_goods_std = np.std(food_stats, axis=0), np.std(land_stats, axis=0), np.std(luxury_goods_stats, axis=0)
-       gini_food, gini_land, gini_luxury_goods = CsvAnalysis.calculate_gini_coefficient(food_stats.flatten()), CsvAnalysis.calculate_gini_coefficient(land_stats.flatten()), CsvAnalysis.calculate_gini_coefficient(luxury_goods_stats.flatten())
+        food_mean, land_mean, luxury_good_mean = np.mean(food_stats, axis=0), np.mean(land_stats, axis=0), np.mean(luxury_goods_stats, axis=0)
+        food_median, land_median, luxury_good_median = np.median(food_stats, axis=0), np.median(land_stats, axis=0), np.median(luxury_goods_stats, axis=0)
+        food_std, land_std, luxury_goods_std = np.std(food_stats, axis=0), np.std(land_stats, axis=0), np.std(luxury_goods_stats, axis=0)
+        gini_food, gini_land, gini_luxury_goods = CsvAnalysis.calculate_gini_coefficient(food_stats.flatten()), CsvAnalysis.calculate_gini_coefficient(land_stats.flatten()), CsvAnalysis.calculate_gini_coefficient(luxury_goods_stats.flatten())
 
+
+        
+        overall_land_mean = np.mean(land_stats)
+        overall_land_median = np.median(land_stats)
+        overall_land_std = np.std(land_stats)
+
+        overall_food_mean = np.mean(food_stats)
+        overall_food_median = np.median(food_stats)
+        overall_food_std = np.std(food_stats)
+
+        overall_luxury_mean = np.mean(luxury_goods_stats)
+        overall_luxury_median = np.median(luxury_goods_stats)
+        overall_luxury_std = np.std(luxury_goods_stats)
+
+        total_food, total_land, total_luxury = np.sum(food_stats, axis=0), np.sum(land_stats, axis=0), np.sum(luxury_goods_stats, axis=0)
+        richest_food, poorest_food = np.argmax(total_food), np.argmin(total_food)
+        richest_land, poorest_land = np.argmax(total_land), np.argmin(total_land)
+        richest_luxury, poorest_luxury = np.argmax(total_luxury), np.argmin(total_luxury)
+
+        richest_food_value, poorest_food_value = total_food[richest_food], total_food[poorest_food]
+        richest_land_value, poorest_land_value = total_land[richest_land], total_land[poorest_land]
+        richest_luxury_value, poorest_luxury_value = total_land[richest_luxury], total_land[poorest_luxury]
 
       
-       overall_land_mean = np.mean(land_stats)
-       overall_land_median = np.median(land_stats)
-       overall_land_std = np.std(land_stats)
+        richest_food_str = f"{richest_food}|{richest_food_value}"
+        poorest_food_str = f"{poorest_food}|{poorest_food_value}"
+        richest_land_str = f"{richest_land}|{richest_land_value}"
+        poorest_land_str = f"{poorest_land}|{poorest_land_value}"
+        richest_luxury_str = f"{richest_luxury}|{richest_luxury_value}"
+        poorest_luxury_str = f"{poorest_luxury}|{poorest_luxury_value}"
+        
+        overall_luxury_production_mean = np.mean(luxury_production_stats)
+        overall_food_production_mean = np.mean(food_production_stats)
+        total_food_production = np.sum(food_production_stats)
+        total_luxury_production = np.sum(luxury_production_stats)  
+        if total_luxury_production > 0:
+          good_distribution_ratio = total_food_production / total_luxury_production
+        else:
+          good_distribution_ratio = "undefined"
 
-       overall_food_mean = np.mean(food_stats)
-       overall_food_median = np.median(food_stats)
-       overall_food_std = np.std(food_stats)
-
-       overall_luxury_mean = np.mean(luxury_goods_stats)
-       overall_luxury_median = np.median(luxury_goods_stats)
-       overall_luxury_std = np.std(luxury_goods_stats)
-
-       total_food, total_land, total_luxury = np.sum(food_stats, axis=0), np.sum(land_stats, axis=0), np.sum(luxury_goods_stats, axis=0)
-       richest_food, poorest_food = np.argmax(total_food), np.argmin(total_food)
-       richest_land, poorest_land = np.argmax(total_land), np.argmin(total_land)
-       richest_luxury, poorest_luxury = np.argmax(total_luxury), np.argmin(total_luxury)
-
-       richest_food_value, poorest_food_value = total_food[richest_food], total_food[poorest_food]
-       richest_land_value, poorest_land_value = total_land[richest_land], total_land[poorest_land]
-       richest_luxury_value, poorest_luxury_value = total_land[richest_luxury], total_land[poorest_luxury]
-
-    
-       richest_food_str = f"{richest_food}|{richest_food_value}"
-       poorest_food_str = f"{poorest_food}|{poorest_food_value}"
-       richest_land_str = f"{richest_land}|{richest_land_value}"
-       poorest_land_str = f"{poorest_land}|{poorest_land_value}"
-       richest_luxury_str = f"{richest_luxury}|{richest_luxury_value}"
-       poorest_luxury_str = f"{poorest_luxury}|{poorest_luxury_value}"
-      
-
-       return [food_mean, food_median, food_std, richest_food_str, poorest_food_str, gini_food, land_mean, land_median, land_std, richest_land_str, poorest_land_str, gini_land, luxury_good_mean, luxury_good_median, luxury_goods_std, richest_luxury_str, poorest_luxury_str, gini_luxury_goods, overall_land_mean, overall_land_median, overall_land_std, overall_food_mean, overall_food_median, overall_food_std, overall_luxury_mean, overall_luxury_median, overall_luxury_std]
+        return [food_mean, food_median, food_std, richest_food_str, poorest_food_str, gini_food, land_mean, land_median, land_std, richest_land_str, poorest_land_str, gini_land, luxury_good_mean, luxury_good_median, luxury_goods_std, richest_luxury_str, poorest_luxury_str, gini_luxury_goods, overall_land_mean, overall_land_median, overall_land_std, overall_food_mean, overall_food_median, overall_food_std, overall_luxury_mean, overall_luxury_median, overall_luxury_std, overall_luxury_production_mean, overall_food_production_mean, good_distribution_ratio]
   def calculate_gini_coefficient(data):
        diff_sum = np.sum(np.abs(np.subtract.outer(data, data)))
        return diff_sum / (2 * len(data) * np.sum(data))
@@ -256,10 +279,12 @@ class CsvAnalysis:
     individuals = system.individuals
 
     # calculate all data 
+    
     food_mean, food_median, food_std, richest_food_str, poorest_food_str, gini_food, \
     land_mean, land_median, land_std, richest_land_str, poorest_land_str, gini_land, \
     luxury_good_mean, luxury_good_median, luxury_goods_std, richest_luxury_str, poorest_luxury_str, gini_luxury_goods, \
-    overall_land_mean, overall_land_median, overall_land_std, overall_food_mean, overall_food_median, overall_food_std, overall_luxury_mean, overall_luxury_median, overall_luxury_std = self.calculate_interval_statistics()
+    overall_land_mean, overall_land_median, overall_land_std, overall_food_mean, overall_food_median, overall_food_std, \
+    overall_luxury_mean, overall_luxury_median, overall_luxury_std, overall_luxury_production_mean, overall_food_production_mean, good_distribution_ratio = self.calculate_interval_statistics()
 
     # re-sort wealth by person
     self.calculate_and_sort_wealth(system)
@@ -291,5 +316,5 @@ class CsvAnalysis:
     activity_ratio_str = ", ".join([f"{action}: {rate}" for action, rate in activity_ratios.items()])
 
     # mean_production value 
-    return overall_food_std, overall_food_mean, overall_land_std, overall_land_mean, individual_wealth, gini_food, gini_land, person_change_in_wealth, gdp, daily_gdp_growth_rate, None, activity_ratio_str, None
+    return overall_food_std, overall_food_mean, overall_land_std, overall_land_mean, individual_wealth, gini_food, gini_land, person_change_in_wealth, gdp, daily_gdp_growth_rate, overall_food_production_mean, activity_ratio_str, good_distribution_ratio
 
