@@ -73,7 +73,6 @@ luxury_production = np.random.normal(2, 0.5)
 # %%
 # Function to update the state of each individual at the end of the day
 def day_end(system:System,individuals:List[Individual]):
-  count = 0
   for individual in individuals:
     if individual.attributes['food'] >= system.consumption_rate:
       individual.attributes['food'] -= system.consumption_rate # Decrease the food by 3
@@ -81,8 +80,7 @@ def day_end(system:System,individuals:List[Individual]):
     else:
       individual.attributes['starved'] += 1
       if individual.attributes['starved'] > system.days_of_starvation:
-         pass
-        # indivisual_death(system, individuals, count)
+        individual_death(system, individual)
     if individual.attributes["luxury_goods"] >= 1:
       result: str = query_individual(individual, system, AIAction(AIActionType.ConsumeLuxury, id, None))
       if result.lower() == "yes":
@@ -101,8 +99,6 @@ def day_end(system:System,individuals:List[Individual]):
     individual.food_production = round(np.random.normal(food_production, 0.5))
     individual.luxury_production = round(np.random.normal(luxury_production, 0.5))
 
-    count += 1
-
   system.time+=1
   if system.day_end_counter > 0:
       system.day_end_counter += 1
@@ -110,12 +106,12 @@ def day_end(system:System,individuals:List[Individual]):
       system.should_exit = True
   print("TOTAL DEATHS: ", system.deaths)
 
-def indivisual_death(system, individuals:List[Individual], index):
-  print("Dead" + str(index))
+def individual_death(system, individual:Individual):
+  print(f"{individual.attributes['name']} has died.")
   system.deaths += 1
-  individuals[index].death = True
-  individuals[index].__init__(system.max_indivisual_index, f'person {system.max_indivisual_index}')
-  system.max_indivisual_index += 1
+  person_id = individual.attributes["id"]
+  individual.__init__(person_id, f'person_{system.max_individual_index}')
+  system.max_individual_index += 1
   
 file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
 #if file name alread exist, datetime will be as detail as second
@@ -408,15 +404,15 @@ def simulate(individuals:List[Individual],system:System):
 
     if (system.time % days_between_conversation == 0):
 
-      # topic = "share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?"
+      topic = "share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?"
 
       # print("Conversation starting...")
       # discuss_topic(system, individuals, topic, system.time)
       # print("conversation ended")
 
-      r = Report(system).report()
-      for statement in r:
-         print(statement)
+      # r = Report(system).report()
+      # for statement in r:
+      #    print(statement)
       
     system.csv_analysis.log_stat(system, csv_file_name)
 

@@ -27,7 +27,7 @@ class System:
         self.lux_factor = [1] * len(individuals)
         self.bank = Bank.Bank()
         self.individual_count = len(individuals)
-        self.max_indivisual_index = len(individuals)
+        self.max_individual_index = len(individuals)
         self.deaths = 0
 
         #set food mechanism
