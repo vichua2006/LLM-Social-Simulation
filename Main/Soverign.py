@@ -16,9 +16,9 @@ class Report:
         # person_change_in_wealth: dict{name:wealth}
 
         conversations=""#WIP
-        poor=(0,current_system.consumption_rate*population*2)
-        medium_income=(current_system.consumption_rate*population*2,current_system.consumption_rate*population*4)
-        affluent=(current_system.consumption_rate*population*4,current_system.consumption_rate*population*4,"+infinity")
+        poor=(0,current_system.consumption_rate*population*4)
+        medium_income=(current_system.consumption_rate*population*4,current_system.consumption_rate*population*10)
+        affluent=(current_system.consumption_rate*population*10,"+infinity")
         interval_of_properity=[poor,medium_income,affluent] #DATA: to be swapped with integer two touple values.
         
         society_description=f"""The society consists of you and {population} other civilians. People interact on a daily basis, if they choose to. They have a variety of actions to choose from, they can farm produce, produce luxury goods, trade, and rob. They can also converse with each other.
