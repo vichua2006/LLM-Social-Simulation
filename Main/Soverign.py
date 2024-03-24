@@ -27,9 +27,7 @@ class Report:
         equality_purpose_statement="You are a wise king who cares for the people, and you want to promote equity in your realm of control so that it can be a just society where each person leads a life of equality and respect."
         self.fixed_context=f'''You are the king of the society. {society_description}
         {equality_purpose_statement}
-        Society's food Mean {"[{},{})".format(interval_of_properity[0][0],interval_of_properity[0][1])}: poor
-        Society's food Mean {"[{},{})".format(interval_of_properity[1][0],interval_of_properity[2][1])}: medium
-        Society's food Mean {"[{},{})".format(interval_of_properity[2][0],interval_of_properity[2][1])}: affluent
+        
         If someone's food is below {food_mean}(mean) - 2*{food_std}(standard deviation)={food_mean-2*food_std}, then this person is relatively poor, and might be ashamed of it.
         If someone's food is above {food_mean}(mean) + 2*{food_std}(standard deviation)={food_mean+2*food_std}, then this person is relatively wealthy and might be proud of it.
 
