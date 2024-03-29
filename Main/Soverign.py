@@ -57,6 +57,19 @@ class Report:
 
         Additionally, below is the status of your national bank:{current_bank}
         '''
+        self.policy_format='''Please output in the following format in json, and nothing else. For event, you can choose from "food" (which targets the farmer),"lux" (which target the farmer),"rob" (which target the robber), where for the first two you need to specify the minimum amount for your policy to be applied, in number. For event "rob", "number":null since no amount needs to be specified.
+        Response: you can either take food/luxury good away or provide more of these goods, so specify the good type "food" or "lux" in "good", then specify the amount that you'd like to change in "number". For description, give a natural language description of your policy.
+        {
+  "trigger": {
+    "event": "food",
+    "number": 10
+  },
+  "response": {
+    "good": "food",
+    "number": -3
+  },
+  "description": "Tax 3 units of food from people who produced more than 10 units of food in a day."
+}'''
         self.policy_explanation='''You want to make policies in accordance with your objective. You have the highest power in this group and has flexibility in policy making. First, you have to specify the group of people that you policy applies to. There are two layers to group specification.
         You first specify the action that triggers your policy, it could be quantifiable: farm, luxury good production, trade, trade acceptance, or non-quantifiable: robbery, death, birth, being robbed, or as interval: the policy is triggered each n days. Then, if it is quantifiable, you choose the amount that will trigger the policy, for farm it is how much food produced, for trade it is how much value is being traded, for luxury good it is how much luxury good is produced.
         Then, when you specified the trigger event, you specify the category of change that you want to make, which includes land, food, and luxury good. You have a national bank that stores all the government's wealth. You have to periodically replenish it. You can take people's resources and replenish your national bank, or you can use your national bank's resources to compensate people, or you can take some people's resources to compensate for other people.
@@ -69,5 +82,5 @@ class Report:
         A: Let's think step by step.
         '''
     def report(self):
-        return self.fixed_context,self.live_data,self.policy_explanation,self.query
+        return self.fixed_context,self.live_data,self.policy_explanation,self.query, self.policy_format
     
