@@ -3,6 +3,7 @@ import numpy as np  # numpy for numerical computations
 import os  # os for accessing environment variables
 from openai import OpenAI # OpenAI for interacting with the GPT-3 model
 from openai.types import Completion
+from Main.Soverign import Report
 
 # Setting the OpenAI API key
 charles_key="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"
@@ -12,7 +13,7 @@ ericyamnovski_key = "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"
 ryan_key = "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"
 victor_key = "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"
 
-os.environ["OPENAI"] = jinhan_key
+os.environ["OPENAI"] = victor_key
 client = OpenAI(
   api_key=os.environ["OPENAI"]
 )
@@ -39,6 +40,14 @@ def chat(system, user_assistant,top_prob):
     except Exception as e:
       print("An Exception Occur when communicating with ChatGPT:",e)
 
+def generate_policy_text(rpt: Report):
+    prompts = list(rpt.report())
+    messages = [{"role": "system", "content": p} for p in prompts]
+    completions = client.chat.completions.create(model="gpt-3.5-turbo", messages=messages, temperature=0.0, response_format={"type": "json_object"})
+
+    return completions.choices[0].message.content
+
+    
 
 def get_embedding(text, model="text-embedding-ada-002"):
     text = text.replace("\n", " ")

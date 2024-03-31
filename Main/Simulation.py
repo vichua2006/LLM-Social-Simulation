@@ -14,8 +14,9 @@ from Main.PendingAction import append_to_pending_action, str_to_ai_action
 from Main.SaveLoad import init_save, save_logframes
 import numpy as np
 from Main.Memory import ConceptNode
-from Main.Conversation import converse, add_memory_after_conversation
+from Main.Conversation import converse, add_memory_after_conversation, summarize_conversation
 from Main.Soverign import Report
+from Main.ChatGpt import generate_policy_text
 
 
 csv_file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
@@ -26,12 +27,15 @@ if os.path.exists(csv_file_name):
 conversation_dir = f"conversation_and_memory_log/{datetime.datetime.now().strftime('%d, %I %M %S%p')}/"
 
 # number of days between conversations
-days_between_conversation = 3
+days_between_conversation = 5
+conversation_list = []
 
 def discuss_topic(system: System, individuals: List[Individual], topic: str, day_count: int):
   '''
   Initiate a conversation between individuals on a topic for discussion. 
   Their memories are updated afterwards with the contents of the conversation from their own perspective.
+
+  returns the conversation record in json format
   '''
 
   # let agents converse
@@ -55,7 +59,7 @@ def discuss_topic(system: System, individuals: List[Individual], topic: str, day
       f.write(memory)
       f.write("\n")
   
-  return
+  return conversation
   
 
 
@@ -406,13 +410,20 @@ def simulate(individuals:List[Individual],system:System):
 
       topic = "share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?"
 
-      # print("Conversation starting...")
-      # discuss_topic(system, individuals, topic, system.time)
-      # print("conversation ended")
+      print("Conversation starting...")
+      conversation = discuss_topic(system, individuals, topic, system.time)
+      print("conversation ended")
 
-      # r = Report(system).report()
-      # for statement in r:
-      #    print(statement)
+      conversation_list.append(conversation)
+      if (len(conversation_list) > 1):
+        summary = summarize_conversation(conversation_list)
+        r = Report(system, summary)
+
+        response = generate_policy_text(r)
+        print(response)
+
+        conversation_list.clear()
+
       
     system.csv_analysis.log_stat(system, csv_file_name)
 

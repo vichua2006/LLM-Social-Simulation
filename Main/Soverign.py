@@ -2,7 +2,7 @@ from Main.CsvAnalysis import CsvAnalysis
 from Main.System import System
 
 class Report:
-    def __init__(self, system:System) -> None:
+    def __init__(self, system:System, summarized_conversation: str) -> None:
         population = len(system.individuals) # should really be system.individual_count considering death system, but that also won't work
         current_system=system
         analysis=system.csv_analysis
@@ -15,11 +15,10 @@ class Report:
         # individual_wealth: dict{name:wealth}, make it sorted, descending order.
         # person_change_in_wealth: dict{name:wealth}
 
-        conversations=""#WIP
         poor=(0,current_system.consumption_rate*population*4)
         medium_income=(current_system.consumption_rate*population*4,current_system.consumption_rate*population*10)
         affluent=(current_system.consumption_rate*population*10,"+infinity")
-        interval_of_properity=[poor,medium_income,affluent] #DATA: to be swapped with integer two touple values.
+        interval_of_properity=[poor,medium_income,affluent]
         
         society_description=f"""The society consists of you and {population} other civilians. People interact on a daily basis, if they choose to. They have a variety of actions to choose from, they can farm produce, produce luxury goods, trade, and rob. They can also converse with each other.
         They started out unfamiliar to each other, but will eventually get to know each other through conversations and other interactions. They sometimes will discuss about your policies.
@@ -53,7 +52,9 @@ class Report:
 
         Rates of activities:{rate_of_activities}.
         Distribution of goods production: {goods_distribution}.
-        Conversations:{conversations}
+
+        IMPORTANT Here is the summarized opinion of the citizens:
+        {summarized_conversation}
 
         Additionally, below is the status of your national bank:{current_bank}
         '''
@@ -65,9 +66,8 @@ class Report:
         Non-quantifiable: if someone robbes another person, this person has to compensate 10 units of food to the victim.
         Interval: every 10 days, each person is taxed 10 percent of their luxury good holdings.'''#Explain what policies are possible, formatting, etc. Where you insert this paragraph can change based on how function call is done.
         self.query=f'''
-        Q: You are about to make policies. You can use any modern analysis tools you know of and any number of them, to make a policy that you think will help you achieve you objective.{self.policy_explanation}. The current policies are {current_policies}. You have a budget of  What is your policy?
+        Q: You are about to make policies. You can use any modern analysis tools you know of and any number of them, to make a policy that you think will help you achieve you objective.{self.policy_explanation}. The current policies are {current_policies}. You have a budget of  What is your policy? Give your output in a json format. Also give an explanation of why you chose to make this policy, with the key as "reason".
         A: Let's think step by step.
         '''
     def report(self):
         return self.fixed_context,self.live_data,self.policy_explanation,self.query
-    
