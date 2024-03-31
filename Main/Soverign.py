@@ -58,16 +58,54 @@ class Report:
 
         Additionally, below is the status of your national bank:{current_bank}
         '''
-        self.policy_explanation='''You want to make policies in accordance with your objective. You have the highest power in this group and has flexibility in policy making. First, you have to specify the group of people that you policy applies to. There are two layers to group specification.
-        You first specify the action that triggers your policy, it could be quantifiable: farm, luxury good production, trade, trade acceptance, or non-quantifiable: robbery, death, birth, being robbed, or as interval: the policy is triggered each n days. Then, if it is quantifiable, you choose the amount that will trigger the policy, for farm it is how much food produced, for trade it is how much value is being traded, for luxury good it is how much luxury good is produced.
-        Then, when you specified the trigger event, you specify the category of change that you want to make, which includes land, food, and luxury good. You have a national bank that stores all the government's wealth. You have to periodically replenish it. You can take people's resources and replenish your national bank, or you can use your national bank's resources to compensate people, or you can take some people's resources to compensate for other people.
-        Several examples of policy is listed below in textual format, although you will have to output in a different format:
-        Quantifiable: if someone farms more than 20 units a day, gives one of this person's land to the poorest person.
-        Non-quantifiable: if someone robbes another person, this person has to compensate 10 units of food to the victim.
-        Interval: every 10 days, each person is taxed 10 percent of their luxury good holdings.'''#Explain what policies are possible, formatting, etc. Where you insert this paragraph can change based on how function call is done.
+        self.policy_sample='''A quantifiable case: {
+  "trigger": {
+    "event": "food",
+    "number": 10
+  },
+  "response": {
+    "good": "food",
+    "number": -3
+  },
+  "description": "Tax 3 units of food from people who produced more than 10 units of food in a day."
+    }
+    A non-quantifiable case: {
+  "trigger": {
+    "event": "robbery",
+    "number": null
+  },
+  "response": {
+    "good": "food",
+    "number": -10
+  },
+  "description": "Tax 10 units of food from the robber each time they rob someone."
+    }'''
+        
+        self.policy_range="it could be quantifiable: farm, luxury good production, trade, or non-quantifiable: robbery, being robbed."# "it could be quantifiable: farm, luxury good production, trade, trade acceptance, or non-quantifiable: robbery, death, birth, being robbed, or as interval: the policy is triggered each n days."
+        
+        self.policy_explanation=f'''You want to make policies in accordance with your objective. You have the highest power in this group and has flexibility in policy making. First, you have to specify the group of people that you policy applies to. There are two layers to group specification.
+        You first specify the action that triggers your policy, {self.policy_range}  Then, if it is quantifiable, you choose the amount that will trigger the policy, for farm it is how much food produced, for trade it is how much value is being traded, for luxury good it is how much luxury good is produced.
+        Then, when you specified the trigger event, you specify the category of change that you want to make, which includes land, food, and luxury good. You have a national bank that stores all the government's wealth. You have to periodically replenish it. You can take people's resources and replenish your national bank, or you can use your national bank's resources to compensate people.
+        '''#Explain what policies are possible, formatting, etc. Where you insert this paragraph can change based on how function call is done.
         self.query=f'''
-        Q: You are about to make policies. You can use any modern analysis tools you know of and any number of them, to make a policy that you think will help you achieve you objective.{self.policy_explanation}. The current policies are {current_policies}. You have a budget of  What is your policy? Give your output in a json format. Also give an explanation of why you chose to make this policy, with the key as "reason".
-        A: Let's think step by step.
+        Q: You are about to make policies. You can use any modern analysis tools you know of and any number of them, to make a policy that you think will help you achieve you objective.{self.policy_explanation}. The current policies are {current_policies}. You have a budget of  What is your policy?
+        A: Let's think step by step about what policy is sensible to implement to this society taking everything into consideration at this time:
         '''
+        self.policy_format='''Please output in the following format in json according to your previous decision, and nothing else. For event, you can choose from "food" (which targets the farmer),"lux" (which target the farmer),"trade","rob" (which target the robber), "being robbed" which targets the victim, where for the first two you need to specify the minimum amount for your policy to be applied, in number. For event "rob" and "being robbed", "number":null since no amount needs to be specified.
+        Response: you can either take food/luxury good away or provide more of these goods, so specify the good type "food" or "lux" in "good", then specify the amount that you'd like to change in "number". For description, give a natural language description of your policy.
+        {
+  "trigger": {
+    "event": "xx",
+    "number": xx
+  },
+  "response": {
+    "good": "xx",
+    "number": xx
+  },
+  "description": "xxxx"
+    }
+    Samples are included below: '''
+        self.policy_format+=self.policy_sample
     def report(self):
-        return self.fixed_context,self.live_data,self.policy_explanation,self.query
+        return self.fixed_context,self.live_data,self.policy_explanation,self.query, self.policy_format
+    
