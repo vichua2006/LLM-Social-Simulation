@@ -2,7 +2,7 @@ import os
 import json
 import random
 import datetime
-from typing import List
+from typing import List, Dict
 from Main.Calculation import donate, increase_food, increase_luxury, punishment, rob_rebelled, winner_loser
 from Main.CsvAnalysis import CsvAnalysis
 from Main.Individual import Individual
@@ -116,7 +116,13 @@ def individual_death(system, individual:Individual):
   person_id = individual.attributes["id"]
   individual.__init__(person_id, f'person_{system.max_individual_index}')
   system.max_individual_index += 1
-  
+
+def generate_policy_text(system: System, conversations: List[List[Dict[str, str]]]):
+  summary = summarize_conversation(conversation_list)
+  r = Report(system, summary)
+  response = generate_policy_text(r)
+  return response
+
 file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
 #if file name alread exist, datetime will be as detail as second
 if os.path.exists(file_name):
@@ -416,12 +422,7 @@ def simulate(individuals:List[Individual],system:System):
 
       conversation_list.append(conversation)
       if (len(conversation_list) > 1):
-        summary = summarize_conversation(conversation_list)
-        r = Report(system, summary)
-
-        response = generate_policy_text(r)
-        print(response)
-
+        generate_policy_text(system, conversation_list)
         conversation_list.clear()
 
       
