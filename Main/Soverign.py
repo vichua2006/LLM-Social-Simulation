@@ -96,16 +96,17 @@ class Report:
         {
   "trigger": {
     "event": "xx",
-    "number": xx
+    "number": "xx"
   },
   "response": {
     "good": "xx",
-    "number": xx
+    "number": "xx"
   },
   "description": "xxxx"
     }
     Samples are included below: '''
         self.policy_format+=self.policy_sample
+        
     def report(self):
         return self.fixed_context,self.live_data,self.policy_explanation,self.query, self.policy_format
     

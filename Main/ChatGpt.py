@@ -1,9 +1,11 @@
 # Importing necessary libraries
 import numpy as np  # numpy for numerical computations
 import os  # os for accessing environment variables
+from typing import List
 from openai import OpenAI # OpenAI for interacting with the GPT-3 model
 from openai.types import Completion
 from Main.Soverign import Report
+
 
 # Setting the OpenAI API key
 charles_key="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"
@@ -17,6 +19,20 @@ os.environ["OPENAI"] = victor_key
 client = OpenAI(
   api_key=os.environ["OPENAI"]
 )
+
+# configuation for AutoGen agents
+AUTOGEN_LLM_CONFIG = {
+    "config_list": [
+        {
+            "model": "gpt-3.5-turbo",
+            "api_key": os.environ["OPENAI"],
+        },  
+    ], 
+    "temperature": 0.0, 
+    "top_p": 1,
+}
+
+
 # Function to interact with the GPT-3 model and get response
 
 def chat(system, user_assistant,top_prob):
@@ -47,7 +63,14 @@ def generate_policy_text(rpt: Report):
 
     return completions.choices[0].message.content
 
-    
+
+def chat_json(message_texts: List[str]) -> str:
+    # function to get json formatted response from gpt
+    messages = [{"role": "system", "content": text} for text in message_texts]
+    completions = client.chat.completions.create(model="gpt-3.5-turbo", messages=messages, temperature=0.0, response_format={"type": "json_object"})
+
+    return completions.choices[0].message.content
+
 
 def get_embedding(text, model="text-embedding-ada-002"):
     text = text.replace("\n", " ")
