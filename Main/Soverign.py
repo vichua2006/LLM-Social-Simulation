@@ -1,5 +1,6 @@
 from Main.CsvAnalysis import CsvAnalysis
 from Main.System import System
+from Main.ChatGpt import chat, chat_json
 
 class Report:
     def __init__(self, system:System, summarized_conversation: str) -> None:
@@ -58,28 +59,34 @@ class Report:
 
         Additionally, below is the status of your national bank:{current_bank}
         '''
-        self.policy_sample='''A quantifiable case: {
+        self.policy_sample='''
+        A quantifiable case: 
+{
   "trigger": {
     "event": "food",
-    "number": 10
+    "number": "10"
   },
   "response": {
     "good": "food",
-    "number": -3
+    "number": "-3",
+    "type": "amount"
   },
   "description": "Tax 3 units of food from people who produced more than 10 units of food in a day."
-    }
-    A non-quantifiable case: {
+}
+
+        A non-quantifiable case: 
+{
   "trigger": {
     "event": "robbery",
-    "number": null
+    "number": None
   },
   "response": {
     "good": "food",
-    "number": -10
+    "number": "-10",
+    "type": "amount"
   },
   "description": "Tax 10 units of food from the robber each time they rob someone."
-    }'''
+}'''
         
         self.policy_range="it could be quantifiable: farm, luxury good production, trade, or non-quantifiable: robbery, being robbed."# "it could be quantifiable: farm, luxury good production, trade, trade acceptance, or non-quantifiable: robbery, death, birth, being robbed, or as interval: the policy is triggered each n days."
         
@@ -88,25 +95,48 @@ class Report:
         Then, when you specified the trigger event, you specify the category of change that you want to make, which includes land, food, and luxury good. You have a national bank that stores all the government's wealth. You have to periodically replenish it. You can take people's resources and replenish your national bank, or you can use your national bank's resources to compensate people.
         '''#Explain what policies are possible, formatting, etc. Where you insert this paragraph can change based on how function call is done.
         self.query=f'''
-        Q: You are about to make policies. You can use any modern analysis tools you know of and any number of them, to make a policy that you think will help you achieve you objective.{self.policy_explanation}. The current policies are {current_policies}. You have a budget of  What is your policy?
-        A: Let's think step by step about what policy is sensible to implement to this society taking everything into consideration at this time:
+        Q: You are about to make policies. You can use any modern analysis tools you know of and any number of them, to make a policy that you think will help you achieve you objective.{self.policy_explanation}. The current policies are {current_policies}. You have a budget of  What is your policy? 
+        First, state how many policies you want to implement, then provide a description for each policy.
+        A: Let's think step by step about what policy is sensible to implement to this society taking everything into consideration at this time.:
         '''
-        self.policy_format='''Please output in the following format in json according to your previous decision, and nothing else. For event, you can choose from "food" (which targets the farmer),"lux" (which target the farmer),"trade","rob" (which target the robber), "being robbed" which targets the victim, where for the first two you need to specify the minimum amount for your policy to be applied, in number. For event "rob" and "being robbed", "number":null since no amount needs to be specified.
-        Response: you can either take food/luxury good away or provide more of these goods, so specify the good type "food" or "lux" in "good", then specify the amount that you'd like to change in "number". For description, give a natural language description of your policy.
-        {
+        self.policy_format='''Based on the previous message, please rewrite the policies listed and output in the following format in json, and nothing else. For event, you can choose from "food" (which targets the farmer),"lux" (which target the farmer),"trade","rob" (which target the robber), "being robbed" which targets the victim, where for the first two you need to specify the minimum amount for your policy to be applied, in "number". For events "rob" and "being robbed", "number": "None" since no amount needs to be specified.
+        Response: you can either take food/luxury good away or provide more of these goods, so specify the good type "food" or "lux" in "good", then specify the amount that you'd like to change in "number"; this number should be an integer. In "type" specify whether the number given is a "percentage" or "amount". 
+        For description, give a natural language description of your policy.
+        Here is the expected format of the response:
+{        
   "trigger": {
-    "event": "xx",
-    "number": "xx"
+    "event": <one of "food", "lux", "trade", "rob", "being robbed">,
+    "number": <an integer value specifying the amount that triggers the policy>,
   },
   "response": {
-    "good": "xx",
-    "number": "xx"
+    "good": <one of "food" or "lux">,
+    "number": <an integer value specifying the amount or percentage you want to change>,
+    "type": <whether the previous number is an "amount" or "percentage">,
   },
-  "description": "xxxx"
-    }
-    Samples are included below: '''
+  "description": <a natural language description of your policy>
+}
+    Sample responses are included below: '''
         self.policy_format+=self.policy_sample
-        
+
     def report(self):
         return self.fixed_context,self.live_data,self.policy_explanation,self.query, self.policy_format
+
+def generate_policy_json(rpt: Report):
+    # send report prompts to gpt and generate policy(ies) in json format
+    prompts = list(rpt.report())
+    description_prompts = prompts[:-1]
+    json_prompt = prompts[-1]
+
+    # let gpt analyze the entire situation holistically in the first call, and decide on how many policies it needs to implement, and what each of them are.
+    policy_descriptions = chat(description_prompts[0], description_prompts[1:], 1)
+
+    print(policy_descriptions)
+
+    # then takes the first response and format them correctly in a list of json policies.
+    description_prompts.append(policy_descriptions)
+    description_prompts.append(json_prompt)
+
+    policy_json = chat_json(description_prompts)
+
+    return policy_json
     

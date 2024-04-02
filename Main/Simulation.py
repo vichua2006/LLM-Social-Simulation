@@ -15,8 +15,7 @@ from Main.SaveLoad import init_save, save_logframes
 import numpy as np
 from Main.Memory import ConceptNode
 from Main.Conversation import converse, add_memory_after_conversation, summarize_conversation
-from Main.Soverign import Report
-from Main.ChatGpt import generate_policy_text
+from Main.Soverign import Report, generate_policy_json
 
 
 csv_file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
@@ -27,7 +26,7 @@ if os.path.exists(csv_file_name):
 conversation_dir = f"conversation_and_memory_log/{datetime.datetime.now().strftime('%d, %I %M %S%p')}/"
 
 # number of days between conversations
-days_between_conversation = 5
+days_between_conversation = 1
 conversation_list = []
 
 def discuss_topic(system: System, individuals: List[Individual], topic: str, day_count: int):
@@ -117,10 +116,10 @@ def individual_death(system, individual:Individual):
   individual.__init__(person_id, f'person_{system.max_individual_index}')
   system.max_individual_index += 1
 
-def generate_policy_text(system: System, conversations: List[List[Dict[str, str]]]):
+def generate_policy(system: System, conversations: List[List[Dict[str, str]]]):
   summary = summarize_conversation(conversation_list)
   r = Report(system, summary)
-  response = generate_policy_text(r)
+  response = generate_policy_json(r)
   return response
 
 file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
@@ -422,8 +421,10 @@ def simulate(individuals:List[Individual],system:System):
 
       conversation_list.append(conversation)
       if (len(conversation_list) > 1):
-        generate_policy_text(system, conversation_list)
+        description = generate_policy(system, conversation_list)
         conversation_list.clear()
+
+        print(description)
 
       
     system.csv_analysis.log_stat(system, csv_file_name)

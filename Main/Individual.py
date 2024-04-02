@@ -6,7 +6,7 @@ import queue
 from Main.System import System
 from Main.Memory import MemoryStream
 from Main.SpeakingAgent import SpeakingAgent
-from Main.config import AUTOGEN_LLM_CONFIG
+from Main.ChatGpt import AUTOGEN_LLM_CONFIG
 from Main.Personalities import generate_personality
 
 

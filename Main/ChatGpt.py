@@ -4,8 +4,6 @@ import os  # os for accessing environment variables
 from typing import List
 from openai import OpenAI # OpenAI for interacting with the GPT-3 model
 from openai.types import Completion
-from Main.Soverign import Report
-
 
 # Setting the OpenAI API key
 charles_key="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"
@@ -39,8 +37,7 @@ def chat(system, user_assistant,top_prob):
     # Format the conversation
     system_msg = [{"role": "system", "content": system}]
     user_assistant_msgs = [
-        {"role": "assistant", "content": user_assistant[i]} if i % 2 else {"role": "user", "content": user_assistant[i]}
-        for i in range(len(user_assistant))
+        {"role": "system", "content": user_assistant[i]} for i in range(len(user_assistant))
     ]
 
     # Combine the system and user messages
@@ -55,14 +52,6 @@ def chat(system, user_assistant,top_prob):
       return response.choices[0].message.content
     except Exception as e:
       print("An Exception Occur when communicating with ChatGPT:",e)
-
-def generate_policy_text(rpt: Report):
-    prompts = list(rpt.report())
-    messages = [{"role": "system", "content": p} for p in prompts]
-    completions = client.chat.completions.create(model="gpt-3.5-turbo", messages=messages, temperature=0.0, response_format={"type": "json_object"})
-
-    return completions.choices[0].message.content
-
 
 def chat_json(message_texts: List[str]) -> str:
     # function to get json formatted response from gpt
