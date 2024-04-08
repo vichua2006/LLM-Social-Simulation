@@ -65,7 +65,9 @@ class Individual:
         self.agent = SpeakingAgent(
             name=self.attributes["name"],
             system_message=self.attributes["name"],
-            llm_config=AUTOGEN_LLM_CONFIG
+            llm_config=AUTOGEN_LLM_CONFIG,
+            human_input_mode="NEVER",
+            is_termination_msg=(lambda x: x.get("content").lower() == "terminate")
         )
 
         # a list of 5 strings, denoting the person's openness, conscientiousness, agreeableness, neuroticism respectively
