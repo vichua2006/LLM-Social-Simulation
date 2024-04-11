@@ -1,6 +1,8 @@
 from __future__ import annotations # Allow self-reference in type annotations
+import json
 import numpy as np  # numpy for numerical computations
 from typing import Any, List, Dict, Tuple, Optional, Callable, Literal, Union
+from copy import deepcopy
 from Main.AIAction import AIActionType, AIAction, RobAction
 import queue
 from Main.System import System
@@ -39,10 +41,9 @@ class Individual:
             "starved":0,
             "land": land,  # Land owned by the individual
             "food": food,  # Initial food as long tail distribution
-            "action": 1  # Initial action point is 1
-            ,"trust_of_others":0,
+            "trust_of_others":0,
             "food_production":0,
-            "luxury_production":0
+            "luxury_production":0,
 
         }
         
@@ -138,8 +139,8 @@ class Individual:
     def get_win_rate(self, target:Individual):
         return self.robbing_stats.win_rob_times[target]/self.robbing_stats.rob_times[target]
     
-    def get_agent(self):
-        # return the agent variable
+    def get_agent(self) -> SpeakingAgent:
+        # return the agent instance
         return self.agent
     
     def get_personality(self) -> List[str]:
@@ -151,6 +152,21 @@ class Individual:
     
     def update_agent_speaking_tendency(self, prompt:str):
         self.agent.update_speaking_tendency(prompt)
+    
+    def get_stats_json(self):
+        # retrieves info about the person's production abilities, character (big 5), possession (changed real time), and memory (real time)
+        # returns a json string containing those information
+        stats = deepcopy(self.attributes)
+        stats["expected_food_production_rate"] = self.food_production
+        stats["expected_luxury_production_rate"] = self.luxury_production
+        stats["personality"] = self.get_personality()
+        # returns the 5 most recent memories
+        stats["recent_memories"] = [m.description for m in self.memorystream.concept_nodes[-5:]]
+
+        stats_json = json.dumps(stats)
+
+        return stats_json
+
 
     def __getstate__(self):
         return self.__dict__

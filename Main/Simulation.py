@@ -26,7 +26,7 @@ if os.path.exists(csv_file_name):
 conversation_dir = f"conversation_and_memory_log/{datetime.datetime.now().strftime('%d, %I %M %S%p')}/"
 
 # number of days between conversations
-days_between_conversation = 3
+days_between_conversation = 2
 
 def discuss_topic(system: System, individuals: List[Individual], topic: str, day_count: int):
   '''
@@ -160,7 +160,7 @@ def simulate(individuals:List[Individual],system:System):
           passive=not individual.pending_action.empty()
           if individual.attributes['action']>0 or not individual.pending_action.empty():
             passive=not individual.pending_action.empty()
-            print(f"{individual.attirbutes['name']} is responding...\n")
+            print(f"{individual.attributes['name']} is responding...\n")
             response_action: AIAction = individual.pending_action.get() if passive else None
             action:int=query_individual(individual,system,response_action)
             if passive and response_action is not None:
@@ -402,9 +402,14 @@ def simulate(individuals:List[Individual],system:System):
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
 
+    
+
     if (system.time % days_between_conversation == 0):
 
       topic = "share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?"
+
+      for person in individuals:
+        print(person.get_stats_json()) 
 
       # print("Conversation starting...")
       # discuss_topic(system, individuals, topic, system.time)
