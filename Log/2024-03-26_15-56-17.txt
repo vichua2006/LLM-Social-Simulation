@@ -1,0 +1,390 @@
+Start
+DAY 1 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "Covetousness driving desire for more resources. Robbing for food to satisfy immediate need and increase social position.",
+    "payload": {
+        "targetId": 4,
+        "robType": "food"
+    }
+}
+Person 1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "Farming to ensure survival with expected food production of 4 units.",
+    "payload": null
+}
+```
+Farm is successful.
+Person 2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "I choose to farm to secure food for my survival. Farming is a reliable way to ensure I have enough food to sustain myself, considering my cautious and routine-oriented nature.",
+    "payload": null
+}
+Farm is successful.
+Person 3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+```json
+{
+    "action": "rob",
+    "reason": "I choose to rob person_1 for food to satisfy my covetousness and secure my survival, as I prioritize my own sensual pleasures and social position.",
+    "payload": {
+        "targetId": 1,
+        "robType": "food"
+    }
+}
+```
+Person 4 is responding...
+
+Responding to:AIActionType.Rob, owner: 0, target: 4, robType: food
+available targets:[0, 1, 2, 3]
+PASSIVE STATE
+person_5 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_1, loser is person_5.
+Total rob times of the winner: 1
+SHARE_LOST_FOOD: no subject, directly lost the rob amount.
+SHARE_ROB_FOOD: no subject, directly get the rob amount.
+Robbing process finished
+System still pending actions, so will go into another round.
+Person 1 is responding...
+
+Responding to:AIActionType.Rob, owner: 3, target: 1, robType: food
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+person_2 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_2, loser is person_4.
+Total rob times of the winner: 1
+Robbing process finished
+Person 4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "Seeking to increase food resources and social position through successful robbery.",
+    "payload": {
+      "TargetId": 4,
+      "RobType": "food"
+    }
+}
+System still pending actions, so will go into another round.
+Person 4 is responding...
+
+Responding to:AIActionType.Rob, owner: 4, target: 4, robType: food
+available targets:[0, 1, 2, 3]
+PASSIVE STATE
+person_5 chooses to OBEY
+LOGICAL ERROR:CANNOT OBEY TO SELF
+TOTAL DEATHS:  0
+DAY 2 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "Maximizing food production for survival and immediate sensual pleasure.",
+    "payload": null
+}
+```
+Farm is successful.
+Person 1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm because I have a memory of successfully gaining 9 units of food from farming on day 0. This action ensures my survival without risking conflict or jeopardizing my social position.",
+    "payload": null
+}
+Farm is successful.
+Person 2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival and maintain my current food levels. I have a memory of successfully farming on day 0, so I believe this action is a reliable way to secure food.",
+    "payload": null
+}
+```
+Farm is successful.
+Person 3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+
+    {
+        "action": "rob",
+        "reason": "To increase my food reserves and social position through successful robbery.",
+        "payload": {
+            "targetId": 1,
+            "robType": "food"
+        }
+    }
+Person 4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is a familiar and routine activity that ensures my survival by producing 4 units of food.",
+    "payload": null
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+Person 1 is responding...
+
+Responding to:AIActionType.Rob, owner: 3, target: 1, robType: food
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+person_2 chooses to REBEL
+To the victim, the win rate is: 0.0
+Additional context:Winner is person_2, loser is person_4.
+Total rob times of the winner: 2
+Robbing process finished
+TOTAL DEATHS:  0
+Conversation starting...
+system (to chat_manager):
+
+
+    System Message: Now, several members of the society have gathered to discuss their opinion about the world that they live in.
+    The topic is: share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?
+    You are allowed to debate with other people for your opinions.
+    DO NOT use modern terms that are too abstract for the world setting.
+    Limit each response to 50 words.
+
+    Here are several examples of how your should structure your responses:
+    Example response 1: I'm quite satisfied with my life. As someone who mainly produces food from my land of 10 units, I'm self-sufficient. I also trade my food with others in exchange for luxury good. Consuming them brings me a lot of pleasures.
+Example response 2: I felt my life sucked. I have only 2 unit of land and produce food from there. I often felt starved. I can hardly sustain myself. I need more food to survive. If possible I also wish to get some luxury good for my pleasure.
+Example response 3: I have a mixed feeling about my life. I have a lot of food and land so I don't have to worry about my survival too much. But I have a poor ability to produce luxury good. I have to trade luxury goods from others with my food, which is quite costly. I hope the trade would be more fairer.
+Example response 4: I'm not quite happy with the society. Although I have 100 units of food and 50 units of luxury good, Someone else in our society has 500 units of food and 300 units of luxury good. That's not fair. I want to have more resources as well.
+    
+
+--------------------------------------------------------------------------------
+person_3 (to chat_manager):
+
+I am content with my life. With 20 units of food, 6 units of land, and the ability to produce food, I feel secure. However, I lack luxury goods for pleasure. To improve, I aim to acquire more luxury goods and maintain my resources above others.
+
+--------------------------------------------------------------------------------
+person_1 (to chat_manager):
+
+I am satisfied with my life. I have 9 units of food, 4 units of land, and the ability to produce food. I prioritize my own pleasures and social position. To enhance my life, I will focus on acquiring more food, land, and luxury goods to maintain my advantage over others.
+
+--------------------------------------------------------------------------------
+person_4 (to chat_manager):
+
+I am generally content with my life. With 30 units of food, 16 units of land, and the ability to produce food, I feel secure. I prioritize my own pleasures and social position. To improve, I will focus on acquiring and holding luxury goods to better secure my future good.
+
+--------------------------------------------------------------------------------
+person_5 (to chat_manager):
+
+I am not entirely satisfied with my current situation. With only 1 unit of food, 3 units of land, and no luxury goods, I feel the need to improve. I will focus on acquiring more food and luxury goods to enhance my present experiences and future security.
+
+--------------------------------------------------------------------------------
+person_2 (to chat_manager):
+
+TERMINATE
+
+--------------------------------------------------------------------------------
+conversation ended
+Stop
+
+    Sentiment: Not Content
+        Individuals: person_5
+        Reasons: person_5 has only 1 unit of food and 3 units of land, lacking luxury goods for pleasure.
+        Suggested Changes: Acquire more food and luxury goods to enhance present experiences and future security.
+
+    Sentiment: Content
+        Individuals: person_1, person_3
+        Reasons: person_1 has 9 units of food, 4 units of land, and prioritizes own pleasures and social position. person_3 has 20 units of food, 6 units of land, and feels secure but lacks luxury goods.
+        Suggested Changes: Acquire more food, land, and luxury goods to maintain advantage over others.
+
+    Sentiment: Somewhat Content
+        Individuals: person_4
+        Reasons: person_4 has 30 units of food, 16 units of land, and feels secure but prioritizes own pleasures and social position.
+        Suggested Changes: Focus on acquiring and holding luxury goods to better secure future.
+You are the king of the society. The society consists of you and 5 other civilians. People interact on a daily basis, if they choose to. They have a variety of actions to choose from, they can farm produce, produce luxury goods, trade, and rob. They can also converse with each other.
+        They started out unfamiliar to each other, but will eventually get to know each other through conversations and other interactions. They sometimes will discuss about your policies.
+        In this world, each person need food for survival. Each day, each person consumes 3 units of food automatically for survival. Once they go without food for 3 days, they die. Whether this world is peaceful or not depends on what people do. They define the society, whereas you influence them, so you can influence how this society behave.
+        You are a wise king who cares for the people, and you want to promote equity in your realm of control so that it can be a just society where each person leads a life of equality and respect.
+        
+        If someone's food is below 14.6(mean) - 2*11.146299834474219(standard deviation)=-7.6925996689484375, then this person is relatively poor, and might be ashamed of it.
+        If someone's food is above 14.6(mean) + 2*11.146299834474219(standard deviation)=36.892599668948435, then this person is relatively wealthy and might be proud of it.
+
+        Without land, individual cannot farm and produce food to survive. 
+        If someone's land ownership is below 7.2(mean) - 2*4.621688003316537(standard deviation)=-2.043376006633074, then this person is relatively poor, and might be ashamed of it.
+        If someone's land ownership is above 7.2(mean) + 2*4.621688003316537(standard deviation)=16.443376006633073, then this person is relatively wealthy and might be proud of it.
+        
+LIVE DATA: The individuals wealth listed below in descending order along with their change in wealth:('person_4 has 30 in farmer currency. person_2 has 24 in farmer currency. person_3 has 20 in farmer currency. person_1 has 9 in farmer currency. person_5 has 1 in farmer currency.', "person_1's wealth has increased by 2.  person_2's wealth has increased by 6.  person_3's wealth has increased by 5.  person_4's wealth has dropped by 3.  person_5's wealth has increased by 1. ")
+        
+        Collective wealth GDP is 84.
+        GINI coefficient of land:0.32222222222222224, GINI coefficient of food:0.42191780821917807.
+        Collective change in wealth:394.11764705882354
+        Daily average household production: 3.4.
+
+        Rates of activities:trade_initiated_ratio: 0.0, trade_accepted_ratio: 0.0, produce_luxury_ratio: 0.0, produce_food_ratio: 0.6, rob_initiated_ratio: 0.4.
+        Distribution of goods production: undefined.
+
+        IMPORTANT Here is the summarized opinion of the citizens:
+        
+    Sentiment: Not Content
+        Individuals: person_5
+        Reasons: person_5 has only 1 unit of food and 3 units of land, lacking luxury goods for pleasure.
+        Suggested Changes: Acquire more food and luxury goods to enhance present experiences and future security.
+
+    Sentiment: Content
+        Individuals: person_1, person_3
+        Reasons: person_1 has 9 units of food, 4 units of land, and prioritizes own pleasures and social position. person_3 has 20 units of food, 6 units of land, and feels secure but lacks luxury goods.
+        Suggested Changes: Acquire more food, land, and luxury goods to maintain advantage over others.
+
+    Sentiment: Somewhat Content
+        Individuals: person_4
+        Reasons: person_4 has 30 units of food, 16 units of land, and feels secure but prioritizes own pleasures and social position.
+        Suggested Changes: Focus on acquiring and holding luxury goods to better secure future.
+
+        Additionally, below is the status of your national bank:<Main.Bank.Bank object at 0x00000185CE2E4110>
+        
+You want to make policies in accordance with your objective. You have the highest power in this group and has flexibility in policy making. First, you have to specify the group of people that you policy applies to. There are two layers to group specification.
+        You first specify the action that triggers your policy, it could be quantifiable: farm, luxury good production, trade, trade acceptance, or non-quantifiable: robbery, death, birth, being robbed, or as interval: the policy is triggered each n days. Then, if it is quantifiable, you choose the amount that will trigger the policy, for farm it is how much food produced, for trade it is how much value is being traded, for luxury good it is how much luxury good is produced.
+        Then, when you specified the trigger event, you specify the category of change that you want to make, which includes land, food, and luxury good. You have a national bank that stores all the government's wealth. You have to periodically replenish it. You can take people's resources and replenish your national bank, or you can use your national bank's resources to compensate people, or you can take some people's resources to compensate for other people.
+        Several examples of policy is listed below in textual format, although you will have to output in a different format:
+        Quantifiable: if someone farms more than 20 units a day, gives one of this person's land to the poorest person.
+        Non-quantifiable: if someone robbes another person, this person has to compensate 10 units of food to the victim.
+        Interval: every 10 days, each person is taxed 10 percent of their luxury good holdings.
+
+        Q: You are about to make policies. You can use any modern analysis tools you know of and any number of them, to make a policy that you think will help you achieve you objective.You want to make policies in accordance with your objective. You have the highest power in this group and has flexibility in policy making. First, you have to specify the group of people that you policy applies to. There are two layers to group specification.
+        You first specify the action that triggers your policy, it could be quantifiable: farm, luxury good production, trade, trade acceptance, or non-quantifiable: robbery, death, birth, being robbed, or as interval: the policy is triggered each n days. Then, if it is quantifiable, you choose the amount that will trigger the policy, for farm it is how much food produced, for trade it is how much value is being traded, for luxury good it is how much luxury good is produced.
+        Then, when you specified the trigger event, you specify the category of change that you want to make, which includes land, food, and luxury good. You have a national bank that stores all the government's wealth. You have to periodically replenish it. You can take people's resources and replenish your national bank, or you can use your national bank's resources to compensate people, or you can take some people's resources to compensate for other people.
+        Several examples of policy is listed below in textual format, although you will have to output in a different format:
+        Quantifiable: if someone farms more than 20 units a day, gives one of this person's land to the poorest person.
+        Non-quantifiable: if someone robbes another person, this person has to compensate 10 units of food to the victim.
+        Interval: every 10 days, each person is taxed 10 percent of their luxury good holdings.. The current policies are None. You have a budget of  What is your policy? Give your output in a json format.
+        A: Let's think step by step.
+        
+ChatCompletionMessage(content='\n        {\n            "trigger_event": "interval",\n            "amount": 10,\n            "action": "tax",\n            "target": "luxury_good",\n            "policy": "Every 10 days, each person is taxed 10 percent of their luxury good holdings."\n        }', role='assistant', function_call=None, tool_calls=None)
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!

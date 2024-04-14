@@ -3,7 +3,6 @@ from Main.Conversation import evaluate_speaking_tendencies
 
 
 
-d = {(1, 2), (3, 4)}
+l = [1,2,3,3,4,5]
 
-for i, j in d:
-    print(i + j)
+print(l[:-1])
