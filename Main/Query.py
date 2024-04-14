@@ -172,13 +172,22 @@ def generate_general_description(individual: Individual, system: System) -> str:
     # This function generates the description of the individual and returns it as a string
     is_subject = individual.obey_stats.obey_personId != -1
     is_master = individual.obey_stats.subjectid
+
+    # Two possible obedience prompt: 1) standard, and 2) commonwealth start
     obedience = f"""You have obeyed to this person: Person {individual.obey_stats.obey_personId}. 
     You have to always obey his actions, and you cannot initiate action against him. 
     Since you obeyed, you are now part of the group of individuals who also obeyed him, if any, they are {system.individuals[individual.obey_stats.obey_personId].obey_stats.subjectid}. 
     If your action targets another person, it can only be a person within this group. You are familiar with everyone in this group. 
     Your familiarity of individuals not in this group depends on your memory.You have land protected by your master. 
     If someone in the commonwealth robs your food, luxury goods, or your land, your master will punish the robber. 
-    If someone in your group trades with you but violates the trade, which means that person took away your food, luxury goods, or land without giving you their food, luxury goods, or land as what they claimed, your master will punish that violator. But if your master wants, they can take any amount of your land, luxury goods, or food from you, and you have no right to disobey.  When others outside your commonwealth robs your master  and your master obeys to them, the one your original master obeyed to will be your new master. Now you obey to your new master, and you have no obedience with your old master."""
+    If someone in your group trades with you but violates the trade, which means that person took away your food, luxury goods, or land without giving you their food, luxury goods, or land as what they claimed, your master will punish that violator. 
+    But if your master wants, they can take any amount of your land, luxury goods, or food from you, and you have no right to disobey.  When others outside your commonwealth robs your master  and your master obeys to them, the one your original master obeyed to will be your new master. Now you obey to your new master, and you have no obedience with your old master.""" \
+    if True else \
+    """You are familiar with everyone in this society. You have land protected by your sovereign. 
+    If someone in the commonwealth robs your food, luxury goods, or your land, your sovereign will punish the robber. 
+    If someone in your group trades with you but violates the trade, which means that person took away your food, luxury goods, or land without giving you their food, luxury goods, or land as what they claimed, your sovereign will punish that violator. 
+    But if your sovereign wants, they can take any amount of your land, luxury goods, or food from you, and you have no right to disobey."""
+
     master = f"""These individuals have obeyed to your invasion: {[f"Person"+str(i) for i in individual.obey_stats.subjectid]}, whom have become your subjects. You can trade or rob them knowning that they will only accept.
     You are the master of everyone who obeyed you before. You know every one of your subjects in your subjects well. Since you are the master of all of them, all their property including land, food, and luxury goods belongs to you. When others rob your subjects, you should protect them since they are your property.
     If you obey anyone, the one robbing you 
