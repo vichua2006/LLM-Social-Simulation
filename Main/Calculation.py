@@ -149,7 +149,7 @@ def donate(target: Individual, donate_person:Individual, system: System, donateT
 
 
 #master punish subject, get his food and land and share it to other subjects except the subject being punished
-def punishment(subject:Individual, system:System) -> None:
+def punishment(subject:Individual, system:System, food_amount:int = None, land_amount:int  = None) -> None:
     if subject.obey_stats.obey_personId==-1:
         print("PUNISHMENTERROR: no master, this should not happen.")
         return
@@ -158,8 +158,8 @@ def punishment(subject:Individual, system:System) -> None:
     subject.memory.append(f"I was punished by {system.individuals[subject.obey_stats.obey_personId].attributes['name']} because I, as a subject, rob other subject.")
     master.memory.append(f"I punished {subject.attributes['name']} because he, as a subject, rob other subject.")
     #master punish subject, 50% food and 50% land
-    food_amount = 0.5 * subject.attributes['food']
-    land_amount = 0.5 * subject.attributes['land']
+    if (food_amount == None): food_amount = 0.5 * subject.attributes['food']
+    if (land_amount == None):land_amount = 0.5 * subject.attributes['land']
     subject.attributes['food'] -= food_amount
     subject.attributes['land'] -= land_amount
     #share the food and land to other subjects
