@@ -17,16 +17,20 @@ from Main.Memory import ConceptNode
 from Main.Conversation import converse, add_memory_after_conversation
 from Main.Soverign import Report
 
+file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
+#if file name alread exist, datetime will be as detail as second
+if os.path.exists(file_name):
+  file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M %S%p")+'.csv'
 
 csv_file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
 #if file name alread exist, datetime will be as detail as second
 if os.path.exists(csv_file_name):
     csv_file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M %S%p")+'.csv'
 
-conversation_dir = f"conversation_and_memory_log/{datetime.datetime.now().strftime('%d, %I %M %S%p')}/"
+conversation_dir = f"conversation_and_memory_log/{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}/"
 
 # number of days between conversations
-days_between_conversation = 2
+days_between_conversation = 5
 
 def discuss_topic(system: System, individuals: List[Individual], topic: str, day_count: int):
   '''
@@ -112,12 +116,6 @@ def individual_death(system, individual:Individual):
   person_id = individual.attributes["id"]
   individual.__init__(person_id, f'person_{system.max_individual_index}')
   system.max_individual_index += 1
-  
-file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
-#if file name alread exist, datetime will be as detail as second
-if os.path.exists(file_name):
-  file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M %S%p")+'.csv'
-
 
 def initialize():
     # Initialize individuals and environment
@@ -402,18 +400,16 @@ def simulate(individuals:List[Individual],system:System):
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
 
-    
+    for person in individuals:
+      print(person.get_stats_json()) 
 
     if (system.time % days_between_conversation == 0):
 
       topic = "share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?"
 
-      for person in individuals:
-        print(person.get_stats_json()) 
-
-      # print("Conversation starting...")
-      # discuss_topic(system, individuals, topic, system.time)
-      # print("conversation ended")
+      print("Conversation starting...")
+      discuss_topic(system, individuals, topic, system.time)
+      print("conversation ended")
 
       # r = Report(system).report()
       # for statement in r:
