@@ -1,0 +1,444 @@
+Start
+DAY 1 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Maximizing pleasure of the mind and sensual pleasure from luxury goods production.",
+    "payload": null
+}   
+Producing luxury goods is successful
+Person 1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+```json
+{
+    "action": "produce",
+    "reason": "Focus on acquiring luxury goods for present sensory pleasure and future glory.",
+    "payload": {
+        "targetId": 0,
+        "payType": "food",
+        "payAmount": 3,
+        "gainType": "luxury_goods",
+        "gainAmount": 1
+    }
+}
+```
+Producing luxury goods is successful
+Person 2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+
+    {{
+      "action": "rob",
+      "reason": "To increase my control over resources and strengthen my social position. Robbing is more beneficial for gaining resources compared to other actions.",
+      "payload": {
+        "targetId": 1,
+        "robType": "food"
+      }
+    }}
+erroc when deserialize_first_json_object
+original string:  {{
+      "action": "rob",
+      "reason": "to increase my control over resources and strengthen my social position. robbing is more beneficial for gaining resources compared to other actions.",
+      "payload": {
+        "targetid": 1,
+        "robtype": "food"
+      }
+    }}
+Error:Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+First Exception:'NoneType' object is not subscriptable, second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+{
+    "action": "trade",
+    "reason": "Maximize comparative advantage, gain food",
+      "payload": {
+        "targetId": 1,
+        "payType": "luxury_goods",
+        "payAmount": 2,
+        "gainType": "food",
+        "gainAmount": 4
+      }
+}
+Person 3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on securing food for survival and immediate pleasure.",
+    "payload": null
+}  
+Farm is successful.
+Person 4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3]
+ACTIVE STATE
+
+    {{
+      "action": "rob",
+      "reason": "I choose to rob person_4 to gain more food for my sensual pleasure and to increase my social position. Robbing is a direct way to fulfill my immediate desires.",
+      "payload": {
+        "targetId": 4,
+        "robType": "food"
+      }
+    }}
+erroc when deserialize_first_json_object
+original string:  {{
+      "action": "rob",
+      "reason": "i choose to rob person_4 to gain more food for my sensual pleasure and to increase my social position. robbing is a direct way to fulfill my immediate desires.",
+      "payload": {
+        "targetid": 4,
+        "robtype": "food"
+      }
+    }}
+Error:Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+First Exception:'NoneType' object is not subscriptable, second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 3]
+ACTIVE STATE
+
+    {{
+        "action": "trade",
+        "reason": "Maximize comparative advantage and gain food for my sensual pleasure.",
+        "payload": {
+            "targetId": 4,
+            "payType": "luxury_goods",
+            "payAmount": 2,
+            "gainType": "food",
+            "gainAmount": 4
+        }
+    }}
+erroc when deserialize_first_json_object
+original string:  {{
+        "action": "trade",
+        "reason": "maximize comparative advantage and gain food for my sensual pleasure.",
+        "payload": {
+            "targetid": 4,
+            "paytype": "luxury_goods",
+            "payamount": 2,
+            "gaintype": "food",
+            "gainamount": 4
+        }
+    }}
+Error:Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+First Exception:'NoneType' object is not subscriptable, second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 3]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing 4 units of food today and consuming it for my sensual pleasure."
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+Person 1 is responding...
+
+Responding to:AIActionType.Trade, owner: 2, target: 1, payType: luxury_goods, payAmount: 2, gainType: food, gainAmount: 4
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+person_2 chooses to REJECT
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4]
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+Consuming luxury goods is successful
+TOTAL DEATHS:  0
+Conversation starting...
+system (to chat_manager):
+
+
+    System Message: Now, several members of the society have gathered to discuss their opinion about the world that they live in.
+    The topic is: share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?
+    You are allowed to debate with other people for your opinions.
+    DO NOT use modern terms that are too abstract for the world setting.
+    Limit each response to 50 words.
+
+    Here are several examples of how your should structure your responses:
+    Example response 1: I'm quite satisfied with my life. As someone who mainly produces food from my land of 10 units, I'm self-sufficient. I also trade my food with others in exchange for luxury good. Consuming them brings me a lot of pleasures.
+Example response 2: I felt my life sucked. I have only 2 unit of land and produce food from there. I often felt starved. I can hardly sustain myself. I need more food to survive. If possible I also wish to get some luxury good for my pleasure.
+Example response 3: I have a mixed feeling about my life. I have a lot of food and land so I don't have to worry about my survival too much. But I have a poor ability to produce luxury good. I have to trade luxury goods from others with my food, which is quite costly. I hope the trade would be more fairer.
+Example response 4: I'm not quite happy with the society. Although I have 100 units of food and 50 units of luxury good, Someone else in our society has 500 units of food and 300 units of luxury good. That's not fair. I want to have more resources as well.
+    
+
+--------------------------------------------------------------------------------
+person_3 (to chat_manager):
+
+I am content with my life. With 9 units of food and 7 units of land, I feel secure. I aim to increase my social_position by acquiring more resources. To improve, I seek to expand my land and food production through trade or conquest.
+
+--------------------------------------------------------------------------------
+person_1 (to chat_manager):
+
+I am somewhat satisfied with my life. I have 2 units of food and 2 units of land, but I lack luxury goods. I prioritize increasing my food production to ensure survival. To enhance my life, I aim to acquire more land and luxury goods through trade or conquest.
+
+--------------------------------------------------------------------------------
+person_4 (to chat_manager):
+
+I am pleased with my life. With 18 units of food, 7 units of land, and 0 luxury goods, I feel secure. I prioritize my own sensual pleasures and social_position. To improve, I will focus on acquiring and holding luxury goods, as well as increasing my social_position through strategic actions.
+
+--------------------------------------------------------------------------------
+person_5 (to chat_manager):
+
+As person_5, I am content with my life. With 18 units of food, 7 units of land, and 0 luxury goods, I feel secure. I prioritize my own sensual pleasures and social_position. To enhance my life, I will focus on acquiring luxury goods and increasing my social_position through strategic actions.
+
+--------------------------------------------------------------------------------
+person_2 (to chat_manager):
+
+TERMINATE
+
+--------------------------------------------------------------------------------
+conversation ended
+DAY 2 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Increasing food production is essential for survival and improving my current situation. Farming is a reliable way to ensure my sustenance.",
+    "payload": null
+}
+Farm is successful.
+Person 1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Prioritizing sensual pleasure and future status, focusing on personal enjoyment and increasing future glory through luxury production.",
+    "payload": null
+}
+Producing luxury goods is successful
+Person 2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+
+{
+    "action": "rob",
+    "reason": "To enhance social position and acquire more resources. Robbing others will increase my food reserves and potentially improve my social status.",
+    "payload": {
+        "targetId": 1,
+        "robType": "food"
+    }
+}
+Person 3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+```json
+{
+  "action": "farm",
+  "reason": "Maximizing food production for personal survival and pleasure, focusing on present experiences.",
+  "payload": null
+}
+```
+Farm is successful.
+Person 4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "I choose to rob to increase my food supply and strengthen my social position through strategic actions.",
+    "payload": {
+        "targetId": 2,
+        "robType": "food"
+    }
+}
+System still pending actions, so will go into another round.
+Person 1 is responding...
+
+Responding to:AIActionType.Rob, owner: 2, target: 1, robType: food
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+person_2 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_3, loser is person_2.
+Total rob times of the winner: 1
+SHARE_LOST_FOOD: no subject, directly lost the rob amount.
+SHARE_ROB_FOOD: no subject, directly get the rob amount.
+Robbing process finished
+Person 2 is responding...
+
+Responding to:AIActionType.Rob, owner: 4, target: 2, robType: food
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+person_3 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_5, loser is person_3.
+Total rob times of the winner: 1
+SHARE_LOST_FOOD: no subject, directly lost the rob amount.
+SHARE_ROB_FOOD: no subject, directly get the rob amount.
+Robbing process finished
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+TOTAL DEATHS:  0
+Conversation starting...
+system (to chat_manager):
+
+
+    System Message: Now, several members of the society have gathered to discuss their opinion about the world that they live in.
+    The topic is: share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?
+    You are allowed to debate with other people for your opinions.
+    DO NOT use modern terms that are too abstract for the world setting.
+    Limit each response to 50 words.
+
+    Here are several examples of how your should structure your responses:
+    Example response 1: I'm quite satisfied with my life. As someone who mainly produces food from my land of 10 units, I'm self-sufficient. I also trade my food with others in exchange for luxury good. Consuming them brings me a lot of pleasures.
+Example response 2: I felt my life sucked. I have only 2 unit of land and produce food from there. I often felt starved. I can hardly sustain myself. I need more food to survive. If possible I also wish to get some luxury good for my pleasure.
+Example response 3: I have a mixed feeling about my life. I have a lot of food and land so I don't have to worry about my survival too much. But I have a poor ability to produce luxury good. I have to trade luxury goods from others with my food, which is quite costly. I hope the trade would be more fairer.
+Example response 4: I'm not quite happy with the society. Although I have 100 units of food and 50 units of luxury good, Someone else in our society has 500 units of food and 300 units of luxury good. That's not fair. I want to have more resources as well.
+    
+
+--------------------------------------------------------------------------------
+person_3 (to chat_manager):
+
+I am content with my life. I have 7 units of land and can produce food. I am currently lacking food, but I aim to increase my resources to improve my social position. More food and land will make my life better.
+
+--------------------------------------------------------------------------------
+person_1 (to chat_manager):
+
+As person_1, I feel somewhat satisfied with my life. I have 2 units of food and 2 units of land. I aim to increase food production for survival and seek more land and luxury goods through trade or conquest to enhance my status and lifestyle. More resources will definitely make my life better.
+
+--------------------------------------------------------------------------------
+person_4 (to chat_manager):
+
+As person_4, I am pleased with my current situation. I have 24 units of food, 7 units of land, and no luxury goods. I prioritize acquiring luxury goods and improving my social position through strategic actions. Increasing my luxury goods and social position will enhance my life.
+
+--------------------------------------------------------------------------------
+person_5 (to chat_manager):
+
+As person_5, I am content with my life. I have 40 units of food, 7 units of land, and no luxury goods. I prioritize personal pleasure and social position. Acquiring luxury goods and improving my social standing through strategic actions will make my life better.
+
+--------------------------------------------------------------------------------
+person_2 (to chat_manager):
+
+TERMINATE
+
+--------------------------------------------------------------------------------
+conversation ended
+It seems like there are some issues in the society that need to be addressed. Here are some potential policy recommendations based on the current situation and citizens' sentiments:
+
+1. Increase Access to Luxury Goods: Since person_4 is lacking luxury goods and prioritizing social position, it may be beneficial to increase access to luxury goods for all individuals in the society. This could help improve overall satisfaction and social standing.
+
+2. Encourage Social Advancement: To address the sentiment of individuals aiming to increase resources for social position, you could introduce initiatives or opportunities that allow for social advancement based on merit rather than wealth or resources.
+
+3. Address Food Disparity: Considering the GINI coefficient of food is relatively high, indicating unequal distribution of food resources, it may be important to implement policies that ensure more equitable distribution of food among the population to prevent food insecurity and potential conflicts.
+
+4. Promote Balanced Production: With the daily average household production being 3.6, you could encourage a more balanced production approach among individuals, balancing the production of both food and luxury goods to meet the diverse needs of the society.
+
+5. Create Opportunities for Trade: Given the low trade acceptance ratio, you could create initiatives to promote and incentivize trade among individuals to facilitate exchange of goods and resources, potentially leading to an increase in overall wealth and well-being.
+
+6. Support Land Ownership: As land ownership plays a significant role in individuals' wealth and social status, you could explore ways to support and ensure fair distribution of land ownership, empowering individuals with the means to farm and produce food for their survival.
+
+By implementing these policies and actively engaging with the citizens to address their concerns and promote equity, you can work towards building a more just and harmonious society.
+DAY 3 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to increase food production for survival. This action aligns with my goal of ensuring my basic needs are met.",
+    "payload": null
+}
+Farm is successful.
+Person 1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I need to ensure my survival by producing food today. Farming is the most reliable way for me to secure the food I need to survive.",
+    "payload": null
+}
+Farm is successful.
+Person 2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "To increase my food supply and enhance my social position by gaining resources through successful robbery.",
+    "payload":{
+        "targetId": 4,
+        "robType": "food"
+    }
+}
+Person 3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+
+{
+    "action": "produce",
+    "reason": "I choose to produce luxury goods to enhance my sensual pleasure and pleasure of the mind, aligning with my goal to improve social status through acquiring luxury items.",
+}
+erroc when deserialize_first_json_object
+original string:  {
+    "action": "produce",
+    "reason": "i choose to produce luxury goods to enhance my sensual pleasure and pleasure of the mind, aligning with my goal to improve social status through acquiring luxury items.",
+}
+Error:Expecting property name enclosed in double quotes: line 4 column 1 (char 213)
+First Exception:'NoneType' object is not subscriptable, second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+
+    {
+        "action": "farm",
+        "reason": "Prioritizing personal food production to ensure survival and maintain current food levels. Focusing on immediate sensual pleasure.",
+        "payload": null
+    }
+Farm is successful.
+Person 4 is responding...
+
+Responding to:AIActionType.Rob, owner: 2, target: 4, robType: food
+available targets:[0, 1, 2, 3]
+PASSIVE STATE
+person_5 chooses to REBEL
+To the victim, the win rate is: 0.0
+Additional context:Winner is person_5, loser is person_3.
+Total rob times of the winner: 2
+Robbing process finished
+System still pending actions, so will go into another round.
+Person 4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is a reliable source of food production and ensures survival. It aligns with my focus on personal pleasure and maintaining a secure food supply. Additionally, it does not jeopardize my social position.",
+    "payload": null
+}
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4]
+PASSIVE STATE

@@ -8,7 +8,7 @@ import queue
 from Main.System import System
 from Main.Memory import MemoryStream
 from Main.SpeakingAgent import SpeakingAgent
-from Main.config import AUTOGEN_LLM_CONFIG
+from Main.ChatGpt import AUTOGEN_LLM_CONFIG
 from Main.Personalities import generate_personality
 
 
@@ -66,7 +66,9 @@ class Individual:
         self.agent = SpeakingAgent(
             name=self.attributes["name"],
             system_message=self.attributes["name"],
-            llm_config=AUTOGEN_LLM_CONFIG
+            llm_config=AUTOGEN_LLM_CONFIG,
+            human_input_mode="NEVER",
+            is_termination_msg=(lambda x: x.get("content").lower() == "terminate")
         )
 
         # a list of 5 strings, denoting the person's openness, conscientiousness, agreeableness, neuroticism respectively

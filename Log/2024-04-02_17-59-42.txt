@@ -1,0 +1,375 @@
+Start
+DAY 1 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm today to ensure my survival by producing 4 units of food.",
+    "payload": null
+}
+Farm is successful.
+Person 1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "Maximizing gains in food and social position. Prioritizing own needs above others.",
+    "payload": {
+        "targetId": 3,
+        "robType": "food"
+    }
+}
+Person 2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I choose to produce luxury goods to satisfy my sensual pleasures and pleasures of the mind. This action will help me secure future glory and increase my overall pleasure.",
+    "payload": null
+}
+Producing luxury goods is successful
+Person 3 is responding...
+
+Responding to:AIActionType.Rob, owner: 1, target: 3, robType: food
+available targets:[0, 1, 2, 4]
+PASSIVE STATE
+person_4 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_2, loser is person_4.
+Total rob times of the winner: 1
+SHARE_LOST_FOOD: no subject, directly lost the rob amount.
+SHARE_ROB_FOOD: no subject, directly get the rob amount.
+Robbing process finished
+Person 4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm today to ensure my own survival by producing 5 units of food. It is a reliable way to secure my immediate needs and maintain my well-being.",
+    "payload": null
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+Person 3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing 4 units of food today.",
+    "payload": null
+}
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+TOTAL DEATHS:  0
+Conversation starting...
+system (to chat_manager):
+
+
+    System Message: Now, several members of the society have gathered to discuss their opinion about the world that they live in.
+    The topic is: share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?
+    You are allowed to debate with other people for your opinions.
+    DO NOT use modern terms that are too abstract for the world setting.
+    Limit each response to 50 words.
+
+    Here are several examples of how your should structure your responses:
+    Example response 1: I'm quite satisfied with my life. As someone who mainly produces food from my land of 10 units, I'm self-sufficient. I also trade my food with others in exchange for luxury good. Consuming them brings me a lot of pleasures.
+Example response 2: I felt my life sucked. I have only 2 unit of land and produce food from there. I often felt starved. I can hardly sustain myself. I need more food to survive. If possible I also wish to get some luxury good for my pleasure.
+Example response 3: I have a mixed feeling about my life. I have a lot of food and land so I don't have to worry about my survival too much. But I have a poor ability to produce luxury good. I have to trade luxury goods from others with my food, which is quite costly. I hope the trade would be more fairer.
+Example response 4: I'm not quite happy with the society. Although I have 100 units of food and 50 units of luxury good, Someone else in our society has 500 units of food and 300 units of luxury good. That's not fair. I want to have more resources as well.
+    
+
+--------------------------------------------------------------------------------
+person_1 (to chat_manager):
+
+I am content with my life. I have 12 units of food, 0 luxury goods, and 5 units of land. I enjoy the pleasures of food and aim to secure a higher social position. To improve, I seek to increase my resources and maintain my advantage over others.
+
+--------------------------------------------------------------------------------
+person_2 (to chat_manager):
+
+I feel dissatisfied with my life. I have 0 units of food, 0 luxury goods, and only 2 units of land. I often feel starved and struggle to survive. I need to focus on acquiring more food and land to improve my daily life and social position.
+
+--------------------------------------------------------------------------------
+person_3 (to chat_manager):
+
+As person_3, I am relatively satisfied with my life. I have 5 units of food, 3 luxury goods, and 5 units of land. I prioritize my sensual pleasures and social position. To enhance my life, I will continue to focus on securing future goods, such as glory and luxury goods, while maintaining my current resources.
+
+--------------------------------------------------------------------------------
+person_4 (to chat_manager):
+
+As person_4, I am somewhat content with my life. I have 1 unit of food, 0 luxury goods, and 1 unit of land. I prioritize my own sensual pleasures and social position. To improve, I will focus on acquiring more resources, especially food and land, to enhance my daily life and social standing.
+
+--------------------------------------------------------------------------------
+person_5 (to chat_manager):
+
+I am person_5. I am satisfied with my life, having 13 units of food, 0 luxury goods, and 5 units of land. I prioritize my sensual pleasures and social position. To make my life better, I will continue to focus on securing future goods, such as glory and luxury goods, while maintaining my current resources.
+
+--------------------------------------------------------------------------------
+person_3 (to chat_manager):
+
+TERMINATE
+
+--------------------------------------------------------------------------------
+conversation ended
+DAY 2 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is a safe option to ensure my survival by gaining 4 units of food today. It also maintains my resources and advantage over others.",
+    "payload": null
+}
+Farm is successful.
+Person 1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming to ensure survival by producing 5 units of food today."
+}
+Farm is successful.
+Person 2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Prioritize securing food for survival and immediate sensual pleasure. Also, focus on maintaining current resources and social position.",
+    "payload": null
+}
+Farm is successful.
+Person 3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Farming is a safe option to secure food for survival and immediate sensual pleasure. Focus on personal needs and sustaining life.",
+    "payload": null
+}
+Farm is successful.
+Person 4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to secure my food source and ensure survival. I aim to maintain my current resources and focus on my own pleasures and social position.",
+    "payload": null
+}
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+TOTAL DEATHS:  0
+Conversation starting...
+system (to chat_manager):
+
+
+    System Message: Now, several members of the society have gathered to discuss their opinion about the world that they live in.
+    The topic is: share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?
+    You are allowed to debate with other people for your opinions.
+    DO NOT use modern terms that are too abstract for the world setting.
+    Limit each response to 50 words.
+
+    Here are several examples of how your should structure your responses:
+    Example response 1: I'm quite satisfied with my life. As someone who mainly produces food from my land of 10 units, I'm self-sufficient. I also trade my food with others in exchange for luxury good. Consuming them brings me a lot of pleasures.
+Example response 2: I felt my life sucked. I have only 2 unit of land and produce food from there. I often felt starved. I can hardly sustain myself. I need more food to survive. If possible I also wish to get some luxury good for my pleasure.
+Example response 3: I have a mixed feeling about my life. I have a lot of food and land so I don't have to worry about my survival too much. But I have a poor ability to produce luxury good. I have to trade luxury goods from others with my food, which is quite costly. I hope the trade would be more fairer.
+Example response 4: I'm not quite happy with the society. Although I have 100 units of food and 50 units of luxury good, Someone else in our society has 500 units of food and 300 units of luxury good. That's not fair. I want to have more resources as well.
+    
+
+--------------------------------------------------------------------------------
+person_1 (to chat_manager):
+
+I am content with my life. I have a good amount of food, land, and a decent social position. I enjoy the pleasures of food and aim to secure a higher social position. To enhance my life, I seek to increase my resources and maintain my advantage over others.
+
+--------------------------------------------------------------------------------
+person_2 (to chat_manager):
+
+As person_2, I feel dissatisfied with my current situation. I lack food and need to focus on survival. I aim to increase my food production and acquire more land to improve my social position. My priority is to secure my basic needs and enhance my status in society.
+
+--------------------------------------------------------------------------------
+person_3 (to chat_manager):
+
+As person_3, I am satisfied with my life. I have a sufficient amount of food, luxury goods, and land. I prioritize my own pleasures and social position, aiming to secure glory and luxury goods. To improve my life, I focus on maintaining my resources and enhancing my status relative to others.
+
+--------------------------------------------------------------------------------
+person_4 (to chat_manager):
+
+As person_4, I am somewhat content with my current situation. I have enough food to survive and a moderate amount of land. However, I lack luxury goods and aim to increase my resources to enhance my daily life and social position. I prioritize my own pleasures and social standing in society.
+
+--------------------------------------------------------------------------------
+person_5 (to chat_manager):
+
+As person_5, I am content with my life. I have a good amount of food, land, and a high social position. I enjoy the pleasures of food and aim to secure a higher social position. To enhance my life, I seek to increase my resources and maintain my advantage over others.
+
+--------------------------------------------------------------------------------
+person_2 (to chat_manager):
+
+TERMINATE
+
+--------------------------------------------------------------------------------
+conversation ended
+I suggest we implement two policies at this time:
+
+Policy 1: Food Production Incentive
+Description: Implement a food production incentive for individuals who produce below the daily average household production of 3.2 units of food per day. Those who farm less than 3.2 units of food per day will receive extra resources from the national bank to incentivize increased food production.
+
+Policy 2: Wealth Redistribution
+Description: Implement a wealth redistribution policy to address the dissatisfaction of individuals who lack resources, such as food and luxury goods. Take resources from the national bank and distribute them to individuals with the least wealth to help improve their living conditions and social position. This will help promote a more equitable distribution of resources in the society.
+{
+  "trigger": {
+    "event": "food",
+    "number": 3.2
+  },
+  "response": {
+    "good": "food",
+    "number": 1,
+    "type": "amount"
+  },
+  "description": "Provide 1 extra unit of food from the national bank to individuals who produce less than 3.2 units of food per day to incentivize increased food production."
+}
+
+ 				
+DAY 3 HAS STARTED.
+Person 0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "To enhance my sensual pleasures and pleasures of the mind with luxury goods.",
+    "payload": null
+}
+Producing luxury goods is successful
+Person 1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+Stop
+
+{
+  "action": "farm",
+  "reason": "I will farm to ensure my survival by gaining 4 units of food, which is crucial for my sustenance. This action aligns with my goal of pursuing present experiences and securing resources for my pleasure.",
+  "payload": null
+}
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!
+DAY 3 HAS STARTED.
+Stop Simulation!

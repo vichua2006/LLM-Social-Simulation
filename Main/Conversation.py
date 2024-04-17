@@ -8,9 +8,8 @@ from Main.Memory import ConceptNode
 from Main.SpeakingAgent import SpeakingAgent, CustomGroupChat
 from Main.Query import generate_environment_description, generate_general_description
 from Main.Retrieve import new_retrieve
-from Main.ChatGpt import chat
+from Main.ChatGpt import AUTOGEN_LLM_CONFIG 
 
-from Main.config import AUTOGEN_LLM_CONFIG 
 client = OpenAI(api_key=AUTOGEN_LLM_CONFIG["config_list"][0]["api_key"])
 
 def converse(individuals: List[Individual], system: System, chat_topic: str, pleasure_system_input: str = None) -> List[Dict[str, str]]:
