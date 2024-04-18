@@ -59,6 +59,8 @@ class Individual:
         self.memorystream = MemoryStream(id)
         # Initialize memory of the individual
         self.memory = ['None']*30
+        # Initiallize a list to record daily json stats of the person
+        self.json_log_list = []
         self.DESIRE_FOR_GLORY=10
         self.DESIRE_FOR_PEACE=3
         # Initialize autogen agent of the individual
@@ -155,10 +157,11 @@ class Individual:
     def update_agent_speaking_tendency(self, prompt:str):
         self.agent.update_speaking_tendency(prompt)
     
-    def get_stats_json(self):
-        # retrieves info about the person's production abilities, character (big 5), possession (changed real time), and memory (real time)
+    def get_stats_json(self, system:System):
+        # retrieves the current info about the person's production abilities, character (big 5), possessions, and recent memories 
         # returns a json string containing those information
         stats = deepcopy(self.attributes)
+        stats["day"] = system.time
         stats["expected_food_production_rate"] = self.food_production
         stats["expected_luxury_production_rate"] = self.luxury_production
         stats["personality"] = self.get_personality()
@@ -169,6 +172,14 @@ class Individual:
 
         return stats_json
 
+    def log_personal_stats(self, system:System):
+        # appends generated json stats into the individual's log list as a json object
+        stats_json = self.get_stats_json(system)
+        self.json_log_list.append(json.loads(stats_json))
+    
+    def get_log_list(self):
+        # returns a string of the log list
+        return json.dumps(self.json_log_list)
 
     def __getstate__(self):
         return self.__dict__

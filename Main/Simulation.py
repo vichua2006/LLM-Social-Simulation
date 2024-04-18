@@ -17,11 +17,6 @@ from Main.Memory import ConceptNode
 from Main.Conversation import converse, add_memory_after_conversation, summarize_conversation
 from Main.Soverign import Report, generate_policy_json
 
-file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
-#if file name alread exist, datetime will be as detail as second
-if os.path.exists(file_name):
-  file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M %S%p")+'.csv'
-
 csv_file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
 #if file name alread exist, datetime will be as detail as second
 if os.path.exists(csv_file_name):
@@ -29,8 +24,10 @@ if os.path.exists(csv_file_name):
 
 conversation_dir = f"conversation_and_memory_log/{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}/"
 
+individual_data_dir = f"individual_data_log/{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}/"
+
 # number of days between conversations
-days_between_conversation = 1
+days_between_conversation = 5
 conversation_list = []
 
 def discuss_topic(system: System, individuals: List[Individual], topic: str, day_count: int):
@@ -105,6 +102,7 @@ def day_end(system:System,individuals:List[Individual]):
     # Generate food/luxury production numbers for specific individuals based general distribution
     individual.food_production = round(np.random.normal(food_production, 0.5))
     individual.luxury_production = round(np.random.normal(luxury_production, 0.5))
+    individual.log_personal_stats(system)
 
   system.time+=1
   if system.day_end_counter > 0:
@@ -125,11 +123,6 @@ def generate_policy(system: System, conversations: List[List[Dict[str, str]]]):
   r = Report(system, summary)
   response = generate_policy_json(r)
   return response
-
-file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
-#if file name alread exist, datetime will be as detail as second
-if os.path.exists(file_name):
-  file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M %S%p")+'.csv'
 
 
 def initialize():
@@ -415,23 +408,23 @@ def simulate(individuals:List[Individual],system:System):
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
 
-    for person in individuals:
-      print(person.get_stats_json()) 
 
     if (system.time % days_between_conversation == 0):
 
       topic = "share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?"
 
-      print("Conversation starting...")
-      conversation = discuss_topic(system, individuals, topic, system.time)
-      print("conversation ended")
+      # print("Conversation starting...")
+      # conversation = discuss_topic(system, individuals, topic, system.time)
+      # print("conversation ended")
 
-      conversation_list.append(conversation)
-      if (len(conversation_list) > 1):
-        description = generate_policy(system, conversation_list)
-        conversation_list.clear()
+      # conversation_list.append(conversation)
+      # if (len(conversation_list) > 1):
+      #   json_description = generate_policy(system, conversation_list)
+      #   conversation_list.clear()
 
-        print(description)
+      #   print(json_description)
+
+      system.csv_analysis.output_individual_stats(system, individual_data_dir)
 
       
     system.csv_analysis.log_stat(system, csv_file_name)
