@@ -165,6 +165,8 @@ class Individual:
         stats["personality"] = self.get_personality()
         # returns the 5 most recent memories
         stats["recent_memories"] = [m.description for m in self.memorystream.concept_nodes[-5:]]
+        stats["emotion"] = self.memorystream.emotion
+        del stats["starved"]
 
         stats_json = json.dumps(stats)
 

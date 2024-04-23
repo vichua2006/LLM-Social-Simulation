@@ -332,9 +332,10 @@ class CsvAnalysis:
 
       # generate the by_day list
       for i in range(days):
-         by_day.append({"day": i, "stats": []})
+         day_data = {"day": i, "stats": []}
          for stats in combined_stats:
-            by_day[i]["stats"].append(stats[i])
+            day_data["stats"].append(stats[i])
+         by_day.append(day_data)
       
       # generate the by_person list
       for i, stats in enumerate(combined_stats):

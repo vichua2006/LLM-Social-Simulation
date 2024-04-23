@@ -413,9 +413,9 @@ def simulate(individuals:List[Individual],system:System):
 
       topic = "share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?"
 
-      # print("Conversation starting...")
-      # conversation = discuss_topic(system, individuals, topic, system.time)
-      # print("conversation ended")
+      print("Conversation starting...")
+      conversation = discuss_topic(system, individuals, topic, system.time)
+      print("conversation ended")
 
       # conversation_list.append(conversation)
       # if (len(conversation_list) > 1):
@@ -424,7 +424,8 @@ def simulate(individuals:List[Individual],system:System):
 
       #   print(json_description)
 
-      system.csv_analysis.output_individual_stats(system, individual_data_dir)
+    
+    if (system.time == 10): system.csv_analysis.output_individual_stats(system, individual_data_dir)
 
       
     system.csv_analysis.log_stat(system, csv_file_name)

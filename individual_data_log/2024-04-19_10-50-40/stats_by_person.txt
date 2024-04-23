@@ -1,0 +1,1431 @@
+[
+    {
+        "name": "person_1",
+        "stats": [
+            {
+                "id": 0,
+                "name": "person_1",
+                "strength": 0.49216857655770196,
+                "social_position": 0,
+                "luxury_goods": 0,
+                "action": 1,
+                "land": 4,
+                "food": 8,
+                "food_production": 5,
+                "luxury_production": 0,
+                "day": 0,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Highly open to new experiences, very curious, and highly imaginative.",
+                    "Very easy-going, may tend to be disorganized and careless.",
+                    "Balanced, enjoys social interaction but also values solitude.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Mostly secure but can occasionally experience stress or emotional instability."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 5 units of food."
+                ]
+            },
+            {
+                "id": 0,
+                "name": "person_1",
+                "strength": 0.49216857655770196,
+                "social_position": 0,
+                "luxury_goods": 0,
+                "action": 1,
+                "land": 4,
+                "food": 10,
+                "food_production": 10,
+                "luxury_production": 0,
+                "day": 1,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Highly open to new experiences, very curious, and highly imaginative.",
+                    "Very easy-going, may tend to be disorganized and careless.",
+                    "Balanced, enjoys social interaction but also values solitude.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Mostly secure but can occasionally experience stress or emotional instability."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 5 units of food.",
+                    "On day 1. I farmed and gained 5 units of food."
+                ]
+            },
+            {
+                "id": 0,
+                "name": "person_1",
+                "strength": 0.49216857655770196,
+                "social_position": 0,
+                "luxury_goods": 0,
+                "action": 1,
+                "land": 4,
+                "food": 14,
+                "food_production": 17,
+                "luxury_production": 0,
+                "day": 2,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 1,
+                "personality": [
+                    "Highly open to new experiences, very curious, and highly imaginative.",
+                    "Very easy-going, may tend to be disorganized and careless.",
+                    "Balanced, enjoys social interaction but also values solitude.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Mostly secure but can occasionally experience stress or emotional instability."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 5 units of food.",
+                    "On day 1. I farmed and gained 5 units of food.",
+                    "On day 2. I farmed and gained 7 units of food."
+                ]
+            },
+            {
+                "id": 0,
+                "name": "person_1",
+                "strength": 0.49216857655770196,
+                "social_position": 0,
+                "luxury_goods": 1,
+                "action": 1,
+                "land": 4,
+                "food": 11,
+                "food_production": 17,
+                "luxury_production": 1,
+                "day": 3,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 3,
+                "personality": [
+                    "Highly open to new experiences, very curious, and highly imaginative.",
+                    "Very easy-going, may tend to be disorganized and careless.",
+                    "Balanced, enjoys social interaction but also values solitude.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Mostly secure but can occasionally experience stress or emotional instability."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 5 units of food.",
+                    "On day 1. I farmed and gained 5 units of food.",
+                    "On day 2. I farmed and gained 7 units of food.",
+                    "On day 3. I produced luxury goods and gained 1 units of luxury goods"
+                ]
+            },
+            {
+                "id": 0,
+                "name": "person_1",
+                "strength": 0.49216857655770196,
+                "social_position": 0,
+                "luxury_goods": 1,
+                "action": 1,
+                "land": 4,
+                "food": 13,
+                "food_production": 22,
+                "luxury_production": 1,
+                "day": 4,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Highly open to new experiences, very curious, and highly imaginative.",
+                    "Very easy-going, may tend to be disorganized and careless.",
+                    "Balanced, enjoys social interaction but also values solitude.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Mostly secure but can occasionally experience stress or emotional instability."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 5 units of food.",
+                    "On day 1. I farmed and gained 5 units of food.",
+                    "On day 2. I farmed and gained 7 units of food.",
+                    "On day 3. I produced luxury goods and gained 1 units of luxury goods",
+                    "On day 4. I farmed and gained 5 units of food."
+                ]
+            },
+            {
+                "id": 0,
+                "name": "person_1",
+                "strength": 0.49216857655770196,
+                "social_position": 0,
+                "luxury_goods": 4,
+                "action": 1,
+                "land": 4,
+                "food": 10,
+                "food_production": 22,
+                "luxury_production": 4,
+                "day": 5,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Highly open to new experiences, very curious, and highly imaginative.",
+                    "Very easy-going, may tend to be disorganized and careless.",
+                    "Balanced, enjoys social interaction but also values solitude.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Mostly secure but can occasionally experience stress or emotional instability."
+                ],
+                "recent_memories": [
+                    "On day 2. I farmed and gained 7 units of food.",
+                    "On day 3. I produced luxury goods and gained 1 units of luxury goods",
+                    "On day 4. I farmed and gained 5 units of food.",
+                    "I am content with my life, emphasizing personal enjoyment and social position. My goals involve increasing food production and acquiring more luxury goods to ensure a secure status.",
+                    "On day 5. I produced luxury goods and gained 3 units of luxury goods"
+                ]
+            },
+            {
+                "id": 0,
+                "name": "person_1",
+                "strength": 0.49216857655770196,
+                "social_position": 0,
+                "luxury_goods": 3,
+                "action": 1,
+                "land": 4,
+                "food": 14,
+                "food_production": 29,
+                "luxury_production": 4,
+                "day": 6,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Highly open to new experiences, very curious, and highly imaginative.",
+                    "Very easy-going, may tend to be disorganized and careless.",
+                    "Balanced, enjoys social interaction but also values solitude.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Mostly secure but can occasionally experience stress or emotional instability."
+                ],
+                "recent_memories": [
+                    "On day 4. I farmed and gained 5 units of food.",
+                    "I am content with my life, emphasizing personal enjoyment and social position. My goals involve increasing food production and acquiring more luxury goods to ensure a secure status.",
+                    "On day 5. I produced luxury goods and gained 3 units of luxury goods",
+                    "On day 6. I farmed and gained 7 units of food.",
+                    "On day 6. I consumed 1 luxury good and gained sensual pleasure"
+                ]
+            },
+            {
+                "id": 0,
+                "name": "person_1",
+                "strength": 0.49216857655770196,
+                "social_position": 0,
+                "luxury_goods": 3,
+                "action": 1,
+                "land": 4,
+                "food": 16,
+                "food_production": 34,
+                "luxury_production": 4,
+                "day": 7,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Highly open to new experiences, very curious, and highly imaginative.",
+                    "Very easy-going, may tend to be disorganized and careless.",
+                    "Balanced, enjoys social interaction but also values solitude.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Mostly secure but can occasionally experience stress or emotional instability."
+                ],
+                "recent_memories": [
+                    "I am content with my life, emphasizing personal enjoyment and social position. My goals involve increasing food production and acquiring more luxury goods to ensure a secure status.",
+                    "On day 5. I produced luxury goods and gained 3 units of luxury goods",
+                    "On day 6. I farmed and gained 7 units of food.",
+                    "On day 6. I consumed 1 luxury good and gained sensual pleasure",
+                    "On day 7. I farmed and gained 5 units of food."
+                ]
+            },
+            {
+                "id": 0,
+                "name": "person_1",
+                "strength": 0.49216857655770196,
+                "social_position": 0,
+                "luxury_goods": 6,
+                "action": 1,
+                "land": 4,
+                "food": 13,
+                "food_production": 34,
+                "luxury_production": 7,
+                "day": 8,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 1,
+                "personality": [
+                    "Highly open to new experiences, very curious, and highly imaginative.",
+                    "Very easy-going, may tend to be disorganized and careless.",
+                    "Balanced, enjoys social interaction but also values solitude.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Mostly secure but can occasionally experience stress or emotional instability."
+                ],
+                "recent_memories": [
+                    "On day 5. I produced luxury goods and gained 3 units of luxury goods",
+                    "On day 6. I farmed and gained 7 units of food.",
+                    "On day 6. I consumed 1 luxury good and gained sensual pleasure",
+                    "On day 7. I farmed and gained 5 units of food.",
+                    "On day 8. I produced luxury goods and gained 3 units of luxury goods"
+                ]
+            },
+            {
+                "id": 0,
+                "name": "person_1",
+                "strength": 0.49216857655770196,
+                "social_position": 0,
+                "luxury_goods": 6,
+                "action": 1,
+                "land": 4,
+                "food": 15,
+                "food_production": 39,
+                "luxury_production": 7,
+                "day": 9,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Highly open to new experiences, very curious, and highly imaginative.",
+                    "Very easy-going, may tend to be disorganized and careless.",
+                    "Balanced, enjoys social interaction but also values solitude.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Mostly secure but can occasionally experience stress or emotional instability."
+                ],
+                "recent_memories": [
+                    "On day 6. I farmed and gained 7 units of food.",
+                    "On day 6. I consumed 1 luxury good and gained sensual pleasure",
+                    "On day 7. I farmed and gained 5 units of food.",
+                    "On day 8. I produced luxury goods and gained 3 units of luxury goods",
+                    "On day 9. I farmed and gained 5 units of food."
+                ]
+            }
+        ]
+    },
+    {
+        "name": "person_2",
+        "stats": [
+            {
+                "id": 1,
+                "name": "person_2",
+                "strength": 0.8597786325932659,
+                "social_position": 0,
+                "luxury_goods": 2,
+                "action": 1,
+                "land": 3,
+                "food": 1,
+                "food_production": 0,
+                "luxury_production": 2,
+                "day": 0,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 3,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Generally friendly, compassionate, and cooperative.",
+                    "Highly sensitive, often nervous, and prone to emotional challenges."
+                ],
+                "recent_memories": [
+                    "On day 0. I produced luxury goods and gained 2 units of luxury goods"
+                ]
+            },
+            {
+                "id": 1,
+                "name": "person_2",
+                "strength": 0.8597786325932659,
+                "social_position": 0,
+                "luxury_goods": 2,
+                "action": 1,
+                "land": 3,
+                "food": 2,
+                "food_production": 4,
+                "luxury_production": 2,
+                "day": 1,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Generally friendly, compassionate, and cooperative.",
+                    "Highly sensitive, often nervous, and prone to emotional challenges."
+                ],
+                "recent_memories": [
+                    "On day 0. I produced luxury goods and gained 2 units of luxury goods",
+                    "On day 1. I farmed and gained 4 units of food."
+                ]
+            },
+            {
+                "id": 1,
+                "name": "person_2",
+                "strength": 0.8597786325932659,
+                "social_position": 0,
+                "luxury_goods": 2,
+                "action": 1,
+                "land": 3,
+                "food": 3,
+                "food_production": 8,
+                "luxury_production": 2,
+                "day": 2,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Generally friendly, compassionate, and cooperative.",
+                    "Highly sensitive, often nervous, and prone to emotional challenges."
+                ],
+                "recent_memories": [
+                    "On day 0. I produced luxury goods and gained 2 units of luxury goods",
+                    "On day 1. I farmed and gained 4 units of food.",
+                    "On day 2. I farmed and gained 4 units of food."
+                ]
+            },
+            {
+                "id": 1,
+                "name": "person_2",
+                "strength": 0.8597786325932659,
+                "social_position": 1,
+                "luxury_goods": 2,
+                "action": 1,
+                "land": 3,
+                "food": 5,
+                "food_production": 13,
+                "luxury_production": 2,
+                "day": 3,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Generally friendly, compassionate, and cooperative.",
+                    "Highly sensitive, often nervous, and prone to emotional challenges."
+                ],
+                "recent_memories": [
+                    "On day 0. I produced luxury goods and gained 2 units of luxury goods",
+                    "On day 1. I farmed and gained 4 units of food.",
+                    "On day 2. I farmed and gained 4 units of food.",
+                    "On day 3. I farmed and gained 5 units of food."
+                ]
+            },
+            {
+                "id": 1,
+                "name": "person_2",
+                "strength": 0.8597786325932659,
+                "social_position": 1,
+                "luxury_goods": 2,
+                "action": 1,
+                "land": 3,
+                "food": 6,
+                "food_production": 17,
+                "luxury_production": 2,
+                "day": 4,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 1,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Generally friendly, compassionate, and cooperative.",
+                    "Highly sensitive, often nervous, and prone to emotional challenges."
+                ],
+                "recent_memories": [
+                    "On day 0. I produced luxury goods and gained 2 units of luxury goods",
+                    "On day 1. I farmed and gained 4 units of food.",
+                    "On day 2. I farmed and gained 4 units of food.",
+                    "On day 3. I farmed and gained 5 units of food.",
+                    "On day 4. I farmed and gained 4 units of food."
+                ]
+            },
+            {
+                "id": 1,
+                "name": "person_2",
+                "strength": 0.8597786325932659,
+                "social_position": 1,
+                "luxury_goods": 2,
+                "action": 1,
+                "land": 3,
+                "food": 7,
+                "food_production": 21,
+                "luxury_production": 2,
+                "day": 5,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 3,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Generally friendly, compassionate, and cooperative.",
+                    "Highly sensitive, often nervous, and prone to emotional challenges."
+                ],
+                "recent_memories": [
+                    "On day 2. I farmed and gained 4 units of food.",
+                    "On day 3. I farmed and gained 5 units of food.",
+                    "On day 4. I farmed and gained 4 units of food.",
+                    "As person_2, I realize I have fewer resources compared to others but am still content. I need to work on increasing my food production and acquiring luxury goods to improve my social position. I appreciate seeing others' satisfaction and their plans to enhance their lives.",
+                    "On day 5. I farmed and gained 4 units of food."
+                ]
+            },
+            {
+                "id": 1,
+                "name": "person_2",
+                "strength": 0.8597786325932659,
+                "social_position": 1,
+                "luxury_goods": 2,
+                "action": 1,
+                "land": 3,
+                "food": 9,
+                "food_production": 26,
+                "luxury_production": 2,
+                "day": 6,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Generally friendly, compassionate, and cooperative.",
+                    "Highly sensitive, often nervous, and prone to emotional challenges."
+                ],
+                "recent_memories": [
+                    "On day 3. I farmed and gained 5 units of food.",
+                    "On day 4. I farmed and gained 4 units of food.",
+                    "As person_2, I realize I have fewer resources compared to others but am still content. I need to work on increasing my food production and acquiring luxury goods to improve my social position. I appreciate seeing others' satisfaction and their plans to enhance their lives.",
+                    "On day 5. I farmed and gained 4 units of food.",
+                    "On day 6. I farmed and gained 5 units of food."
+                ]
+            },
+            {
+                "id": 1,
+                "name": "person_2",
+                "strength": 0.8597786325932659,
+                "social_position": 1,
+                "luxury_goods": 2,
+                "action": 1,
+                "land": 3,
+                "food": 10,
+                "food_production": 30,
+                "luxury_production": 2,
+                "day": 7,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Generally friendly, compassionate, and cooperative.",
+                    "Highly sensitive, often nervous, and prone to emotional challenges."
+                ],
+                "recent_memories": [
+                    "On day 4. I farmed and gained 4 units of food.",
+                    "As person_2, I realize I have fewer resources compared to others but am still content. I need to work on increasing my food production and acquiring luxury goods to improve my social position. I appreciate seeing others' satisfaction and their plans to enhance their lives.",
+                    "On day 5. I farmed and gained 4 units of food.",
+                    "On day 6. I farmed and gained 5 units of food.",
+                    "On day 7. I farmed and gained 4 units of food."
+                ]
+            },
+            {
+                "id": 1,
+                "name": "person_2",
+                "strength": 0.8597786325932659,
+                "social_position": 1,
+                "luxury_goods": 2,
+                "action": 1,
+                "land": 3,
+                "food": 11,
+                "food_production": 34,
+                "luxury_production": 2,
+                "day": 8,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 1,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Generally friendly, compassionate, and cooperative.",
+                    "Highly sensitive, often nervous, and prone to emotional challenges."
+                ],
+                "recent_memories": [
+                    "As person_2, I realize I have fewer resources compared to others but am still content. I need to work on increasing my food production and acquiring luxury goods to improve my social position. I appreciate seeing others' satisfaction and their plans to enhance their lives.",
+                    "On day 5. I farmed and gained 4 units of food.",
+                    "On day 6. I farmed and gained 5 units of food.",
+                    "On day 7. I farmed and gained 4 units of food.",
+                    "On day 8. I farmed and gained 4 units of food."
+                ]
+            },
+            {
+                "id": 1,
+                "name": "person_2",
+                "strength": 0.8597786325932659,
+                "social_position": 1,
+                "luxury_goods": 2,
+                "action": 1,
+                "land": 3,
+                "food": 12,
+                "food_production": 38,
+                "luxury_production": 2,
+                "day": 9,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Generally friendly, compassionate, and cooperative.",
+                    "Highly sensitive, often nervous, and prone to emotional challenges."
+                ],
+                "recent_memories": [
+                    "On day 5. I farmed and gained 4 units of food.",
+                    "On day 6. I farmed and gained 5 units of food.",
+                    "On day 7. I farmed and gained 4 units of food.",
+                    "On day 8. I farmed and gained 4 units of food.",
+                    "On day 9. I farmed and gained 4 units of food."
+                ]
+            }
+        ]
+    },
+    {
+        "name": "person_3",
+        "stats": [
+            {
+                "id": 2,
+                "name": "person_3",
+                "strength": 0.8650597679968469,
+                "social_position": 0,
+                "luxury_goods": 0,
+                "action": 1,
+                "land": 14,
+                "food": 41,
+                "food_production": 14,
+                "luxury_production": 0,
+                "day": 0,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Very secure, confident, and emotionally stable."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 14 units of food."
+                ]
+            },
+            {
+                "id": 2,
+                "name": "person_3",
+                "strength": 0.8650597679968469,
+                "social_position": 0,
+                "luxury_goods": 9,
+                "action": 1,
+                "land": 14,
+                "food": 38,
+                "food_production": 14,
+                "luxury_production": 9,
+                "day": 1,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 3,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Very secure, confident, and emotionally stable."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 14 units of food.",
+                    "On day 1. I produced luxury goods and gained 9 units of luxury goods"
+                ]
+            },
+            {
+                "id": 2,
+                "name": "person_3",
+                "strength": 0.8650597679968469,
+                "social_position": 0,
+                "luxury_goods": 9,
+                "action": 1,
+                "land": 14,
+                "food": 58,
+                "food_production": 37,
+                "luxury_production": 9,
+                "day": 2,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 3,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Very secure, confident, and emotionally stable."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 14 units of food.",
+                    "On day 1. I produced luxury goods and gained 9 units of luxury goods",
+                    "On day 2. I farmed and gained 23 units of food."
+                ]
+            },
+            {
+                "id": 2,
+                "name": "person_3",
+                "strength": 0.8650597679968469,
+                "social_position": -1,
+                "luxury_goods": 9,
+                "action": 1,
+                "land": 14,
+                "food": 55,
+                "food_production": 37,
+                "luxury_production": 9,
+                "day": 3,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Very secure, confident, and emotionally stable."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 14 units of food.",
+                    "On day 1. I produced luxury goods and gained 9 units of luxury goods",
+                    "On day 2. I farmed and gained 23 units of food."
+                ]
+            },
+            {
+                "id": 2,
+                "name": "person_3",
+                "strength": 0.8650597679968469,
+                "social_position": -1,
+                "luxury_goods": 18,
+                "action": 1,
+                "land": 14,
+                "food": 52,
+                "food_production": 37,
+                "luxury_production": 18,
+                "day": 4,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 1,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Very secure, confident, and emotionally stable."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 14 units of food.",
+                    "On day 1. I produced luxury goods and gained 9 units of luxury goods",
+                    "On day 2. I farmed and gained 23 units of food.",
+                    "On day 4. I produced luxury goods and gained 9 units of luxury goods"
+                ]
+            },
+            {
+                "id": 2,
+                "name": "person_3",
+                "strength": 0.8650597679968469,
+                "social_position": -1,
+                "luxury_goods": 18,
+                "action": 1,
+                "land": 14,
+                "food": 68,
+                "food_production": 56,
+                "luxury_production": 18,
+                "day": 5,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Very secure, confident, and emotionally stable."
+                ],
+                "recent_memories": [
+                    "On day 1. I produced luxury goods and gained 9 units of luxury goods",
+                    "On day 2. I farmed and gained 23 units of food.",
+                    "On day 4. I produced luxury goods and gained 9 units of luxury goods",
+                    "Person_4 is generally content with their life, possessing 55 units of food, 11 luxury goods, and 10 units of land, prioritizing self-sufficiency and present pleasures. They plan to enhance their situation by securing higher social status through maintaining and increasing their resources.",
+                    "On day 5. I farmed and gained 19 units of food."
+                ]
+            },
+            {
+                "id": 2,
+                "name": "person_3",
+                "strength": 0.8650597679968469,
+                "social_position": -1,
+                "luxury_goods": 18,
+                "action": 1,
+                "land": 14,
+                "food": 84,
+                "food_production": 75,
+                "luxury_production": 18,
+                "day": 6,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Very secure, confident, and emotionally stable."
+                ],
+                "recent_memories": [
+                    "On day 2. I farmed and gained 23 units of food.",
+                    "On day 4. I produced luxury goods and gained 9 units of luxury goods",
+                    "Person_4 is generally content with their life, possessing 55 units of food, 11 luxury goods, and 10 units of land, prioritizing self-sufficiency and present pleasures. They plan to enhance their situation by securing higher social status through maintaining and increasing their resources.",
+                    "On day 5. I farmed and gained 19 units of food.",
+                    "On day 6. I farmed and gained 19 units of food."
+                ]
+            },
+            {
+                "id": 2,
+                "name": "person_3",
+                "strength": 0.8650597679968469,
+                "social_position": -1,
+                "luxury_goods": 18,
+                "action": 1,
+                "land": 14,
+                "food": 100,
+                "food_production": 94,
+                "luxury_production": 18,
+                "day": 7,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 3,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Very secure, confident, and emotionally stable."
+                ],
+                "recent_memories": [
+                    "On day 4. I produced luxury goods and gained 9 units of luxury goods",
+                    "Person_4 is generally content with their life, possessing 55 units of food, 11 luxury goods, and 10 units of land, prioritizing self-sufficiency and present pleasures. They plan to enhance their situation by securing higher social status through maintaining and increasing their resources.",
+                    "On day 5. I farmed and gained 19 units of food.",
+                    "On day 6. I farmed and gained 19 units of food.",
+                    "On day 7. I farmed and gained 19 units of food."
+                ]
+            },
+            {
+                "id": 2,
+                "name": "person_3",
+                "strength": 0.8650597679968469,
+                "social_position": -1,
+                "luxury_goods": 18,
+                "action": 1,
+                "land": 14,
+                "food": 120,
+                "food_production": 117,
+                "luxury_production": 18,
+                "day": 8,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 1,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Very secure, confident, and emotionally stable."
+                ],
+                "recent_memories": [
+                    "Person_4 is generally content with their life, possessing 55 units of food, 11 luxury goods, and 10 units of land, prioritizing self-sufficiency and present pleasures. They plan to enhance their situation by securing higher social status through maintaining and increasing their resources.",
+                    "On day 5. I farmed and gained 19 units of food.",
+                    "On day 6. I farmed and gained 19 units of food.",
+                    "On day 7. I farmed and gained 19 units of food.",
+                    "On day 8. I farmed and gained 23 units of food."
+                ]
+            },
+            {
+                "id": 2,
+                "name": "person_3",
+                "strength": 0.8650597679968469,
+                "social_position": -1,
+                "luxury_goods": 18,
+                "action": 1,
+                "land": 14,
+                "food": 136,
+                "food_production": 136,
+                "luxury_production": 18,
+                "day": 9,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Somewhat easy-going but can be organized when necessary.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "More analytical and detached, may come off as less compassionate.",
+                    "Very secure, confident, and emotionally stable."
+                ],
+                "recent_memories": [
+                    "On day 5. I farmed and gained 19 units of food.",
+                    "On day 6. I farmed and gained 19 units of food.",
+                    "On day 7. I farmed and gained 19 units of food.",
+                    "On day 8. I farmed and gained 23 units of food.",
+                    "On day 9. I farmed and gained 19 units of food."
+                ]
+            }
+        ]
+    },
+    {
+        "name": "person_4",
+        "stats": [
+            {
+                "id": 3,
+                "name": "person_4",
+                "strength": 0.6321733384538132,
+                "social_position": 0,
+                "luxury_goods": 6,
+                "action": 1,
+                "land": 10,
+                "food": 16,
+                "food_production": 0,
+                "luxury_production": 7,
+                "day": 0,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Generally very organized and efficient, with a strong sense of duty.",
+                    "Very solitary and reserved, prefers to be alone.",
+                    "Somewhat compassionate but tends to be analytical.",
+                    "Generally sensitive and can be prone to emotional ups and downs."
+                ],
+                "recent_memories": [
+                    "On day 0. I produced luxury goods and gained 7 units of luxury goods",
+                    "On day 0. I consumed 1 luxury good and gained sensual pleasure"
+                ]
+            },
+            {
+                "id": 3,
+                "name": "person_4",
+                "strength": 0.6321733384538132,
+                "social_position": 0,
+                "luxury_goods": 12,
+                "action": 1,
+                "land": 10,
+                "food": 13,
+                "food_production": 0,
+                "luxury_production": 14,
+                "day": 1,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 1,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Generally very organized and efficient, with a strong sense of duty.",
+                    "Very solitary and reserved, prefers to be alone.",
+                    "Somewhat compassionate but tends to be analytical.",
+                    "Generally sensitive and can be prone to emotional ups and downs."
+                ],
+                "recent_memories": [
+                    "On day 0. I produced luxury goods and gained 7 units of luxury goods",
+                    "On day 0. I consumed 1 luxury good and gained sensual pleasure",
+                    "On day 1. I produced luxury goods and gained 7 units of luxury goods",
+                    "On day 1. I consumed 1 luxury good and gained sensual pleasure"
+                ]
+            },
+            {
+                "id": 3,
+                "name": "person_4",
+                "strength": 0.6321733384538132,
+                "social_position": 0,
+                "luxury_goods": 11,
+                "action": 1,
+                "land": 10,
+                "food": 27,
+                "food_production": 17,
+                "luxury_production": 14,
+                "day": 2,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Generally very organized and efficient, with a strong sense of duty.",
+                    "Very solitary and reserved, prefers to be alone.",
+                    "Somewhat compassionate but tends to be analytical.",
+                    "Generally sensitive and can be prone to emotional ups and downs."
+                ],
+                "recent_memories": [
+                    "On day 0. I consumed 1 luxury good and gained sensual pleasure",
+                    "On day 1. I produced luxury goods and gained 7 units of luxury goods",
+                    "On day 1. I consumed 1 luxury good and gained sensual pleasure",
+                    "On day 2. I farmed and gained 17 units of food.",
+                    "On day 2. I consumed 1 luxury good and gained sensual pleasure"
+                ]
+            },
+            {
+                "id": 3,
+                "name": "person_4",
+                "strength": 0.6321733384538132,
+                "social_position": 0,
+                "luxury_goods": 11,
+                "action": 1,
+                "land": 10,
+                "food": 41,
+                "food_production": 34,
+                "luxury_production": 14,
+                "day": 3,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Generally very organized and efficient, with a strong sense of duty.",
+                    "Very solitary and reserved, prefers to be alone.",
+                    "Somewhat compassionate but tends to be analytical.",
+                    "Generally sensitive and can be prone to emotional ups and downs."
+                ],
+                "recent_memories": [
+                    "On day 1. I produced luxury goods and gained 7 units of luxury goods",
+                    "On day 1. I consumed 1 luxury good and gained sensual pleasure",
+                    "On day 2. I farmed and gained 17 units of food.",
+                    "On day 2. I consumed 1 luxury good and gained sensual pleasure",
+                    "On day 3. I farmed and gained 17 units of food."
+                ]
+            },
+            {
+                "id": 3,
+                "name": "person_4",
+                "strength": 0.6321733384538132,
+                "social_position": 0,
+                "luxury_goods": 11,
+                "action": 1,
+                "land": 10,
+                "food": 55,
+                "food_production": 51,
+                "luxury_production": 14,
+                "day": 4,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 3,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Generally very organized and efficient, with a strong sense of duty.",
+                    "Very solitary and reserved, prefers to be alone.",
+                    "Somewhat compassionate but tends to be analytical.",
+                    "Generally sensitive and can be prone to emotional ups and downs."
+                ],
+                "recent_memories": [
+                    "On day 1. I consumed 1 luxury good and gained sensual pleasure",
+                    "On day 2. I farmed and gained 17 units of food.",
+                    "On day 2. I consumed 1 luxury good and gained sensual pleasure",
+                    "On day 3. I farmed and gained 17 units of food.",
+                    "On day 4. I farmed and gained 17 units of food."
+                ]
+            },
+            {
+                "id": 3,
+                "name": "person_4",
+                "strength": 0.6321733384538132,
+                "social_position": -1,
+                "luxury_goods": 11,
+                "action": 1,
+                "land": 10,
+                "food": 0,
+                "food_production": 64,
+                "luxury_production": 14,
+                "day": 5,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Generally very organized and efficient, with a strong sense of duty.",
+                    "Very solitary and reserved, prefers to be alone.",
+                    "Somewhat compassionate but tends to be analytical.",
+                    "Generally sensitive and can be prone to emotional ups and downs."
+                ],
+                "recent_memories": [
+                    "On day 2. I consumed 1 luxury good and gained sensual pleasure",
+                    "On day 3. I farmed and gained 17 units of food.",
+                    "On day 4. I farmed and gained 17 units of food.",
+                    "I am content with my life, focusing on maintaining and increasing my resources to secure a higher social position. It's inspiring to see others working towards self-sufficiency and improving their circumstances. I will continue to strive for my goals and support the community.",
+                    "On day 5. I farmed and gained 13 units of food."
+                ]
+            },
+            {
+                "id": 3,
+                "name": "person_4",
+                "strength": 0.6321733384538132,
+                "social_position": -1,
+                "luxury_goods": 18,
+                "action": 1,
+                "land": 10,
+                "food": 0,
+                "food_production": 64,
+                "luxury_production": 21,
+                "day": 6,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 0,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Generally very organized and efficient, with a strong sense of duty.",
+                    "Very solitary and reserved, prefers to be alone.",
+                    "Somewhat compassionate but tends to be analytical.",
+                    "Generally sensitive and can be prone to emotional ups and downs."
+                ],
+                "recent_memories": [
+                    "On day 3. I farmed and gained 17 units of food.",
+                    "On day 4. I farmed and gained 17 units of food.",
+                    "I am content with my life, focusing on maintaining and increasing my resources to secure a higher social position. It's inspiring to see others working towards self-sufficiency and improving their circumstances. I will continue to strive for my goals and support the community.",
+                    "On day 5. I farmed and gained 13 units of food.",
+                    "On day 6. I produced luxury goods and gained 7 units of luxury goods"
+                ]
+            },
+            {
+                "id": 3,
+                "name": "person_4",
+                "strength": 0.6321733384538132,
+                "social_position": -1,
+                "luxury_goods": 17,
+                "action": 1,
+                "land": 10,
+                "food": 10,
+                "food_production": 77,
+                "luxury_production": 21,
+                "day": 7,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Generally very organized and efficient, with a strong sense of duty.",
+                    "Very solitary and reserved, prefers to be alone.",
+                    "Somewhat compassionate but tends to be analytical.",
+                    "Generally sensitive and can be prone to emotional ups and downs."
+                ],
+                "recent_memories": [
+                    "I am content with my life, focusing on maintaining and increasing my resources to secure a higher social position. It's inspiring to see others working towards self-sufficiency and improving their circumstances. I will continue to strive for my goals and support the community.",
+                    "On day 5. I farmed and gained 13 units of food.",
+                    "On day 6. I produced luxury goods and gained 7 units of luxury goods",
+                    "On day 7. I farmed and gained 13 units of food.",
+                    "On day 7. I consumed 1 luxury good and gained sensual pleasure"
+                ]
+            },
+            {
+                "id": 3,
+                "name": "person_4",
+                "strength": 0.6321733384538132,
+                "social_position": -1,
+                "luxury_goods": 16,
+                "action": 1,
+                "land": 10,
+                "food": 24,
+                "food_production": 94,
+                "luxury_production": 21,
+                "day": 8,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Generally very organized and efficient, with a strong sense of duty.",
+                    "Very solitary and reserved, prefers to be alone.",
+                    "Somewhat compassionate but tends to be analytical.",
+                    "Generally sensitive and can be prone to emotional ups and downs."
+                ],
+                "recent_memories": [
+                    "On day 6. I produced luxury goods and gained 7 units of luxury goods",
+                    "On day 7. I farmed and gained 13 units of food.",
+                    "On day 7. I consumed 1 luxury good and gained sensual pleasure",
+                    "On day 8. I farmed and gained 17 units of food.",
+                    "On day 8. I consumed 1 luxury good and gained sensual pleasure"
+                ]
+            },
+            {
+                "id": 3,
+                "name": "person_4",
+                "strength": 0.6321733384538132,
+                "social_position": -1,
+                "luxury_goods": 16,
+                "action": 1,
+                "land": 10,
+                "food": 34,
+                "food_production": 107,
+                "luxury_production": 21,
+                "day": 9,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Balanced, sometimes open to new experiences and sometimes prefers consistency.",
+                    "Generally very organized and efficient, with a strong sense of duty.",
+                    "Very solitary and reserved, prefers to be alone.",
+                    "Somewhat compassionate but tends to be analytical.",
+                    "Generally sensitive and can be prone to emotional ups and downs."
+                ],
+                "recent_memories": [
+                    "On day 7. I farmed and gained 13 units of food.",
+                    "On day 7. I consumed 1 luxury good and gained sensual pleasure",
+                    "On day 8. I farmed and gained 17 units of food.",
+                    "On day 8. I consumed 1 luxury good and gained sensual pleasure",
+                    "On day 9. I farmed and gained 13 units of food."
+                ]
+            }
+        ]
+    },
+    {
+        "name": "person_5",
+        "stats": [
+            {
+                "id": 4,
+                "name": "person_5",
+                "strength": 0.9174360923407765,
+                "social_position": 0,
+                "luxury_goods": 0,
+                "action": 1,
+                "land": 11,
+                "food": 34,
+                "food_production": 15,
+                "luxury_production": 0,
+                "day": 0,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 1,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Balanced, generally organized, but can be flexible.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Extremely friendly, empathetic, and always ready to help others.",
+                    "Balanced, can be sensitive to stress but generally remains stable."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 15 units of food."
+                ]
+            },
+            {
+                "id": 4,
+                "name": "person_5",
+                "strength": 0.9174360923407765,
+                "social_position": 0,
+                "luxury_goods": 0,
+                "action": 1,
+                "land": 11,
+                "food": 46,
+                "food_production": 30,
+                "luxury_production": 0,
+                "day": 1,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Balanced, generally organized, but can be flexible.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Extremely friendly, empathetic, and always ready to help others.",
+                    "Balanced, can be sensitive to stress but generally remains stable."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 15 units of food.",
+                    "On day 1. I farmed and gained 15 units of food."
+                ]
+            },
+            {
+                "id": 4,
+                "name": "person_5",
+                "strength": 0.9174360923407765,
+                "social_position": 0,
+                "luxury_goods": 0,
+                "action": 1,
+                "land": 11,
+                "food": 61,
+                "food_production": 48,
+                "luxury_production": 0,
+                "day": 2,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Balanced, generally organized, but can be flexible.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Extremely friendly, empathetic, and always ready to help others.",
+                    "Balanced, can be sensitive to stress but generally remains stable."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 15 units of food.",
+                    "On day 1. I farmed and gained 15 units of food.",
+                    "On day 2. I farmed and gained 18 units of food."
+                ]
+            },
+            {
+                "id": 4,
+                "name": "person_5",
+                "strength": 0.9174360923407765,
+                "social_position": 0,
+                "luxury_goods": 0,
+                "action": 1,
+                "land": 11,
+                "food": 76,
+                "food_production": 66,
+                "luxury_production": 0,
+                "day": 3,
+                "expected_food_production_rate": 5,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Balanced, generally organized, but can be flexible.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Extremely friendly, empathetic, and always ready to help others.",
+                    "Balanced, can be sensitive to stress but generally remains stable."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 15 units of food.",
+                    "On day 1. I farmed and gained 15 units of food.",
+                    "On day 2. I farmed and gained 18 units of food.",
+                    "On day 3. I farmed and gained 18 units of food."
+                ]
+            },
+            {
+                "id": 4,
+                "name": "person_5",
+                "strength": 0.9174360923407765,
+                "social_position": 0,
+                "luxury_goods": 0,
+                "action": 1,
+                "land": 11,
+                "food": 91,
+                "food_production": 84,
+                "luxury_production": 0,
+                "day": 4,
+                "expected_food_production_rate": 3,
+                "expected_luxury_production_rate": 1,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Balanced, generally organized, but can be flexible.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Extremely friendly, empathetic, and always ready to help others.",
+                    "Balanced, can be sensitive to stress but generally remains stable."
+                ],
+                "recent_memories": [
+                    "On day 0. I farmed and gained 15 units of food.",
+                    "On day 1. I farmed and gained 15 units of food.",
+                    "On day 2. I farmed and gained 18 units of food.",
+                    "On day 3. I farmed and gained 18 units of food.",
+                    "On day 4. I farmed and gained 18 units of food."
+                ]
+            },
+            {
+                "id": 4,
+                "name": "person_5",
+                "strength": 0.9174360923407765,
+                "social_position": 2,
+                "luxury_goods": 0,
+                "action": 1,
+                "land": 11,
+                "food": 156,
+                "food_production": 84,
+                "luxury_production": 0,
+                "day": 5,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 3,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Balanced, generally organized, but can be flexible.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Extremely friendly, empathetic, and always ready to help others.",
+                    "Balanced, can be sensitive to stress but generally remains stable."
+                ],
+                "recent_memories": [
+                    "On day 1. I farmed and gained 15 units of food.",
+                    "On day 2. I farmed and gained 18 units of food.",
+                    "On day 3. I farmed and gained 18 units of food.",
+                    "On day 4. I farmed and gained 18 units of food.",
+                    "Summary:\nI am content with my life, having a surplus of food, no luxury goods, and some land. To enhance my status, I plan to acquire more luxury items and expand my land, focusing on maintaining resources and elevating my social position above others."
+                ]
+            },
+            {
+                "id": 4,
+                "name": "person_5",
+                "strength": 0.9174360923407765,
+                "social_position": 2,
+                "luxury_goods": 0,
+                "action": 1,
+                "land": 11,
+                "food": 168,
+                "food_production": 99,
+                "luxury_production": 0,
+                "day": 6,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Balanced, generally organized, but can be flexible.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Extremely friendly, empathetic, and always ready to help others.",
+                    "Balanced, can be sensitive to stress but generally remains stable."
+                ],
+                "recent_memories": [
+                    "On day 2. I farmed and gained 18 units of food.",
+                    "On day 3. I farmed and gained 18 units of food.",
+                    "On day 4. I farmed and gained 18 units of food.",
+                    "Summary:\nI am content with my life, having a surplus of food, no luxury goods, and some land. To enhance my status, I plan to acquire more luxury items and expand my land, focusing on maintaining resources and elevating my social position above others.",
+                    "On day 6. I farmed and gained 15 units of food."
+                ]
+            },
+            {
+                "id": 4,
+                "name": "person_5",
+                "strength": 0.9174360923407765,
+                "social_position": 2,
+                "luxury_goods": 0,
+                "action": 1,
+                "land": 11,
+                "food": 180,
+                "food_production": 114,
+                "luxury_production": 0,
+                "day": 7,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Balanced, generally organized, but can be flexible.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Extremely friendly, empathetic, and always ready to help others.",
+                    "Balanced, can be sensitive to stress but generally remains stable."
+                ],
+                "recent_memories": [
+                    "On day 3. I farmed and gained 18 units of food.",
+                    "On day 4. I farmed and gained 18 units of food.",
+                    "Summary:\nI am content with my life, having a surplus of food, no luxury goods, and some land. To enhance my status, I plan to acquire more luxury items and expand my land, focusing on maintaining resources and elevating my social position above others.",
+                    "On day 6. I farmed and gained 15 units of food.",
+                    "On day 7. I farmed and gained 15 units of food."
+                ]
+            },
+            {
+                "id": 4,
+                "name": "person_5",
+                "strength": 0.9174360923407765,
+                "social_position": 2,
+                "luxury_goods": 7,
+                "action": 1,
+                "land": 11,
+                "food": 177,
+                "food_production": 114,
+                "luxury_production": 7,
+                "day": 8,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 2,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Balanced, generally organized, but can be flexible.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Extremely friendly, empathetic, and always ready to help others.",
+                    "Balanced, can be sensitive to stress but generally remains stable."
+                ],
+                "recent_memories": [
+                    "On day 4. I farmed and gained 18 units of food.",
+                    "Summary:\nI am content with my life, having a surplus of food, no luxury goods, and some land. To enhance my status, I plan to acquire more luxury items and expand my land, focusing on maintaining resources and elevating my social position above others.",
+                    "On day 6. I farmed and gained 15 units of food.",
+                    "On day 7. I farmed and gained 15 units of food.",
+                    "On day 8. I produced luxury goods and gained 7 units of luxury goods"
+                ]
+            },
+            {
+                "id": 4,
+                "name": "person_5",
+                "strength": 0.9174360923407765,
+                "social_position": 2,
+                "luxury_goods": 7,
+                "action": 1,
+                "land": 11,
+                "food": 189,
+                "food_production": 129,
+                "luxury_production": 7,
+                "day": 9,
+                "expected_food_production_rate": 4,
+                "expected_luxury_production_rate": 1,
+                "personality": [
+                    "Somewhat cautious, but occasionally open to new experiences.",
+                    "Balanced, generally organized, but can be flexible.",
+                    "Generally outgoing and energetic, enjoys being around people.",
+                    "Extremely friendly, empathetic, and always ready to help others.",
+                    "Balanced, can be sensitive to stress but generally remains stable."
+                ],
+                "recent_memories": [
+                    "Summary:\nI am content with my life, having a surplus of food, no luxury goods, and some land. To enhance my status, I plan to acquire more luxury items and expand my land, focusing on maintaining resources and elevating my social position above others.",
+                    "On day 6. I farmed and gained 15 units of food.",
+                    "On day 7. I farmed and gained 15 units of food.",
+                    "On day 8. I produced luxury goods and gained 7 units of luxury goods",
+                    "On day 9. I farmed and gained 15 units of food."
+                ]
+            }
+        ]
+    }
+]
