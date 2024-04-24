@@ -40,12 +40,14 @@ class Individual:
             "starved":0,
             "land": land,  # Land owned by the individual
             "food": food,  # Initial food as long tail distribution
-            "food_production":0,
-            "luxury_production":0,
-
+            "food_production_today":0, # amount of food produced today; cleared at the end of each day
+            "luxury_production_today":0, # amount of luxury good produced today; cleared at the end of each day
+            "total_food_production":0, # overall total amount of food produced by the individual
+            "total_luxury_production":0, # overall total amount of food produced by the individual
+            "food_consumed_today":0, # running tally of the amount of food the individual consumed throughout the current day
         }
         
-        # Individual specific production numbers
+        # Individual specific production rate; the expected rate of production
         self.food_production = 0
         self.luxury_production = 0
         
@@ -180,6 +182,12 @@ class Individual:
     def get_log_list(self):
         # returns a string of the log list
         return json.dumps(self.json_log_list)
+
+    def reset_daily_counters(self):
+        # resets the counter to zero; this method should be called at the end of each day
+        self.attributes["food_consumed_today"] = 0
+        self.attributes["food_production_today"] = 0
+        self.attributes["luxury_production_today"] = 0
 
     def __getstate__(self):
         return self.__dict__

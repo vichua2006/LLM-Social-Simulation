@@ -108,8 +108,8 @@ class CsvAnalysis:
      individual = system.individuals[i]
      food = individual.attributes['food']
      land = individual.attributes['land']
-     food_production = individual.attributes['food_production']
-     luxury_production = individual.attributes['luxury_production']
+     food_production = individual.attributes['food_production_today']
+     luxury_production = individual.attributes['luxury_production_today']
      luxury_goods = individual.attributes['luxury_goods']
      current_wealth = luxury_goods * 2 + food
      daily_change_in_wealth[i] = current_wealth - self.previous_individual_wealth[i]

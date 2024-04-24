@@ -80,6 +80,7 @@ def day_end(system:System,individuals:List[Individual]):
   for individual in individuals:
     if individual.attributes['food'] >= system.consumption_rate:
       individual.attributes['food'] -= system.consumption_rate # Decrease the food by 3
+      individual.attributes['food_consumed_today'] += system.consumption_rate
       individual.attributes["starved"] = 0
     else:
       individual.attributes['starved'] += 1
@@ -103,6 +104,14 @@ def day_end(system:System,individuals:List[Individual]):
     individual.food_production = round(np.random.normal(food_production, 0.5))
     individual.luxury_production = round(np.random.normal(luxury_production, 0.5))
     individual.log_personal_stats(system)
+    
+  
+  # log down all individual status at the very end
+  system.csv_analysis.log_stat(system, csv_file_name)
+
+  # reset daily counters for new day
+  for individual in individuals:
+     individual.reset_daily_counters()
 
   system.time+=1
   if system.day_end_counter > 0:
@@ -425,11 +434,7 @@ def simulate(individuals:List[Individual],system:System):
       #   print(json_description)
 
     
-    if (system.time == 10): system.csv_analysis.output_individual_stats(system, individual_data_dir)
-
-      
-    system.csv_analysis.log_stat(system, csv_file_name)
-
+    if (system.time == 2): system.csv_analysis.output_individual_stats(system, individual_data_dir)
     # save_logframes(system)
     
 # %%
