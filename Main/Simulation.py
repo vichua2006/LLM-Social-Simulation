@@ -342,6 +342,7 @@ def simulate(individuals:List[Individual],system:System):
                   farm_node = ConceptNode(len(individual.memorystream.concept_nodes), "farm", system.time, individual.attributes["id"], "farm", [], 0,f'On day {system.time}. I farmed and gained {gain} units of food.', 1)
                   individual.memorystream.add_concept_node(farm_node)
                   individual.memory.append(f'On day {system.time}. I farmed and gained {gain} units of food.')
+                  individual.attributes["food_production_today"] += gain
                   print("Farm is successful.")
               elif ai_action.type == AIActionType.ProduceLuxury:
                   gain = increase_luxury(individual, system.food_factor[individual.attributes['id']])
@@ -349,6 +350,7 @@ def simulate(individuals:List[Individual],system:System):
                   luxury_node = ConceptNode(len(individual.memorystream.concept_nodes), "produce_luxury", system.time, individual.attributes["id"], "produce_luxury", [], 0, f'On day {system.time}. I produced luxury goods and gained {gain} units of luxury goods', 1)
                   individual.memorystream.add_concept_node(luxury_node)
                   individual.memory.append(f'On day {system.time}. I produced luxury goods and gained {gain} units of luxury goods')
+                  individual.attributes["luxury_production_today"] += gain
                   print("Producing luxury goods is successful")
               elif ai_action.type==AIActionType.Rob:
                     
