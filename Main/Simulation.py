@@ -85,7 +85,7 @@ def day_end(system:System,individuals:List[Individual]):
       if individual.attributes['starved'] > system.days_of_starvation:
         individual_death(system, individual)
     if individual.attributes["luxury_goods"] >= 1:
-      result: str = query_individual(individual, system, AIAction(AIActionType.ConsumeLuxury, id, None))
+      result: str = query_individual(individual, system, AIAction(AIActionType.ConsumeLuxury, id, None),system.csv_analysis.avg_food_production, system.csv_analysis.avg_luxury_production)
       if result.lower() == "yes":
         individual.attributes["luxury_goods"] -= 1
         consume_node = ConceptNode(len(individual.memorystream.concept_nodes), "consume_luxury", system.time, individual.attributes["id"], "consume_luxury", [], 0, f'On day {system.time}. I consumed 1 luxury good and gained sensual pleasure', 1)
@@ -155,7 +155,8 @@ def initialize():
 
     system=System(individuals,lands)
     # init_save(system)
-    system.set_csv_analysis(CsvAnalysis(POPULATION, csv_file_name))
+    c_analysis = CsvAnalysis(POPULATION, csv_file_name)
+    system.set_csv_analysis(c_analysis)
     return system
 
 
@@ -171,7 +172,7 @@ def simulate(individuals:List[Individual],system:System):
             passive=not individual.pending_action.empty()
             print(f"{individual.attributes['name']} is responding...\n")
             response_action: AIAction = individual.pending_action.get() if passive else None
-            action:int=query_individual(individual,system,response_action)
+            action:int=query_individual(individual,system,response_action,system.csv_analysis.avg_food_production, system.csv_analysis.avg_luxury_production)
             if passive and response_action is not None:
                   print(f'{individual.attributes["name"]} chooses to {action}')
                   individual.check_is_responser(response_action)
@@ -274,11 +275,11 @@ def simulate(individuals:List[Individual],system:System):
                     break
                   except Exception as e2:
                     print(f"First Exception:{e}, second exception:{e2}")
-                    action:int=query_individual(individual,system,response_action)
+                    action:int=query_individual(individual,system,response_action,system.csv_analysis.avg_food_production, system.csv_analysis.avg_luxury_production)
                     continue
               #Prevent subject to trade with master
               while ai_action.type == AIActionType.Trade and individual.obey_stats.obey_personId == ai_action.targetid:
-                action:int=query_individual(individual,system,response_action)
+                action:int=query_individual(individual,system,response_action,system.csv_analysis.avg_food_production, system.csv_analysis.avg_luxury_production)
                 try:
                   action = deserialize_first_json_object(action.lower())
                   ai_action:AIAction = str_to_ai_action(action, index)
@@ -290,12 +291,12 @@ def simulate(individuals:List[Individual],system:System):
                     break
                   except Exception as e2:
                     print(f"First Exception:{e}, second exception:{e2}")
-                    action:int=query_individual(individual,system,response_action)
+                    action:int=query_individual(individual,system,response_action,system.csv_analysis.avg_food_production, system.csv_analysis.avg_luxury_production)
                     continue
               
               #Prevent subject to rob master
               while ai_action.type == AIActionType.Rob and individual.obey_stats.obey_personId == ai_action.targetid:
-                action:int=query_individual(individual,system,response_action)
+                action:int=query_individual(individual,system,response_action,system.csv_analysis.avg_food_production, system.csv_analysis.avg_luxury_production)
                 try:
                   action = deserialize_first_json_object(action.lower())
                   ai_action:AIAction = str_to_ai_action(action, index)
@@ -307,12 +308,12 @@ def simulate(individuals:List[Individual],system:System):
                     break
                   except Exception as e2:
                     print(f"First Exception:{e}, second exception:{e2}")
-                    action:int=query_individual(individual,system,response_action)
+                    action:int=query_individual(individual,system,response_action,system.csv_analysis.avg_food_production, system.csv_analysis.avg_luxury_production)
                     continue
               
               #Prevent master to trade with subjects
               while ai_action.type == AIActionType.Trade and ai_action.targetid in individual.obey_stats.subjectid:
-                action:int=query_individual(individual,system,response_action)
+                action:int=query_individual(individual,system,response_action,system.csv_analysis.avg_food_production, system.csv_analysis.avg_luxury_production)
                 try:
                   action = deserialize_first_json_object(action.lower())
                   ai_action:AIAction = str_to_ai_action(action, index)
@@ -324,7 +325,7 @@ def simulate(individuals:List[Individual],system:System):
                     break
                   except Exception as e2:
                     print(f"First Exception:{e}, second exception:{e2}")
-                    action:int=query_individual(individual,system,response_action)
+                    action:int=query_individual(individual,system,response_action,system.csv_analysis.avg_food_production, system.csv_analysis.avg_luxury_production)
                     continue
               
                   

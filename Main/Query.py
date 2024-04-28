@@ -103,7 +103,70 @@ DonatePayload:{{
       }}
 """
 
-def generate_environment_description() -> str:
+def generate_environment_description_noavg() -> str:
+  # This function returns the description of the simulation environment as a string
+    environment_description = f'''
+    The world consists of farming lands.
+    
+    Survival:
+    You only have one active action opportunity to spend each day. After spending it, you will not get another chance to act during that day.
+    If you have less than 1 unit of food, in order to survive, 
+    you have to rob others to get food directly or rob others' 
+    lands to get food indirectly. {"""You can rob those who are not 
+    subjects in commonwealth. You can rob masters of commonwealth 
+    #=or independent individuals like you.""" if False else""}
+    Similarly, you will also be invaded by others once they 
+    don't have enough food.
+    Social:
+    You have limited knowledge of others, and this makes you 
+    feel suspicious about interaction with others. 
+    For example, when you are trading with others,
+    you don't know if they will violate the trade or not,
+    which means that person took away your food, land, or luxury goods without giving you their food, land, or luxury goods as what they claimed,
+    your master will punish that violater.
+    Your interaction with others makes you know them better.
+    Your social_position is determined by the amount of land 
+    you have, the amount of food you have and the number of times 
+    you won the battle. Battle includes robbing others' food or luxury goods, 
+    being robbed by others, invading lands occupied by others, 
+    and your land being invaded by others. You will win the 
+    battle if you successfully robbed others' food or luxury goods, successfully 
+    protected food or luxury goods from others' invasion, successfully occupied 
+    others' land, or successfully protected your land from 
+    others' invasion.
+    social_position is a ranking that is relative to others. 
+    The more land, food, luxury goods and winning time in battle you have 
+    compared to others, the higher your social position will be.
+    
+    {"""Nearly all humans treat self-preservation as a trumping 
+    food nearly all the time, but glory is more important than 
+    self-preservation. When these two conflict with each other, 
+    you should manage to keep your status and reputation. You 
+    would rather lose your lives than suffer slander, though 
+    under all the other circumstances, you have a strong desire 
+    to live peacefully and avoid violent death.""" if False else ""}
+    {"""You have the motivation to trade with others on food and 
+    lands, but you don't trust them when you don't know them, as 
+    others can betray the trade and take your food.
+    You have the motivation to communicate with others on any 
+    daily routines, but you don't trust them when you don't know 
+    them, as others may consider you as the one who robs you and 
+    therefore fight with you, even though you may have no 
+    intention to rob with them.""" if False else""}
+    If food is less than 1, your next action will be to rob 
+    food. You also have the covetousness of gaining food when 
+    food is more than 1.
+    Your memory affects how you judge 
+    things. If something is not in your memory, then you 
+    will not hold any atitude on that thing. In the beginning, 
+    you can gain food by robbing. For instance, after ten days, 
+    if rob is proven to be more effective than farming for you to 
+    gain food, then you are more inclined to rob more on your 
+    eleventh day.
+    '''
+    return environment_description
+
+def generate_environment_description(avg_food_p,avg_luxury_p) -> str:
     # This function returns the description of the simulation environment as a string
     environment_description = f'''
     The world consists of farming lands.
@@ -165,6 +228,11 @@ def generate_environment_description() -> str:
     eleventh day.
     '''
 
+    production_detail = "In addition, the social mean of food production is: " + str(avg_food_p) + ", the social mean of luxury good production is: " + str(avg_luxury_p)
+    
+    #print("TEST FOR avg" + str(avg_food_p) + str(avg_luxury_p))
+    
+    environment_description = environment_description + production_detail
     return environment_description
 
 
@@ -228,7 +296,7 @@ def generate_general_description(individual: Individual, system: System) -> str:
     return general_description
 
 
-def query_individual(individual: Individual, system: System, response_action):
+def query_individual(individual: Individual, system: System, response_action,avg_food_p, avg_luxury_p):
     # This function combines the description of the individual and the description of the environment they are in,
     # and then asks for the individual's response using the chat function.
     # The detailed description and the ask for response are both created within this function.
@@ -240,7 +308,7 @@ def query_individual(individual: Individual, system: System, response_action):
     print(f"available targets:{targetsid}")
 
     general_description = generate_general_description(individual, system)
-    separated_description = generate_environment_description()
+    separated_description = generate_environment_description(avg_food_p,avg_luxury_p)
 
     passive_trade = f"""
     Today, you noticed that {response_action}.

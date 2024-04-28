@@ -27,6 +27,8 @@ class CsvAnalysis:
    self.luxury_goods_daily = []  
    self.food_production_daily = []
    self.luxury_production_daily = []
+   self.avg_food_production = 0
+   self.avg_luxury_production = 0
    special = [population]
    head = [f"day"]
    head.extend(["1st Wealthiest", "2nd Wealthiest", "3rd Wealthiest", "4th Wealthiest", "5th Wealthiest", "6th Wealthiest", "7th Wealthiest", "8th Wealthiest", "9th Wealthiest"])
@@ -210,6 +212,10 @@ class CsvAnalysis:
         
         overall_luxury_production_mean = np.mean(luxury_production_stats)
         overall_food_production_mean = np.mean(food_production_stats)
+        
+        self.avg_food_production = overall_food_production_mean
+        self.avg_luxury_production = overall_luxury_production_mean
+        
         total_food_production = np.sum(food_production_stats)
         total_luxury_production = np.sum(luxury_production_stats)  
         if total_luxury_production > 0:
