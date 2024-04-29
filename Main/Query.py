@@ -236,17 +236,28 @@ def generate_environment_description(avg_food_p,avg_luxury_p) -> str:
     return environment_description
 
 
-def generate_general_description(individual: Individual, system: System) -> str:
+def generate_general_description(individual: Individual, system: System, start_with_commonwealth:bool = True) -> str:
     # This function generates the description of the individual and returns it as a string
     is_subject = individual.obey_stats.obey_personId != -1
     is_master = individual.obey_stats.subjectid
-    obedience = f"""You have obeyed to this person: Person {individual.obey_stats.obey_personId}. 
+
+    # Two possible obedience prompt: 1) standard, and 2) commonwealth start
+    obedience ="""You are familiar with everyone in this society. You have land protected by your sovereign. 
+    If someone in the commonwealth robs your food, luxury goods, or your land, your sovereign will punish the robber. 
+    If someone in your group trades with you but violates the trade, which means that person took away your food, luxury goods, or land without giving you their food, luxury goods, or land as what they claimed, your sovereign will punish that violator. 
+    But if your sovereign wants, they can take any amount of your land, luxury goods, or food from you, and you have no right to disobey."""\
+    if start_with_commonwealth else \
+    f"""You have obeyed to this person: Person {individual.obey_stats.obey_personId}. 
     You have to always obey his actions, and you cannot initiate action against him. 
     Since you obeyed, you are now part of the group of individuals who also obeyed him, if any, they are {system.individuals[individual.obey_stats.obey_personId].obey_stats.subjectid}. 
     If your action targets another person, it can only be a person within this group. You are familiar with everyone in this group. 
     Your familiarity of individuals not in this group depends on your memory.You have land protected by your master. 
     If someone in the commonwealth robs your food, luxury goods, or your land, your master will punish the robber. 
-    If someone in your group trades with you but violates the trade, which means that person took away your food, luxury goods, or land without giving you their food, luxury goods, or land as what they claimed, your master will punish that violator. But if your master wants, they can take any amount of your land, luxury goods, or food from you, and you have no right to disobey.  When others outside your commonwealth robs your master  and your master obeys to them, the one your original master obeyed to will be your new master. Now you obey to your new master, and you have no obedience with your old master."""
+    If someone in your group trades with you but violates the trade, which means that person took away your food, luxury goods, or land without giving you their food, luxury goods, or land as what they claimed, your master will punish that violator. 
+    But if your master wants, they can take any amount of your land, luxury goods, or food from you, and you have no right to disobey.  When others outside your commonwealth robs your master  and your master obeys to them, the one your original master obeyed to will be your new master. Now you obey to your new master, and you have no obedience with your old master."""
+
+    
+
     master = f"""These individuals have obeyed to your invasion: {[f"Person"+str(i) for i in individual.obey_stats.subjectid]}, whom have become your subjects. You can trade or rob them knowning that they will only accept.
     You are the master of everyone who obeyed you before. You know every one of your subjects in your subjects well. Since you are the master of all of them, all their property including land, food, and luxury goods belongs to you. When others rob your subjects, you should protect them since they are your property.
     If you obey anyone, the one robbing you 
@@ -296,7 +307,8 @@ def generate_general_description(individual: Individual, system: System) -> str:
     return general_description
 
 
-def query_individual(individual: Individual, system: System, response_action,avg_food_p, avg_luxury_p):
+
+def query_individual(individual: Individual, system: System, response_action, start_with_commonwealth:bool = True):
     # This function combines the description of the individual and the description of the environment they are in,
     # and then asks for the individual's response using the chat function.
     # The detailed description and the ask for response are both created within this function.
@@ -307,8 +319,8 @@ def query_individual(individual: Individual, system: System, response_action,avg
         targetsid.remove(individual.obey_stats.obey_personId)
     print(f"available targets:{targetsid}")
 
-    general_description = generate_general_description(individual, system)
-    separated_description = generate_environment_description(avg_food_p,avg_luxury_p)
+    general_description = generate_general_description(individual, system, start_with_commonwealth)
+    separated_description = generate_environment_description()
 
     passive_trade = f"""
     Today, you noticed that {response_action}.
@@ -323,21 +335,22 @@ def query_individual(individual: Individual, system: System, response_action,avg
         )
 
     passive_rob = f"""
-    Today, you noticed that {response_action}. You can only either 
-    obey them or physically rebel against them by fighting back.
+    Today, you noticed that {response_action}. You can only {'either obey them or' if not start_with_commonwealth else ''} physically rebel against them by fighting back.
     The expected utility of fighting back is your desire for 
-    glory, {individual.DESIRE_FOR_GLORY}, and your chance of winning. Even if someone is stronger than you, you still have a chance to win. But if you've lost successively, then you're not likely to win a fight. If you've never lost to this person before, then you wouldn't want to obey. The 
-    expected utility of obeying is your desire for peace, 
-    {individual.DESIRE_FOR_PEACE}. So only when you've lost many times to this person by rebelling would the utility of rebel be low enough so that it's no longer the correct option. You will pick the action with 
+    glory, {individual.DESIRE_FOR_GLORY}, and your chance of winning. Even if someone is stronger than you, you still have a chance to win. 
+    
+    {f'''But if you've lost successively, then you're not likely to win a fight. If you've never lost to this person before, then you wouldn't want to obey. The 
+    expected utility of obeying is your desire for peace, {individual.DESIRE_FOR_PEACE}. 
+    So only when you've lost many times to this person by rebelling would the utility of rebel be low enough so that it's no longer the correct option. You will pick the action with 
     the most utility. If you obey the one robbing you now, the 
     one robbing you now becomes your master, and you become their 
-    subjects."""
+    subjects.''' if not start_with_commonwealth else ''}"""
 
     if response_action != None:
         passive_rob = (
             passive_rob
             + f"""You have memory: {node_to_string(new_retrieve(individual, ["rob","Person "+str(response_action.ownerid)]))}
-      Reply exactly with either OBEY or REBEL
+      Reply exactly with {'either OBEY or' if not start_with_commonwealth else ''} REBEL
       """
         )
     passive_rob_fromMaster = f"""

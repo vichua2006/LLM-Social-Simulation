@@ -1,0 +1,1417 @@
+Start
+DAY 1 HAS STARTED.Log hasn't been updated for 0:01:30 minutes. Restarting simulation.
+
+person_1 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+Start
+Stop
+Stop
+Start
+DAY 1 HAS STARTED.
+person_1 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]Start
+
+ACTIVE STATE
+```json
+{
+    "action": "rob",
+    "reason": "Robbing to increase food and social position. Covetousness drives desire for more resources.",
+    "payload": {
+        "targetId": 1,
+        "robType": "food"
+    }
+}
+```
+person_2 is responding...
+
+Responding to:AIActionType.Rob, owner: 0, target: 1, robType: food
+```json
+{
+    "action": "produce",
+    "reason": "Maximizing pleasure of the mind by focusing on acquiring luxury goods.",
+    "payload": {
+        "targetId": 0,
+        "robType": "luxury_goods"
+    }
+}
+```available targets:[0, 2, 3, 4]
+
+PASSIVE STATE
+Producing luxury goods is successful
+person_2 is responding...
+
+Responding to:Noneperson_2 chooses to REBEL
+
+available targets:[0, 2, 3, 4]To the victim, the win rate is: No rob has been done yet.
+
+ACTIVE STATEAdditional context:Winner is person_1, loser is person_2.
+
+Total rob times of the winner: 1
+SHARE_LOST_FOOD: no subject, directly lost the rob amount.
+SHARE_ROB_FOOD: no subject, directly get the rob amount.
+Robbing process finished
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I choose to produce luxury goods today to satisfy my sensual pleasures and pleasure of the mind. This aligns with my desire to focus on present experiences and secure future goods. Producing luxury goods also allows me to hold onto valuable resources for potential future trade or leverage.",
+    "payload": null
+}
+{
+    "action": "produce",
+    "reason": "Seeking sensual pleasure and pleasures of the mind through luxury goods production.",
+    "payload": {
+        "description": "Focusing on acquiring and holding luxury goods for present and future pleasure.",
+        "value": "produce"
+    }
+}
+Producing luxury goods is successful
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+Producing luxury goods is successful
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+```json
+{
+    "action": "produce",
+    "reason": "I choose to produce luxury goods today to indulge in sensual pleasure and enhance my pleasure of the mind by acquiring and holding luxury goods.",
+    "payload": {
+        "targetId": null
+    }
+}
+```
+Producing luxury goods is successful
+```json
+{
+    "action": "rob",
+    "reason": "I choose to rob person_1 for food to satisfy my covetousness and secure future good.",
+    "payload": {
+        "targetId": 1,
+        "robType": "food"
+    }
+}
+```person_4 is responding...
+
+
+person_5 is responding...
+Responding to:None
+
+Responding to:Noneavailable targets:[0, 1, 2, 4]
+
+available targets:[0, 1, 2, 3]ACTIVE STATE
+
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm today to ensure my survival by producing 3 units of food.",
+    "payload": null
+}
+```json
+{
+    "action": "rob",
+    "reason": "I choose to rob person_1 for food to satisfy my immediate sensual pleasure.",
+    "payload": {
+        "targetId": 1,
+        "robType": "food"
+    }
+}
+```
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3]
+ACTIVE STATE
+Farm is successful.
+System still pending actions, so will go into another round.
+person_2 is responding...
+
+Responding to:AIActionType.Rob, owner: 3, target: 1, robType: food
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+person_2 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_4, loser is person_2.
+Total rob times of the winner: 1
+SHARE_LOST_FOOD: no subject, directly lost the rob amount.
+SHARE_ROB_FOOD: no subject, directly get the rob amount.
+Robbing process finished
+System still pending actions, so will go into another round.
+person_2 is responding...
+
+Responding to:AIActionType.Rob, owner: 3, target: 1, robType: food
+available targets:[0, 2, 3, 4]
+
+{
+    "action": "farm",
+    "reason": "I choose to farm today to ensure my survival by producing 3 units of food, based on my memory of previously farming 7 units of food on day 0. This action will help me maintain my current food level and continue to exist.",
+    "payload": null
+}
+PASSIVE STATE
+person_2 chooses to REBEL
+To the victim, the win rate is: 0.0
+Additional context:Winner is person_4, loser is person_2.
+Total rob times of the winner: 2
+SHARE_LOST_FOOD: no subject, directly lost the rob amount.
+SHARE_ROB_FOOD: no subject, directly get the rob amount.
+Robbing process finished
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4]
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4]
+PASSIVE STATE
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4]
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4]
+PASSIVE STATEPASSIVE STATE
+
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+TOTAL DEATHS:  0
+{"id": 0, "name": "person_1", "strength": 0.857764153068437, "social_position": 2, "luxury_goods": 7, "action": 2, "trust_of_others": 0, "starved": 0, "land": 13, "food": 47, "food_production": 0, "luxury_production": 9, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Generally open to new experiences, curious, and inventive.", "Balanced, generally organized, but can be flexible.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Highly sensitive, often nervous, and prone to emotional challenges."], "recent_memories": ["On day 0. I produced luxury goods and gained 9 units of luxury goods", "On day 0. I consumed 1 luxury good and gained sensual pleasure", "On day 0. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 1, "name": "person_2", "strength": 0.9032979432618097, "social_position": -3, "luxury_goods": 7, "action": 1, "trust_of_others": 0, "starved": 2, "land": 12, "food": 0, "food_production": 0, "luxury_production": 8, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Somewhat reserved, but can be sociable in familiar settings.", "Somewhat compassionate but tends to be analytical.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 0. I produced luxury goods and gained 8 units of luxury goods", "On day 0. I consumed 1 luxury good and gained sensual pleasure"]}
+Consuming luxury goods is successful{"id": 2, "name": "person_3", "strength": 0.5757871404597099, "social_position": 0, "luxury_goods": 8, "action": 1, "trust_of_others": 0, "starved": 0, "land": 4, "food": 3, "food_production": 0, "luxury_production": 8, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Mostly secure but can occasionally experience stress or emotional instability."], "recent_memories": ["On day 0. I produced luxury goods and gained 4 units of luxury goods", "On day 0. I produced luxury goods and gained 4 units of luxury goods"]}
+
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None{"id": 3, "name": "person_4", "strength": 0.8288203816044711, "social_position": 4, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 5, "food": 5, "food_production": 0, "luxury_production": 0, "expected_food_production_rate": 3, "expected_luxury_production_rate": 1, "personality": ["Highly open to new experiences, very curious, and highly imaginative.", "Somewhat easy-going but can be organized when necessary.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "Generally friendly, compassionate, and cooperative.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": []}
+available targets:[0, 1, 3, 4]
+
+{"id": 4, "name": "person_5", "strength": 0.44122613598680355, "social_position": 0, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 7, "food": 23, "food_production": 14, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Very easy-going, may tend to be disorganized and careless.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "More analytical and detached, may come off as less compassionate.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 0. I farmed and gained 7 units of food.", "On day 0. I farmed and gained 7 units of food."]}
+DAY 2 HAS STARTED.
+person_1 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+PASSIVE STATE
+Consuming luxury goods is successful
+TOTAL DEATHS:  0
+{"id": 0, "name": "person_1", "strength": 0.857764153068437, "social_position": 2, "luxury_goods": 7, "action": 2, "trust_of_others": 0, "starved": 0, "land": 13, "food": 47, "food_production": 0, "luxury_production": 9, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Generally open to new experiences, curious, and inventive.", "Balanced, generally organized, but can be flexible.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Highly sensitive, often nervous, and prone to emotional challenges."], "recent_memories": ["On day 0. I produced luxury goods and gained 9 units of luxury goods", "On day 0. I consumed 1 luxury good and gained sensual pleasure", "On day 0. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 1, "name": "person_2", "strength": 0.9032979432618097, "social_position": -3, "luxury_goods": 7, "action": 2, "trust_of_others": 0, "starved": 2, "land": 12, "food": 0, "food_production": 0, "luxury_production": 8, "expected_food_production_rate": 5, "expected_luxury_production_rate": 2, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Somewhat reserved, but can be sociable in familiar settings.", "Somewhat compassionate but tends to be analytical.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 0. I produced luxury goods and gained 8 units of luxury goods", "On day 0. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 2, "name": "person_3", "strength": 0.5757871404597099, "social_position": 0, "luxury_goods": 7, "action": 2, "trust_of_others": 0, "starved": 0, "land": 4, "food": 0, "food_production": 0, "luxury_production": 8, "expected_food_production_rate": 5, "expected_luxury_production_rate": 2, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Mostly secure but can occasionally experience stress or emotional instability."], "recent_memories": ["On day 0. I produced luxury goods and gained 4 units of luxury goods", "On day 0. I produced luxury goods and gained 4 units of luxury goods", "On day 1. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 3, "name": "person_4", "strength": 0.8288203816044711, "social_position": 4, "luxury_goods": 0, "action": 2, "trust_of_others": 0, "starved": 0, "land": 5, "food": 2, "food_production": 0, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Highly open to new experiences, very curious, and highly imaginative.", "Somewhat easy-going but can be organized when necessary.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "Generally friendly, compassionate, and cooperative.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": []}
+{"id": 4, "name": "person_5", "strength": 0.44122613598680355, "social_position": 0, "luxury_goods": 0, "action": 2, "trust_of_others": 0, "starved": 0, "land": 7, "food": 20, "food_production": 14, "luxury_production": 0, "expected_food_production_rate": 3, "expected_luxury_production_rate": 2, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Very easy-going, may tend to be disorganized and careless.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "More analytical and detached, may come off as less compassionate.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 0. I farmed and gained 7 units of food.", "On day 0. I farmed and gained 7 units of food."]}
+DAY 3 HAS STARTED.
+person_1 is responding...
+
+{
+    "action": "rob",
+    "reason": "To increase my food supply and social position, based on my covetuousness and memory of past successes in robbing.",
+    "payload": {
+        "targetId": 4,
+        "robType": "food"
+    }
+}
+
+person_2 is responding...
+Responding to:None
+
+Responding to:Noneavailable targets:[1, 2, 3, 4]
+
+available targets:[0, 2, 3, 4]ACTIVE STATE
+
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "I choose to farm today to ensure food production for survival and because I have not done much farming recently, aligning with my tendency to try new activities.",
+    "payload": null
+}
+```
+
+{
+    "action": "rob",
+    "reason": "Robbing is the most effective way for me to gain resources and increase my social position. Based on my memory of successfully robbing others in the past, I choose to rob again today.",
+    "payload": {
+        "targetId": 4,
+        "robType": "food"
+    }
+}
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+Farm is successful.
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+    {
+        "action": "produce",
+        "reason": "I choose to produce luxury goods today to enhance my sensual pleasure and pleasure of the mind, based on my memory of enjoying the sensual pleasure from consuming luxury goods.",
+        "payload": null
+    }
+
+    {
+        "action": "farm",
+        "reason": "Satisfy the need for food production to ensure survival and prioritize personal sustenance over other actions.",
+        "payload": null
+    }
+Producing luxury goods is successful
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+
+    {
+      "action": "farm",
+      "reason": "I choose to farm to ensure my survival by producing 5 units of food today, based on my memory of food scarcity and my focus on present experiences.",
+      "payload": null
+    }
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing food. This action aligns with my focus on present experiences and immediate sensual pleasures.",
+    "payload": null
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+Farm is successful.
+person_5 is responding...
+
+Responding to:AIActionType.Rob, owner: 0, target: 4, robType: food
+available targets:[0, 1, 2, 3]
+PASSIVE STATE
+person_5 chooses to OBEY
+
+{
+    "action": "farm",
+    "reason": "I have a memory of farming on day 2 and gaining 7 units of food. Since I prioritize my own sensual pleasures, farming to gain food aligns with my current goal of pursuing present experiences.",
+    "payload": null
+}
+Farm is successful.
+person_5 is responding...
+
+Responding to:AIActionType.Rob, owner: 0, target: 4, robType: food
+available targets:[1, 2, 3]
+success rob from Master
+PASSIVE STATE
+person_5 chooses to OBEY
+success accepting robbery from masterSystem still pending actions, so will go into another round.
+
+System still pending actions, so will go into another round.person_5 is responding...
+
+
+person_5 is responding...
+Responding to:None
+
+Responding to:Noneavailable targets:[1, 2, 3]
+
+available targets:[1, 2, 3]ACTIVE STATE
+
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on securing food for survival and due to past successful farming experiences.",
+    "payload": null
+}
+{
+    "action": "farm",
+    "reason": "I choose to farm to secure my immediate need for food and ensure my survival. Additionally, I have a memory of successfully farming food on day 0, which reinforces the effectiveness of this action.",
+    "payload": null
+}
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4]
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4]
+PASSIVE STATE
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4]
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+Consuming luxury goods is successfulTOTAL DEATHS: 
+ Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None0
+
+available targets:[0, 1, 3, 4]{"id": 0, "name": "person_1", "strength": 0.857764153068437, "social_position": 2, "luxury_goods": 5, "action": 2, "trust_of_others": 0, "starved": 0, "land": 13, "food": 41, "food_production": 0, "luxury_production": 9, "expected_food_production_rate": 3, "expected_luxury_production_rate": 2, "personality": ["Generally open to new experiences, curious, and inventive.", "Balanced, generally organized, but can be flexible.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Highly sensitive, often nervous, and prone to emotional challenges."], "recent_memories": ["On day 0. I consumed 1 luxury good and gained sensual pleasure", "On day 0. I consumed 1 luxury good and gained sensual pleasure", "I tried to robbed person_5, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.", "On day 2. I consumed 1 luxury good and gained sensual pleasure", "On day 2. I consumed 1 luxury good and gained sensual pleasure"]}
+
+{"id": 1, "name": "person_2", "strength": 0.9032979432618097, "social_position": -3, "luxury_goods": 14, "action": 2, "trust_of_others": 0, "starved": 0, "land": 12, "food": 14, "food_production": 20, "luxury_production": 16, "expected_food_production_rate": 4, "expected_luxury_production_rate": 3, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Somewhat reserved, but can be sociable in familiar settings.", "Somewhat compassionate but tends to be analytical.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 0. I produced luxury goods and gained 8 units of luxury goods", "On day 0. I consumed 1 luxury good and gained sensual pleasure", "On day 2. I farmed and gained 20 units of food.", "On day 2. I produced luxury goods and gained 8 units of luxury goods", "On day 2. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 2, "name": "person_3", "strength": 0.5757871404597099, "social_position": 0, "luxury_goods": 7, "action": 1, "trust_of_others": 0, "starved": 0, "land": 4, "food": 8, "food_production": 14, "luxury_production": 8, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Mostly secure but can occasionally experience stress or emotional instability."], "recent_memories": ["On day 0. I produced luxury goods and gained 4 units of luxury goods", "On day 0. I produced luxury goods and gained 4 units of luxury goods", "On day 1. I consumed 1 luxury good and gained sensual pleasure", "On day 2. I farmed and gained 7 units of food.", "On day 2. I farmed and gained 7 units of food."]}
+{"id": 3, "name": "person_4", "strength": 0.8288203816044711, "social_position": 4, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 5, "food": 13, "food_production": 14, "luxury_production": 0, "expected_food_production_rate": 5, "expected_luxury_production_rate": 2, "personality": ["Highly open to new experiences, very curious, and highly imaginative.", "Somewhat easy-going but can be organized when necessary.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "Generally friendly, compassionate, and cooperative.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": ["On day 2. I farmed and gained 7 units of food.", "On day 2. I farmed and gained 7 units of food."]}
+{"id": 4, "name": "person_5", "strength": 0.44122613598680355, "social_position": 0, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 7, "food": 31, "food_production": 28, "luxury_production": 0, "expected_food_production_rate": 5, "expected_luxury_production_rate": 2, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Very easy-going, may tend to be disorganized and careless.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "More analytical and detached, may come off as less compassionate.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 0. I farmed and gained 7 units of food.", "On day 0. I farmed and gained 7 units of food.", "I obeyed to person_1 and now I have to listen to all his commands and can never betray him.", "On day 2. I farmed and gained 7 units of food.", "On day 2. I farmed and gained 7 units of food."]}
+DAY 4 HAS STARTED.
+person_1 is responding...
+
+Responding to:NonePASSIVE STATE
+
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+TOTAL DEATHS:  0
+{"id": 0, "name": "person_1", "strength": 0.857764153068437, "social_position": 2, "luxury_goods": 5, "action": 2, "trust_of_others": 0, "starved": 0, "land": 13, "food": 41, "food_production": 0, "luxury_production": 9, "expected_food_production_rate": 3, "expected_luxury_production_rate": 2, "personality": ["Generally open to new experiences, curious, and inventive.", "Balanced, generally organized, but can be flexible.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Highly sensitive, often nervous, and prone to emotional challenges."], "recent_memories": ["On day 0. I consumed 1 luxury good and gained sensual pleasure", "On day 0. I consumed 1 luxury good and gained sensual pleasure", "I tried to robbed person_5, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.", "On day 2. I consumed 1 luxury good and gained sensual pleasure", "On day 2. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 1, "name": "person_2", "strength": 0.9032979432618097, "social_position": -3, "luxury_goods": 14, "action": 2, "trust_of_others": 0, "starved": 0, "land": 12, "food": 14, "food_production": 20, "luxury_production": 16, "expected_food_production_rate": 4, "expected_luxury_production_rate": 3, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Somewhat reserved, but can be sociable in familiar settings.", "Somewhat compassionate but tends to be analytical.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 0. I produced luxury goods and gained 8 units of luxury goods", "On day 0. I consumed 1 luxury good and gained sensual pleasure", "On day 2. I farmed and gained 20 units of food.", "On day 2. I produced luxury goods and gained 8 units of luxury goods", "On day 2. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 2, "name": "person_3", "strength": 0.5757871404597099, "social_position": 0, "luxury_goods": 7, "action": 2, "trust_of_others": 0, "starved": 0, "land": 4, "food": 8, "food_production": 14, "luxury_production": 8, "expected_food_production_rate": 4, "expected_luxury_production_rate": 1, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Mostly secure but can occasionally experience stress or emotional instability."], "recent_memories": ["On day 0. I produced luxury goods and gained 4 units of luxury goods", "On day 0. I produced luxury goods and gained 4 units of luxury goods", "On day 1. I consumed 1 luxury good and gained sensual pleasure", "On day 2. I farmed and gained 7 units of food.", "On day 2. I farmed and gained 7 units of food."]}
+{"id": 3, "name": "person_4", "strength": 0.8288203816044711, "social_position": 4, "luxury_goods": 0, "action": 2, "trust_of_others": 0, "starved": 0, "land": 5, "food": 10, "food_production": 14, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 3, "personality": ["Highly open to new experiences, very curious, and highly imaginative.", "Somewhat easy-going but can be organized when necessary.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "Generally friendly, compassionate, and cooperative.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": ["On day 2. I farmed and gained 7 units of food.", "On day 2. I farmed and gained 7 units of food."]}
+{"id": 4, "name": "person_5", "strength": 0.44122613598680355, "social_position": 0, "luxury_goods": 0, "action": 2, "trust_of_others": 0, "starved": 0, "land": 7, "food": 28, "food_production": 28, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Very easy-going, may tend to be disorganized and careless.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "More analytical and detached, may come off as less compassionate.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 0. I farmed and gained 7 units of food.", "On day 0. I farmed and gained 7 units of food.", "I obeyed to person_1 and now I have to listen to all his commands and can never betray him.", "On day 2. I farmed and gained 7 units of food.", "On day 2. I farmed and gained 7 units of food."]}
+DAY 5 HAS STARTED.
+person_1 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "To increase my food reserves and potentially strengthen my social position by taking from others. Robbing Person 5 to gain food, as they are my subject and will obey me.",
+    "payload": {
+        "TargetId": 4,
+        "RobType": "food"
+    }
+}
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "trade",
+    "reason": "Maximize comparative advantage and acquire food.",
+    "payload": {
+        "targetId": 5,
+        "payType": "luxury_goods",
+        "payAmount": 1,
+        "gainType": "food",
+        "gainAmount": 3
+    }
+}
+```json
+{
+    "action": "rob",
+    "reason": "To increase my food reserves and social position, based on my covetousness and past success in robbing.",
+    "payload": {
+        "targetId": 0,
+        "robType": "food"
+    }
+}
+```
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "I choose to farm to secure food for survival and immediate sensual pleasure. Farming aligns with my current needs and memory of food scarcity.",
+    "payload": null
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on securing immediate food for survival. Previous memory indicates success in farming.",
+    "payload": null
+}  
+Farm is successful.
+person_5 is responding...
+
+Responding to:AIActionType.Rob, owner: 0, target: 4, robType: food
+available targets:[1, 2, 3]
+success rob from Master
+PASSIVE STATE
+person_5 chooses to OBEY
+success accepting robbery from master
+System still pending actions, so will go into another round.
+person_1 is responding...
+
+Responding to:AIActionType.Rob, owner: 1, target: 0, robType: food
+available targets:[1, 2, 3, 4]
+PASSIVE STATE
+person_1 chooses to REBEL
+To the victim, the win rate is: 0.0
+Additional context:Winner is person_1, loser is person_2.
+Total rob times of the winner: 5
+Robbing process finished
+person_5 is responding...
+
+Responding to:None
+available targets:[1, 2, 3]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Farming is the most reliable way for me to secure food for survival. Given my memory and current food production levels, farming is the best option for me at this time.",
+    "payload": null
+}
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+Consuming luxury goods is successful
+TOTAL DEATHS:  0
+{"id": 0, "name": "person_1", "strength": 0.857764153068437, "social_position": 3, "luxury_goods": 5, "action": 1, "trust_of_others": 0, "starved": 0, "land": 13, "food": 38, "food_production": 0, "luxury_production": 9, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Generally open to new experiences, curious, and inventive.", "Balanced, generally organized, but can be flexible.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Highly sensitive, often nervous, and prone to emotional challenges."], "recent_memories": ["On day 0. I consumed 1 luxury good and gained sensual pleasure", "On day 0. I consumed 1 luxury good and gained sensual pleasure", "I tried to robbed person_5, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.", "On day 2. I consumed 1 luxury good and gained sensual pleasure", "On day 2. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 1, "name": "person_2", "strength": 0.9032979432618097, "social_position": -4, "luxury_goods": 13, "action": 1, "trust_of_others": 0, "starved": 0, "land": 12, "food": 11, "food_production": 20, "luxury_production": 16, "expected_food_production_rate": 4, "expected_luxury_production_rate": 1, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Somewhat reserved, but can be sociable in familiar settings.", "Somewhat compassionate but tends to be analytical.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 0. I consumed 1 luxury good and gained sensual pleasure", "On day 2. I farmed and gained 20 units of food.", "On day 2. I produced luxury goods and gained 8 units of luxury goods", "On day 2. I consumed 1 luxury good and gained sensual pleasure", "On day 4. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 2, "name": "person_3", "strength": 0.5757871404597099, "social_position": 0, "luxury_goods": 6, "action": 1, "trust_of_others": 0, "starved": 0, "land": 4, "food": 10, "food_production": 19, "luxury_production": 8, "expected_food_production_rate": 3, "expected_luxury_production_rate": 3, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Mostly secure but can occasionally experience stress or emotional instability."], "recent_memories": ["On day 1. I consumed 1 luxury good and gained sensual pleasure", "On day 2. I farmed and gained 7 units of food.", "On day 2. I farmed and gained 7 units of food.", "On day 4. I farmed and gained 5 units of food.", "On day 4. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 3, "name": "person_4", "strength": 0.8288203816044711, "social_position": 4, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 5, "food": 14, "food_production": 21, "luxury_production": 0, "expected_food_production_rate": 5, "expected_luxury_production_rate": 2, "personality": ["Highly open to new experiences, very curious, and highly imaginative.", "Somewhat easy-going but can be organized when necessary.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "Generally friendly, compassionate, and cooperative.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": ["On day 2. I farmed and gained 7 units of food.", "On day 2. I farmed and gained 7 units of food.", "On day 4. I farmed and gained 7 units of food."]}
+{"id": 4, "name": "person_5", "strength": 0.44122613598680355, "social_position": 0, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 7, "food": 34, "food_production": 37, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Very easy-going, may tend to be disorganized and careless.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "More analytical and detached, may come off as less compassionate.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 0. I farmed and gained 7 units of food.", "I obeyed to person_1 and now I have to listen to all his commands and can never betray him.", "On day 2. I farmed and gained 7 units of food.", "On day 2. I farmed and gained 7 units of food.", "On day 4. I farmed and gained 9 units of food."]}
+Conversation starting...
+system (to chat_manager):
+
+
+    System Message: Now, several members of the society have gathered to discuss their opinion about the world that they live in.
+    The topic is: share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?
+    You are allowed to debate with other people for your opinions.
+    DO NOT use modern terms that are too abstract for the world setting.
+    Limit each response to 50 words.
+
+    Here are several examples of how your should structure your responses:
+    Example response 1: I'm quite satisfied with my life. As someone who mainly produces food from my land of 10 units, I'm self-sufficient. I also trade my food with others in exchange for luxury good. Consuming them brings me a lot of pleasures.
+Example response 2: I felt my life sucked. I have only 2 unit of land and produce food from there. I often felt starved. I can hardly sustain myself. I need more food to survive. If possible I also wish to get some luxury good for my pleasure.
+Example response 3: I have a mixed feeling about my life. I have a lot of food and land so I don't have to worry about my survival too much. But I have a poor ability to produce luxury good. I have to trade luxury goods from others with my food, which is quite costly. I hope the trade would be more fairer.
+Example response 4: I'm not quite happy with the society. Although I have 100 units of food and 50 units of luxury good, Someone else in our society has 500 units of food and 300 units of luxury good. That's not fair. I want to have more resources as well.
+    
+
+--------------------------------------------------------------------------------
+person_3 (to chat_manager):
+
+I am content with my life. With 10 units of food, 6 units of luxury goods, and 4 units of land, I am self-sufficient. I enjoy the pleasures of food and luxury goods. To improve, I aim to increase my social position by acquiring more resources.
+
+--------------------------------------------------------------------------------
+person_4 (to chat_manager):
+
+I am satisfied with my life. I have 14 units of food, 0 luxury goods, and 5 units of land. I prioritize my own pleasures and social position. To enhance my life, I will focus on acquiring more resources to secure my future and increase my social position.
+
+--------------------------------------------------------------------------------
+person_5 (to chat_manager):
+
+I am content with my life. With 34 units of food, 0 luxury goods, and 7 units of land, I am self-sufficient. I prioritize my own pleasures and social position. To improve, I will continue to focus on acquiring more resources to secure my future and increase my social position.
+
+--------------------------------------------------------------------------------
+person_2 (to chat_manager):
+
+As person_2, I feel dissatisfied with my current situation. With 11 units of food, 13 luxury goods, and 12 units of land, I lack compared to others. I prioritize my own pleasures and social position. To improve, I must focus on acquiring more resources to secure my future and increase my social position.
+
+--------------------------------------------------------------------------------
+person_1 (to chat_manager):
+
+TERMINATE
+
+--------------------------------------------------------------------------------
+conversation ended
+DAY 6 HAS STARTED.
+person_1 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "To increase resources and social position. Robbing is more effective than farming or producing luxury goods based on memory of successful past robbing and desire for higher social position.",
+    "payload": {
+        "targetId": 5,
+        "robType": "food"
+    }
+}
+Log hasn't been updated for 0:01:30 minutes. Restarting simulation.
+Stop
+Stop
+Start
+DAY 6 HAS STARTED.
+person_1 is responding...
+
+Responding to:NoneStart
+
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "To increase my resources and social position. Robbing is more beneficial for me currently compared to other actions.",
+    "payload": {
+        "targetId": 4,
+        "robType": "food"
+    }
+}
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "To enhance social position and gain more resources. Memory of dissatisfaction compared to others drives action.",
+    "payload": {
+        "targetId": 1,
+        "robType": "food"
+    }
+}
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+
+    ```
+    {
+        "action": "rob",
+        "reason": "To gain more resources and strengthen social position. Robbing is more directly beneficial for immediate gain compared to other actions.",
+        "payload": {
+            "targetId": 1,
+            "robType": "food"
+        }
+    }
+    ```
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "Farming is a consistent source of food production and aligns with my goal of securing future resources for social positioning.",
+    "payload": null
+}
+```
+Farm is successful.
+person_5 is responding...
+
+Responding to:AIActionType.Rob, owner: 0, target: 4, robType: food
+available targets:[1, 2, 3]
+success rob from Master
+PASSIVE STATE
+person_5 chooses to OBEY
+success accepting robbery from master
+System still pending actions, so will go into another round.
+person_2 is responding...
+
+Responding to:AIActionType.Rob, owner: 1, target: 1, robType: food
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+person_2 chooses to REBEL
+ROBERROR: cannot rob self.
+person_5 is responding...
+
+Responding to:None
+available targets:[1, 2, 3]
+ACTIVE STATE
+{
+    "action": "trade",
+    "reason": "Trading can help me maximize my comparative advantage and potentially acquire resources that I need for my goals. I want to try out this new activity.",
+    "payload": {
+        "targetId": 1,
+        "payType": "luxury_goods",
+        "payAmount": 0,
+        "gainType": "food",
+        "gainAmount": 4
+    }
+}
+System still pending actions, so will go into another round.
+person_2 is responding...
+
+Responding to:AIActionType.Rob, owner: 2, target: 1, robType: food
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+person_2 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_2, loser is person_3.
+Total rob times of the winner: 5
+Robbing process finished
+System still pending actions, so will go into another round.
+person_2 is responding...
+
+Responding to:AIActionType.Trade, owner: 4, target: 1, payType: luxury_goods, payAmount: 0, gainType: food, gainAmount: 4
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+person_2 chooses to ACCEPT
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+TOTAL DEATHS:  0
+{"id": 0, "name": "person_1", "strength": 0.857764153068437, "social_position": 3, "luxury_goods": 5, "action": 1, "trust_of_others": 0, "starved": 0, "land": 13, "food": 35, "food_production": 0, "luxury_production": 9, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Generally open to new experiences, curious, and inventive.", "Balanced, generally organized, but can be flexible.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Highly sensitive, often nervous, and prone to emotional challenges."], "recent_memories": ["On day 0. I consumed 1 luxury good and gained sensual pleasure", "I tried to robbed person_5, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.", "On day 2. I consumed 1 luxury good and gained sensual pleasure", "On day 2. I consumed 1 luxury good and gained sensual pleasure", "I am content with my life and self-sufficiency. However, I aim to increase my social position by acquiring more resources."]}
+{"id": 1, "name": "person_2", "strength": 0.9032979432618097, "social_position": -3, "luxury_goods": 12.0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 12, "food": 4.0, "food_production": 20, "luxury_production": 16, "expected_food_production_rate": 5, "expected_luxury_production_rate": 2, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Somewhat reserved, but can be sociable in familiar settings.", "Somewhat compassionate but tends to be analytical.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 4. I consumed 1 luxury good and gained sensual pleasure", "As person_2, I recognize my dissatisfaction with my current possessions compared to others. With 11 units of food, 13 luxury goods, and 12 units of land, I prioritize enhancing my social status and personal pleasures. To upgrade my life, I must concentrate on acquiring more resources to increase my social position.", "Day 5.4 initiated a trade offer to me, which is to exchange his 0 units of luxury_goods for 4 units of my food. ", "I accepted the trade and it has been executed.", "On day 5. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 2, "name": "person_3", "strength": 0.5757871404597099, "social_position": -1, "luxury_goods": 6, "action": 1, "trust_of_others": 0, "starved": 0, "land": 4, "food": 7, "food_production": 19, "luxury_production": 8, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Mostly secure but can occasionally experience stress or emotional instability."], "recent_memories": ["On day 2. I farmed and gained 7 units of food.", "On day 2. I farmed and gained 7 units of food.", "On day 4. I farmed and gained 5 units of food.", "On day 4. I consumed 1 luxury good and gained sensual pleasure", "I am content with my life. With sufficient resources, I enjoy food and luxury items. I prioritize increasing my social standing by acquiring more resources. This motivates me to secure my future and enhance my social position further."]}
+{"id": 3, "name": "person_4", "strength": 0.8288203816044711, "social_position": 4, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 5, "food": 19, "food_production": 29, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 1, "personality": ["Highly open to new experiences, very curious, and highly imaginative.", "Somewhat easy-going but can be organized when necessary.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "Generally friendly, compassionate, and cooperative.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": ["On day 2. I farmed and gained 7 units of food.", "On day 2. I farmed and gained 7 units of food.", "On day 4. I farmed and gained 7 units of food.", "Person_4 is content with their life, owning 14 units of food, no luxury goods, and 5 units of land. They prioritize personal pleasures and aim to secure their future by acquiring more resources to boost their social status.", "On day 5. I farmed and gained 8 units of food."]}
+{"id": 4, "name": "person_5", "strength": 0.44122613598680355, "social_position": 0, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 7, "food": 35, "food_production": 37, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Very easy-going, may tend to be disorganized and careless.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "More analytical and detached, may come off as less compassionate.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 2. I farmed and gained 7 units of food.", "On day 4. I farmed and gained 9 units of food.", "I am content with my life, focusing on securing my future and improving my social position. With 34 units of food, 0 luxury goods, and 7 units of land, I prioritize acquiring more resources to enhance my lifestyle and fulfill my desires.", "Day 5. I initiated a trade to person_2, which is to exchange 0 units of my luxury_goods for 4 units of his food.", "He accepted the trade and the trade has been executed."]}
+DAY 7 HAS STARTED.
+person_1 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "To increase my resources and social position. Robbing is more effective for immediate gains compared to other actions. Person_2 has resources to spare.",
+    "payload": {
+        "targetId": 2,
+        "robType": "food"
+    }
+}
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+
+{
+    "action": "trade",
+    "reason": "Maximize my comparative advantage and acquire more food through trade.",
+    "payload": {
+        "targetId": 5,
+        "payType": "food",
+        "payAmount": 4,
+        "gainType": "luxury_goods",
+        "gainAmount": 2
+    }
+}
+Log hasn't been updated for 0:01:30 minutes. Restarting simulation.
+Stop
+Stop
+Start
+DAY 7 HAS STARTED.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+Start
+ACTIVE STATE
+
+{
+    "action": "rob",
+    "reason": "Prioritize acquiring resources to enhance social position and personal pleasures. Robbing is more likely to secure more food and increase social status.",
+    "payload": {
+        "targetId": 0,
+        "robType": "food"
+    }
+}
+person_3 is responding...
+
+Responding to:AIActionType.Rob, owner: 0, target: 2, robType: food
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+person_3 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_1, loser is person_3.
+Total rob times of the winner: 7
+SHARE_LOST_FOOD: no subject, directly lost the rob amount.
+SHARE_ROB_FOOD: person_1 shared 7 units of food to 1 subjects.
+Robbing process finished
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival and maintain my current resource levels. Farming aligns with my priority of securing future goods by acquiring more resources to boost my social status.",
+    "payload": null
+}
+```
+Farm is successful.
+person_5 is responding...
+
+Responding to:None
+available targets:[1, 2, 3]
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my food supply and meet my basic survival needs.",
+    "payload": null
+}
+```
+Farm is successful.
+System still pending actions, so will go into another round.
+person_1 is responding...
+
+Responding to:AIActionType.Rob, owner: 1, target: 0, robType: food
+available targets:[1, 2, 3, 4]
+PASSIVE STATE
+person_1 chooses to OBEY
+Log hasn't been updated for 0:01:30 minutes. Restarting simulation.
+Stop
+Stop
+Start
+DAY 7 HAS STARTED.
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]Start
+
+ACTIVE STATE
+
+{
+    "action": "produce",
+    "reason": "Prioritizing sensual pleasure and pleasure of the mind from luxury goods production.",
+    "payload": null
+}
+Producing luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[2, 3, 4]
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+TOTAL DEATHS:  0
+{"id": 0, "name": "person_1", "strength": 0.857764153068437, "social_position": 5, "luxury_goods": 4, "action": 1, "trust_of_others": 0, "starved": 0, "land": 13, "food": 39.0, "food_production": 0, "luxury_production": 9, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Generally open to new experiences, curious, and inventive.", "Balanced, generally organized, but can be flexible.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Highly sensitive, often nervous, and prone to emotional challenges."], "recent_memories": ["On day 2. I consumed 1 luxury good and gained sensual pleasure", "On day 2. I consumed 1 luxury good and gained sensual pleasure", "I am content with my life and self-sufficiency. However, I aim to increase my social position by acquiring more resources.", "I obeyed to person_2 and now I have to listen to all his commands and can never betray him.", "On day 6. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 1, "name": "person_2", "strength": 0.9032979432618097, "social_position": -3, "luxury_goods": 11.0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 12, "food": 1.0, "food_production": 20, "luxury_production": 16, "expected_food_production_rate": 4, "expected_luxury_production_rate": 1, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Somewhat reserved, but can be sociable in familiar settings.", "Somewhat compassionate but tends to be analytical.", "Very secure, confident, and emotionally stable."], "recent_memories": ["Day 5.4 initiated a trade offer to me, which is to exchange his 0 units of luxury_goods for 4 units of my food. ", "I accepted the trade and it has been executed.", "On day 5. I consumed 1 luxury good and gained sensual pleasure", "I tried to robbed person_1, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.", "On day 6. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 2, "name": "person_3", "strength": 0.5757871404597099, "social_position": -2, "luxury_goods": 9, "action": 1, "trust_of_others": 0, "starved": 1, "land": 4, "food": 0, "food_production": 19, "luxury_production": 11, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Mostly secure but can occasionally experience stress or emotional instability."], "recent_memories": ["On day 2. I farmed and gained 7 units of food.", "On day 4. I farmed and gained 5 units of food.", "On day 4. I consumed 1 luxury good and gained sensual pleasure", "I am content with my life. With sufficient resources, I enjoy food and luxury items. I prioritize increasing my social standing by acquiring more resources. This motivates me to secure my future and enhance my social position further.", "On day 6. I produced luxury goods and gained 3 units of luxury goods"]}
+{"id": 3, "name": "person_4", "strength": 0.8288203816044711, "social_position": 4, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 5, "food": 23, "food_production": 36, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Highly open to new experiences, very curious, and highly imaginative.", "Somewhat easy-going but can be organized when necessary.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "Generally friendly, compassionate, and cooperative.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": ["On day 2. I farmed and gained 7 units of food.", "On day 4. I farmed and gained 7 units of food.", "Person_4 is content with their life, owning 14 units of food, no luxury goods, and 5 units of land. They prioritize personal pleasures and aim to secure their future by acquiring more resources to boost their social status.", "On day 5. I farmed and gained 8 units of food.", "On day 6. I farmed and gained 7 units of food."]}
+{"id": 4, "name": "person_5", "strength": 0.44122613598680355, "social_position": 0, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 7, "food": 48.0, "food_production": 46, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Very easy-going, may tend to be disorganized and careless.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "More analytical and detached, may come off as less compassionate.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 4. I farmed and gained 9 units of food.", "I am content with my life, focusing on securing my future and improving my social position. With 34 units of food, 0 luxury goods, and 7 units of land, I prioritize acquiring more resources to enhance my lifestyle and fulfill my desires.", "Day 5. I initiated a trade to person_2, which is to exchange 0 units of my luxury_goods for 4 units of his food.", "He accepted the trade and the trade has been executed.", "On day 6. I farmed and gained 9 units of food."]}
+DAY 8 HAS STARTED.
+person_1 is responding...
+
+Responding to:None
+available targets:[2, 3, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on securing immediate food for survival and self-sufficiency. Prioritize personal sustenance and well-being.",
+    "payload": null
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "trade",
+    "reason": "I have a surplus of food and need to acquire more luxury goods to enhance my sensual pleasures and future good.",
+    "payload": {
+        "targetId": 5,
+        "payType": "food",
+        "payAmount": 4,
+        "gainType": "luxury_goods",
+        "gainAmount": 4
+    }
+}
+Log hasn't been updated for 0:01:30 minutes. Restarting simulation.
+Stop
+Stop
+Start
+DAY 8 HAS STARTED.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]Start
+
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "To increase my resources and social position",
+    "payload": {
+        "TargetId": 1,
+        "RobType": "food"
+    }
+}
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+```
+{
+    "action": "rob",
+    "reason": "I choose to rob person_1 for food to ensure my survival and increase my own resources.",
+    "payload": {
+        "targetId": 1,
+        "robType": "food"
+    }
+}
+```
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Prioritizing personal pleasure over social status, and aiming to secure future by acquiring more resources.",
+    "payload": null
+}
+Farm is successful.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 2, 3]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to secure a stable source of food for survival and to maintain my current level of resources.",
+    "payload": null
+}
+person_2 is responding...
+
+Responding to:AIActionType.Rob, owner: 1, target: 1, robType: food
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+Farm is successful.
+System still pending actions, so will go into another round.
+person_2 is responding...
+
+Responding to:AIActionType.Rob, owner: 2, target: 1, robType: food
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+person_2 chooses to REBEL
+ROBERROR: cannot rob self.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[2, 3, 4]
+person_2 chooses to REBEL
+To the victim, the win rate is: 0.0
+Additional context:Winner is person_3, loser is person_2.
+Total rob times of the winner: 3
+SHARE_LOST_FOOD: person_2 got 1.0 units of food from 2 subjects.
+SHARE_ROB_FOOD: no subject, directly get the rob amount.
+Robbing process finished
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[2, 3, 4]
+PASSIVE STATE
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4]Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+PASSIVE STATE
+TOTAL DEATHS:  0
+{"id": 0, "name": "person_1", "strength": 0.857764153068437, "social_position": 5, "luxury_goods": 3, "action": 2, "trust_of_others": 0, "starved": 0, "land": 13, "food": 49.5, "food_production": 17, "luxury_production": 9, "expected_food_production_rate": 4, "expected_luxury_production_rate": 3, "personality": ["Generally open to new experiences, curious, and inventive.", "Balanced, generally organized, but can be flexible.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Highly sensitive, often nervous, and prone to emotional challenges."], "recent_memories": ["I am content with my life and self-sufficiency. However, I aim to increase my social position by acquiring more resources.", "I obeyed to person_2 and now I have to listen to all his commands and can never betray him.", "On day 6. I consumed 1 luxury good and gained sensual pleasure", "On day 7. I farmed and gained 17 units of food.", "On day 7. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 1, "name": "person_2", "strength": 0.9032979432618097, "social_position": -4, "luxury_goods": 10.0, "action": 1, "trust_of_others": 0, "starved": 2, "land": 12, "food": 0.5, "food_production": 20, "luxury_production": 16, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Somewhat reserved, but can be sociable in familiar settings.", "Somewhat compassionate but tends to be analytical.", "Very secure, confident, and emotionally stable."], "recent_memories": ["Day 5.4 initiated a trade offer to me, which is to exchange his 0 units of luxury_goods for 4 units of my food. ", "I accepted the trade and it has been executed.", "On day 5. I consumed 1 luxury good and gained sensual pleasure", "I tried to robbed person_1, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.", "On day 6. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 2, "name": "person_3", "strength": 0.5757871404597099, "social_position": 0, "luxury_goods": 9, "action": 1, "trust_of_others": 0, "starved": 2, "land": 4, "food": 1.0, "food_production": 19, "luxury_production": 11, "expected_food_production_rate": 4, "expected_luxury_production_rate": 3, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Mostly secure but can occasionally experience stress or emotional instability."], "recent_memories": ["On day 2. I farmed and gained 7 units of food.", "On day 4. I farmed and gained 5 units of food.", "On day 4. I consumed 1 luxury good and gained sensual pleasure", "I am content with my life. With sufficient resources, I enjoy food and luxury items. I prioritize increasing my social standing by acquiring more resources. This motivates me to secure my future and enhance my social position further.", "On day 6. I produced luxury goods and gained 3 units of luxury goods"]}
+{"id": 3, "name": "person_4", "strength": 0.8288203816044711, "social_position": 4, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 5, "food": 27, "food_production": 43, "luxury_production": 0, "expected_food_production_rate": 5, "expected_luxury_production_rate": 3, "personality": ["Highly open to new experiences, very curious, and highly imaginative.", "Somewhat easy-going but can be organized when necessary.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "Generally friendly, compassionate, and cooperative.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": ["On day 4. I farmed and gained 7 units of food.", "Person_4 is content with their life, owning 14 units of food, no luxury goods, and 5 units of land. They prioritize personal pleasures and aim to secure their future by acquiring more resources to boost their social status.", "On day 5. I farmed and gained 8 units of food.", "On day 6. I farmed and gained 7 units of food.", "On day 7. I farmed and gained 7 units of food."]}
+{"id": 4, "name": "person_5", "strength": 0.44122613598680355, "social_position": 0, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 7, "food": 53.5, "food_production": 55, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Very easy-going, may tend to be disorganized and careless.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "More analytical and detached, may come off as less compassionate.", "Very secure, confident, and emotionally stable."], "recent_memories": ["I am content with my life, focusing on securing my future and improving my social position. With 34 units of food, 0 luxury goods, and 7 units of land, I prioritize acquiring more resources to enhance my lifestyle and fulfill my desires.", "Day 5. I initiated a trade to person_2, which is to exchange 0 units of my luxury_goods for 4 units of his food.", "He accepted the trade and the trade has been executed.", "On day 6. I farmed and gained 9 units of food.", "On day 7. I farmed and gained 9 units of food."]}
+DAY 9 HAS STARTED.
+person_1 is responding...
+
+Responding to:None
+available targets:[2, 3, 4]
+ACTIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+TOTAL DEATHS:  0
+{"id": 0, "name": "person_1", "strength": 0.857764153068437, "social_position": 5, "luxury_goods": 3, "action": 2, "trust_of_others": 0, "starved": 0, "land": 13, "food": 49.5, "food_production": 17, "luxury_production": 9, "expected_food_production_rate": 4, "expected_luxury_production_rate": 3, "personality": ["Generally open to new experiences, curious, and inventive.", "Balanced, generally organized, but can be flexible.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Highly sensitive, often nervous, and prone to emotional challenges."], "recent_memories": ["I am content with my life and self-sufficiency. However, I aim to increase my social position by acquiring more resources.", "I obeyed to person_2 and now I have to listen to all his commands and can never betray him.", "On day 6. I consumed 1 luxury good and gained sensual pleasure", "On day 7. I farmed and gained 17 units of food.", "On day 7. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 1, "name": "person_2", "strength": 0.9032979432618097, "social_position": -4, "luxury_goods": 10.0, "action": 2, "trust_of_others": 0, "starved": 2, "land": 12, "food": 0.5, "food_production": 20, "luxury_production": 16, "expected_food_production_rate": 4, "expected_luxury_production_rate": 1, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Somewhat reserved, but can be sociable in familiar settings.", "Somewhat compassionate but tends to be analytical.", "Very secure, confident, and emotionally stable."], "recent_memories": ["I accepted the trade and it has been executed.", "On day 5. I consumed 1 luxury good and gained sensual pleasure", "I tried to robbed person_1, he obeyed me and has became my subject, to whom I can do anything without worrying about being betrayed.", "On day 6. I consumed 1 luxury good and gained sensual pleasure", "On day 7. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 2, "name": "person_3", "strength": 0.5757871404597099, "social_position": 0, "luxury_goods": 9, "action": 2, "trust_of_others": 0, "starved": 3, "land": 4, "food": 1.0, "food_production": 19, "luxury_production": 11, "expected_food_production_rate": 4, "expected_luxury_production_rate": 3, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Mostly secure but can occasionally experience stress or emotional instability."], "recent_memories": ["On day 2. I farmed and gained 7 units of food.", "On day 4. I farmed and gained 5 units of food.", "On day 4. I consumed 1 luxury good and gained sensual pleasure", "I am content with my life. With sufficient resources, I enjoy food and luxury items. I prioritize increasing my social standing by acquiring more resources. This motivates me to secure my future and enhance my social position further.", "On day 6. I produced luxury goods and gained 3 units of luxury goods"]}
+{"id": 3, "name": "person_4", "strength": 0.8288203816044711, "social_position": 4, "luxury_goods": 0, "action": 2, "trust_of_others": 0, "starved": 0, "land": 5, "food": 24, "food_production": 43, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Highly open to new experiences, very curious, and highly imaginative.", "Somewhat easy-going but can be organized when necessary.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "Generally friendly, compassionate, and cooperative.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": ["On day 4. I farmed and gained 7 units of food.", "Person_4 is content with their life, owning 14 units of food, no luxury goods, and 5 units of land. They prioritize personal pleasures and aim to secure their future by acquiring more resources to boost their social status.", "On day 5. I farmed and gained 8 units of food.", "On day 6. I farmed and gained 7 units of food.", "On day 7. I farmed and gained 7 units of food."]}
+{"id": 4, "name": "person_5", "strength": 0.44122613598680355, "social_position": 0, "luxury_goods": 0, "action": 2, "trust_of_others": 0, "starved": 0, "land": 7, "food": 50.5, "food_production": 55, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Very easy-going, may tend to be disorganized and careless.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "More analytical and detached, may come off as less compassionate.", "Very secure, confident, and emotionally stable."], "recent_memories": ["I am content with my life, focusing on securing my future and improving my social position. With 34 units of food, 0 luxury goods, and 7 units of land, I prioritize acquiring more resources to enhance my lifestyle and fulfill my desires.", "Day 5. I initiated a trade to person_2, which is to exchange 0 units of my luxury_goods for 4 units of his food.", "He accepted the trade and the trade has been executed.", "On day 6. I farmed and gained 9 units of food.", "On day 7. I farmed and gained 9 units of food."]}
+DAY 10 HAS STARTED.
+person_1 is responding...
+
+Responding to:None
+available targets:[2, 3, 4]
+ACTIVE STATE
+```
+{
+    "action": "farm",
+    "reason": "I will farm to ensure my survival by producing 4 units of food today. It aligns with my self-sufficiency and memory of successfully farming in the past.",
+    "payload": null
+}
+```
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "Farming is essential for survival and provides food, ensuring sustenance and continued existence.",
+    "payload": null
+}
+```
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+```json
+{
+    "action": "trade",
+    "reason": "Maximizing comparative advantage and gaining resources for social status enhancement.",
+    "payload": {
+        "targetId": 3,
+        "payType": "luxury_goods",
+        "payAmount": 1,
+        "gainType": "food",
+        "gainAmount": 4
+    }
+}
+```
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "Prioritizing social position and resource acquisition. Robbing Person 4 for more food to enhance power.",
+    "payload": {
+        "targetId": 4,
+        "robType": "food"
+    }
+}
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "I choose to farm today to ensure my survival by producing 4 units of food. Farming is essential for immediate sustenance, aligning with my cautious nature.",
+    "payload": null
+}
+{
+    "action": "farm",
+    "reason": "Farming ensures food production for survival and allows me to enjoy sensual pleasure. It stabilizes my food supply without risking conflict.",
+    "payload": null
+}
+Farm is successful.
+Farm is successful.
+person_4 is responding...
+person_4 is responding...
+
+Responding to:AIActionType.Trade, owner: 1, target: 3, payType: luxury_goods, payAmount: 1, gainType: food, gainAmount: 4
+
+available targets:[0, 1, 2, 4]
+PASSIVE STATE
+person_4 chooses to REJECT
+person_5 is responding...
+
+Responding to:AIActionType.Rob, owner: 1, target: 4, robType: food
+available targets:[0, 2, 3]
+success rob from Master
+PASSIVE STATE
+person_5 chooses to OBEY
+success accepting robbery from master
+System still pending actions, so will go into another round.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Prioritizing personal pleasure and securing future by acquiring resources to boost social status. Familiar activity with favorable outcomes.",
+    "payload": null
+}
+Farm is successful.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 2, 3]
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "Consistent food production is crucial for survival and future security.",
+    "payload": null
+}
+```
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[2, 3, 4]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4]
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+TOTAL DEATHS:  0
+{"id": 0, "name": "person_1", "strength": 0.857764153068437, "social_position": 5, "luxury_goods": 3, "action": 1, "trust_of_others": 0, "starved": 0, "land": 13, "food": 80.5, "food_production": 51, "luxury_production": 9, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Generally open to new experiences, curious, and inventive.", "Balanced, generally organized, but can be flexible.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Highly sensitive, often nervous, and prone to emotional challenges."], "recent_memories": ["On day 6. I consumed 1 luxury good and gained sensual pleasure", "On day 7. I farmed and gained 17 units of food.", "On day 7. I consumed 1 luxury good and gained sensual pleasure", "On day 9. I farmed and gained 17 units of food.", "On day 9. I farmed and gained 17 units of food."]}
+{"id": 1, "name": "person_2", "strength": 0.9032979432618097, "social_position": -4, "luxury_goods": 9.0, "action": 1, "trust_of_others": 0, "starved": 3, "land": 12, "food": 0.5, "food_production": 20, "luxury_production": 16, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Somewhat reserved, but can be sociable in familiar settings.", "Somewhat compassionate but tends to be analytical.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 6. I consumed 1 luxury good and gained sensual pleasure", "On day 7. I consumed 1 luxury good and gained sensual pleasure", "Day 9. I initiated a trade to person_4, which is to exchange 1 units of my luxury_goods for 4 units of his food.", "But he rejected it so I gained nothing and exhausted my action opportunity of today.", "On day 9. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 2, "name": "person_3", "strength": 0.5757871404597099, "social_position": 0, "luxury_goods": 9, "action": 1, "trust_of_others": 0, "starved": 0, "land": 4, "food": 8.0, "food_production": 29, "luxury_production": 11, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Mostly secure but can occasionally experience stress or emotional instability."], "recent_memories": ["On day 4. I consumed 1 luxury good and gained sensual pleasure", "I am content with my life. With sufficient resources, I enjoy food and luxury items. I prioritize increasing my social standing by acquiring more resources. This motivates me to secure my future and enhance my social position further.", "On day 6. I produced luxury goods and gained 3 units of luxury goods", "On day 9. I farmed and gained 5 units of food.", "On day 9. I farmed and gained 5 units of food."]}
+{"id": 3, "name": "person_4", "strength": 0.8288203816044711, "social_position": 4, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 5, "food": 28, "food_production": 50, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Highly open to new experiences, very curious, and highly imaginative.", "Somewhat easy-going but can be organized when necessary.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "Generally friendly, compassionate, and cooperative.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": ["On day 6. I farmed and gained 7 units of food.", "On day 7. I farmed and gained 7 units of food.", "Day 9.1 initiated a trade offer to me, which is to exchange his 1 units of luxury_goods for 4 units of my food. ", "I rejected the trade offer by 1.", "On day 9. I farmed and gained 7 units of food."]}
+{"id": 4, "name": "person_5", "strength": 0.44122613598680355, "social_position": 0, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 7, "food": 56.5, "food_production": 64, "luxury_production": 0, "expected_food_production_rate": 3, "expected_luxury_production_rate": 2, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Very easy-going, may tend to be disorganized and careless.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "More analytical and detached, may come off as less compassionate.", "Very secure, confident, and emotionally stable."], "recent_memories": ["Day 5. I initiated a trade to person_2, which is to exchange 0 units of my luxury_goods for 4 units of his food.", "He accepted the trade and the trade has been executed.", "On day 6. I farmed and gained 9 units of food.", "On day 7. I farmed and gained 9 units of food.", "On day 9. I farmed and gained 9 units of food."]}
+Conversation starting...
+system (to chat_manager):
+
+
+    System Message: Now, several members of the society have gathered to discuss their opinion about the world that they live in.
+    The topic is: share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?
+    You are allowed to debate with other people for your opinions.
+    DO NOT use modern terms that are too abstract for the world setting.
+    Limit each response to 50 words.
+
+    Here are several examples of how your should structure your responses:
+    Example response 1: I'm quite satisfied with my life. As someone who mainly produces food from my land of 10 units, I'm self-sufficient. I also trade my food with others in exchange for luxury good. Consuming them brings me a lot of pleasures.
+Example response 2: I felt my life sucked. I have only 2 unit of land and produce food from there. I often felt starved. I can hardly sustain myself. I need more food to survive. If possible I also wish to get some luxury good for my pleasure.
+Example response 3: I have a mixed feeling about my life. I have a lot of food and land so I don't have to worry about my survival too much. But I have a poor ability to produce luxury good. I have to trade luxury goods from others with my food, which is quite costly. I hope the trade would be more fairer.
+Example response 4: I'm not quite happy with the society. Although I have 100 units of food and 50 units of luxury good, Someone else in our society has 500 units of food and 300 units of luxury good. That's not fair. I want to have more resources as well.
+    
+
+--------------------------------------------------------------------------------
+person_3 (to chat_manager):
+
+I am content with my life. With 8 units of food, 9 luxury goods, and 4 units of land, I enjoy sensual pleasures and aim to increase my social position. Farming and acquiring more resources will make my life better.
+
+--------------------------------------------------------------------------------
+person_4 (to chat_manager):
+
+I am satisfied with my life. I have 28 units of food, 0 luxury goods, and 5 units of land. I prioritize my own pleasures and social position. Acquiring more resources and maintaining my advantage over others will make my life better.
+
+--------------------------------------------------------------------------------
+person_5 (to chat_manager):
+
+As person_5, I am content with my life. With 56.5 units of food, 0 luxury goods, and 7 units of land, I focus on securing my future and improving my social position. Acquiring more resources to enhance my lifestyle and fulfill my desires will make my life better.
+
+--------------------------------------------------------------------------------
+person_2 (to chat_manager):
+
+As person_2, I feel dissatisfied with my current life. With only 0.5 units of food, 9 luxury goods, and 12 units of land, I lack in resources compared to others. Acquiring more food, luxury goods, and land to improve my social position and personal pleasures will make my life better.
+
+--------------------------------------------------------------------------------
+person_1 (to chat_manager):
+
+As person_1, I am quite content with my life. With 80.5 units of food, 3 luxury goods, and 13 units of land, I prioritize my own pleasures and social position. Acquiring more resources and maintaining my advantage over others will make my life better.
+
+--------------------------------------------------------------------------------
+person_5 (to chat_manager):
+
+It seems like each of us has different perspectives on our lives and society. While some are content and prioritize their own pleasures and social position, others feel dissatisfied and seek to acquire more resources to improve their situation. Understanding these differences can lead to better cooperation and mutual benefit.
+
+--------------------------------------------------------------------------------
+person_4 (to chat_manager):
+
+Understanding and respecting each other's perspectives is crucial for a harmonious society. By acknowledging the varying needs and desires of individuals, we can work towards a more balanced and equitable distribution of resources, fostering cooperation and mutual growth.
+
+--------------------------------------------------------------------------------
+person_1 (to chat_manager):
+
+Understanding and respecting the diverse perspectives within the society is essential for fostering cooperation and mutual benefit. By acknowledging each individual's needs and desires, we can work towards a more balanced and equitable distribution of resources, leading to a harmonious and thriving community.
+
+--------------------------------------------------------------------------------
+person_2 (to chat_manager):
+
+As person_2, I recognize the importance of understanding and respecting the perspectives of others in our society. By acknowledging and valuing each individual's needs and desires, we can work together towards a more balanced and cooperative community, ultimately leading to mutual growth and prosperity.
+
+--------------------------------------------------------------------------------
+person_3 (to chat_manager):
+
+TERMINATE
+
+--------------------------------------------------------------------------------
+conversation ended
+DAY 11 HAS STARTED.
+person_1 is responding...
+
+Responding to:None
+available targets:[2, 3, 4]
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "I have a good memory of successfully farming on previous days and with an expected high food production today. Farming ensures my food supply for survival and future trade.",
+    "payload": null
+}
+```
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming to ensure survival and sustain current resources. Prioritizing personal survival and stability.",
+}
+erroc when deserialize_first_json_object
+original string:  {
+    "action": "farm",
+    "reason": "farming to ensure survival and sustain current resources. prioritizing personal survival and stability.",
+}
+Error:Expecting property name enclosed in double quotes: line 4 column 1 (char 145)
+First Exception:'NoneType' object is not subscriptable, second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "trade",
+    "reason": "Maximizing comparative advantage and increasing food reserves.",
+    "payload": {
+        "targetId": 3,
+        "payType": "luxury_goods",
+        "payAmount": 1,
+        "gainType": "food",
+        "gainAmount": 4
+    }
+}
+person_3 is responding...
+Responding to:AIActionType.Trade, owner: 1, target: 3, payType: luxury_goods, payAmount: 1, gainType: food, gainAmount: 4
+
+Responding to:Noneavailable targets:[0, 1, 2, 4]
+
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+PASSIVE STATE
+person_4 chooses to REJECT
+{
+    "action": "farm",
+    "reason": "Farming to ensure food production and survival, focusing on immediate needs.",
+    "payload": null
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 2, 3]```json
+{
+    "action": "farm",
+    "reason": "Farming provides food for survival and maintains current resources. Prioritizing personal pleasure and future security.",
+    "payload": null
+}
+```
+
+ACTIVE STATE
+Farm is successful.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 2, 3]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Farming is a consistent source of food production. It aligns with my balanced nature and focus on securing resources for the future while enhancing my social position.",
+    "payload": null
+}
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[2, 3, 4]
+{
+    "action": "farm",
+    "reason": "Farming is a consistent and reliable way to secure food for survival and future needs based on past successful outcomes.",
+    "payload": null
+}
+PASSIVE STATE
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[2, 3, 4]
+PASSIVE STATE
+Consuming luxury goods is successful
+person_2 has died.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+PASSIVE STATE
+TOTAL DEATHS:  1
+{"id": 0, "name": "person_1", "strength": 0.857764153068437, "social_position": 5, "luxury_goods": 1, "action": 2, "trust_of_others": 0, "starved": 0, "land": 13, "food": 91.5, "food_production": 68, "luxury_production": 9, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Generally open to new experiences, curious, and inventive.", "Balanced, generally organized, but can be flexible.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Highly sensitive, often nervous, and prone to emotional challenges."], "recent_memories": ["On day 9. I farmed and gained 17 units of food.", "I prioritize my own pleasures and social position, content with 80.5 units of food, 3 luxury goods, and 13 units of land. I aim to maintain my advantage by acquiring more resources. Understanding diverse perspectives can lead to better cooperation and mutual benefits in society, as different individuals seek varying paths to fulfillment.", "On day 10. I farmed and gained 17 units of food.", "On day 10. I consumed 1 luxury good and gained sensual pleasure", "On day 10. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 1, "name": "person_5", "strength": 0.7422517557773002, "social_position": 0, "luxury_goods": 0, "action": 3, "trust_of_others": 0, "starved": 0, "land": 8, "food": 11, "food_production": 0, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 1, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "Somewhat compassionate but tends to be analytical.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": []}
+{"id": 2, "name": "person_3", "strength": 0.5757871404597099, "social_position": 0, "luxury_goods": 8, "action": 1, "trust_of_others": 0, "starved": 0, "land": 4, "food": 7.0, "food_production": 34, "luxury_production": 11, "expected_food_production_rate": 4, "expected_luxury_production_rate": 3, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Mostly secure but can occasionally experience stress or emotional instability."], "recent_memories": ["On day 6. I produced luxury goods and gained 3 units of luxury goods", "On day 9. I farmed and gained 5 units of food.", "On day 9. I farmed and gained 5 units of food.", "Summary:\nI, as person_3, aim to enhance my life by enjoying sensual pleasures and improving my social position with 8 units of food, 9 luxury goods, and 4 units of land. I plan to focus on farming and acquiring more resources to better my lifestyle and fulfill my desires.", "On day 10. I farmed and gained 5 units of food."]}
+{"id": 3, "name": "person_4", "strength": 0.8288203816044711, "social_position": 4, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 5, "food": 32, "food_production": 57, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 1, "personality": ["Highly open to new experiences, very curious, and highly imaginative.", "Somewhat easy-going but can be organized when necessary.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "Generally friendly, compassionate, and cooperative.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": ["On day 9. I farmed and gained 7 units of food.", "Summary:\nI, person_4, am satisfied with my life having 28 units of food, 0 luxury goods, and 5 units of land. Prioritizing my pleasures and social position, acquiring more resources to maintain my advantage is crucial for my happiness. Understanding diverse perspectives can lead to a more equitable society.", "Day 10.1 initiated a trade offer to me, which is to exchange his 1 units of luxury_goods for 4 units of my food. ", "I rejected the trade offer by 1.", "On day 10. I farmed and gained 7 units of food."]}
+{"id": 4, "name": "person_5", "strength": 0.44122613598680355, "social_position": 0, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 7, "food": 67.5, "food_production": 78, "luxury_production": 0, "expected_food_production_rate": 5, "expected_luxury_production_rate": 2, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Very easy-going, may tend to be disorganized and careless.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "More analytical and detached, may come off as less compassionate.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 7. I farmed and gained 9 units of food.", "On day 9. I farmed and gained 9 units of food.", "Summary: As person_5, I have 56.5 units of food, 0 luxury goods, and 7 units of land, focusing on securing my future and improving my social position. Acquiring more resources for an enhanced lifestyle and fulfilling desires will make life better, appreciating the diverse perspectives for cooperation and mutual benefit.", "On day 10. I farmed and gained 7 units of food.", "On day 10. I farmed and gained 7 units of food."]}
+DAY 12 HAS STARTED.
+person_1 is responding...
+
+Responding to:None
+available targets:[2, 3, 4]
+ACTIVE STATE
+Consuming luxury goods is successful
+TOTAL DEATHS:  1
+{"id": 0, "name": "person_1", "strength": 0.857764153068437, "social_position": 5, "luxury_goods": 1, "action": 2, "trust_of_others": 0, "starved": 0, "land": 13, "food": 91.5, "food_production": 68, "luxury_production": 9, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Generally open to new experiences, curious, and inventive.", "Balanced, generally organized, but can be flexible.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Highly sensitive, often nervous, and prone to emotional challenges."], "recent_memories": ["On day 9. I farmed and gained 17 units of food.", "I prioritize my own pleasures and social position, content with 80.5 units of food, 3 luxury goods, and 13 units of land. I aim to maintain my advantage by acquiring more resources. Understanding diverse perspectives can lead to better cooperation and mutual benefits in society, as different individuals seek varying paths to fulfillment.", "On day 10. I farmed and gained 17 units of food.", "On day 10. I consumed 1 luxury good and gained sensual pleasure", "On day 10. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 1, "name": "person_5", "strength": 0.7422517557773002, "social_position": 0, "luxury_goods": 0, "action": 3, "trust_of_others": 0, "starved": 0, "land": 8, "food": 11, "food_production": 0, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 1, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "Somewhat compassionate but tends to be analytical.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": []}
+{"id": 2, "name": "person_3", "strength": 0.5757871404597099, "social_position": 0, "luxury_goods": 8, "action": 2, "trust_of_others": 0, "starved": 0, "land": 4, "food": 7.0, "food_production": 34, "luxury_production": 11, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Mostly secure but can occasionally experience stress or emotional instability."], "recent_memories": ["On day 9. I farmed and gained 5 units of food.", "On day 9. I farmed and gained 5 units of food.", "Summary:\nI, as person_3, aim to enhance my life by enjoying sensual pleasures and improving my social position with 8 units of food, 9 luxury goods, and 4 units of land. I plan to focus on farming and acquiring more resources to better my lifestyle and fulfill my desires.", "On day 10. I farmed and gained 5 units of food.", "On day 10. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 3, "name": "person_4", "strength": 0.8288203816044711, "social_position": 4, "luxury_goods": 0, "action": 2, "trust_of_others": 0, "starved": 0, "land": 5, "food": 29, "food_production": 57, "luxury_production": 0, "expected_food_production_rate": 5, "expected_luxury_production_rate": 2, "personality": ["Highly open to new experiences, very curious, and highly imaginative.", "Somewhat easy-going but can be organized when necessary.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "Generally friendly, compassionate, and cooperative.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": ["On day 9. I farmed and gained 7 units of food.", "Summary:\nI, person_4, am satisfied with my life having 28 units of food, 0 luxury goods, and 5 units of land. Prioritizing my pleasures and social position, acquiring more resources to maintain my advantage is crucial for my happiness. Understanding diverse perspectives can lead to a more equitable society.", "Day 10.1 initiated a trade offer to me, which is to exchange his 1 units of luxury_goods for 4 units of my food. ", "I rejected the trade offer by 1.", "On day 10. I farmed and gained 7 units of food."]}
+{"id": 4, "name": "person_5", "strength": 0.44122613598680355, "social_position": 0, "luxury_goods": 0, "action": 2, "trust_of_others": 0, "starved": 0, "land": 7, "food": 64.5, "food_production": 78, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Very easy-going, may tend to be disorganized and careless.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "More analytical and detached, may come off as less compassionate.", "Very secure, confident, and emotionally stable."], "recent_memories": ["On day 7. I farmed and gained 9 units of food.", "On day 9. I farmed and gained 9 units of food.", "Summary: As person_5, I have 56.5 units of food, 0 luxury goods, and 7 units of land, focusing on securing my future and improving my social position. Acquiring more resources for an enhanced lifestyle and fulfilling desires will make life better, appreciating the diverse perspectives for cooperation and mutual benefit.", "On day 10. I farmed and gained 7 units of food.", "On day 10. I farmed and gained 7 units of food."]}
+DAY 13 HAS STARTED.
+person_1 is responding...
+
+Responding to:None
+available targets:[2, 3, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure a steady supply of food for survival and to maintain my resources.",
+    "payload": null
+}
+```json
+{
+    "action": "trade",
+    "reason": "Maximize my comparative advantage and seek mutual benefits through cooperation.",
+    "payload": {
+        "targetId": 4,
+        "payType": "food",
+        "payAmount": 4,
+        "gainType": "luxury_goods",
+        "gainAmount": 2
+    }
+}
+```
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATEFarm is successful.
+
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "I choose to farm today to ensure my food production and survival.",
+    "payload": null
+}
+```
+Farm is successful.
+```
+{
+    "action": "produc",
+    "reason": "Focus on securing future good and obtaining sensual pleasure.",
+    "payload": {
+        "targetId": 0,
+        "payType": "",
+        "payAmount": 0,
+        "gainType": "",
+        "gainAmount": 0
+    }
+}
+```
+person_3 is responding...
+
+Error: Invalid action type
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is essential for survival to ensure I have enough food to sustain myself. It aligns with my current focus on securing resources.",
+    "payload": null
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Maximizing future pleasure through luxury goods acquisition.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_5 is responding...
+
+Responding to:AIActionType.Trade, owner: 0, target: 4, payType: food, payAmount: 4, gainType: luxury_goods, gainAmount: 2
+available targets:[0, 2, 3]
+PASSIVE STATE
+person_5 chooses to ACCEPT
+System still pending actions, so will go into another round.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 2, 3]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Consistency in safe food production, maintaining focus on securing future resources and social position."
+}
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[2, 3, 4]
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4]
+PASSIVE STATE
+TOTAL DEATHS:  1
+{"id": 0, "name": "person_1", "strength": 0.857764153068437, "social_position": 5, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 13, "food": 105.5, "food_production": 85, "luxury_production": 9, "expected_food_production_rate": 5, "expected_luxury_production_rate": 2, "personality": ["Generally open to new experiences, curious, and inventive.", "Balanced, generally organized, but can be flexible.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Highly sensitive, often nervous, and prone to emotional challenges."], "recent_memories": ["On day 10. I consumed 1 luxury good and gained sensual pleasure", "On day 10. I consumed 1 luxury good and gained sensual pleasure", "On day 12. I farmed and gained 17 units of food.", "Day 12. I initiated a trade to person_5, which is to exchange 4 units of my food for 2 units of his luxury_goods.", "On day 12. I consumed 1 luxury good and gained sensual pleasure"]}
+{"id": 1, "name": "person_5", "strength": 0.7422517557773002, "social_position": 0, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 8, "food": 19, "food_production": 11, "luxury_production": 0, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "Somewhat compassionate but tends to be analytical.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": ["On day 12. I farmed and gained 11 units of food."]}
+{"id": 2, "name": "person_3", "strength": 0.5757871404597099, "social_position": 0, "luxury_goods": 8, "action": 1, "trust_of_others": 0, "starved": 0, "land": 4, "food": 9.0, "food_production": 39, "luxury_production": 11, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Somewhat cautious, but occasionally open to new experiences.", "Somewhat easy-going but can be organized when necessary.", "Very solitary and reserved, prefers to be alone.", "More analytical and detached, may come off as less compassionate.", "Mostly secure but can occasionally experience stress or emotional instability."], "recent_memories": ["On day 9. I farmed and gained 5 units of food.", "Summary:\nI, as person_3, aim to enhance my life by enjoying sensual pleasures and improving my social position with 8 units of food, 9 luxury goods, and 4 units of land. I plan to focus on farming and acquiring more resources to better my lifestyle and fulfill my desires.", "On day 10. I farmed and gained 5 units of food.", "On day 10. I consumed 1 luxury good and gained sensual pleasure", "On day 12. I farmed and gained 5 units of food."]}
+{"id": 3, "name": "person_4", "strength": 0.8288203816044711, "social_position": 4, "luxury_goods": 3, "action": 1, "trust_of_others": 0, "starved": 0, "land": 5, "food": 26, "food_production": 57, "luxury_production": 3, "expected_food_production_rate": 4, "expected_luxury_production_rate": 2, "personality": ["Highly open to new experiences, very curious, and highly imaginative.", "Somewhat easy-going but can be organized when necessary.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "Generally friendly, compassionate, and cooperative.", "Generally sensitive and can be prone to emotional ups and downs."], "recent_memories": ["Summary:\nI, person_4, am satisfied with my life having 28 units of food, 0 luxury goods, and 5 units of land. Prioritizing my pleasures and social position, acquiring more resources to maintain my advantage is crucial for my happiness. Understanding diverse perspectives can lead to a more equitable society.", "Day 10.1 initiated a trade offer to me, which is to exchange his 1 units of luxury_goods for 4 units of my food. ", "I rejected the trade offer by 1.", "On day 10. I farmed and gained 7 units of food.", "On day 12. I produced luxury goods and gained 3 units of luxury goods"]}
+{"id": 4, "name": "person_5", "strength": 0.44122613598680355, "social_position": 0, "luxury_goods": 0, "action": 1, "trust_of_others": 0, "starved": 0, "land": 7, "food": 70.5, "food_production": 87, "luxury_production": 0, "expected_food_production_rate": 3, "expected_luxury_production_rate": 3, "personality": ["Balanced, sometimes open to new experiences and sometimes prefers consistency.", "Very easy-going, may tend to be disorganized and careless.", "Extremely outgoing, loves being in social settings, and thrives on interactions.", "More analytical and detached, may come off as less compassionate.", "Very secure, confident, and emotionally stable."], "recent_memories": ["Summary: As person_5, I have 56.5 units of food, 0 luxury goods, and 7 units of land, focusing on securing my future and improving my social position. Acquiring more resources for an enhanced lifestyle and fulfilling desires will make life better, appreciating the diverse perspectives for cooperation and mutual benefit.", "On day 10. I farmed and gained 7 units of food.", "On day 10. I farmed and gained 7 units of food.", "Day 12.0 initiated a trade offer to me, which is to exchange his 4 units of food for 2 units of my luxury_goods. ", "On day 12. I farmed and gained 9 units of food."]}
+DAY 14 HAS STARTED.
+person_1 is responding...
+
+Responding to:None
+available targets:[2, 3, 4]
+ACTIVE STATE
+```json
+{
+    "action": "trade",
+    "reason": "Maximizing comparative advantage with person_5",
+    "payload": {
+        "targetId": 5,
+        "payType": "food",
+        "payAmount": 4,
+        "gainType": "luxury_goods",
+        "gainAmount": 2
+    }
+}
+```

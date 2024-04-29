@@ -1,6 +1,8 @@
 from __future__ import annotations # Allow self-reference in type annotations
+import json
 import numpy as np  # numpy for numerical computations
 from typing import Any, List, Dict, Tuple, Optional, Callable, Literal, Union
+from copy import deepcopy
 from Main.AIAction import AIActionType, AIAction, RobAction
 import queue
 from Main.System import System
@@ -35,18 +37,17 @@ class Individual:
             "social_position": 0,  # Initial social position is 0
             "luxury_goods": 0, # Initial luxury goods is 0
             "action": 1,  # Initial action point is 1
-            "trust_of_others":0,
             "starved":0,
             "land": land,  # Land owned by the individual
             "food": food,  # Initial food as long tail distribution
-            "action": 1  # Initial action point is 1
-            ,"trust_of_others":0,
-            "food_production":0,
-            "luxury_production":0
-
+            "food_production_today":0, # amount of food produced today; cleared at the end of each day
+            "luxury_production_today":0, # amount of luxury good produced today; cleared at the end of each day
+            "total_food_production":0, # overall total amount of food produced by the individual
+            "total_luxury_production":0, # overall total amount of food produced by the individual
+            "food_consumed_today":0, # running tally of the amount of food the individual consumed throughout the current day
         }
         
-        # Individual specific production numbers
+        # Individual specific production rate; the expected rate of production
         self.food_production = 0
         self.luxury_production = 0
         
@@ -58,6 +59,8 @@ class Individual:
         self.memorystream = MemoryStream(id)
         # Initialize memory of the individual
         self.memory = ['None']*30
+        # Initiallize a list to record daily json stats of the person
+        self.json_log_list = []
         self.DESIRE_FOR_GLORY=10
         self.DESIRE_FOR_PEACE=3
         # Initialize autogen agent of the individual
@@ -140,8 +143,8 @@ class Individual:
     def get_win_rate(self, target:Individual):
         return self.robbing_stats.win_rob_times[target]/self.robbing_stats.rob_times[target]
     
-    def get_agent(self):
-        # return the agent variable
+    def get_agent(self) -> SpeakingAgent:
+        # return the agent instance
         return self.agent
     
     def get_personality(self) -> List[str]:
@@ -153,6 +156,38 @@ class Individual:
     
     def update_agent_speaking_tendency(self, prompt:str):
         self.agent.update_speaking_tendency(prompt)
+    
+    def get_stats_json(self, system:System):
+        # retrieves the current info about the person's production abilities, character (big 5), possessions, and recent memories 
+        # returns a json string containing those information
+        stats = deepcopy(self.attributes)
+        stats["day"] = system.time
+        stats["expected_food_production_rate"] = self.food_production
+        stats["expected_luxury_production_rate"] = self.luxury_production
+        stats["personality"] = self.get_personality()
+        # returns the 5 most recent memories
+        stats["recent_memories"] = [m.description for m in self.memorystream.concept_nodes[-5:]]
+        stats["emotion"] = self.memorystream.emotion
+        del stats["starved"]
+
+        stats_json = json.dumps(stats)
+
+        return stats_json
+
+    def log_personal_stats(self, system:System):
+        # appends generated json stats into the individual's log list as a json object
+        stats_json = self.get_stats_json(system)
+        self.json_log_list.append(json.loads(stats_json))
+    
+    def get_log_list(self):
+        # returns a string of the log list
+        return json.dumps(self.json_log_list)
+
+    def reset_daily_counters(self):
+        # resets the counter to zero; this method should be called at the end of each day
+        self.attributes["food_consumed_today"] = 0
+        self.attributes["food_production_today"] = 0
+        self.attributes["luxury_production_today"] = 0
 
     def __getstate__(self):
         return self.__dict__

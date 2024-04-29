@@ -17,16 +17,17 @@ from Main.Memory import ConceptNode
 from Main.Conversation import converse, add_memory_after_conversation, summarize_conversation
 from Main.Soverign import Report, generate_policy_json
 
-
 csv_file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
 #if file name alread exist, datetime will be as detail as second
 if os.path.exists(csv_file_name):
     csv_file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M %S%p")+'.csv'
 
-conversation_dir = f"conversation_and_memory_log/{datetime.datetime.now().strftime('%d, %I %M %S%p')}/"
+conversation_dir = f"conversation_and_memory_log/{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}/"
+
+individual_data_dir = f"individual_data_log/{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}/"
 
 # number of days between conversations
-days_between_conversation = 1
+days_between_conversation = 5
 conversation_list = []
 
 def discuss_topic(system: System, individuals: List[Individual], topic: str, day_count: int):
@@ -79,6 +80,7 @@ def day_end(system:System,individuals:List[Individual]):
   for individual in individuals:
     if individual.attributes['food'] >= system.consumption_rate:
       individual.attributes['food'] -= system.consumption_rate # Decrease the food by 3
+      individual.attributes['food_consumed_today'] += system.consumption_rate
       individual.attributes["starved"] = 0
     else:
       individual.attributes['starved'] += 1
@@ -101,6 +103,15 @@ def day_end(system:System,individuals:List[Individual]):
     # Generate food/luxury production numbers for specific individuals based general distribution
     individual.food_production = round(np.random.normal(food_production, 0.5))
     individual.luxury_production = round(np.random.normal(luxury_production, 0.5))
+    individual.log_personal_stats(system)
+    
+  
+  # log down all individual status at the very end
+  system.csv_analysis.log_stat(system, csv_file_name)
+
+  # reset daily counters for new day
+  for individual in individuals:
+     individual.reset_daily_counters()
 
   system.time+=1
   if system.day_end_counter > 0:
@@ -121,11 +132,6 @@ def generate_policy(system: System, conversations: List[List[Dict[str, str]]]):
   r = Report(system, summary)
   response = generate_policy_json(r)
   return response
-
-file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M%p")+'.csv'
-#if file name alread exist, datetime will be as detail as second
-if os.path.exists(file_name):
-  file_name='Log/'+datetime.datetime.now().strftime("%d, %I %M %S%p")+'.csv'
 
 
 def initialize():
@@ -337,6 +343,7 @@ def simulate(individuals:List[Individual],system:System):
                   farm_node = ConceptNode(len(individual.memorystream.concept_nodes), "farm", system.time, individual.attributes["id"], "farm", [], 0,f'On day {system.time}. I farmed and gained {gain} units of food.', 1)
                   individual.memorystream.add_concept_node(farm_node)
                   individual.memory.append(f'On day {system.time}. I farmed and gained {gain} units of food.')
+                  individual.attributes["food_production_today"] += gain
                   print("Farm is successful.")
               elif ai_action.type == AIActionType.ProduceLuxury:
                   gain = increase_luxury(individual, system.food_factor[individual.attributes['id']])
@@ -344,6 +351,7 @@ def simulate(individuals:List[Individual],system:System):
                   luxury_node = ConceptNode(len(individual.memorystream.concept_nodes), "produce_luxury", system.time, individual.attributes["id"], "produce_luxury", [], 0, f'On day {system.time}. I produced luxury goods and gained {gain} units of luxury goods', 1)
                   individual.memorystream.add_concept_node(luxury_node)
                   individual.memory.append(f'On day {system.time}. I produced luxury goods and gained {gain} units of luxury goods')
+                  individual.attributes["luxury_production_today"] += gain
                   print("Producing luxury goods is successful")
               elif ai_action.type==AIActionType.Rob:
                     
@@ -412,6 +420,7 @@ def simulate(individuals:List[Individual],system:System):
             print(f'System still pending actions, so will go into another round.')
     day_end(system,individuals)
 
+
     if (system.time % days_between_conversation == 0):
 
       topic = "share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?"
@@ -420,16 +429,15 @@ def simulate(individuals:List[Individual],system:System):
       conversation = discuss_topic(system, individuals, topic, system.time)
       print("conversation ended")
 
-      conversation_list.append(conversation)
-      if (len(conversation_list) > 1):
-        description = generate_policy(system, conversation_list)
-        conversation_list.clear()
+      # conversation_list.append(conversation)
+      # if (len(conversation_list) > 1):
+      #   json_description = generate_policy(system, conversation_list)
+      #   conversation_list.clear()
 
-        print(description)
+      #   print(json_description)
 
-      
-    system.csv_analysis.log_stat(system, csv_file_name)
-
+    
+    if (system.time == 20): system.csv_analysis.output_individual_stats(system, individual_data_dir)
     # save_logframes(system)
     
 # %%

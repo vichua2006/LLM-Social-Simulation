@@ -3,6 +3,6 @@ from Main.Conversation import evaluate_speaking_tendencies
 
 
 
-l = [1,2,3,3,4,5]
+d = [{"day": 1}, {"day": 2}]
 
-print(l[:-1])
+print(str(d))

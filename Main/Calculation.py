@@ -9,8 +9,8 @@ from Main.System import System, Bank
 def increase_food(individual:Individual, factor):
     # Increase food based on indivi dual's production #
     gain = round(individual.food_production * individual.attributes["land"] / 3)
-    individual.attributes['food'] += gain* factor
-    individual.attributes["food_production"] += gain * factor
+    individual.attributes["food"] += gain* factor
+    individual.attributes["total_food_production"] += gain * factor
     return gain *factor
     
 # Luxury Good
@@ -18,7 +18,7 @@ def increase_luxury(individual: Individual, factor):
     # Increase luxury goods based on individual's production #
     gain = round(individual.luxury_production * individual.attributes["land"] / 3)
     individual.attributes["luxury_goods"] += gain *factor
-    individual.attributes["luxury_production"] += gain * factor
+    individual.attributes["total_luxury_production"] += gain * factor
     return gain*factor
 
 #Rob
@@ -149,7 +149,7 @@ def donate(target: Individual, donate_person:Individual, system: System, donateT
 
 
 #master punish subject, get his food and land and share it to other subjects except the subject being punished
-def punishment(subject:Individual, system:System) -> None:
+def punishment(subject:Individual, system:System, food_amount:int = None, land_amount:int  = None) -> None:
     if subject.obey_stats.obey_personId==-1:
         print("PUNISHMENTERROR: no master, this should not happen.")
         return
@@ -158,8 +158,8 @@ def punishment(subject:Individual, system:System) -> None:
     subject.memory.append(f"I was punished by {system.individuals[subject.obey_stats.obey_personId].attributes['name']} because I, as a subject, rob other subject.")
     master.memory.append(f"I punished {subject.attributes['name']} because he, as a subject, rob other subject.")
     #master punish subject, 50% food and 50% land
-    food_amount = 0.5 * subject.attributes['food']
-    land_amount = 0.5 * subject.attributes['land']
+    if (food_amount == None): food_amount = 0.5 * subject.attributes['food']
+    if (land_amount == None):land_amount = 0.5 * subject.attributes['land']
     subject.attributes['food'] -= food_amount
     subject.attributes['land'] -= land_amount
     #share the food and land to other subjects

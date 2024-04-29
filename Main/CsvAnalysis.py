@@ -2,6 +2,8 @@ from Main import System
 from typing import Optional
 import csv
 import numpy as np
+import json
+import os
 
 
 class CsvAnalysis:
@@ -108,8 +110,8 @@ class CsvAnalysis:
      individual = system.individuals[i]
      food = individual.attributes['food']
      land = individual.attributes['land']
-     food_production = individual.attributes['food_production']
-     luxury_production = individual.attributes['luxury_production']
+     food_production = individual.attributes['food_production_today']
+     luxury_production = individual.attributes['luxury_production_today']
      luxury_goods = individual.attributes['luxury_goods']
      current_wealth = luxury_goods * 2 + food
      daily_change_in_wealth[i] = current_wealth - self.previous_individual_wealth[i]
@@ -324,3 +326,34 @@ class CsvAnalysis:
     # mean_production value 
     return overall_food_std, overall_food_mean, overall_land_std, overall_land_mean, individual_wealth, gini_food, gini_land, person_change_in_wealth, gdp, daily_gdp_growth_rate, overall_food_production_mean, activity_ratio_str, good_distribution_ratio
 
+  def output_individual_stats(self, system:System, dir_name:str):
+      # produce two text files: one lists all information about each person per day, the other lists all information over all days per each person
+      individuals = system.individuals
+      combined_stats = [json.loads(p.get_log_list()) for p in individuals]
+
+      by_person = []
+      by_day = []
+
+      days = system.time
+
+      # generate the by_day list
+      for i in range(days):
+         day_data = {"day": i, "stats": []}
+         for stats in combined_stats:
+            day_data["stats"].append(stats[i])
+         by_day.append(day_data)
+      
+      # generate the by_person list
+      for i, stats in enumerate(combined_stats):
+         by_person.append({"name":individuals[i].attributes["name"], "stats":stats})
+      
+      by_person_filename = f"{dir_name}/stats_by_person.txt"
+      by_day_filename = f"{dir_name}/stats_by_day.txt"
+
+      if not (os.path.exists(dir_name)):
+        os.mkdir(dir_name)
+      
+      with open(by_person_filename, "w") as bpf, open(by_day_filename, "w") as bdf:
+        bpf.write(json.dumps(by_person, indent=4))
+        bdf.write(json.dumps(by_day, indent=4))
+      
