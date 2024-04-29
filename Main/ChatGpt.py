@@ -8,7 +8,7 @@ from openai.types import Completion
 # Setting the OpenAI API key
 charles_key="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"
 taitienchi_key="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"
-jinhan_key = "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"
+jinhan_key = "sk-proj-VN2TboxHobMWOqochYqaT3BlbkFJV6bh80W4W5YaUxYan9ST"
 ericyamnovski_key = "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"
 ryan_key = "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"
 victor_key = "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"
