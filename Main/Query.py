@@ -168,7 +168,7 @@ def generate_environment_description() -> str:
     return environment_description
 
 
-def generate_general_description(individual: Individual, system: System, start_with_commonwealth:bool) -> str:
+def generate_general_description(individual: Individual, system: System, start_with_commonwealth:bool = True) -> str:
     # This function generates the description of the individual and returns it as a string
     is_subject = individual.obey_stats.obey_personId != -1
     is_master = individual.obey_stats.subjectid
@@ -375,8 +375,6 @@ def query_individual(individual: Individual, system: System, response_action, st
         elif response_action.type == AIActionType.Rob:
             if individual.obey_stats.obey_personId != response_action.ownerid:
                 ask_for_response = passive_rob
-
-                print(passive_rob)
             else:
                 ask_for_response = passive_rob_fromMaster
                 print("success rob from Master")
