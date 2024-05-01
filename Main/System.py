@@ -17,7 +17,7 @@ class System:
         for i in individuals:
           self.ranking[i]=0
         #self.relations=[x for x in individuals]
-        self.time=0
+        self.time=1 # starts on day 1
         self.is_stop=False
         self.obey_frequence=[]
         self.day_end_counter=0

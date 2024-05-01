@@ -148,9 +148,8 @@ def initialize():
     #individuals.sort(key=lambda x: x.attributes['id'])
     #default
 
-    for i in range(POPULATION):
-      # have 1-indexed naming to prevent "person 5" issue
-      individual = Individual(i,f'person_{i + 1}')
+    for i in range(1, POPULATION + 1):
+      individual = Individual(i,f'person_{i}')
       
       # Generate food/luxury production numbers for specific individuals based general distribution
       individual.food_production = round(np.random.normal(food_production, 0.5))
