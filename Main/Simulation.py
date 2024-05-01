@@ -30,6 +30,10 @@ individual_data_dir = f"individual_data_log/{datetime.datetime.now().strftime('%
 days_between_conversation = 5
 conversation_list = []
 
+# General food/luxury production numbers
+food_production = np.random.normal(5, 0.5)
+luxury_production = np.random.normal(3, 0.5)
+
 def discuss_topic(system: System, individuals: List[Individual], topic: str, day_count: int):
   '''
   Initiate a conversation between individuals on a topic for discussion. 
@@ -69,10 +73,6 @@ def change_affected_people(affected_people, system:System):
       affected_person_index = int(affected_person.replace("person", "").replace(" ", ""))
       for attribute in affected_people[affected_person]:
         system.individuals[affected_person_index].attributes[attribute]=affected_people[affected_person][attribute]
-
-# General food/luxury production numbers
-food_production = np.random.normal(4, 0.5)
-luxury_production = np.random.normal(2, 0.5)
 
 # %%
 # Function to update the state of each individual at the end of the day
