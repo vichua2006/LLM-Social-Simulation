@@ -6,7 +6,7 @@ from Main.Individual import Individual
 from Main.System import System
 from Main.Memory import ConceptNode
 from Main.SpeakingAgent import SpeakingAgent, CustomGroupChat
-from Main.Query import generate_environment_description_noavg, generate_general_description
+from Main.Query import generate_general_description, generate_environment_description
 from Main.Retrieve import new_retrieve
 from Main.ChatGpt import AUTOGEN_LLM_CONFIG 
 
@@ -38,8 +38,7 @@ def converse(individuals: List[Individual], system: System, chat_topic: str, ple
     # udpate the system message of each agent with game rules/ setting, retrieved memory, personality, pleasure system output (not implemented), and personal status (not implemented)
     for i, person in enumerate(individuals, 0):
 
-        environment_description = generate_environment_description_noavg()
-
+        environment_description = generate_environment_description(system.csv_analysis.avg_food_production, system.csv_analysis.avg_luxury_production)
         general_description = generate_general_description(person, system)
 
         # retrieves relevant memories 

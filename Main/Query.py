@@ -320,7 +320,7 @@ def query_individual(individual: Individual, system: System, response_action, st
     print(f"available targets:{targetsid}")
 
     general_description = generate_general_description(individual, system, start_with_commonwealth)
-    separated_description = generate_environment_description()
+    separated_description = generate_environment_description(system.csv_analysis.avg_food_production, system.csv_analysis.avg_luxury_production)
 
     passive_trade = f"""
     Today, you noticed that {response_action}.
