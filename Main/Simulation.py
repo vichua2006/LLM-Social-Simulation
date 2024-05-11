@@ -149,7 +149,7 @@ def initialize():
     #default
 
     for i in range(1, POPULATION + 1):
-      individual = Individual(i,f'person_{i}')
+      individual = Individual(i - 1,f'person_{i - 1}')
       
       # Generate food/luxury production numbers for specific individuals based general distribution
       individual.food_production = round(np.random.normal(food_production, 0.5))
@@ -216,14 +216,14 @@ def simulate(individuals:List[Individual],system:System):
                         trade_node = ConceptNode(len(owner.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f"Day {system.time}. I initiated a trade to {individual.attributes['name']}, which is to exchange {response_action.payAmount} units of my {response_action.payType} for {response_action.gainAmount} units of his {response_action.gainType}.", 1)
                         owner.memorystream.add_concept_node(trade_node)
                         owner.memory.append(f"Day {system.time}. I initiated a trade to {individual.attributes['name']}, which is to exchange {response_action.payAmount} units of my {response_action.payType} for {response_action.gainAmount} units of his {response_action.gainType}.")
-                        trade_node_ = ConceptNode(len(individual.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f"Day {system.time}.{response_action.ownerid} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ", 1)
+                        trade_node_ = ConceptNode(len(individual.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f"Day {system.time}.{individual.attributes["name"]} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ", 1)
                         individual.memorystream.add_concept_node(trade_node_)
-                        individual.memory.append(f"Day {system.time}.{response_action.ownerid} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ")
+                        individual.memory.append(f"Day {system.time}.{individual.attributes["name"]} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ")
                         
                         if R:
                               no_trade_node = ConceptNode(len(owner.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f'I rejected the trade offer by {response_action.ownerid}.', 1)
                               individual.memorystream.add_concept_node(no_trade_node)
-                              individual.memory.append(f'I rejected the trade offer by {response_action.ownerid}.')
+                              individual.memory.append(f'I rejected the trade offer by {individual.attributes["name"]}.')
                               no_trade_node_ = ConceptNode(len(individual.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f"But he rejected it so I gained nothing and exhausted my action opportunity of today.", 1)
                               owner.memorystream.add_concept_node(no_trade_node_)
                               owner.memory.append(f"But he rejected it so I gained nothing and exhausted my action opportunity of today.")
@@ -252,12 +252,12 @@ def simulate(individuals:List[Individual],system:System):
 
                               else:
                                 if not validO:
-                                      owner.memory.append("He accepted the trade but it couldn't go through since I don't have enough resource for it, and I got nothing out of this trade while I lost my action opportunity of today.")
-                                      individual.memory.append("I accepted the trade but it couldn't go through because he doesn't have enough resources to pay me accordingly.")
+                                      owner.add_memory("He accepted the trade but it couldn't go through since I don't have enough resource for it, and I got nothing out of this trade while I lost my action opportunity of today.")
+                                      individual.add_memory("I accepted the trade but it couldn't go through because he doesn't have enough resources to pay me accordingly.")
                                       system.csv_analysis.trade_accepted(individuals.index(owner))
                                 if not validI:
-                                      owner.memory.append("He accepted the trade but it could't go through because he didn't have enough resources to pay me accordingly. I lost my action opportunity of today.")
-                                      individual.memory.append("I accepted the trade but I don't have enough resources to pay him accordingly so it failed to execute.")
+                                      owner.add_memory("He accepted the trade but it could't go through because he didn't have enough resources to pay me accordingly. I lost my action opportunity of today.")
+                                      individual.add_memory("I accepted the trade but I don't have enough resources to pay him accordingly so it failed to execute.")
                                       system.csv_analysis.trade_accepted(individuals.index(owner))
                                   
                   #query_judge(f'In response to Person {response_action.owner} initiating {response_action}, {individual.attributes["name"]} chooses to {action}. {add_context}',response_action,individual,system)
@@ -436,7 +436,7 @@ def simulate(individuals:List[Individual],system:System):
       #   print(json_description)
 
     
-    if (system.time == 20): system.csv_analysis.output_individual_stats(system, individual_data_dir)
+    if (system.time == 3): system.csv_analysis.output_individual_stats(system, individual_data_dir)
     # save_logframes(system)
     
 # %%

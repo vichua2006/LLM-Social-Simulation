@@ -6,7 +6,7 @@ from copy import deepcopy
 from Main.AIAction import AIActionType, AIAction, RobAction
 import queue
 from Main.System import System
-from Main.Memory import MemoryStream
+from Main.Memory import MemoryStream, ConceptNode
 from Main.SpeakingAgent import SpeakingAgent
 from Main.ChatGpt import AUTOGEN_LLM_CONFIG
 from Main.Personalities import generate_personality
@@ -91,6 +91,11 @@ class Individual:
         # Update the total win rob times towards the person if applicable
         if win_rob:
             self.robbing_stats.win_rob_times[person_id] + 1
+    
+    def add_memory(self, system: System, description: str):
+        # creates a new memory node and adds it to memory stream
+        new_memory = ConceptNode(len(self.memorystream.concept_nodes), "", system.time, self.attributes["id"], "", [], 0, description, 1)
+        self.memorystream.add_concept_node(new_memory)
     
         #return the person id if all individual obey to the same person except for the person who is obeyed
     def check_is_common_wealth(self, system:System)->bool:

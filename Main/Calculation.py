@@ -3,6 +3,7 @@ import random
 import numpy as np
 from Main.Individual import Individual
 from Main.System import System, Bank
+from Main.Memory import ConceptNode
 
 #Utils
 #Food
@@ -42,10 +43,14 @@ def share_rob_gain(master: Individual, robAmount: float, robType: str, system:Sy
     for subjectid in master.obey_stats.subjectid:
         subject = system.individuals[subjectid]
         subject.attributes[robType]+=robAmount/len(master.obey_stats.subjectid)
-        subject.memory.append(f"Day {system.time}. I got {robAmount/len(master.obey_stats.subjectid)} units of {robType} from {master.attributes['name']}.")
+        memory_text = f"Day {system.time}. I got {robAmount/len(master.obey_stats.subjectid)} units of {robType} from {master.attributes['name']}."
+        subject.add_memory(system, memory_text)
+        subject.memory.append(memory_text)
     #include the master
     master.attributes[robType]+=robAmount/len(master.obey_stats.subjectid)
-    master.memory.append(f"Day {system.time}. I gave {robAmount} units of {robType} to my subjects.")
+    memory_text = f"Day {system.time}. I gave {robAmount} units of {robType} to my subjects."
+    master.add_memory(system, memory_text)
+    master.memory.append(memory_text)
     print(f"SHARE_ROB_FOOD: {master.attributes['name']} shared {robAmount} units of {robType} to {len(master.obey_stats.subjectid)} subjects.")
     return
 
@@ -58,10 +63,14 @@ def share_rob_lost(master:Individual, robAmount:float, robType:str, system:Syste
     for subjectid in master.obey_stats.subjectid:
         subject = system.individuals[subjectid]
         subject.attributes[robType]= subject.attributes[robType] - robAmount/len(master.obey_stats.subjectid)
-        subject.memory.append(f"Day {system.time}. I lost {robAmount/len(master.obey_stats.subjectid)} units of {robType} to {master.attributes['name']}.")
+        memory_text = f"Day {system.time}. I lost {robAmount/len(master.obey_stats.subjectid)} units of {robType} to {master.attributes['name']}."
+        subject.add_memory(system, memory_text)  
+        subject.memory.append(memory_text)
     #include the master
     master.attributes[robType] = master.attributes[robType] - robAmount/len(master.obey_stats.subjectid)
-    master.memory.append(f"Day {system.time}. I get {robAmount} units of {robType} from my subjects.")
+    memory_text = f"Day {system.time}. I get {robAmount} units of {robType} from my subjects."
+    master.add_memory(system, memory_text)
+    master.memory.append(memory_text)
     print(f"SHARE_LOST_FOOD: {master.attributes['name']} got {robAmount} units of {robType} from {len(master.obey_stats.subjectid)} subjects.")
     return
 
@@ -95,8 +104,12 @@ def rob_rebelled(target: Individual, rob_person:Individual, system: System, robT
     if winner==target:
             target.attributes['social_position']+=1
             rob_person.attributes['social_position']+=-1
-            target.memory.append(f"Day {system.time}. {rob_person.attributes['name']} tried to rob me, but I rebelled and won. I protected my own land and food and my social position elevated 1 unit.")
-            rob_person.memory.append(f"Day {system.time}. I tried to rob {target.attributes['name']}, who rebelled against me and I lost. I did not gain anything and my social position dropped 1 unit.")
+            target_memory = f"Day {system.time}. {rob_person.attributes['name']} tried to rob me, but I rebelled and won. I protected my own land and food and my social position elevated 1 unit."
+            rob_person_memory = f"Day {system.time}. I tried to rob {target.attributes['name']}, who rebelled against me and I lost. I did not gain anything and my social position dropped 1 unit."
+            target.memory.append(target_memory)
+            rob_person.memory.append(rob_person_memory)
+            target.add_memory(system, target_memory)
+            rob_person.add_memory(system, rob_person_memory)
     else:
             victim_memory = ""
             #Rob Person Successfully Rob Target
@@ -119,8 +132,12 @@ def rob_rebelled(target: Individual, rob_person:Individual, system: System, robT
                 print(f'Error: rob type does not match anyting. Rob type: {robType}')
             target.attributes['social_position']-=1
             rob_person.attributes['social_position']+=2
-            target.memory.append(f"Day {system.time}. {rob_person.attributes['name']} tried to rob me, I rebelled but lost. {victim_memory}. I lost 1 unit of social status.")
-            rob_person.memory.append(f"Day {system.time}. I tried to rob {target.attributes['name']}, who rebelled against me but I won. {victor_memory}. I gained 2 units of social status.")
+            target_memory = f"Day {system.time}. {rob_person.attributes['name']} tried to rob me, I rebelled but lost. {victim_memory}. I lost 1 unit of social status."
+            rob_person_memory = f"Day {system.time}. I tried to rob {target.attributes['name']}, who rebelled against me but I won. {victor_memory}. I gained 2 units of social status."
+            target.memory.append(target_memory)
+            rob_person.memory.append(rob_person_memory)
+            target.add_memory(system, target_memory)
+            rob_person.add_memory(system, rob_person_memory)
 
     print("Robbing process finished")
     return
@@ -155,8 +172,8 @@ def punishment(subject:Individual, system:System, food_amount:int = None, land_a
         return
     print(f"PUNISHMENT: {subject.attributes['name']} is punished by {system.individuals[subject.obey_stats.obey_personId].attributes['name']}, all other subjects will share the food and land of {subject.attributes['name']}.")
     master = system.individuals[subject.obey_stats.obey_personId]
-    subject.memory.append(f"I was punished by {system.individuals[subject.obey_stats.obey_personId].attributes['name']} because I, as a subject, rob other subject.")
-    master.memory.append(f"I punished {subject.attributes['name']} because he, as a subject, rob other subject.")
+    subject.add_memory(system, f"I was punished by {system.individuals[subject.obey_stats.obey_personId].attributes['name']} because I, as a subject, rob other subject.")
+    master.add_memory(system, f"I punished {subject.attributes['name']} because he, as a subject, rob other subject.")
     #master punish subject, 50% food and 50% land
     if (food_amount == None): food_amount = 0.5 * subject.attributes['food']
     if (land_amount == None):land_amount = 0.5 * subject.attributes['land']
@@ -165,7 +182,7 @@ def punishment(subject:Individual, system:System, food_amount:int = None, land_a
     #share the food and land to other subjects
     for subjectid in master.obey_stats.subjectid:
         if subjectid!=subject.attributes['id']:
-            subject.memory.append(f"I got food and land because {subject.attributes['name']} was punished by {master.attributes['name']}, since he robbed other subject.")
+            subject.add_memory(system, f"I got food and land because {subject.attributes['name']} was punished by {master.attributes['name']}, since he robbed other subject.")
             subject = system.individuals[subjectid]
             subject.attributes['food'] += food_amount/(len(master.obey_stats.subjectid)-1)
             subject.attributes['land'] += land_amount/(len(master.obey_stats.subjectid)-1)

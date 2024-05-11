@@ -17,7 +17,7 @@ class System:
         for i in individuals:
           self.ranking[i]=0
         #self.relations=[x for x in individuals]
-        self.time=1 # starts on day 1
+        self.time=0 # starts on day 0
         self.is_stop=False
         self.obey_frequence=[]
         self.day_end_counter=0
@@ -31,7 +31,7 @@ class System:
         self.deaths = 0
 
         #set food mechanism
-        self.consumption_rate=3
+        self.consumption_rate=10
         self.days_of_starvation=3
         
 
