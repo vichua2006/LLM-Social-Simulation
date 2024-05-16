@@ -1,0 +1,62 @@
+[
+    {
+        "day": 0,
+        "stats": [
+            {
+                "message": "This person was not initialized on day 0"
+            },
+            {
+                "message": "This person was not initialized on day 0"
+            },
+            {
+                "message": "This person was not initialized on day 0"
+            },
+            {
+                "message": "This person was not initialized on day 0"
+            },
+            {
+                "message": "This person was not initialized on day 0"
+            }
+        ]
+    },
+    {
+        "day": 1,
+        "stats": [
+            {
+                "message": "This person was not initialized on day 1"
+            },
+            {
+                "message": "This person was not initialized on day 1"
+            },
+            {
+                "message": "This person was not initialized on day 1"
+            },
+            {
+                "message": "This person was not initialized on day 1"
+            },
+            {
+                "message": "This person was not initialized on day 1"
+            }
+        ]
+    },
+    {
+        "day": 2,
+        "stats": [
+            {
+                "message": "This person was not initialized on day 2"
+            },
+            {
+                "message": "This person was not initialized on day 2"
+            },
+            {
+                "message": "This person was not initialized on day 2"
+            },
+            {
+                "message": "This person was not initialized on day 2"
+            },
+            {
+                "message": "This person was not initialized on day 2"
+            }
+        ]
+    }
+]

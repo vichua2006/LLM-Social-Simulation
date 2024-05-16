@@ -1,0 +1,83 @@
+Start
+DAY 0 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Focus on pleasure of the mind by acquiring luxury goods for future good.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4]
+ACTIVE STATE
+{
+    "action": "trade",
+    "reason": "Maximize comparative advantage and try out new activity",
+    "payload": {
+        "targetId": 0,
+        "payType": "luxury_goods",
+        "payAmount": 2,
+        "gainType": "food",
+        "gainAmount": 4
+    }
+}
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Focus on present pleasure of sensual experience and future good. Enhance mind pleasure by acquiring luxury goods.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on my own sensual pleasures and present experiences for survival",
+    "payload": null
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Focus on securing present survival needs. Minimal risk and effort."
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+person_0 is responding...
+
+Responding to:AIActionType.Trade, owner: 1, target: 0, payType: luxury_goods, payAmount: 2, gainType: food, gainAmount: 4
+available targets:[1, 2, 3, 4]
+PASSIVE STATE
+person_0 chooses to REJECT
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4]
+PASSIVE STATE
+TOTAL DEATHS:  0
+person_0 has died.
+DAY 1 HAS STARTED.
+person_5 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4]
+ACTIVE STATE

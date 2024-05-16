@@ -329,7 +329,7 @@ class CsvAnalysis:
   def output_individual_stats(self, system:System, dir_name:str):
       # produce two text files: one lists all information about each person per day, the other lists all information over all days per each person
       individuals = system.individuals
-      combined_stats = [json.loads(p.get_log_list()) for p in individuals]
+      combined_stats = [p.get_log_list() for p in individuals]
 
       by_person = []
       by_day = []
@@ -340,7 +340,9 @@ class CsvAnalysis:
       for i in range(days):
          day_data = {"day": i, "stats": []}
          for stats in combined_stats:
-            day_data["stats"].append(stats[i])
+            # check if key exists, as individual log entries get cleared due to death mechanism
+            if (i in stats): day_data["stats"].append(stats[i])
+            else: day_data["stats"].append({"message":f"This person was not initialized on day {i}"})
          by_day.append(day_data)
       
       # generate the by_person list

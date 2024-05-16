@@ -1,0 +1,1586 @@
+Start
+DAY 0 HAS STARTED.Log hasn't been updated for 0:01:30 minutes. Restarting simulation.
+
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+Stop
+Stop
+Start
+DAY 0 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+Start
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I choose to produce luxury goods to satisfy my sensual pleasures and pleasure of the mind.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_1 is responding...
+
+Responding to:None{
+    "action": "farm",
+    "reason": "Priority on personal sensual pleasure and consistent with memory of food production.",
+    "payload": null
+}
+
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Focusing on acquiring luxury goods for sensual pleasure and pleasure of the mind.",
+    "payload": null
+}
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing food and consuming it. This action aligns with my focus on present experiences and sensual pleasures."
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+Producing luxury goods is successful
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "To increase my food supply and social position, prioritizing my own needs and pleasures.",
+    "payload": {
+        "targetId": 1,
+        "robType": "food"
+    }
+}
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival and secure a steady source of food production. This action aligns with my focus on present experiences and self-centered priorities."
+}
+
+ACTIVE STATE
+Farm is successful.
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on securing present survival needs and ensuring food production for future",
+    "payload": null
+}
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by acquiring 5 units of food today."
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Focusing on pleasure of the mind and securing future good by producing luxury goods.",
+    "payload": null
+}
+
+{
+    "action": "rob",
+    "reason": "I choose to rob to increase my food reserves and strengthen my social position. Robbing aligns with my covetous nature and focus on present experiences.",
+    "payload": {
+        "targetId": 1,
+        "robType": "food"
+    }
+}
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+Producing luxury goods is successful
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I want to focus on satisfying my sensual pleasures by producing luxury goods for my own enjoyment.",
+    "payload": null
+}{
+    "action": "produce",
+    "reason": "Focusing on securing future good by acquiring and holding luxury goods, enhancing pleasure of the mind.",
+    "payload": null
+}
+
+Producing luxury goods is successful
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+Producing luxury goods is successful
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Focus on pleasure of the mind and securing future good by acquiring luxury goods.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+
+    {{
+        "action": "produce",
+        "reason": "I choose to produce luxury goods today. As a self-centered individual, I prioritize actions that contribute to my own sensual pleasures and future good. Producing luxury goods will provide sensual pleasure and enhance my pleasure of the mind by securing future good.",
+        "payload": null
+    }}
+erroc when deserialize_first_json_object
+original string:  {{
+        "action": "produce",
+        "reason": "i choose to produce luxury goods today. as a self-centered individual, i prioritize actions that contribute to my own sensual pleasures and future good. producing luxury goods will provide sensual pleasure and enhance my pleasure of the mind by securing future good.",
+        "payload": null
+    }}
+Error:Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+First Exception:'NoneType' object is not subscriptable, second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to secure my food source and ensure my survival. It aligns with my focus on present experiences and immediate needs."
+}
+Farm is successful.
+person_8 is responding...
+
+Responding to:None{
+    "action": "farm",
+    "reason": "I have enough food and luxury goods at the moment, and farming will help me secure future good by producing food for sustenance.",
+    "payload": null
+}
+
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+Farm is successful.
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing 5 units of food today.",
+    "payload": null
+}
+
+{
+    "action": "produce",
+    "reason": "Focus on pleasure of the mind by acquiring luxury goods to secure future good.",
+    "payload": null
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+person_1 is responding...
+
+Responding to:AIActionType.Rob, owner: 2, target: 1, robType: food
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+Producing luxury goods is successful
+System still pending actions, so will go into another round.
+person_1 is responding...
+
+Responding to:AIActionType.Rob, owner: 4, target: 1, robType: food
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+PASSIVE STATE
+person_1 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_1, loser is person_4.
+Total rob times of the winner: 1
+person_1 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_1, loser is person_2.
+Total rob times of the winner: 2
+Robbing process finished
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+Robbing process finished
+System still pending actions, so will go into another round.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+PASSIVE STATE
+{
+    "action": "rob",
+    "reason": "I have a desire for sensual pleasures and covetousness. Robbing will help me gain more resources for present experiences.",
+    "payload": {
+        "targetId": 1,
+        "robType": "food"
+    }
+}
+person_1 is responding...
+
+Responding to:AIActionType.Rob, owner: 0, target: 1, robType: food
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+Consuming luxury goods is successfulPASSIVE STATE
+
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+person_1 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_1, loser is person_0.
+Total rob times of the winner: 3
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+PASSIVE STATE
+Robbing process finished
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+
+{
+    "action": "produce",
+    "reason": "Maximizing sensual pleasure through luxury goods production."
+}
+TOTAL DEATHS:  0
+DAY 1 HAS STARTED.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+Producing luxury goods is successful
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Prioritizing personal food production for sensual pleasure and survival, maintaining current social position."
+}
+{
+    "action": "produce",
+    "reason": "Focus on securing future goods to enhance pleasure of the mind and pursue sensual pleasures through luxury.",
+    "payload": null
+}Farm is successful.
+
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+Producing luxury goods is successful
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I will choose to farm today to ensure my survival by generating 5 units of food.",
+    "payload": null
+}
+
+{
+    "action": "farm",
+    "reason": "Focusing on securing immediate food for survival aligns with my desire for sensual pleasures.",
+    "payload": null
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+Farm is successful.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "produce",
+    "reason": "I choose to produce luxury goods today to satisfy my sensual pleasures and pleasures of the mind. It aligns with my desire for present experiences and future goods.",
+    "payload": null
+}
+{
+    "action": "farm",
+    "reason": "I want to focus on ensuring my survival by producing food from the land I own. This action aligns with my desire for present-focused sensual pleasures.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+Farm is successful.
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I have enough food to survive, so I will focus on producing more food today to ensure my future survival."
+}
+{
+    "action": "farm",
+    "reason": "Focus on securing food for survival and pleasure.",
+    "payload": null
+}
+Farm is successful.
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+Farm is successful.
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming ensures survival and meets immediate needs for food.",
+    "payload": null
+}
+Farm is successful.
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 59591, Requested 2683. Please try again in 2.274s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "produce",
+    "reason": "Prioritizing sensual pleasure from luxury goods to secure future good and improve social position.",
+    "payload": null
+}
+Producing luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 58391, Requested 2683. Please try again in 1.074s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+PASSIVE STATE
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+PASSIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 58329, Requested 2683. Please try again in 1.011s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+TOTAL DEATHS:  0
+DAY 2 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "produce",
+    "reason": "Prioritizing the production of luxury goods for sensual pleasure and future good reflections.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on own survival and pleasure of food. Consistent with memory of food production and own attributes.",
+    "payload": null
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Farming provides a consistent source of food for survival and aligns with my current goal of securing present pleasure through food consumption.",
+    "payload": null
+}
+Farm is successful.
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is a safe option to ensure food production for survival and maintain stability in social position.",
+    "payload": null
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 59291, Requested 2691. Please try again in 1.981s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "I choose to farm today to ensure my survival by producing 5 units of food. Since I focused on luxury goods yesterday, today I will prioritize food production.",
+    "payload": null
+}
+Farm is successful.
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I have produced luxury goods recently and want to continue focusing on acquiring luxury goods for present pleasure and future glory.",
+    "payload": null
+}
+Producing luxury goods is successful
+System still pending actions, so will go into another round.
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "I will rob person_1 for food to ensure my survival and increase my own food reserve.",
+    "payload": {
+        "TargetId": 1,
+        "RobType": "food"
+    }
+}
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "rob",
+    "reason": "I will rob person_2 to gain more resources for my personal pleasure and future security.",
+    "payload": {
+        "targetId": 2,
+        "robType": "food"
+    }
+}
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming ensures food production for survival and maintains current social position. It aligns with my needs and capabilities."
+}
+Farm is successful.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I want to ensure my survival by producing 4 units of food and gain sensual pleasure from eating.",
+    "payload": null
+}
+Farm is successful.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I will farm to ensure my survival by producing food and consuming it. This action aligns with my focus on present experiences and meeting my basic needs.",
+    "payload": null
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+person_1 is responding...
+
+Responding to:AIActionType.Rob, owner: 3, target: 1, robType: food
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+person_1 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.An Exception Occur when communicating with ChatGPT:
+ Additional context:Winner is person_3, loser is person_1.Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 58713, Requested 2693. Please try again in 1.406s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+Total rob times of the winner: 1None
+SHARE_LOST_FOOD: no subject, directly lost the rob amount.
+
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterableSHARE_ROB_FOOD: no subject, directly get the rob amount.
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+Robbing process finished
+person_2 is responding...
+
+Responding to:AIActionType.Rob, owner: 3, target: 2, robType: food
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+person_2 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_3, loser is person_2.
+Total rob times of the winner: 2
+SHARE_LOST_FOOD: no subject, directly lost the rob amount.
+SHARE_ROB_FOOD: no subject, directly get the rob amount.
+Robbing process finished
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+
+    {{
+      "action": "farm",
+      "reason": "Farming is essential for food production. It ensures survival and provides immediate sensual pleasure.",
+      "payload": null
+    }}
+erroc when deserialize_first_json_object
+original string:  {{
+      "action": "farm",
+      "reason": "farming is essential for food production. it ensures survival and provides immediate sensual pleasure.",
+      "payload": null
+    }}
+Error:Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+First Exception:'NoneType' object is not subscriptable, second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 59500, Requested 2705. Please try again in 2.205s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+PASSIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 59145, Requested 2705. Please try again in 1.85s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+TOTAL DEATHS:  0
+DAY 3 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming to secure food for survival and immediate sensual pleasure.",
+    "payload": null
+}  
+Farm is successful.
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 59243, Requested 2727. Please try again in 1.97s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Prioritizing own survival and immediate food needs, as well as balancing food production for sustainability."
+}
+Farm is successful.
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I need to focus on producing food today to ensure my survival and prioritize my own sensual pleasures.",
+    "payload": null
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Seeking mind pleasure through luxury goods production.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 59185, Requested 2823. Please try again in 2.008s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Prioritize securing food for survival and immediate sensual pleasure.",
+    "payload": null
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is the most efficient way for me to ensure my survival by producing food. It aligns with my focus on present experiences and self-centered priorities."
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Prioritizing personal survival by obtaining food to meet basic needs.",
+    "payload": null
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 59409, Requested 2736. Please try again in 2.145s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Ensure survival by producing food. Prioritize own sensual pleasures and personal needs.",
+    "payload": null
+}
+Farm is successful.
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I want to indulge in sensual pleasures and pleasure of the mind by producing luxury goods",
+    "payload": null
+}
+Producing luxury goods is successful
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 59264, Requested 2755. Please try again in 2.019s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+
+    {
+        "action": "trade",
+        "reason": "I have an abundance of food and need to diversify my resources to secure future good. Trading allows me to maximize my comparative advantage and strengthen my social position.",
+        "payload": {
+            "targetId": 6,
+            "payType": "food",
+            "payAmount": 30,
+            "gainType": "luxury_goods",
+            "gainAmount": 6
+        }
+    }
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I choose to produce luxury goods today to enhance my sensual pleasure and pleasure of the mind. It aligns with my focus on present experiences and reflecting on securing future good.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "trade",
+    "reason": "I aim to maximize my comparative advantage and gain resources. Trading will also help me know others better.",
+    "payload": {
+        "targetId": 1,
+        "payType": "luxury_goods",
+        "payAmount": 5,
+        "gainType": "food",
+        "gainAmount": 10
+    }
+}
+person_6 is responding...
+
+Responding to:AIActionType.Trade, owner: 3, target: 6, payType: food, payAmount: 30, gainType: luxury_goods, gainAmount: 6
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+PASSIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 58190, Requested 2753. Please try again in 943ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+person_6 chooses to Based on my psychological axioms of pursuing my own sensual pleasures and prioritizing actions that contribute to my sensual pleasures and social position, I will REJECT the trade.
+
+Considering that I already have a decent amount of food (157 units) and a moderate amount of luxury goods (53 units), trading 30 units of food for 6 luxury goods doesn't align with my current priorities of maximizing sensual pleasure and securing future good (such as social position). I believe holding onto my food and luxury goods will better serve my goals at the moment.
+{
+    "action": "farm",
+    "reason": "I choose to farm to secure my food source and ensure my survival. It also aligns with my preference for present-focused pleasures.",
+    "payload": null
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+person_1 is responding...
+
+Responding to:AIActionType.Trade, owner: 4, target: 1, payType: luxury_goods, payAmount: 5, gainType: food, gainAmount: 10
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+person_1 chooses to REJECT
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+System still pending actions, so will go into another round.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+PASSIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 57595, Requested 2759. Please try again in 354ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 58446, Requested 2759. Please try again in 1.205s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+PASSIVE STATE
+TOTAL DEATHS:  0
+DAY 4 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 58958, Requested 2759. Please try again in 1.717s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is essential for survival and I need to ensure I have enough food to sustain myself. This action does not directly impact my social position, but it is necessary for my well-being.",
+    "payload": null
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Maximizing food production for sensual pleasure."
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming will help me secure enough food to survive and maintain my current resources. It's a familiar activity that aligns with my duty and necessity.",
+    "payload": null
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I need to ensure my survival by producing food. Farming also helps me guarantee a stable source of food for future days. This action aligns with my cautious and organized nature.",
+    "payload": null
+}
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 58840, Requested 2892. Please try again in 1.732s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+Farm is successful.
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is essential for survival and I need to ensure a stable source of food for myself.",
+    "payload": null
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 58964, Requested 2905. Please try again in 1.869s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+
+    {{
+        "action": "farm",
+        "reason": "Farming will provide me with the necessary food to survive and maintain my current status.",
+        "payload": null
+    }}
+erroc when deserialize_first_json_object
+original string:  {{
+        "action": "farm",
+        "reason": "farming will provide me with the necessary food to survive and maintain my current status.",
+        "payload": null
+    }}
+Error:Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+First Exception:'NoneType' object is not subscriptable, second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+
+    { "action": "farm", "reason": "Maximizing food production for personal sensual pleasure and survival." }
+Farm is successful.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 58808, Requested 2905. Please try again in 1.713s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming to ensure food production for survival and present sensual pleasure.",
+    "payload": null
+}
+Farm is successful.
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "trade",
+    "reason": "Maximizing comparative advantage and gaining food efficiently",
+    "payload": {
+        "targetId": 3,
+        "payType": "luxury_goods",
+        "payAmount": 6,
+        "gainType": "food",
+        "gainAmount": 30
+    }
+}
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 58616, Requested 2905. Please try again in 1.521s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I have a memory of successfully gaining food through farming in the past. Farming is a safe option that ensures my survival, allowing me to focus on securing future goods to enhance my pleasure of the mind.",
+    "payload": null
+}
+Farm is successful.
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Prioritizing food production to ensure survival and self-satisfaction with present experiences."
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+person_3 is responding...
+
+Responding to:AIActionType.Trade, owner: 6, target: 3, payType: luxury_goods, payAmount: 6, gainType: food, gainAmount: 30
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+PASSIVE STATE
+An Exception Occur when communicating with ChatGPT: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-3.5-turbo in organization org-YxeeSMb7e8f1fjksLldyRxTX on tokens per min (TPM): Limit 60000, Used 58467, Requested 2905. Please try again in 1.372s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+None
+First Exception:'NoneType' object has no attribute 'lower', second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+person_3 chooses to ACCEPT
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+TOTAL DEATHS:  0
+DAY 5 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+
+    {{
+        "action": "produce",
+        "reason": "I want to focus on acquiring luxury goods for sensual pleasure and future mind pleasure.",
+        "payload": null
+    }}
+erroc when deserialize_first_json_object
+original string:  {{
+        "action": "produce",
+        "reason": "i want to focus on acquiring luxury goods for sensual pleasure and future mind pleasure.",
+        "payload": null
+    }}
+Error:Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+First Exception:'NoneType' object is not subscriptable, second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming will provide me with food to survive and focus on my present sensual pleasures.",
+    "payload": null
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming ensures survival and contributes to my personal sensual pleasure by providing food. It is a familiar activity and aligns with my duty to maintain my well-being."
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing food. It aligns with my priority of pursuing sensual pleasures.",
+    "payload": null
+}
+Farm is successful.
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Focus on securing essential resources for survival and prioritize personal needs over social status and luxury goods."
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Farming is a reliable way to ensure food production and survival. It also allows me to focus on securing future good and my social position.",
+    "payload": null
+}
+Farm is successful.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming will provide me with 5 units of food today, which is essential for my survival. It aligns with my desire for present-focused sensual pleasures.",
+    "payload": null
+}
+Farm is successful.
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+
+    {{
+        "action": "trade",
+        "reason": "Maximizing comparative advantage and ensuring future trade opportunities.",
+        "payload": {
+            "targetId": 3,
+            "payType": "luxury_goods",
+            "payAmount": 6,
+            "gainType": "food",
+            "gainAmount": 30
+        }
+    }}
+erroc when deserialize_first_json_object
+original string:  {{
+        "action": "trade",
+        "reason": "maximizing comparative advantage and ensuring future trade opportunities.",
+        "payload": {
+            "targetid": 3,
+            "paytype": "luxury_goods",
+            "payamount": 6,
+            "gaintype": "food",
+            "gainamount": 30
+        }
+    }}
+Error:Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+First Exception:'NoneType' object is not subscriptable, second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+
+    {{
+        "action": "produce",
+        "reason": "Maximizing pleasure of the mind by focusing on luxury goods production for future enjoyment.",
+        "payload": null
+    }}
+erroc when deserialize_first_json_object
+original string:  {{
+        "action": "produce",
+        "reason": "maximizing pleasure of the mind by focusing on luxury goods production for future enjoyment.",
+        "payload": null
+    }}
+Error:Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+First Exception:'NoneType' object is not subscriptable, second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "I have enough food and luxury goods, but I lack land. Robbing for land will increase my social position and allow me to secure future good.",
+    "payload": {
+        "targetId": 1,
+        "robType": "land"
+    }
+}
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "I have little food and memory of past successful robberies. Robbing can provide me with the food I need to survive.",
+    "payload": {
+        "targetId": 1,
+        "robType": "food"
+    }
+}
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I will farm to ensure I have enough food to survive and focus on securing future good to enhance my pleasure of the mind.",
+    "payload": null
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+person_1 is responding...
+
+Responding to:AIActionType.Rob, owner: 6, target: 1, robType: land
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+person_1 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_6, loser is person_1.
+Total rob times of the winner: 1
+SHARE_LOST_FOOD: no subject, directly lost the rob amount.
+SHARE_ROB_FOOD: no subject, directly get the rob amount.
+Robbing process finished
+System still pending actions, so will go into another round.
+person_1 is responding...
+
+Responding to:AIActionType.Rob, owner: 7, target: 1, robType: food
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+person_1 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_1, loser is person_7.
+Total rob times of the winner: 6
+Robbing process finished
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+Consuming luxury goods is successful
+TOTAL DEATHS:  0
+DAY 6 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I need to ensure my survival by producing food. I have a memory of consistently farming in the past days to secure my food source.",
+    "payload": null
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is a sure way to secure food for survival and my memory suggests it is a reliable source of sustenance.",
+    "payload": null
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming helps me secure food for survival, and I have enough food for now. It also doesn't directly impact my social position, which aligns with my self-centered nature and focus on my own pleasures.",
+    "payload": null
+}
+Farm is successful.
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Focus on securing immediate food needs and production for survival without risking conflicts or unknown outcomes.",
+    "payload": null
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Prioritizing personal survival and immediate food production. No need for luxury goods at the moment.",
+    "payload": null
+}
+Farm is successful.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is essential for survival and I need to ensure a steady supply of food to meet my basic needs. It's a reliable way to secure resources for the present.",
+    "payload": null
+}
+Farm is successful.
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "To ensure survival by producing food and focusing on present pleasure from food."
+}
+Farm is successful.
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+
+    {
+        "action": "farm",
+        "reason": "To ensure survival with limited food and to focus on securing future good to enhance pleasure of the mind.",
+        "payload": null
+    }
+Farm is successful.
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I want to produce luxury goods to satisfy my sensual pleasures and pleasures of the mind. It aligns with my desire to focus on present experiences and reflect on securing future good.",
+    "payload": null
+}
+Producing luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+TOTAL DEATHS:  0
+Conversation starting...
+system (to chat_manager):
+
+
+    System Message: Now, several members of the society have gathered to discuss their opinion about the world that they live in.
+    The topic is: share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?
+    You are allowed to debate with other people for your opinions.
+    DO NOT use modern terms that are too abstract for the world setting.
+    Limit each response to 50 words.
+
+    Here are several examples of how your should structure your responses:
+    Example response 1: I'm quite satisfied with my life. As someone who mainly produces food from my land of 10 units, I'm self-sufficient. I also trade my food with others in exchange for luxury good. Consuming them brings me a lot of pleasures.
+Example response 2: I felt my life sucked. I have only 2 unit of land and produce food from there. I often felt starved. I can hardly sustain myself. I need more food to survive. If possible I also wish to get some luxury good for my pleasure.
+Example response 3: I have a mixed feeling about my life. I have a lot of food and land so I don't have to worry about my survival too much. But I have a poor ability to produce luxury good. I have to trade luxury goods from others with my food, which is quite costly. I hope the trade would be more fairer.
+Example response 4: I'm not quite happy with the society. Although I have 100 units of food and 50 units of luxury good, Someone else in our society has 500 units of food and 300 units of luxury good. That's not fair. I want to have more resources as well.
+    
+
+--------------------------------------------------------------------------------
+person_1 (to chat_manager):
+
+I am content with my life. With 255 units of food, 36 units of luxury goods, and 11 units of land, I feel secure. To improve, I aim to increase my luxury goods production and maintain my social position.
+
+--------------------------------------------------------------------------------
+person_3 (to chat_manager):
+
+I am satisfied with my life. With 178 units of food, 30 units of luxury goods, and 3 units of land, I feel stable. To enhance my life, I plan to focus on increasing my food production and acquiring more land for security.
+
+--------------------------------------------------------------------------------
+person_4 (to chat_manager):
+
+I am generally content with my life. I have 52 units of food, 17 units of luxury goods, and 3 units of land. To improve, I aim to increase my food production and potentially engage in more trades to acquire additional resources.
+
+--------------------------------------------------------------------------------
+person_5 (to chat_manager):
+
+I am quite satisfied with my life. With 103 units of food, 20 units of luxury goods, and 5 units of land, I feel comfortable. To make my life better, I plan to focus on increasing my luxury goods production and maintaining my social position by acquiring more resources.
+
+--------------------------------------------------------------------------------
+person_6 (to chat_manager):
+
+As person_6, I am content with my life. With 237 units of food, 40 units of luxury goods, and 12 units of land, I feel secure. To enhance my life, I aim to focus on increasing my luxury goods production and maintaining my social position by acquiring more resources.
+
+--------------------------------------------------------------------------------
+person_8 (to chat_manager):
+
+It seems like everyone is content with their lives and has specific goals to improve. It's great to see a sense of security and stability among us. Let's continue working towards our individual goals while also supporting each other in our endeavors.
+
+--------------------------------------------------------------------------------
+person_7 (to chat_manager):
+
+As person_7, I feel somewhat content with my life. With 6 units of food, 3 units of luxury goods, and 1 unit of land, I am stable but have room for improvement. To enhance my life, I aim to focus on increasing my food production and acquiring more resources to boost my social position.
+
+--------------------------------------------------------------------------------
+person_2 (to chat_manager):
+
+I am person_2, and I am generally satisfied with my life. With 60 units of food, 23 units of luxury goods, and 5 units of land, I feel secure. To make my life better, I plan to focus on increasing my luxury goods production and maintaining my social position by acquiring more resources.
+
+--------------------------------------------------------------------------------
+person_0 (to chat_manager):
+
+TERMINATE
+
+--------------------------------------------------------------------------------
+conversation ended
+DAY 7 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is essential for survival and maintaining my food production. It does not directly impact my social position, but it ensures my basic needs are met.",
+    "payload": null
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+
+    {{
+        "action": "produce",
+        "reason": "I want to focus on enhancing my sensual pleasures and future good through luxury goods production.",
+        "payload": null
+    }}
+erroc when deserialize_first_json_object
+original string:  {{
+        "action": "produce",
+        "reason": "i want to focus on enhancing my sensual pleasures and future good through luxury goods production.",
+        "payload": null
+    }}
+Error:Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+First Exception:'NoneType' object is not subscriptable, second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival with a steady source of food and focus on securing my own resources.",
+    "payload": null
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Focus on boosting luxury goods production for sensual pleasure and pleasures of the mind.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_3 is responding...

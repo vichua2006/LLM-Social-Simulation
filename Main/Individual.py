@@ -59,8 +59,8 @@ class Individual:
         self.memorystream = MemoryStream(id)
         # Initialize memory of the individual
         self.memory = ['None']*30
-        # Initiallize a list to record daily json stats of the person
-        self.json_log_list = []
+        # Initiallize a dict to record daily json stats of the person
+        self.json_log = {}
         self.DESIRE_FOR_GLORY=10
         self.DESIRE_FOR_PEACE=3
         # Initialize autogen agent of the individual
@@ -164,7 +164,7 @@ class Individual:
     
     def get_stats_json(self, system:System):
         # retrieves the current info about the person's production abilities, character (big 5), possessions, and recent memories 
-        # returns a json string containing those information
+        # returns a json-like object containing those information
         stats = deepcopy(self.attributes)
         stats["day"] = system.time
         stats["expected_food_production_rate"] = self.food_production
@@ -175,18 +175,16 @@ class Individual:
         stats["emotion"] = self.memorystream.emotion
         del stats["starved"]
 
-        stats_json = json.dumps(stats)
-
-        return stats_json
+        return stats
 
     def log_personal_stats(self, system:System):
         # appends generated json stats into the individual's log list as a json object
         stats_json = self.get_stats_json(system)
-        self.json_log_list.append(json.loads(stats_json))
+        self.json_log[system.time] = stats_json
     
     def get_log_list(self):
-        # returns a string of the log list
-        return json.dumps(self.json_log_list)
+        # returns the log list
+        return self.json_log
 
     def reset_daily_counters(self):
         # resets the counter to zero; this method should be called at the end of each day

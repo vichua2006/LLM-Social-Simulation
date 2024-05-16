@@ -6,7 +6,7 @@ from openai import OpenAI # OpenAI for interacting with the GPT-3 model
 from openai.types import Completion
 
 # Setting the OpenAI API key
-charles_key="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"
+charles_key="sk-proj-mj2R4FOicXXbmaDihi3FT3BlbkFJ391MzwbJ9AOARs2VKl6z"
 taitienchi_key="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"
 jinhan_key = "sk-proj-VN2TboxHobMWOqochYqaT3BlbkFJV6bh80W4W5YaUxYan9ST"
 ericyamnovski_key = "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"
