@@ -342,7 +342,7 @@ class CsvAnalysis:
          for stats in combined_stats:
             # check if key exists, as individual log entries get cleared due to death mechanism
             if (i in stats): day_data["stats"].append(stats[i])
-            else: day_data["stats"].append({"message":f"This person was not initialized on day {i}"})
+            else: day_data["stats"].append({"message":f"This person has no entry on day {i}"})
          by_day.append(day_data)
       
       # generate the by_person list

@@ -3,6 +3,7 @@ import json
 import random
 import datetime
 from typing import List, Dict
+from copy import deepcopy
 from Main.Calculation import donate, increase_food, increase_luxury, punishment, rob_rebelled, winner_loser
 from Main.CsvAnalysis import CsvAnalysis
 from Main.Individual import Individual
@@ -121,10 +122,14 @@ def day_end(system:System,individuals:List[Individual]):
   print("TOTAL DEATHS: ", system.deaths)
 
 def individual_death(system, individual:Individual):
+  # reinitialize individual
   print(f"{individual.attributes['name']} has died.")
   system.deaths += 1
+  # TEMPORARY: previous log is copied and passed on to new instance so to not lose information
   person_id = individual.attributes["id"]
+  recorded_log = deepcopy(individual.get_log_list())
   individual.__init__(person_id, f'person_{system.max_individual_index}')
+  individual.json_log = recorded_log
   system.max_individual_index += 1
 
 def generate_policy(system: System, conversations: List[List[Dict[str, str]]]):
@@ -138,7 +143,7 @@ def initialize():
     # Initialize individuals and environment
     individuals=[]
     lands=[]
-    POPULATION=5
+    POPULATION=9
     #POPULATIONLIST=[x for x in range(POPULATION)]
     #random id
     #random_numbers = random.sample(POPULATIONLIST, POPULATION)
@@ -216,12 +221,12 @@ def simulate(individuals:List[Individual],system:System):
                         trade_node = ConceptNode(len(owner.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f"Day {system.time}. I initiated a trade to {individual.attributes['name']}, which is to exchange {response_action.payAmount} units of my {response_action.payType} for {response_action.gainAmount} units of his {response_action.gainType}.", 1)
                         owner.memorystream.add_concept_node(trade_node)
                         owner.memory.append(f"Day {system.time}. I initiated a trade to {individual.attributes['name']}, which is to exchange {response_action.payAmount} units of my {response_action.payType} for {response_action.gainAmount} units of his {response_action.gainType}.")
-                        trade_node_ = ConceptNode(len(individual.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f"Day {system.time}.{individual.attributes['name']} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ", 1)
+                        trade_node_ = ConceptNode(len(individual.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f"Day {system.time}.{owner.attributes['name']} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ", 1)
                         individual.memorystream.add_concept_node(trade_node_)
-                        individual.memory.append(f"Day {system.time}.{individual.attributes['name']} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ")
+                        individual.memory.append(f"Day {system.time}.{owner.attributes['name']} initiated a trade offer to me, which is to exchange his {response_action.payAmount} units of {response_action.payType} for {response_action.gainAmount} units of my {response_action.gainType}. ")
                         
                         if R:
-                              no_trade_node = ConceptNode(len(owner.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f'I rejected the trade offer by {response_action.ownerid}.', 1)
+                              no_trade_node = ConceptNode(len(owner.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f'I rejected the trade offer by {owner.attributes["name"]}.', 1)
                               individual.memorystream.add_concept_node(no_trade_node)
                               individual.memory.append(f'I rejected the trade offer by {individual.attributes["name"]}.')
                               no_trade_node_ = ConceptNode(len(individual.memorystream.concept_nodes), "trade", system.time, owner.attributes["id"], "trade with", [individual.attributes["id"]], 0, f"But he rejected it so I gained nothing and exhausted my action opportunity of today.", 1)
@@ -435,7 +440,7 @@ def simulate(individuals:List[Individual],system:System):
 
       #   print(json_description)
 
-    if (system.time == 3): system.csv_analysis.output_individual_stats(system, individual_data_dir)
+    if (system.time == 30): system.csv_analysis.output_individual_stats(system, individual_data_dir)
     # save_logframes(system)
     
 # %%

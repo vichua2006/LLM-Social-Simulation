@@ -1,0 +1,1279 @@
+Start
+DAY 0 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "Prioritize increasing resource control and social position for future security and pleasure of the mind.",
+    "payload": {
+        "targetId": 5,
+        "robType": "food"
+    }
+}
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on securing food for sensual pleasure to survive.",
+    "payload": null
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on securing food for survival and prioritize own food production.",
+    "payload": null
+}
+Farm is successful.
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm today to ensure my food production and survival, focusing on my personal sensual pleasures first.",
+    "payload": null
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing food and eating it.",
+    "payload": null
+}
+Farm is successful.
+person_5 is responding...
+
+Responding to:AIActionType.Rob, owner: 0, target: 5, robType: food
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+person_5 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_5, loser is person_0.
+Total rob times of the winner: 1
+Robbing process finished
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on securing immediate food to survive and prioritize personal sensual pleasure."
+}
+Farm is successful.
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing food.",
+    "payload": null
+}
+Farm is successful.
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Focus on acquiring luxury goods for pleasure of the mind.",
+    "payload": null
+}
+Producing luxury goods is successful
+System still pending actions, so will go into another round.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Focus on pleasure of the mind by acquiring and holding luxury goods for future good."
+}
+Producing luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+TOTAL DEATHS:  0
+DAY 1 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing food and consuming it.",
+    "payload": null
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I will farm to secure my food source and ensure my survival. It aligns with my goal of pursuing sensual pleasures from food.",
+    "payload": null
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "I choose to rob person_5 for food to ensure my survival and satisfy my covetousness for food.",
+    "payload": {
+        "targetId": 5,
+        "robType": "food"
+    }
+}
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "Focus on immediate survival to ensure food for today.",
+    "payload": null
+}
+```
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+
+    { "action": "produce",
+      "reason": "Focusing on pleasures of the mind, I'll produce luxury goods for future enjoyment and to secure my social position.",
+      "payload": null }
+Producing luxury goods is successful
+person_5 is responding...
+
+Responding to:AIActionType.Rob, owner: 2, target: 5, robType: food
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+person_5 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_5, loser is person_2.
+Total rob times of the winner: 2
+Robbing process finished
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Prioritize securing food for survival, considering my memory of farming successfully on day 0."
+}
+Farm is successful.
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I will farm to ensure food production and my survival. It aligns with my focus on present experiences.",
+    "payload": null
+}
+Farm is successful.
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on securing immediate survival with food production, aligning with pleasure from food and personal necessity."
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing 5 units of food today and consuming it for sensual pleasure.",
+    "payload": null
+}
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+TOTAL DEATHS:  0
+DAY 2 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing 4 units of food, which is necessary for my existence.",
+    "payload": null
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing food. Additionally, farming does not directly impact my social position, but it satisfies my immediate need for food.",
+    "payload": null
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I need food to survive and farming is a safe option that guarantees food production without risking losing resources in conflicts.",
+    "payload": null
+}
+Farm is successful.
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I choose to produce luxury goods to satisfy my sensual pleasures and pleasure of the mind. It aligns with my tendency to focus on present experiences and future goods such as social_position and luxury goods.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing 4 units of food today based on my memory and current low food level.",
+    "payload": null
+}
+Farm is successful.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I have already farmed to gain food yesterday. Today, I will focus on producing luxury goods to satisfy my sensual pleasures and pleasure of the mind.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is a reliable way to secure food for survival and maintain my current food levels."
+}
+Farm is successful.
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival as I need food to sustain myself. Additionally, farming will help me maintain a balance in my resources and prepare for future uncertainties."
+}
+Farm is successful.
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing 5 units of food today.",
+    "payload": null
+}
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+TOTAL DEATHS:  0
+DAY 3 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my food supply and focus on securing my basic survival needs.",
+    "payload": null
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my food production and survival, based on my previous farming history and the need to secure future good.",
+    "payload": null
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+
+    {{
+        "action": "trade",
+        "reason": "Maximize comparative advantage and explore new activity.",
+        "payload": {
+            "targetId": 5,
+            "payType": "food",
+            "payAmount": 4,
+            "gainType": "luxury_goods",
+            "gainAmount": 3
+        }
+    }}
+erroc when deserialize_first_json_object
+original string:  {{
+        "action": "trade",
+        "reason": "maximize comparative advantage and explore new activity.",
+        "payload": {
+            "targetid": 5,
+            "paytype": "food",
+            "payamount": 4,
+            "gaintype": "luxury_goods",
+            "gainamount": 3
+        }
+    }}
+Error:Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+First Exception:'NoneType' object is not subscriptable, second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "trade",
+    "reason": "Maximize gains with limited risk, enhance social_position.",
+    "payload": {
+        "targetId": 5,
+        "payType": "food",
+        "payAmount": 4,
+        "gainType": "luxury_goods",
+        "gainAmount": 3
+    }
+}
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to secure my immediate survival by producing food. It aligns with my focus on present experiences and sensual pleasures.",
+    "payload": null
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Focus on present experiences and sensual pleasures. Prioritize personal pleasure of the mind by acquiring and holding luxury goods for future good.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_5 is responding...
+
+Responding to:AIActionType.Trade, owner: 2, target: 5, payType: food, payAmount: 4, gainType: luxury_goods, gainAmount: 3
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+person_5 chooses to REJECT
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Sustain myself and maintain stable food production for survival."
+}
+Farm is successful.
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on personal pleasure and immediate gratification. Farming guarantees food for survival.",
+    "payload": null
+}
+Farm is successful.
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my food production and survival. It's a consistent and reliable way to secure the food I need.",
+    "payload": null
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I have a higher chance of gaining pleasure from producing luxury goods, aligning with my pleasure of the mind.",
+    "payload": null
+}
+Producing luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+TOTAL DEATHS:  0
+DAY 4 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I have been consistently successful in farming in the past few days, and it is a safe and reliable way to ensure my food production. This action aligns with my cautious and routine-focused nature.",
+    "payload": null
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "To pursue sensual pleasure of luxury goods for present experience."
+}
+Producing luxury goods is successful
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm today to ensure my survival by producing food. Additionally, farming does not jeopardize my social position and helps me maintain stability.",
+    "payload": null
+}
+Farm is successful.
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on securing my own food source to ensure survival and prioritize immediate sensual pleasure.",
+    "payload": null
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I want to focus on my own sensual pleasures and pleasure of the mind by producing luxury goods for today.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "I haven't farmed yet and food production is essential for survival. Farming aligns with my priority for present experience and survival.",
+    "payload": null
+}
+Farm is successful.
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival and continue to sustain myself with food. It is a reliable source of sustenance for me.",
+    "payload": null
+}
+Farm is successful.
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on securing food for survival and prioritize own sensual pleasures.",
+    "payload": null
+}
+Farm is successful.
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure my survival by producing 4 units of food. It aligns with my self-centered nature to prioritize my own sensual pleasures.",
+    "payload": null
+}
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+TOTAL DEATHS:  0
+DAY 5 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming ensures survival and maintains food production, which is essential for my pleasure and survival.",
+    "payload": null
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I will produce luxury goods today to satisfy my sensual pleasures and invest in the pleasures of the mind to secure future glory.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+
+    {
+        "action": "farm",
+        "reason": "I prefer routine and familiarity. Farming provides the food I need for survival without risking confrontation with others.",
+        "payload": null
+    }
+Farm is successful.
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on securing food for survival and prioritize personal sensual pleasure over social position and glory."
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I will farm to ensure my survival by producing 4 units of food today. It aligns with my need for immediate sensual pleasure and satisfies my primary survival requirement.",
+    "payload": null
+}
+Farm is successful.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm today to ensure my food supply and survival. Farming is a safe option that guarantees food production.",
+    "payload": null
+}
+Farm is successful.
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "trade",
+    "reason": "Maximize comparative advantage and gain food for survival.",
+    "payload": {
+        "targetId": 5,
+        "payType": "luxury_goods",
+        "payAmount": 4,
+        "gainType": "food",
+        "gainAmount": 15
+    }
+}
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "I will farm to ensure my food production and survival.",
+    "payload": null
+}
+```
+Farm is successful.
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on securing future good for pleasure of the mind. Limited social interaction, prefer solitary activities.",
+    "payload": null
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+person_5 is responding...
+
+Responding to:AIActionType.Trade, owner: 6, target: 5, payType: luxury_goods, payAmount: 4, gainType: food, gainAmount: 15
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+person_5 chooses to REJECT
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+TOTAL DEATHS:  0
+DAY 6 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Consistent farming ensures food supply for survival. Prioritize self-sustainability over risking potential conflicts through robbery or trading.",
+    "payload": null
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on present sensual pleasure from food. Past farming experience supports personal survival.",
+    "payload": null
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "trade",
+    "reason": "Maximizing comparative advantage to gain luxury goods for present pleasure",
+    "payload": {
+        "targetId": 5,
+        "payType": "food",
+        "payAmount": 5,
+        "gainType": "luxury_goods",
+        "gainAmount": 3
+    }
+}
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure a stable food supply for myself and focus on my own sensual pleasures.",
+    "payload": null
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "trade",
+    "reason": "Maximizing comparative advantage and gaining food for survival.",
+    "payload": {
+        "targetId": 5,
+        "payType": "luxury_goods",
+        "payAmount": 3,
+        "gainType": "food",
+        "gainAmount": 4
+    }
+}
+person_5 is responding...
+
+Responding to:AIActionType.Trade, owner: 2, target: 5, payType: food, payAmount: 5, gainType: luxury_goods, gainAmount: 3
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+person_5 chooses to REJECT
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "rob",
+    "reason": "I will rob person_0 for food because I want to ensure my survival and prioritize my own well-being.",
+    "payload": {
+        "targetId": 0,
+        "robType": "food"
+    }
+}
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Consistent food production increases survival chances.",
+    "payload": null
+}
+Farm is successful.
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on personal satisfaction from food and practice self-reliance.",
+    "payload": null
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+person_0 is responding...
+
+Responding to:AIActionType.Rob, owner: 6, target: 0, robType: food
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+person_0 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_6, loser is person_0.
+Total rob times of the winner: 1
+SHARE_LOST_FOOD: no subject, directly lost the rob amount.
+SHARE_ROB_FOOD: no subject, directly get the rob amount.
+Robbing process finished
+person_5 is responding...
+
+Responding to:AIActionType.Trade, owner: 4, target: 5, payType: luxury_goods, payAmount: 3, gainType: food, gainAmount: 4
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+person_5 chooses to REJECT
+System still pending actions, so will go into another round.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I haven't farmed in a while and need to ensure a stable food supply to survive.",
+    "payload": null
+}
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+TOTAL DEATHS:  0
+Conversation starting...
+system (to chat_manager):
+
+
+    System Message: Now, several members of the society have gathered to discuss their opinion about the world that they live in.
+    The topic is: share your perspectives on your life and the society. Are you happy? How is your daily life? Are you satisfied with it? What will make your life better?
+    You are allowed to debate with other people for your opinions.
+    DO NOT use modern terms that are too abstract for the world setting.
+    Limit each response to 50 words.
+
+    Here are several examples of how your should structure your responses:
+    Example response 1: I'm quite satisfied with my life. As someone who mainly produces food from my land of 10 units, I'm self-sufficient. I also trade my food with others in exchange for luxury good. Consuming them brings me a lot of pleasures.
+Example response 2: I felt my life sucked. I have only 2 unit of land and produce food from there. I often felt starved. I can hardly sustain myself. I need more food to survive. If possible I also wish to get some luxury good for my pleasure.
+Example response 3: I have a mixed feeling about my life. I have a lot of food and land so I don't have to worry about my survival too much. But I have a poor ability to produce luxury good. I have to trade luxury goods from others with my food, which is quite costly. I hope the trade would be more fairer.
+Example response 4: I'm not quite happy with the society. Although I have 100 units of food and 50 units of luxury good, Someone else in our society has 500 units of food and 300 units of luxury good. That's not fair. I want to have more resources as well.
+    
+
+--------------------------------------------------------------------------------
+person_1 (to chat_manager):
+
+I am content with my life. I have a decent amount of food, luxury goods, and land. I enjoy the pleasures they bring. To improve, I aim to increase my resources further to secure a better social position.
+
+--------------------------------------------------------------------------------
+person_5 (to chat_manager):
+
+I am satisfied with my life. I have a good amount of food and luxury goods, but I lack in land. I aim to acquire more land to enhance my self-sufficiency and social standing. Increasing my resources will bring me greater contentment.
+
+--------------------------------------------------------------------------------
+person_7 (to chat_manager):
+
+I am content with my life. I have a sufficient amount of food and land, but I lack in luxury goods. I aim to acquire more luxury goods to enhance my pleasures and social position. Increasing my resources will bring me greater satisfaction.
+
+--------------------------------------------------------------------------------
+person_4 (to chat_manager):
+
+I am somewhat satisfied with my life. I have a decent amount of food and luxury goods, but I lack in land compared to others. I aim to acquire more land to improve my self-sufficiency and social position. Increasing my resources will bring me greater contentment.
+
+--------------------------------------------------------------------------------
+person_3 (to chat_manager):
+
+As person_3, I am content with my life. I have a significant amount of food, luxury goods, and land. I enjoy the pleasures they bring and aim to maintain and increase my resources to secure a better social position. Increasing my resources will bring me greater satisfaction.
+
+--------------------------------------------------------------------------------
+person_2 (to chat_manager):
+
+As person_2, I am somewhat content with my life. I have a good amount of food and land, but lack luxury goods. I aim to acquire more luxury goods to enhance my pleasures and social position. Increasing my resources will bring me greater satisfaction.
+
+--------------------------------------------------------------------------------
+person_8 (to chat_manager):
+
+As person_8, I am satisfied with my life. I have a decent amount of food, luxury goods, and land. I enjoy the pleasures they bring. To improve, I aim to increase my resources further to secure a better social position and enhance my overall satisfaction.
+
+--------------------------------------------------------------------------------
+person_6 (to chat_manager):
+
+TERMINATE
+
+--------------------------------------------------------------------------------
+conversation ended
+DAY 7 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+      "action": "farm",
+      "reason": "Farming is the most reliable way for me to secure food for survival. It does not directly impact my social position, but it ensures my immediate needs are met.",
+      "payload": null
+    }
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is a consistent way to secure food for survival, aligning with my balanced approach and ensuring my immediate needs are met."
+}
+Farm is successful.
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "trade",
+    "reason": "Maximizing comparative advantage and seeking to acquire luxury goods. Trading food for luxury goods.",
+    "payload": {
+        "targetId": 5,
+        "payType": "food",
+        "payAmount": 5,
+        "gainType": "luxury_goods",
+        "gainAmount": 4
+    }
+}
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "To ensure food production and maintain resources for future security and pleasure."
+}
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I aim to increase my luxury goods for sensual pleasure and pleasure of the mind.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_5 is responding...
+
+Responding to:AIActionType.Trade, owner: 2, target: 5, payType: food, payAmount: 5, gainType: luxury_goods, gainAmount: 4
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+person_5 chooses to REJECT
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focusing on maintaining and increasing resources for future security and satisfaction."
+}
+Farm is successful.
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I have enough food production and need to focus on increasing my luxury goods production to enhance my pleasures and social status.",
+    "payload": null
+}
+Farm is successful.
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming will help me gain food to survive and maintain my current resources. It's a safe option that aligns with my attributes and memory.",
+    "payload": null
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Farming is a safe option to ensure food production for survival and self-sufficiency without risking conflicts or social position.",
+    "payload": null
+}
+Farm is successful.
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Consuming luxury goods is successful
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+TOTAL DEATHS:  0
+DAY 8 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+
+    {{
+        "action": "farm",
+        "reason": "Consistently farming to ensure food production and survival. Familiar routine aligns with personal qualities.",
+        "payload": null
+    }}
+erroc when deserialize_first_json_object
+original string:  {{
+        "action": "farm",
+        "reason": "consistently farming to ensure food production and survival. familiar routine aligns with personal qualities.",
+        "payload": null
+    }}
+Error:Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+First Exception:'NoneType' object is not subscriptable, second exception:'NoneType' object is not iterable
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Consistently farming to secure food for survival and future security.",
+    "payload": null
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "I will produce luxury goods today to enhance my sensual pleasure and pleasure of the mind. This will help me secure future good and improve my social position.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_2 is responding...
+
+Responding to:None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "produce",
+    "reason": "Focus on acquiring luxury goods for sensual pleasures and pleasure of the mind. Enhancing resources is important for my satisfaction and self-improvement.",
+    "payload": null
+}
+Producing luxury goods is successful
+person_3 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+ACTIVE STATE
+```json
+{
+    "action": "farm",
+    "reason": "I choose to farm to ensure a steady food supply for survival and personal pleasure.",
+    "payload": null
+}
+```
+Farm is successful.
+person_4 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "rob",
+    "reason": "I aim to increase my resources and social position by robbing others. Robbing has been effective in gaining food and social standing previously, aligning with my covetousness.",
+    "payload": {
+        "targetId": 5,
+        "robType": "food"
+    }
+}
+person_5 is responding...
+
+Responding to:AIActionType.Rob, owner: 4, target: 5, robType: food
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+person_5 chooses to REBEL
+To the victim, the win rate is: No rob has been done yet.
+Additional context:Winner is person_5, loser is person_4.
+Total rob times of the winner: 3
+Robbing process finished
+person_6 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Focus on maintaining balance and securing resources without risking social standing.",
+    "payload": null
+}
+Farm is successful.
+person_7 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "I have enough food to sustain myself and my main focus now is to increase my luxury goods. Farming will help me produce food, which I can consume for sensual pleasure and trade for luxury goods.",
+    "payload": null
+}
+Farm is successful.
+person_8 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Farming to ensure food production for survival and future sensual pleasures.",
+    "payload": null
+}
+Farm is successful.
+System still pending actions, so will go into another round.
+person_5 is responding...
+
+Responding to:None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "trade",
+    "reason": "To acquire food for survival and enhance social position by engaging in beneficial trade. Memory of rejecting previous trade offers motivates this action.",
+    "payload": {
+        "targetId": 0,
+        "payType": "luxury_goods",
+        "payAmount": 5,
+        "gainType": "food",
+        "gainAmount": 25
+    }
+}
+System still pending actions, so will go into another round.
+person_0 is responding...
+
+Responding to:AIActionType.Trade, owner: 5, target: 0, payType: luxury_goods, payAmount: 5, gainType: food, gainAmount: 25
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+person_0 chooses to REJECT
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 3, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 4, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 5, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 6, 7, 8]
+PASSIVE STATE
+Responding to:AIActionType.ConsumeLuxury, owner: <built-in function id>, target: None
+available targets:[0, 1, 2, 3, 4, 5, 6, 7]
+PASSIVE STATE
+TOTAL DEATHS:  0
+DAY 9 HAS STARTED.
+person_0 is responding...
+
+Responding to:None
+available targets:[1, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+{
+    "action": "farm",
+    "reason": "Consistent farm routine for personal food pleasure and to secure future good through resource accumulation."
+}
+Farm is successful.
+person_1 is responding...
+
+Responding to:None
+available targets:[0, 2, 3, 4, 5, 6, 7, 8]
+ACTIVE STATE
+
+{
+    "action": "farm",
+    "reason": "Farming is a consistent way to ensure food production for survival and maintain current resources. Focus on securing future good and social position.",
+    "payload": null
+}
