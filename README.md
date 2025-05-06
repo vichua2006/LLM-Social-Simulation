@@ -1,4 +1,5 @@
 # LLM-Social-Simulation
+*(manually Forked from CharlieDreemur/LLM-Social-Simulations)*
 **Using python 3.1.0**
 Check your git version using the following command:
 ``` 
